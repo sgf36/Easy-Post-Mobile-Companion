@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import '../theme.dart';
+import 'claims_screen.dart';
 import 'hts_screen.dart';
+import 'insurance_screen.dart';
+import 'pickups_screen.dart';
 import 'reports_screen.dart';
 import 'resource_list_screen.dart';
 import 'trackers_screen.dart';
@@ -75,39 +78,9 @@ class _HomeShellState extends State<HomeShell> {
             trailing: (m['status'] ?? '').toString(),
           ),
         ),
-      Section.insurance => ResourceListScreen(
-          nav: nav,
-          title: 'Insurance',
-          emptyText: 'No insurance policies yet.',
-          fetch: () => proxy.getInsurances(c),
-          row: (m) => ResourceRow(
-            title: (m['tracking_code'] ?? m['id'] ?? '—').toString(),
-            subtitle: (m['provider'] ?? m['carrier'] ?? '').toString(),
-            trailing: _money(m['amount']),
-          ),
-        ),
-      Section.claims => ResourceListScreen(
-          nav: nav,
-          title: 'Claims',
-          emptyText: 'No claims filed yet.',
-          fetch: () => proxy.getClaims(c),
-          row: (m) => ResourceRow(
-            title: (m['tracking_code'] ?? m['id'] ?? '—').toString(),
-            subtitle: (m['type'] ?? '').toString(),
-            trailing: (m['status'] ?? '').toString(),
-          ),
-        ),
-      Section.pickups => ResourceListScreen(
-          nav: nav,
-          title: 'Pickups',
-          emptyText: 'No pickups scheduled yet.',
-          fetch: () => proxy.getPickups(c),
-          row: (m) => ResourceRow(
-            title: (m['id'] ?? '—').toString(),
-            subtitle: (m['reference'] ?? '').toString(),
-            trailing: (m['status'] ?? '').toString(),
-          ),
-        ),
+      Section.insurance => InsuranceScreen(nav: nav, creds: c),
+      Section.claims => ClaimsScreen(nav: nav, creds: c),
+      Section.pickups => PickupsScreen(nav: nav, creds: c),
       Section.reports => ReportsScreen(nav: nav, creds: c),
       Section.hts => HtsScreen(nav: nav),
     };
@@ -119,11 +92,6 @@ class _HomeShellState extends State<HomeShell> {
       return parts.join(', ');
     }
     return '';
-  }
-
-  static String _money(dynamic v) {
-    if (v == null) return '';
-    return '\$$v';
   }
 }
 

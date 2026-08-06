@@ -96,4 +96,44 @@ class ProxyClient {
       _getList(c, '/ep/claims', 'claims');
   Future<List<Map<String, dynamic>>> getPickups(PairingCredentials c) =>
       _getList(c, '/ep/pickups', 'pickups');
+
+  /// POST an allow-listed EasyPost action through the proxy, returning the JSON
+  /// body. Surfaces EasyPost's own error message where present.
+  Future<Map<String, dynamic>> _post(
+    PairingCredentials c,
+    String path,
+    Map<String, dynamic> body,
+  ) async {
+    final res = await http.post(
+      Uri.parse('${c.proxyUrl}$path'),
+      headers: {..._authHeaders(c), 'content-type': 'application/json'},
+      body: jsonEncode(body),
+    );
+    dynamic data;
+    try {
+      data = res.body.isNotEmpty ? jsonDecode(res.body) : {};
+    } catch (_) {
+      data = {};
+    }
+    if (res.statusCode == 401) throw ProxyException('This device is no longer paired.');
+    if (res.statusCode == 403) throw ProxyException('That action is not permitted from the app.');
+    if (res.statusCode >= 400) {
+      final err = (data is Map && data['error'] is Map) ? data['error']['message'] : null;
+      throw ProxyException(err?.toString() ?? 'Request failed (error ${res.statusCode}).');
+    }
+    return (data is Map) ? data.cast<String, dynamic>() : <String, dynamic>{};
+  }
+
+  /// Buy standalone insurance. `insurance` carries tracking_code, carrier,
+  /// amount and the to/from addresses.
+  Future<Map<String, dynamic>> buyInsurance(PairingCredentials c, Map<String, dynamic> insurance) =>
+      _post(c, '/ep/insurances', {'insurance': insurance});
+
+  /// File a claim (fields sent at the top level per the EasyPost claims API).
+  Future<Map<String, dynamic>> fileClaim(PairingCredentials c, Map<String, dynamic> claim) =>
+      _post(c, '/ep/claims', claim);
+
+  /// Cancel a scheduled pickup.
+  Future<Map<String, dynamic>> cancelPickup(PairingCredentials c, String id) =>
+      _post(c, '/ep/pickups/$id/cancel', const {});
 }
