@@ -1,0 +1,65 @@
+# Run Easy-Post Mobile Companion in the iOS Simulator (Cloud Mac)
+
+**For a Claude instance running on Spencer's Cloud Mac.** Goal: get the
+Easy-Post Mobile Companion Flutter app running in the iOS Simulator so Spencer
+can click through it. Work through the steps, resolving anything `flutter doctor`
+flags. Ask Spencer before installing large tools if that needs his approval.
+
+## Facts
+- Private GitHub repo: `sgf36/Easy-Post-Mobile-Companion`
+- Flutter app; bundle id `com.spencerfields.easypostmobilecompanion`
+- Backend proxy (live): `https://easypost-mobile-proxy.sgf36.workers.dev`
+- Built and tested against **Flutter 3.44.8 stable** (a close 3.44.x is fine)
+
+## 1. Prerequisites
+- **Xcode** from the App Store, then:
+  - `sudo xcodebuild -license accept`
+  - `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
+  - Ensure an iOS **Simulator runtime** is installed: Xcode → Settings → Platforms → download iOS, or `xcodebuild -downloadPlatform iOS`.
+- **Homebrew**, then:
+  - `brew install --cask flutter` (or a git clone of the Flutter stable channel)
+  - `brew install cocoapods`
+- Verify: `flutter --version` (≈ 3.44.x) and `flutter doctor` — resolve red items for Xcode/CocoaPods.
+
+## 2. Get the code (private repo — needs auth)
+```bash
+gh auth login          # authenticate as Spencer's GitHub, if not already
+git clone https://github.com/sgf36/Easy-Post-Mobile-Companion.git
+cd Easy-Post-Mobile-Companion
+```
+
+## 3. Dependencies
+```bash
+flutter pub get
+cd ios && pod install && cd ..     # native pods: mobile_scanner, flutter_secure_storage
+```
+
+## 4. Boot a simulator and run
+```bash
+open -a Simulator                  # boots the default iPhone
+flutter devices                    # confirm the simulator is listed
+flutter run                        # pick the simulator if prompted
+```
+The app should launch on the **"Pair with desktop"** screen.
+
+## 5. What you can / can't test in the Simulator
+- The iOS Simulator has **no camera**, so the **QR scanner will not work** — the
+  camera area stays black. That is expected, not a bug.
+- To exercise **pairing → trackers without a camera**, tap **"Enter review
+  code"**. That path calls the backend's `/pair/demo`, which is only enabled
+  when the Worker secrets `REVIEW_CODE` + `DEMO_EASYPOST_TEST_KEY` are set —
+  otherwise it returns 403. If you want live demo data, ask Spencer to have the
+  Windows Claude enable the review-code demo on the `easypost-mobile-proxy`
+  Worker.
+- Even without the demo enabled you can visually verify the **UI**: the pairing
+  screen, the review-code dialog, theming, and navigation.
+- A **real end-to-end test** (scan the desktop's pairing QR → live trackers)
+  needs a real camera — do that on a **physical iPhone via TestFlight** once the
+  signed `.ipa` is uploaded to App Store Connect.
+
+## 6. Troubleshooting
+- Pod errors → `cd ios && pod repo update && pod install`.
+- No simulator runtime → Xcode → Settings → Platforms → download iOS.
+- Signing complaints → make sure the target is a **Simulator** device (simulator
+  builds are not code-signed); don't select a physical device here.
+- Pub resolution issues → re-run `flutter pub get` on stable 3.44.x.
