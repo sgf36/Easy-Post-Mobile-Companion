@@ -50,10 +50,23 @@ gh secret set IOS_PROVISION_PROFILE_NAME  -R sgf36/Easy-Post-Mobile-Companion   
 gh secret set APPLE_TEAM_ID               -R sgf36/Easy-Post-Mobile-Companion   # 7WA4F8P743
 ```
 
-To upload the built `.ipa` to App Store Connect from CI later, we'll add
-`APPLE_ID` + an app-specific `APPLE_APP_PASSWORD` and an `altool` step, the same
-pattern as the desktop Mac App Store leg. For now the signed `.ipa` is a
-downloadable artifact you can upload with Transporter.
+## TestFlight auto-upload (2 more secrets)
+
+With these set, a push to `main` uploads the signed `.ipa` straight to App Store
+Connect (TestFlight). Without them, the signed `.ipa` is still a downloadable
+artifact you can upload with Apple's Transporter app.
+
+```powershell
+gh secret set APPLE_ID           -R sgf36/Easy-Post-Mobile-Companion   # your Apple ID email
+gh secret set APPLE_APP_PASSWORD -R sgf36/Easy-Post-Mobile-Companion   # app-specific password
+```
+
+- Generate the **app-specific password** at appleid.apple.com → Sign-In & Security
+  → App-Specific Passwords (label it e.g. "EasyPost CI"). It is not your normal
+  Apple ID password.
+- The **first** TestFlight build needs a one-time **export-compliance** answer in
+  App Store Connect (the app uses only standard HTTPS, so "no non-exempt
+  encryption") before it becomes installable.
 
 ## Notes
 
