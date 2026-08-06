@@ -20,7 +20,8 @@ if (hasReleaseSigning) {
 
 android {
     namespace = "com.spencerfields.easypost_mobile_companion"
-    compileSdk = flutter.compileSdkVersion
+    // flutter_secure_storage requires compileSdk 37 (Flutter's default is 36).
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
