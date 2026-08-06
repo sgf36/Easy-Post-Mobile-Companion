@@ -142,6 +142,24 @@ jobs:
           </dict></plist>
           EOF
 
+      # The flutter-create project uses automatic signing (needs an Apple account
+      # in Xcode), which fails in CI. Force manual signing with the Distribution
+      # cert + App Store profile for the archive.
+      - name: Force manual code signing
+        if: steps.signing.outputs.ready == 'true'
+        env:
+          TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          PROFILE_NAME: ${{ secrets.IOS_PROVISION_PROFILE_NAME }}
+        run: |
+          sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual;/g' ios/Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/"iPhone Developer"/"Apple Distribution"/g' ios/Runner.xcodeproj/project.pbxproj
+          {
+            echo "CODE_SIGN_STYLE=Manual"
+            echo "DEVELOPMENT_TEAM=$TEAM_ID"
+            echo "PROVISIONING_PROFILE_SPECIFIER=$PROFILE_NAME"
+            echo "CODE_SIGN_IDENTITY=Apple Distribution"
+          } >> ios/Flutter/Release.xcconfig
+
       - name: Build signed IPA
         if: steps.signing.outputs.ready == 'true'
         run: |
