@@ -92,8 +92,21 @@ class _PairScreenState extends State<PairScreen> {
       appBar: AppBar(title: const Text('Pair with desktop')),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Row(
+              children: [
+                Image.asset('assets/icon/app_icon.png', height: 44, width: 44),
+                const SizedBox(width: 12),
+                const Expanded(
+                  child: Text('Easy-Post Mobile Companion',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+          ),
           const Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: Text(
               'Open Easy-Post Desktop, choose "Pair mobile app", and scan the QR code shown there.',
             ),

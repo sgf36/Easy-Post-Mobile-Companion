@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'screens/pair_screen.dart';
 import 'screens/trackers_screen.dart';
 import 'services/pairing_store.dart';
+import 'theme.dart';
 
 void main() => runApp(const CompanionApp());
 
@@ -14,10 +15,7 @@ class CompanionApp extends StatelessWidget {
     return MaterialApp(
       title: 'Easy-Post Mobile Companion',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorSchemeSeed: const Color(0xFF2D6CDF),
-        useMaterial3: true,
-      ),
+      theme: Brand.theme(),
       home: const RootGate(),
     );
   }
