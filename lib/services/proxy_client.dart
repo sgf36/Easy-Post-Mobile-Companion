@@ -60,23 +60,40 @@ class ProxyClient {
     return PairingCredentials(deviceToken: token, kek: kek, proxyUrl: proxyUrl);
   }
 
-  /// The EasyPost trackers for the paired account, via the scope-limited proxy.
-  Future<List<Map<String, dynamic>>> getTrackers(PairingCredentials c) async {
-    final res = await http.get(
-      Uri.parse('${c.proxyUrl}/ep/trackers'),
-      headers: {
+  Map<String, String> _authHeaders(PairingCredentials c) => {
         'authorization': 'Bearer ${c.deviceToken}',
         'x-ep-kek': c.kek,
-      },
-    );
+      };
+
+  /// GET an allow-listed EasyPost collection through the proxy and return the
+  /// array under [key] (e.g. "trackers", "shipments").
+  Future<List<Map<String, dynamic>>> _getList(
+    PairingCredentials c,
+    String path,
+    String key,
+  ) async {
+    final res = await http.get(Uri.parse('${c.proxyUrl}$path'), headers: _authHeaders(c));
     if (res.statusCode == 401) {
       throw ProxyException('This device is no longer paired. Pair again from the desktop.');
     }
+    if (res.statusCode == 403) {
+      throw ProxyException('That action is not permitted from the app.');
+    }
     if (res.statusCode != 200) {
-      throw ProxyException('Could not load trackers (error ${res.statusCode}).');
+      throw ProxyException('Request failed (error ${res.statusCode}).');
     }
     final body = jsonDecode(res.body) as Map<String, dynamic>;
-    final list = (body['trackers'] as List<dynamic>?) ?? const [];
-    return list.cast<Map<String, dynamic>>();
+    return ((body[key] as List<dynamic>?) ?? const []).cast<Map<String, dynamic>>();
   }
+
+  Future<List<Map<String, dynamic>>> getTrackers(PairingCredentials c) =>
+      _getList(c, '/ep/trackers', 'trackers');
+  Future<List<Map<String, dynamic>>> getShipments(PairingCredentials c) =>
+      _getList(c, '/ep/shipments', 'shipments');
+  Future<List<Map<String, dynamic>>> getInsurances(PairingCredentials c) =>
+      _getList(c, '/ep/insurances', 'insurances');
+  Future<List<Map<String, dynamic>>> getClaims(PairingCredentials c) =>
+      _getList(c, '/ep/claims', 'claims');
+  Future<List<Map<String, dynamic>>> getPickups(PairingCredentials c) =>
+      _getList(c, '/ep/pickups', 'pickups');
 }

@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import '../models/tracker.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
+import 'home_shell.dart';
 import 'tracker_detail_screen.dart';
 
 enum SortBy { status, carrier, code, updated }
 
 class TrackersScreen extends StatefulWidget {
   final PairingCredentials creds;
-  final Future<void> Function() onUnpair;
-  const TrackersScreen({super.key, required this.creds, required this.onUnpair});
+  final AppNav nav;
+  const TrackersScreen({super.key, required this.creds, required this.nav});
 
   @override
   State<TrackersScreen> createState() => _TrackersScreenState();
@@ -153,6 +154,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(nav: widget.nav),
       appBar: AppBar(
         title: const Text('Tracking'),
         actions: [
@@ -175,11 +177,6 @@ class _TrackersScreenState extends State<TrackersScreen> {
               tooltip: 'Filter',
               onPressed: snap.hasData ? () => _openFilterSheet(snap.data!) : null,
             ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.link_off),
-            tooltip: 'Unpair this device',
-            onPressed: () => widget.onUnpair(),
           ),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'screens/home_shell.dart';
 import 'screens/pair_screen.dart';
-import 'screens/trackers_screen.dart';
 import 'services/pairing_store.dart';
 import 'theme.dart';
 
@@ -68,6 +68,6 @@ class _RootGateState extends State<RootGate> {
     }
     final creds = _creds;
     if (creds == null) return PairScreen(onPaired: _onPaired);
-    return TrackersScreen(creds: creds, onUnpair: _unpair);
+    return HomeShell(creds: creds, onUnpair: _unpair);
   }
 }
