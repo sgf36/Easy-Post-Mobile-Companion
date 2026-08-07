@@ -69,6 +69,13 @@ jobs:
         if: steps.signing.outputs.ready == 'true'
         run: flutter build appbundle --release
 
+      # A signed release APK for direct (sideload) download, offered in-app from
+      # Tools > Android app while the Play listing is pending. Same signing config
+      # as the bundle; uploaded alongside it by the artifact step below.
+      - name: Build signed APK (direct download)
+        if: steps.signing.outputs.ready == 'true'
+        run: flutter build apk --release
+
       - name: Build debug APK (no signing secrets yet)
         if: steps.signing.outputs.ready != 'true'
         run: flutter build apk --debug
