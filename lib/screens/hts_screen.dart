@@ -28,7 +28,11 @@ class _HtsScreenState extends State<HtsScreen> {
     final kw = _controller.text.trim();
     if (kw.isEmpty) return;
     FocusScope.of(context).unfocus();
-    setState(() => _future = searchHts(kw));
+    // Assign inside a block: an arrow body would return the Future, which
+    // setState asserts against.
+    setState(() {
+      _future = searchHts(kw);
+    });
   }
 
   @override
