@@ -107,15 +107,36 @@ class _ClaimFormState extends State<_ClaimForm> {
     super.dispose();
   }
 
+  /// Damage and theft claims are refused by EasyPost without at least one
+  /// supporting document ("At least one supporting documentation attachment is
+  /// required for theft or damage claims"). The phone cannot attach one yet, so
+  /// this says so plainly instead of sending a request that always fails.
+  bool get _needsAttachment => _type == 'damage' || _type == 'theft';
+
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
+    if (_needsAttachment) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Damage and theft claims need a supporting photo or invoice, '
+            'which has to be attached on the desktop app. A loss claim can be '
+            'filed here.',
+          ),
+        ),
+      );
+      return;
+    }
     setState(() => _busy = true);
     try {
       await widget.proxy.fileClaim(widget.creds, {
         'tracking_code': _tracking.text.trim(),
         'type': _type,
         'amount': _amount.text.trim(),
-        'email': _email.text.trim(),
+        // `contact_email`, not `email`. EasyPost rejects the request outright
+        // otherwise — "contact_email: field required" — so every claim filed
+        // from the phone failed, whatever was typed here.
+        'contact_email': _email.text.trim(),
         'description': _description.text.trim(),
       });
       if (!mounted) return;
@@ -153,6 +174,13 @@ class _ClaimFormState extends State<_ClaimForm> {
               ],
               onChanged: (v) => setState(() => _type = v ?? 'damage'),
             ),
+            if (_needsAttachment) ...[
+              const SizedBox(height: 8),
+              const Text(
+                'Damage and theft claims need a supporting photo or invoice. '
+                'File those on the desktop app, where documents can be attached.',
+              ),
+            ],
             const SizedBox(height: 12),
             TextFormField(
               controller: _amount,
