@@ -132,14 +132,29 @@ class _InsuranceFormState extends State<_InsuranceForm> {
     super.dispose();
   }
 
+  /// EasyPost caps declared insurance at 5,000 US dollars and always reads the
+  /// amount as USD, whatever the shipment is priced in. Checked here so an
+  /// over-limit figure is caught on the phone rather than coming back as an
+  /// opaque API error after the user has committed to buying.
+  static const double maxInsuranceUsd = 5000;
+
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
+    final amount = double.tryParse(_amount.text.trim());
+    if (amount == null || amount <= 0 || amount > maxInsuranceUsd) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Insured amount must be between \$0.01 and \$5,000 USD.'),
+        ),
+      );
+      return;
+    }
     setState(() => _busy = true);
     try {
       await widget.proxy.buyInsurance(widget.creds, {
         'tracking_code': _tracking.text.trim(),
         'carrier': _carrier.text.trim(),
-        'amount': _amount.text.trim(),
+        'amount': amount.toStringAsFixed(2),
         'from_address': _from.toMap(),
         'to_address': _to.toMap(),
       });
@@ -148,7 +163,18 @@ class _InsuranceFormState extends State<_InsuranceForm> {
     } catch (e) {
       if (mounted) {
         setState(() => _busy = false);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+        // This endpoint is standalone insurance, which is a per-account
+        // permission. Where it is switched off EasyPost answers "Your account
+        // is not enabled for standalone insurance purchase" — a setting to take
+        // up with EasyPost, not a mistake the user just made, so it is worth
+        // saying so rather than showing the raw error.
+        final raw = e.toString();
+        final message = raw.contains('not enabled for standalone insurance')
+            ? 'This EasyPost account is not enabled for standalone insurance. '
+                'Ask EasyPost support to enable it, or add insurance when '
+                'buying the label instead.'
+            : raw;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
       }
     }
   }
