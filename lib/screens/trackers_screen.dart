@@ -265,14 +265,25 @@ class _TrackerTile extends StatelessWidget {
           ],
         ],
       ),
-      trailing: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        decoration: BoxDecoration(
-          color: ss.color.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(12),
+      // Capped, and allowed to wrap inside the cap. A long status name —
+      // "Disponible en point relais", "Rücksendung an Absender" — is as wide as
+      // the row, and an unbounded badge took that width from the subtitle,
+      // which then ellipsised to "Prévu 14 …". Two lines of badge cost nothing:
+      // the row is already tall enough for them.
+      trailing: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 132),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: ss.color.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            statusLabel(t, tracker.status),
+            textAlign: TextAlign.center,
+            style: TextStyle(color: ss.color, fontSize: 12, fontWeight: FontWeight.w600),
+          ),
         ),
-        child: Text(statusLabel(t, tracker.status),
-            style: TextStyle(color: ss.color, fontSize: 12, fontWeight: FontWeight.w600)),
       ),
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => TrackerDetailScreen(tracker: tracker)),
