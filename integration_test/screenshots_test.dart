@@ -41,18 +41,37 @@ Future<void> _settle(WidgetTester tester,
   }
 }
 
+/// Set SHOTS_REQUIRED=1 (CI does) to turn a failed capture into a failed test.
+///
+/// Left off, this helper swallows its own errors so one bad screen cannot cost
+/// the remaining shots — reasonable when a human is watching the simulator. In
+/// CI nobody is watching, and a run where the shot server was never started
+/// captured nothing at all yet still reported success. Unattended runs must
+/// fail loudly instead.
+const bool _shotsRequired =
+    bool.fromEnvironment('SHOTS_REQUIRED', defaultValue: false);
+
 Future<void> _shot(WidgetTester tester, String name) async {
   await _settle(tester, seconds: 1, frames: 6);
+  Object? failure;
   await tester.runAsync(() async {
     try {
-      await http
+      final response = await http
           .get(Uri.parse('$_shotServer/shot?name=$name'))
           .timeout(const Duration(seconds: 30));
+      if (response.statusCode != 200) {
+        throw StateError(
+            'shot server returned ${response.statusCode}: ${response.body}');
+      }
       debugPrint('STEP shot-ok $name');
     } catch (e) {
       debugPrint('STEP shot-fail $name $e');
+      failure = e;
     }
   });
+  if (failure != null && _shotsRequired) {
+    fail('Screenshot "$name" was not captured: $failure');
+  }
 }
 
 /// Runs one capture step, logging rather than aborting the whole run so a

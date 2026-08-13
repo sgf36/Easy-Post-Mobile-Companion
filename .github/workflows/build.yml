@@ -198,3 +198,89 @@ jobs:
           name: ios
           if-no-files-found: warn
           path: build/ios/ipa/*.ipa
+
+  # App Store screenshots, on a hosted macOS runner rather than a rented Mac.
+  #
+  # Manual dispatch only: capture is a release chore, not a per-push cost, and
+  # booting a simulator plus a full integration run is slow.
+  #
+  # The split between the test and tool/shotserver.py is deliberate — the test
+  # drives the widget tree in-process, so it needs no accessibility permissions,
+  # and it cannot shell out from inside the simulator. It calls the host at each
+  # settled frame; the host captures and answers only once the PNG is written,
+  # which keeps the two in lockstep instead of sleeping and hoping.
+  screenshots:
+    if: github.event_name == 'workflow_dispatch'
+    needs: test
+    runs-on: macos-latest
+    env:
+      DEVICE: iPhone 16 Pro Max
+      ASC_SHOTS_DIR: ${{ github.workspace }}/asc-screenshots
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+
+      # A fresh Xcode ships only the current generation's devices, but the
+      # device TYPE is present in the runtime even when the device is not, so
+      # the 6.9-inch Pro Max can be created on demand. App Store Connect
+      # requires that size, and 1320x2868 is accepted without resizing.
+      - name: Boot the 6.9-inch simulator
+        run: |
+          set -euo pipefail
+          xcrun simctl list runtimes
+          if ! xcrun simctl list devices available | grep -q "$DEVICE"; then
+            RUNTIME=$(xcrun simctl list runtimes --json \
+              | python3 -c "import json,sys;r=[x['identifier'] for x in json.load(sys.stdin)['runtimes'] if x['isAvailable'] and 'iOS' in x['name']];print(r[-1])")
+            echo "Creating $DEVICE on $RUNTIME"
+            xcrun simctl create "$DEVICE" \
+              "com.apple.CoreSimulator.SimDeviceType.iPhone-16-Pro-Max" "$RUNTIME"
+          fi
+          xcrun simctl boot "$DEVICE"
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl list devices | grep "$DEVICE"
+
+      # No `open -a Simulator`: a runner has no GUI session, and
+      # `simctl io booted screenshot` does not need one.
+      - name: Capture screenshots
+        run: |
+          set -euo pipefail
+          mkdir -p "$ASC_SHOTS_DIR"
+          python3 tool/shotserver.py &
+          SERVER=$!
+          trap 'kill $SERVER 2>/dev/null || true' EXIT
+          for i in $(seq 1 20); do
+            curl -fsS "http://127.0.0.1:8099/shot?name=_warmup" >/dev/null && break || sleep 1
+          done
+          rm -f "$ASC_SHOTS_DIR/_warmup.png"
+          flutter test integration_test/screenshots_test.dart \
+            -d "$DEVICE" --dart-define=SHOTS_REQUIRED=1
+
+      # The capture path has failed silently before: the server answered 200
+      # whatever happened and the test caught its own errors, so a run that
+      # captured nothing was green. Prove the files exist, and at the size the
+      # App Store demands, before calling this a success.
+      - name: Verify the captures
+        run: |
+          set -euo pipefail
+          COUNT=$(ls -1 "$ASC_SHOTS_DIR"/*.png 2>/dev/null | wc -l | tr -d ' ')
+          echo "captured $COUNT png(s)"
+          [ "$COUNT" -ge 6 ] || { echo "::error::expected at least 6 screenshots, got $COUNT"; exit 1; }
+          for f in "$ASC_SHOTS_DIR"/*.png; do
+            SIZE=$(sips -g pixelWidth -g pixelHeight "$f" | awk '/pixel/{printf "%s",$2"x"}' | sed 's/x$//')
+            echo "  $(basename "$f")  $SIZE"
+            case "$SIZE" in
+              1320x2868|1290x2796) ;;
+              *) echo "::error::$(basename "$f") is $SIZE, not a 6.9-inch App Store size"; exit 1 ;;
+            esac
+          done
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ios-screenshots
+          path: ${{ env.ASC_SHOTS_DIR }}

@@ -10,7 +10,9 @@ import os
 import subprocess
 import urllib.parse
 
-OUT = os.path.expanduser("~/Desktop/asc-screenshots")
+# Overridable so CI can write into the workspace, where upload-artifact can see
+# it. A GitHub runner's ~/Desktop is not a useful place to leave build output.
+OUT = os.path.expanduser(os.environ.get("ASC_SHOTS_DIR", "~/Desktop/asc-screenshots"))
 os.makedirs(OUT, exist_ok=True)
 
 
@@ -23,13 +25,22 @@ class Handler(http.server.BaseHTTPRequestHandler):
             ["xcrun", "simctl", "io", "booted", "screenshot", dest],
             capture_output=True,
         )
-        if result.returncode == 0:
-            size = os.path.getsize(dest) if os.path.exists(dest) else 0
+        # A failed capture must answer with a failure.
+        #
+        # This used to reply "200 ok" whatever happened, and the caller catches
+        # its own errors — so a run where simctl never captured anything at all
+        # was green at both ends and only an empty output directory gave it
+        # away. Report the truth and let the test decide.
+        size = os.path.getsize(dest) if os.path.exists(dest) else 0
+        ok = result.returncode == 0 and size > 0
+        if ok:
             print("CAPTURED %s (%d bytes)" % (name, size), flush=True)
         else:
-            print("FAILED %s: %s" % (name, result.stderr.decode()[:200]), flush=True)
-        body = b"ok"
-        self.send_response(200)
+            detail = result.stderr.decode()[:200] or "no file written"
+            print("FAILED %s: %s" % (name, detail), flush=True)
+
+        body = b"ok" if ok else b"capture failed"
+        self.send_response(200 if ok else 500)
         self.send_header("Content-Type", "text/plain")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
