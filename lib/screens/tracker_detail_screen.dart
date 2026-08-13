@@ -33,7 +33,7 @@ class TrackerDetailScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tracker.carrier.isEmpty ? 'Unknown carrier' : tracker.carrier,
+                          Text(tracker.carrier.isEmpty ? 'Unknown carrier' : carrierDisplayName(tracker.carrier),
                               style: TextStyle(color: cc, fontWeight: FontWeight.bold, fontSize: 16)),
                           Text(ss.label, style: TextStyle(color: ss.color, fontWeight: FontWeight.w600)),
                         ],
@@ -42,8 +42,9 @@ class TrackerDetailScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                if (tracker.statusDetail != null && tracker.statusDetail!.isNotEmpty)
-                  _infoRow(Icons.info_outline, tracker.statusDetail!.replaceAll('_', ' ')),
+                if (statusDetailText(tracker.status, tracker.statusDetail) != null)
+                  _infoRow(Icons.info_outline,
+                      statusDetailText(tracker.status, tracker.statusDetail)!),
                 if (tracker.estDelivery != null)
                   _infoRow(Icons.event, 'Estimated delivery ${formatDate(tracker.estDelivery)}'),
                 if (tracker.signedBy != null && tracker.signedBy!.isNotEmpty)

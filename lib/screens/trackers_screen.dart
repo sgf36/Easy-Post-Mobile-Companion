@@ -118,7 +118,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
                     children: [
                       for (final c in carriers)
                         FilterChip(
-                          label: Text(c.isEmpty ? 'Unknown' : c),
+                          label: Text(c.isEmpty ? 'Unknown' : carrierDisplayName(c)),
                           avatar: CircleAvatar(radius: 8, backgroundColor: carrierColor(c)),
                           selected: !_hiddenCarriers.contains(c),
                           onSelected: (sel) {
@@ -246,7 +246,7 @@ class _TrackerTile extends StatelessWidget {
       subtitle: Row(
         children: [
           Text(
-            tracker.carrier.isEmpty ? 'Unknown carrier' : tracker.carrier,
+            tracker.carrier.isEmpty ? 'Unknown carrier' : carrierDisplayName(tracker.carrier),
             style: TextStyle(color: cc, fontWeight: FontWeight.w600),
           ),
           if (tracker.estDelivery != null) ...[

@@ -182,3 +182,69 @@ String formatDate(DateTime? dt) {
   final l = dt.toLocal();
   return '${l.day} ${months[l.month - 1]} ${l.year}';
 }
+
+/// Human-readable carrier name.
+///
+/// EasyPost returns the integration's code, not a name: "RoyalMailV3",
+/// "DHLExpress". Printed raw beside a brand colour it reads as an internal
+/// identifier leaking onto the screen, which is exactly how it looked on the
+/// first App Store capture.
+///
+/// The desktop app fixed the same class of defect in 6070f4a. The bug there was
+/// subtler and worth not repeating: the caller decided whether a carrier had
+/// been recognised by comparing the humanised result with the input, so any
+/// carrier whose display name *is* its code — FedEx, USPS — was treated as
+/// unrecognised and camel-split into "Fed Ex". This function is total: it
+/// always returns something printable and never asks the caller to infer
+/// success from the value.
+String carrierDisplayName(String carrier) {
+  if (carrier.isEmpty) return '';
+  final known = _carrierNames[carrier.toLowerCase()];
+  if (known != null) return known;
+  // Fallback for codes not in the table: split camel case only. Digits stay
+  // attached to the letter before them, so "RoyalMailV3" ends "V3" and not
+  // "V 3" — a version suffix is not a separate word.
+  return carrier.replaceAllMapped(
+    RegExp(r'([a-z])([A-Z])'),
+    (m) => '${m[1]} ${m[2]}',
+  );
+}
+
+const _carrierNames = <String, String>{
+  'usps': 'USPS',
+  'ups': 'UPS',
+  'upsdap': 'UPS',
+  'fedex': 'FedEx',
+  'fedexdefault': 'FedEx',
+  'dhlexpress': 'DHL Express',
+  'dhlecommerce': 'DHL eCommerce',
+  'royalmail': 'Royal Mail',
+  'royalmailv3': 'Royal Mail V3',
+  'evri': 'Evri',
+  'hermes': 'Evri',
+  'canadapost': 'Canada Post',
+  'ontrac': 'OnTrac',
+  'lasership': 'LaserShip',
+  'dpd': 'DPD',
+  'dpduk': 'DPD UK',
+  'amazonmws': 'Amazon',
+  'parcelforce': 'Parcelforce',
+  'yodel': 'Yodel',
+};
+
+/// The finer-grained status line, or null when it says nothing.
+///
+/// EasyPost sets `status_detail` to "unknown" whenever it has nothing more
+/// specific than the status itself, which is most of the time. Printed verbatim
+/// under a status badge it reads as the app not knowing what is happening,
+/// rather than the carrier not having elaborated — so it is omitted instead.
+///
+/// Also dropped when it merely restates the status: "in_transit" under a badge
+/// already reading "In transit" is noise, not detail.
+String? statusDetailText(String status, String? statusDetail) {
+  final d = (statusDetail ?? '').trim();
+  if (d.isEmpty) return null;
+  final normalised = d.toLowerCase().replaceAll(' ', '_');
+  if (normalised == 'unknown' || normalised == status.toLowerCase()) return null;
+  return d.replaceAll('_', ' ');
+}

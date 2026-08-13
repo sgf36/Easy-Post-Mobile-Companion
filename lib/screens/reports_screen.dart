@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/tracker.dart' show carrierColor;
+import '../models/tracker.dart' show carrierColor, carrierDisplayName;
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import 'home_shell.dart';
@@ -98,7 +98,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: CircleAvatar(backgroundColor: carrierColor(c), radius: 14),
-                    title: Text(c.isEmpty ? 'Unknown' : c),
+                    title: Text(c.isEmpty ? 'Unknown' : carrierDisplayName(c)),
                     subtitle: Text('${r.carrierCount[c]} shipment(s)'),
                     trailing: Text('${(r.carrierSpend[c] ?? 0).toStringAsFixed(2)}$cur',
                         style: const TextStyle(fontWeight: FontWeight.w600)),

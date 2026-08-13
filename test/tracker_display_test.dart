@@ -1,0 +1,73 @@
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:easypost_mobile_companion/models/tracker.dart';
+
+/// Carrier names and the status detail line, both of which reached a public
+/// App Store capture reading like internal plumbing.
+void main() {
+  group('carrierDisplayName', () {
+    test('humanises the codes the fixtures actually use', () {
+      // Every carrier in demo_fixtures.dart, since these are the ones that end
+      // up in the screenshots.
+      expect(carrierDisplayName('RoyalMailV3'), 'Royal Mail V3');
+      expect(carrierDisplayName('DHLExpress'), 'DHL Express');
+      expect(carrierDisplayName('USPS'), 'USPS');
+      expect(carrierDisplayName('FedEx'), 'FedEx');
+      expect(carrierDisplayName('Evri'), 'Evri');
+    });
+
+    test('leaves a name that is already its own code alone', () {
+      // The desktop regression this mirrors: a caller inferred "not recognised"
+      // by comparing the humanised result with the input, so carriers whose
+      // display name *is* their code were camel-split. "Fed Ex" shipped.
+      expect(carrierDisplayName('FedEx'), isNot('Fed Ex'));
+      expect(carrierDisplayName('USPS'), isNot('U S P S'));
+    });
+
+    test('is case-insensitive on the lookup', () {
+      expect(carrierDisplayName('royalmailv3'), 'Royal Mail V3');
+      expect(carrierDisplayName('ROYALMAILV3'), 'Royal Mail V3');
+    });
+
+    test('splits an unknown code rather than printing it raw', () {
+      expect(carrierDisplayName('SomeNewCarrier'), 'Some New Carrier');
+    });
+
+    test('keeps a version suffix attached', () {
+      // "V3" is a version, not a word. An unknown code ending in one should not
+      // become "V 3".
+      expect(carrierDisplayName('MadeUpMailV2'), 'Made Up Mail V2');
+    });
+
+    test('is total — never returns null or throws', () {
+      expect(carrierDisplayName(''), '');
+      expect(carrierDisplayName('x'), 'x');
+    });
+  });
+
+  group('statusDetailText', () {
+    test('drops "unknown", which is what EasyPost sends most of the time', () {
+      // Printed verbatim it reads as the app not knowing what is happening,
+      // rather than the carrier not having elaborated.
+      expect(statusDetailText('in_transit', 'unknown'), isNull);
+      expect(statusDetailText('in_transit', 'UNKNOWN'), isNull);
+    });
+
+    test('drops a detail that merely restates the status', () {
+      expect(statusDetailText('in_transit', 'in_transit'), isNull);
+      expect(statusDetailText('delivered', 'Delivered'), isNull);
+    });
+
+    test('drops nothing useful', () {
+      expect(statusDetailText('in_transit', 'arrived_at_facility'),
+          'arrived at facility');
+      expect(statusDetailText('failure', 'address_incorrect'), 'address incorrect');
+    });
+
+    test('handles absent and empty details', () {
+      expect(statusDetailText('in_transit', null), isNull);
+      expect(statusDetailText('in_transit', ''), isNull);
+      expect(statusDetailText('in_transit', '   '), isNull);
+    });
+  });
+}
