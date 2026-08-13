@@ -32,10 +32,10 @@ class _Report {
   /// Keyed by carrier, then currency: a carrier can be paid in more than one.
   final Map<String, Map<String, double>> carrierSpend = {};
 
-  String get spendLabel => formatSpend(spendByCurrency);
+  String spendLabel(String locale) => formatSpend(spendByCurrency, locale: locale);
 
-  String carrierSpendLabel(String carrier) =>
-      formatSpend(carrierSpend[carrier] ?? const {});
+  String carrierSpendLabel(String carrier, String locale) =>
+      formatSpend(carrierSpend[carrier] ?? const {}, locale: locale);
 }
 
 class _ReportsScreenState extends State<ReportsScreen> {
@@ -103,12 +103,19 @@ class _ReportsScreenState extends State<ReportsScreen> {
             return ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                Row(
-                  children: [
-                    Expanded(child: _card(t.reportsShipments, '${r.count}')),
-                    const SizedBox(width: 12),
-                    Expanded(child: _card(t.reportsTotalSpend, r.spendLabel)),
-                  ],
+                // Stretch, not the default: a spend figure spanning two
+                // currencies wraps to a second line, and with the default
+                // alignment the two cards then had visibly different heights.
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(child: _card(t.reportsShipments, '${r.count}')),
+                      const SizedBox(width: 12),
+                      Expanded(
+                          child: _card(t.reportsTotalSpend, r.spendLabel(t.localeName))),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Text(t.reportsByCarrier, style: Theme.of(context).textTheme.titleMedium),
@@ -121,7 +128,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     leading: CircleAvatar(backgroundColor: carrierColor(c), radius: 14),
                     title: Text(c.isEmpty ? t.carrierUnknownShort : carrierDisplayName(c)),
                     subtitle: Text(t.reportsCarrierShipments(r.carrierCount[c] ?? 0)),
-                    trailing: Text(r.carrierSpendLabel(c),
+                    trailing: Text(r.carrierSpendLabel(c, t.localeName),
                         style: const TextStyle(fontWeight: FontWeight.w600)),
                   ),
               ],

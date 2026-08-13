@@ -120,7 +120,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Орієнтовно $date';
+    return 'Орієнт. $date';
   }
 
   @override

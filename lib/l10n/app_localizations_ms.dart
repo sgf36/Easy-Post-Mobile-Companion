@@ -120,7 +120,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Anggaran $date';
+    return 'Angg. $date';
   }
 
   @override

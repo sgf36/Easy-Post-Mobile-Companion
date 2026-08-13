@@ -121,7 +121,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'अनुमानित $date';
+    return 'अनु. $date';
   }
 
   @override

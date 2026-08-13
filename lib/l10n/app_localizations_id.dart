@@ -120,7 +120,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Perkiraan $date';
+    return 'Perk. $date';
   }
 
   @override

@@ -41,7 +41,7 @@
   "trackersEmpty": "Još se ne prati nijedna pošiljka.",
   "trackersShowing": "Prikazano {shown} od {total}",
   "trackersNoMatch": "Ništa ne odgovara trenutnim filtrima.",
-  "etaLabel": "Procjena {date}",
+  "etaLabel": "Procj. {date}",
 
   "detailEstimatedDelivery": "Procijenjena dostava {date}",
   "detailSignedBy": "Potpisao/la {name}",

@@ -41,7 +41,7 @@
   "trackersEmpty": "Żadna przesyłka nie jest jeszcze śledzona.",
   "trackersShowing": "Widoczne {shown} z {total}",
   "trackersNoMatch": "Nic nie pasuje do bieżących filtrów.",
-  "etaLabel": "Przewidywana {date}",
+  "etaLabel": "Przew. {date}",
 
   "detailEstimatedDelivery": "Przewidywane doręczenie {date}",
   "detailSignedBy": "Podpisano przez {name}",

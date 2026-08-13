@@ -41,7 +41,7 @@
   "trackersEmpty": "Наразі не відстежується жодне відправлення.",
   "trackersShowing": "Показано {shown} із {total}",
   "trackersNoMatch": "Нічого не відповідає поточним фільтрам.",
-  "etaLabel": "Орієнтовно {date}",
+  "etaLabel": "Орієнт. {date}",
 
   "detailEstimatedDelivery": "Орієнтовна доставка {date}",
   "detailSignedBy": "Підпис одержувача: {name}",

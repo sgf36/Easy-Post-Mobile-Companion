@@ -41,7 +41,7 @@
   "trackersEmpty": "Aucune expédition n’est encore suivie.",
   "trackersShowing": "{shown} sur {total} affichés",
   "trackersNoMatch": "Rien ne correspond aux filtres actuels.",
-  "etaLabel": "Prévu le {date}",
+  "etaLabel": "Prévu {date}",
 
   "detailEstimatedDelivery": "Livraison estimée le {date}",
   "detailSignedBy": "Signé par {name}",

@@ -59,6 +59,10 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
       },
     ],
   },
+  // The detail capture opens this one, so it carries a full scan history: two
+  // events drew a timeline that stopped halfway down a 6.9-inch screen, and
+  // four distinct cities give the journey map something to draw besides a
+  // straight line between two pins.
   {
     'id': 'trk_demo_02',
     'tracking_code': 'EZ2000000002',
@@ -68,9 +72,33 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
     'tracking_details': <Map<String, dynamic>>[
       {
         'status': 'in_transit',
+        'message': 'Out for Delivery to Local Depot',
+        'datetime': '2026-08-14T06:05:00Z',
+        'tracking_location': {'city': 'Bristol', 'state': '', 'country': 'GB'},
+      },
+      {
+        'status': 'in_transit',
         'message': 'Item Received at Mail Centre',
         'datetime': '2026-08-13T16:22:00Z',
         'tracking_location': {'city': 'Bristol', 'state': '', 'country': 'GB'},
+      },
+      {
+        'status': 'in_transit',
+        'message': 'Item Departed Regional Hub',
+        'datetime': '2026-08-13T09:48:00Z',
+        'tracking_location': {'city': 'Swindon', 'state': '', 'country': 'GB'},
+      },
+      {
+        'status': 'in_transit',
+        'message': 'Item Sorted at National Centre',
+        'datetime': '2026-08-12T22:30:00Z',
+        'tracking_location': {'city': 'Reading', 'state': '', 'country': 'GB'},
+      },
+      {
+        'status': 'in_transit',
+        'message': 'Item Accepted at Post Office',
+        'datetime': '2026-08-12T14:10:00Z',
+        'tracking_location': {'city': 'London', 'state': '', 'country': 'GB'},
       },
       {
         'status': 'pre_transit',
@@ -292,6 +320,22 @@ const List<Map<String, dynamic>> demoShipments = <Map<String, dynamic>>[
     'created_at': '2026-08-11T09:40:00Z',
     'selected_rate': {'carrier': 'USPS', 'service': 'GroundAdvantage', 'rate': '6.75', 'currency': 'USD'},
     'to_address': {'name': 'Marlow & Fern', 'city': 'Toronto', 'state': 'ON', 'country': 'CA'},
+  },
+  {
+    'id': 'shp_demo_08',
+    'tracking_code': 'EZ5000000005',
+    'status': 'return_to_sender',
+    'created_at': '2026-08-10T16:15:00Z',
+    'selected_rate': {'carrier': 'Evri', 'service': 'Standard', 'rate': '3.45', 'currency': 'GBP'},
+    'to_address': {'name': 'Kelvinside Bindery', 'city': 'Glasgow', 'state': '', 'country': 'GB'},
+  },
+  {
+    'id': 'shp_demo_09',
+    'tracking_code': 'EZ8000000008',
+    'status': 'available_for_pickup',
+    'created_at': '2026-08-12T11:00:00Z',
+    'selected_rate': {'carrier': 'DPDUK', 'service': 'NextDay', 'rate': '7.30', 'currency': 'GBP'},
+    'to_address': {'name': 'Taff Vale Cycles', 'city': 'Cardiff', 'state': '', 'country': 'GB'},
   },
 ];
 

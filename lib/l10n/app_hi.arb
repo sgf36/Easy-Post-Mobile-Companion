@@ -41,7 +41,7 @@
   "trackersEmpty": "अभी तक किसी शिपमेंट को ट्रैक नहीं किया जा रहा है।",
   "trackersShowing": "{total} में से {shown} दिखाए जा रहे हैं",
   "trackersNoMatch": "वर्तमान फ़िल्टर से कुछ भी मेल नहीं खाता।",
-  "etaLabel": "अनुमानित {date}",
+  "etaLabel": "अनु. {date}",
 
   "detailEstimatedDelivery": "अनुमानित डिलीवरी {date}",
   "detailSignedBy": "{name} द्वारा हस्ताक्षरित",

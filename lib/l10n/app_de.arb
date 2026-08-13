@@ -41,7 +41,7 @@
   "trackersEmpty": "Es werden noch keine Sendungen verfolgt.",
   "trackersShowing": "{shown} von {total} angezeigt",
   "trackersNoMatch": "Nichts entspricht den aktuellen Filtern.",
-  "etaLabel": "Voraussichtlich {date}",
+  "etaLabel": "Vsl. {date}",
 
   "detailEstimatedDelivery": "Voraussichtliche Zustellung {date}",
   "detailSignedBy": "Unterschrieben von {name}",

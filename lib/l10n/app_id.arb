@@ -41,7 +41,7 @@
   "trackersEmpty": "Belum ada pengiriman yang dilacak.",
   "trackersShowing": "Menampilkan {shown} dari {total}",
   "trackersNoMatch": "Tidak ada yang cocok dengan filter saat ini.",
-  "etaLabel": "Perkiraan {date}",
+  "etaLabel": "Perk. {date}",
 
   "detailEstimatedDelivery": "Estimasi pengiriman {date}",
   "detailSignedBy": "Ditandatangani oleh {name}",

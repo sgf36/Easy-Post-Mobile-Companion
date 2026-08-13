@@ -258,7 +258,7 @@ class _TrackerTile extends StatelessWidget {
             const Text('  ·  '),
             Flexible(
               child: Text(
-                t.etaLabel(formatDate(tracker.estDelivery, t.localeName)),
+                t.etaLabel(formatDateShort(tracker.estDelivery, t.localeName)),
                 overflow: TextOverflow.ellipsis,
               ),
             ),

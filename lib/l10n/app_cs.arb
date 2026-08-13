@@ -41,7 +41,7 @@
   "trackersEmpty": "Zatím není sledována žádná zásilka.",
   "trackersShowing": "Zobrazeno {shown} z {total}",
   "trackersNoMatch": "Aktuálním filtrům nic neodpovídá.",
-  "etaLabel": "Odhad {date}",
+  "etaLabel": "Odh. {date}",
 
   "detailEstimatedDelivery": "Odhadované doručení {date}",
   "detailSignedBy": "Podepsal(a) {name}",

@@ -41,7 +41,7 @@
   "trackersEmpty": "Er worden nog geen zendingen gevolgd.",
   "trackersShowing": "{shown} van {total} weergegeven",
   "trackersNoMatch": "Niets komt overeen met de huidige filters.",
-  "etaLabel": "Verwacht {date}",
+  "etaLabel": "Verw. {date}",
 
   "detailEstimatedDelivery": "Verwachte bezorging {date}",
   "detailSignedBy": "Getekend door {name}",

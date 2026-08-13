@@ -41,7 +41,7 @@
   "trackersEmpty": "Még nincs követett küldemény.",
   "trackersShowing": "{total} közül {shown} látható",
   "trackersNoMatch": "Semmi sem felel meg a jelenlegi szűrőknek.",
-  "etaLabel": "Várható: {date}",
+  "etaLabel": "Vár. {date}",
 
   "detailEstimatedDelivery": "Becsült kézbesítés: {date}",
   "detailSignedBy": "Aláírta: {name}",

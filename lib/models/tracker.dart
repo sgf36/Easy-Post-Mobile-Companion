@@ -211,6 +211,17 @@ String formatDate(DateTime? dt, String locale) {
   return DateFormat.yMMMd(locale).format(dt.toLocal());
 }
 
+/// Day and month, no year: "15 Aug", "15. Aug.", "8月15日".
+///
+/// For the tracker list, where the row already carries a carrier name and a
+/// status badge and the year is four characters of nothing. With the full date
+/// there, a German capture read "Royal Mail V3 · Voraussichtlich 1…" on nine
+/// rows out of eleven — the year was pushing the useful part off the screen.
+String formatDateShort(DateTime? dt, String locale) {
+  if (dt == null) return '';
+  return DateFormat.MMMd(locale).format(dt.toLocal());
+}
+
 /// Human-readable carrier name.
 ///
 /// EasyPost returns the integration's code, not a name: "RoyalMailV3",
@@ -282,11 +293,17 @@ String? statusDetailText(String status, String? statusDetail) {
 /// Ordered largest first. Kept separate rather than summed because converting
 /// between currencies needs a rate, and an app that invents one states a figure
 /// it cannot stand behind.
-String formatSpend(Map<String, double> byCurrency) {
-  if (byCurrency.isEmpty) return '0.00';
+///
+/// [locale] decides the decimal separator, so a German reader sees "57,00 GBP"
+/// rather than the "57.00 GBP" a hardcoded `toStringAsFixed` produced — which
+/// in German is not a near miss but a different number. It defaults to English
+/// so the pure formatting tests need not carry a locale around.
+String formatSpend(Map<String, double> byCurrency, {String locale = 'en'}) {
+  final number = NumberFormat.decimalPatternDigits(locale: locale, decimalDigits: 2);
+  if (byCurrency.isEmpty) return number.format(0);
   final entries = byCurrency.entries.toList()
     ..sort((a, b) => b.value.compareTo(a.value));
   return entries
-      .map((e) => '${e.value.toStringAsFixed(2)}${e.key.isEmpty ? '' : ' ${e.key}'}')
+      .map((e) => '${number.format(e.value)}${e.key.isEmpty ? '' : ' ${e.key}'}')
       .join(' · ');
 }

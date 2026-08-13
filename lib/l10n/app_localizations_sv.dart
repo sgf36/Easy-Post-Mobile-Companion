@@ -120,7 +120,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Beräknad $date';
+    return 'Ber. $date';
   }
 
   @override

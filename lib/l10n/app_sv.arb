@@ -41,7 +41,7 @@
   "trackersEmpty": "Inga försändelser spåras ännu.",
   "trackersShowing": "Visar {shown} av {total}",
   "trackersNoMatch": "Inget matchar de aktuella filtren.",
-  "etaLabel": "Beräknad {date}",
+  "etaLabel": "Ber. {date}",
 
   "detailEstimatedDelivery": "Beräknad leverans {date}",
   "detailSignedBy": "Signerad av {name}",

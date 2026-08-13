@@ -120,7 +120,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Εκτίμηση $date';
+    return 'Εκτ. $date';
   }
 
   @override

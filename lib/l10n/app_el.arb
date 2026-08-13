@@ -41,7 +41,7 @@
   "trackersEmpty": "Δεν παρακολουθείται ακόμη καμία αποστολή.",
   "trackersShowing": "Εμφανίζονται {shown} από {total}",
   "trackersNoMatch": "Τίποτα δεν ταιριάζει στα τρέχοντα φίλτρα.",
-  "etaLabel": "Εκτίμηση {date}",
+  "etaLabel": "Εκτ. {date}",
 
   "detailEstimatedDelivery": "Εκτιμώμενη παράδοση {date}",
   "detailSignedBy": "Υπογραφή από {name}",

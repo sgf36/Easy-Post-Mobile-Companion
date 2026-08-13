@@ -41,7 +41,7 @@
   "trackersEmpty": "Belum ada penghantaran yang dijejak.",
   "trackersShowing": "Memaparkan {shown} daripada {total}",
   "trackersNoMatch": "Tiada yang sepadan dengan penapis semasa.",
-  "etaLabel": "Anggaran {date}",
+  "etaLabel": "Angg. {date}",
 
   "detailEstimatedDelivery": "Anggaran penghantaran {date}",
   "detailSignedBy": "Ditandatangani oleh {name}",

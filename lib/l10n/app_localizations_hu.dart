@@ -120,7 +120,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Várható: $date';
+    return 'Vár. $date';
   }
 
   @override

@@ -120,7 +120,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Verwacht $date';
+    return 'Verw. $date';
   }
 
   @override

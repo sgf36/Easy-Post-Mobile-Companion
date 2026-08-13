@@ -120,7 +120,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Przewidywana $date';
+    return 'Przew. $date';
   }
 
   @override

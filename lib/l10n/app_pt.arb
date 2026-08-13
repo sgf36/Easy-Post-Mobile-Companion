@@ -41,7 +41,7 @@
   "trackersEmpty": "Nenhum envio está sendo rastreado ainda.",
   "trackersShowing": "Mostrando {shown} de {total}",
   "trackersNoMatch": "Nada corresponde aos filtros atuais.",
-  "etaLabel": "Previsão {date}",
+  "etaLabel": "Prev. {date}",
 
   "detailEstimatedDelivery": "Entrega estimada {date}",
   "detailSignedBy": "Assinado por {name}",

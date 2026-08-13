@@ -120,7 +120,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Odhad $date';
+    return 'Odh. $date';
   }
 
   @override

@@ -41,7 +41,7 @@
   "trackersEmpty": "Отслеживаемых отправлений пока нет.",
   "trackersShowing": "Показано {shown} из {total}",
   "trackersNoMatch": "Ничего не соответствует текущим фильтрам.",
-  "etaLabel": "Ожидается {date}",
+  "etaLabel": "Ожид. {date}",
 
   "detailEstimatedDelivery": "Ожидаемая доставка {date}",
   "detailSignedBy": "Подпись получателя: {name}",

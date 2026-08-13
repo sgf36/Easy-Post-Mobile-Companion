@@ -120,7 +120,7 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String etaLabel(String date) {
-    return 'Procjena $date';
+    return 'Procj. $date';
   }
 
   @override

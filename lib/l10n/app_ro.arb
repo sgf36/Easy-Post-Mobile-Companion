@@ -41,7 +41,7 @@
   "trackersEmpty": "Nu se urmărește încă niciun colet.",
   "trackersShowing": "Se afișează {shown} din {total}",
   "trackersNoMatch": "Nimic nu corespunde filtrelor curente.",
-  "etaLabel": "Estimat {date}",
+  "etaLabel": "Est. {date}",
 
   "detailEstimatedDelivery": "Livrare estimată {date}",
   "detailSignedBy": "Semnat de {name}",
