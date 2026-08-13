@@ -258,7 +258,7 @@ jobs:
           done
           rm -f "$ASC_SHOTS_DIR/_warmup.png"
           flutter test integration_test/screenshots_test.dart \
-            -d "$DEVICE" --dart-define=SHOTS_REQUIRED=1
+            -d "$DEVICE" --dart-define=SHOTS_REQUIRED=1 --dart-define=DEMO_FIXTURES=true
 
       # The capture path has failed silently before: the server answered 200
       # whatever happened and the test caught its own errors, so a run that

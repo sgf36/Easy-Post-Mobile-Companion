@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 
 import 'package:http/http.dart' as http;
 
+import 'demo_fixtures.dart';
 import 'pairing_store.dart';
 
 /// A failure with a message safe to show the user.
@@ -17,6 +18,21 @@ class ProxyException implements Exception {
 /// EasyPost key; it presents its device token + KEK and the proxy decrypts,
 /// calls EasyPost, and returns only allow-listed data.
 class ProxyClient {
+  /// Serve invented data instead of calling the proxy. Screenshots only.
+  ///
+  /// Compiled in with `--dart-define=DEMO_FIXTURES=true`, so a shipping build
+  /// cannot reach this path: the constant folds to false and the fixture
+  /// subclass is unreachable. A release build never returns fake shipments.
+  static const bool useFixtures =
+      bool.fromEnvironment('DEMO_FIXTURES', defaultValue: false);
+
+  /// Screens construct `ProxyClient()` directly, so the swap happens here
+  /// rather than by threading an injected client through every widget.
+  factory ProxyClient() =>
+      useFixtures ? _FixtureProxyClient._() : ProxyClient._real();
+
+  ProxyClient._real();
+
   String get _platform => Platform.isIOS ? 'ios' : 'android';
 
   /// Redeem a one-time pairing token (from the desktop QR) for a device token
@@ -136,4 +152,42 @@ class ProxyClient {
   /// Cancel a scheduled pickup.
   Future<Map<String, dynamic>> cancelPickup(PairingCredentials c, String id) =>
       _post(c, '/ep/pickups/$id/cancel', const {});
+}
+
+/// Returns the invented shot-list data instead of calling the proxy.
+///
+/// Reachable only under `--dart-define=DEMO_FIXTURES=true`; see
+/// [ProxyClient.useFixtures]. Every getter is overridden, so a screen added
+/// later that forgets about fixtures cannot silently fall through to the live
+/// account — it would call an inherited method needing credentials the capture
+/// run does not have, and fail loudly rather than photograph real shipments.
+class _FixtureProxyClient extends ProxyClient {
+  _FixtureProxyClient._() : super._real();
+
+  /// A beat of latency so the screens' loading states resolve the way they do
+  /// against the network, rather than painting before the first frame settles.
+  Future<List<Map<String, dynamic>>> _canned(List<Map<String, dynamic>> rows) async {
+    await Future<void>.delayed(const Duration(milliseconds: 120));
+    return rows;
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getTrackers(PairingCredentials c) =>
+      _canned(demoTrackers);
+
+  @override
+  Future<List<Map<String, dynamic>>> getShipments(PairingCredentials c) =>
+      _canned(demoShipments);
+
+  @override
+  Future<List<Map<String, dynamic>>> getInsurances(PairingCredentials c) =>
+      _canned(demoInsurances);
+
+  @override
+  Future<List<Map<String, dynamic>>> getClaims(PairingCredentials c) =>
+      _canned(demoClaims);
+
+  @override
+  Future<List<Map<String, dynamic>>> getPickups(PairingCredentials c) =>
+      _canned(demoPickups);
 }
