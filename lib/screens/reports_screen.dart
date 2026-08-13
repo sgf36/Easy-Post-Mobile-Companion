@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/tracker.dart' show carrierColor, carrierDisplayName;
+import '../models/tracker.dart' show carrierColor, carrierDisplayName, formatSpend;
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import 'home_shell.dart';
@@ -16,12 +16,24 @@ class ReportsScreen extends StatefulWidget {
   State<ReportsScreen> createState() => _ReportsScreenState();
 }
 
+/// Spend is kept per currency, not as one number.
+///
+/// It used to be a single total labelled with whichever currency the *first*
+/// shipment happened to carry. Ship one parcel in dollars and two in pounds and
+/// the screen added them together and called the result dollars — a wrong
+/// figure, stated confidently. Anyone shipping from the United Kingdom to the
+/// United States can do that in an afternoon.
 class _Report {
   int count = 0;
-  double spend = 0;
-  String currency = '';
+  final Map<String, double> spendByCurrency = {};
   final Map<String, int> carrierCount = {};
-  final Map<String, double> carrierSpend = {};
+  /// Keyed by carrier, then currency: a carrier can be paid in more than one.
+  final Map<String, Map<String, double>> carrierSpend = {};
+
+  String get spendLabel => formatSpend(spendByCurrency);
+
+  String carrierSpendLabel(String carrier) =>
+      formatSpend(carrierSpend[carrier] ?? const {});
 }
 
 class _ReportsScreenState extends State<ReportsScreen> {
@@ -42,10 +54,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
       if (rate is Map) {
         final amount = double.tryParse('${rate['rate'] ?? ''}') ?? 0;
         final carrier = (rate['carrier'] ?? 'Unknown').toString();
-        r.spend += amount;
-        if (r.currency.isEmpty) r.currency = (rate['currency'] ?? '').toString();
+        final currency = (rate['currency'] ?? '').toString();
+        r.spendByCurrency[currency] = (r.spendByCurrency[currency] ?? 0) + amount;
         r.carrierCount[carrier] = (r.carrierCount[carrier] ?? 0) + 1;
-        r.carrierSpend[carrier] = (r.carrierSpend[carrier] ?? 0) + amount;
+        final byCurrency = r.carrierSpend.putIfAbsent(carrier, () => {});
+        byCurrency[currency] = (byCurrency[currency] ?? 0) + amount;
       }
     }
     return r;
@@ -76,9 +89,12 @@ class _ReportsScreenState extends State<ReportsScreen> {
               ]);
             }
             final r = snap.data ?? _Report();
+            // Ordered by shipment count rather than spend: spend is no longer a
+            // single comparable number once more than one currency is in play,
+            // and converting between them would need a rate this app has no
+            // business inventing.
             final carriers = r.carrierCount.keys.toList()
-              ..sort((a, b) => (r.carrierSpend[b] ?? 0).compareTo(r.carrierSpend[a] ?? 0));
-            final cur = r.currency.isEmpty ? '' : ' ${r.currency}';
+              ..sort((a, b) => (r.carrierCount[b] ?? 0).compareTo(r.carrierCount[a] ?? 0));
             return ListView(
               padding: const EdgeInsets.all(16),
               children: [
@@ -86,7 +102,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   children: [
                     Expanded(child: _card('Shipments', '${r.count}')),
                     const SizedBox(width: 12),
-                    Expanded(child: _card('Total spend', '${r.spend.toStringAsFixed(2)}$cur')),
+                    Expanded(child: _card('Total spend', r.spendLabel)),
                   ],
                 ),
                 const SizedBox(height: 24),
@@ -100,7 +116,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     leading: CircleAvatar(backgroundColor: carrierColor(c), radius: 14),
                     title: Text(c.isEmpty ? 'Unknown' : carrierDisplayName(c)),
                     subtitle: Text('${r.carrierCount[c]} shipment(s)'),
-                    trailing: Text('${(r.carrierSpend[c] ?? 0).toStringAsFixed(2)}$cur',
+                    trailing: Text(r.carrierSpendLabel(c),
                         style: const TextStyle(fontWeight: FontWeight.w600)),
                   ),
               ],

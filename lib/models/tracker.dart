@@ -248,3 +248,17 @@ String? statusDetailText(String status, String? statusDetail) {
   if (normalised == 'unknown' || normalised == status.toLowerCase()) return null;
   return d.replaceAll('_', ' ');
 }
+
+/// Money totals that may span more than one currency: "18.05 GBP · 8.40 USD".
+///
+/// Ordered largest first. Kept separate rather than summed because converting
+/// between currencies needs a rate, and an app that invents one states a figure
+/// it cannot stand behind.
+String formatSpend(Map<String, double> byCurrency) {
+  if (byCurrency.isEmpty) return '0.00';
+  final entries = byCurrency.entries.toList()
+    ..sort((a, b) => b.value.compareTo(a.value));
+  return entries
+      .map((e) => '${e.value.toStringAsFixed(2)}${e.key.isEmpty ? '' : ' ${e.key}'}')
+      .join(' · ');
+}
