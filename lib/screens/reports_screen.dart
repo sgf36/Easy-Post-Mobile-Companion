@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
 import '../models/tracker.dart' show carrierColor, carrierDisplayName, formatSpend;
+import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import 'home_shell.dart';
@@ -72,8 +74,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Reports')),
+      appBar: AppBar(title: Text(t.navReports)),
       drawer: NavDrawer(nav: widget.nav),
       body: RefreshIndicator(
         onRefresh: _refresh,
@@ -85,7 +88,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
             }
             if (snap.hasError) {
               return ListView(children: [
-                Padding(padding: const EdgeInsets.all(24), child: Text('${snap.error}', textAlign: TextAlign.center)),
+                Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Text(describeError(t, snap.error), textAlign: TextAlign.center)),
               ]);
             }
             final r = snap.data ?? _Report();
@@ -100,22 +105,22 @@ class _ReportsScreenState extends State<ReportsScreen> {
               children: [
                 Row(
                   children: [
-                    Expanded(child: _card('Shipments', '${r.count}')),
+                    Expanded(child: _card(t.reportsShipments, '${r.count}')),
                     const SizedBox(width: 12),
-                    Expanded(child: _card('Total spend', r.spendLabel)),
+                    Expanded(child: _card(t.reportsTotalSpend, r.spendLabel)),
                   ],
                 ),
                 const SizedBox(height: 24),
-                Text('By carrier', style: Theme.of(context).textTheme.titleMedium),
+                Text(t.reportsByCarrier, style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(height: 8),
                 if (carriers.isEmpty)
-                  const Padding(padding: EdgeInsets.all(16), child: Text('No purchased shipments to report yet.')),
+                  Padding(padding: const EdgeInsets.all(16), child: Text(t.reportsEmpty)),
                 for (final c in carriers)
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: CircleAvatar(backgroundColor: carrierColor(c), radius: 14),
-                    title: Text(c.isEmpty ? 'Unknown' : carrierDisplayName(c)),
-                    subtitle: Text('${r.carrierCount[c]} shipment(s)'),
+                    title: Text(c.isEmpty ? t.carrierUnknownShort : carrierDisplayName(c)),
+                    subtitle: Text(t.reportsCarrierShipments(r.carrierCount[c] ?? 0)),
                     trailing: Text(r.carrierSpendLabel(c),
                         style: const TextStyle(fontWeight: FontWeight.w600)),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'l10n/app_localizations.dart';
 import 'screens/home_shell.dart';
 import 'screens/pair_screen.dart';
 import 'services/pairing_store.dart';
@@ -10,11 +11,22 @@ void main() => runApp(const CompanionApp());
 class CompanionApp extends StatelessWidget {
   const CompanionApp({super.key});
 
+  /// Pins the interface language, for screenshot capture only.
+  ///
+  /// Compiled in with `--dart-define=UI_LOCALE=de`; left undefined it folds to
+  /// an empty string and the app follows the device, which is what a shipping
+  /// build does. The capture needs this because a simulator's language cannot
+  /// be changed from inside the test that drives the widget tree.
+  static const String _forcedLocale = String.fromEnvironment('UI_LOCALE');
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Easy-Post Mobile Companion',
+      onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: _forcedLocale.isEmpty ? null : Locale(_forcedLocale),
       theme: Brand.theme(),
       home: const RootGate(),
     );

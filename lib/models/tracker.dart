@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../l10n/app_localizations.dart';
 
 /// A shipment tracker, parsed from the EasyPost tracker object.
 class Tracker {
@@ -84,35 +87,67 @@ class TrackEvent {
 }
 
 /// Visual treatment for an EasyPost tracker status.
+///
+/// Icon and colour only. The words live in the ARB catalogues, because a status
+/// is ordinary prose — "in transit" is a sentence, not an identifier — whereas
+/// a carrier name is a brand and stays as it is in every language. That split is
+/// the same one the desktop app draws in `app/services/formatting.py`.
 class StatusStyle {
   final IconData icon;
   final Color color;
-  final String label;
-  const StatusStyle(this.icon, this.color, this.label);
+  const StatusStyle(this.icon, this.color);
 }
 
 StatusStyle statusStyle(String status) {
   switch (status) {
     case 'pre_transit':
-      return const StatusStyle(Icons.schedule, Color(0xFF8E5AD6), 'Pre-transit');
+      return const StatusStyle(Icons.schedule, Color(0xFF8E5AD6));
     case 'in_transit':
-      return const StatusStyle(Icons.local_shipping, Color(0xFF2B6CB0), 'In transit');
+      return const StatusStyle(Icons.local_shipping, Color(0xFF2B6CB0));
     case 'out_for_delivery':
-      return const StatusStyle(Icons.moving, Color(0xFF00897B), 'Out for delivery');
+      return const StatusStyle(Icons.moving, Color(0xFF00897B));
     case 'delivered':
-      return const StatusStyle(Icons.check_circle, Color(0xFF2E7D32), 'Delivered');
+      return const StatusStyle(Icons.check_circle, Color(0xFF2E7D32));
     case 'available_for_pickup':
-      return const StatusStyle(Icons.storefront, Color(0xFF00838F), 'Ready for pickup');
+      return const StatusStyle(Icons.storefront, Color(0xFF00838F));
     case 'return_to_sender':
-      return const StatusStyle(Icons.keyboard_return, Color(0xFFF9A825), 'Return to sender');
+      return const StatusStyle(Icons.keyboard_return, Color(0xFFF9A825));
     case 'failure':
-      return const StatusStyle(Icons.error, Color(0xFFC62828), 'Failed');
+      return const StatusStyle(Icons.error, Color(0xFFC62828));
     case 'cancelled':
-      return const StatusStyle(Icons.cancel, Color(0xFF757575), 'Cancelled');
+      return const StatusStyle(Icons.cancel, Color(0xFF757575));
     case 'error':
-      return const StatusStyle(Icons.report_problem, Color(0xFFC62828), 'Error');
+      return const StatusStyle(Icons.report_problem, Color(0xFFC62828));
     default:
-      return const StatusStyle(Icons.help_outline, Color(0xFF757575), 'Unknown');
+      return const StatusStyle(Icons.help_outline, Color(0xFF757575));
+  }
+}
+
+/// The status as a reader sees it. Total: an unrecognised code reads "Unknown"
+/// rather than leaking `in_transit` onto the screen, which is what the first
+/// App Store capture did.
+String statusLabel(AppLocalizations t, String status) {
+  switch (status) {
+    case 'pre_transit':
+      return t.statusPreTransit;
+    case 'in_transit':
+      return t.statusInTransit;
+    case 'out_for_delivery':
+      return t.statusOutForDelivery;
+    case 'delivered':
+      return t.statusDelivered;
+    case 'available_for_pickup':
+      return t.statusAvailableForPickup;
+    case 'return_to_sender':
+      return t.statusReturnToSender;
+    case 'failure':
+      return t.statusFailure;
+    case 'cancelled':
+      return t.statusCancelled;
+    case 'error':
+      return t.statusError;
+    default:
+      return t.statusUnknown;
   }
 }
 
@@ -160,27 +195,20 @@ Color carrierColor(String carrier) {
   return palette[carrier.hashCode.abs() % palette.length];
 }
 
-/// "27 Jun 2026, 09:28" — small dependency-free formatter.
-String formatDateTime(DateTime? dt) {
+/// "27 Jun 2026, 09:28" in English, and whatever the locale writes elsewhere.
+///
+/// The month names and the field order both move: Japanese wants 2026年6月27日,
+/// not a translated "Jun" dropped into an English frame. `intl` has the data,
+/// and `flutter_localizations` has already initialised it for the active locale
+/// by the time any of this is built.
+String formatDateTime(DateTime? dt, String locale) {
   if (dt == null) return '';
-  const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-  ];
-  final l = dt.toLocal();
-  final hh = l.hour.toString().padLeft(2, '0');
-  final mm = l.minute.toString().padLeft(2, '0');
-  return '${l.day} ${months[l.month - 1]} ${l.year}, $hh:$mm';
+  return DateFormat.yMMMd(locale).add_Hm().format(dt.toLocal());
 }
 
-String formatDate(DateTime? dt) {
+String formatDate(DateTime? dt, String locale) {
   if (dt == null) return '';
-  const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-  ];
-  final l = dt.toLocal();
-  return '${l.day} ${months[l.month - 1]} ${l.year}';
+  return DateFormat.yMMMd(locale).format(dt.toLocal());
 }
 
 /// Human-readable carrier name.

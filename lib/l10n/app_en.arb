@@ -1,0 +1,217 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Easy-Post Mobile Companion",
+  "@appTitle": {
+    "description": "Product name. A brand, so it is identical in every language."
+  },
+
+  "navTracking": "Tracking",
+  "@navTracking": {
+    "description": "Sidebar section: the list of tracked shipments."
+  },
+  "navHistory": "History",
+  "@navHistory": {
+    "description": "Sidebar section: past shipments."
+  },
+  "navInsurance": "Insurance",
+  "navClaims": "Claims",
+  "navPickups": "Pickups",
+  "navReports": "Reports",
+  "navHts": "HTS Lookup",
+  "@navHts": {
+    "description": "Harmonized Tariff Schedule lookup. HTS stays as the acronym."
+  },
+  "navSectionManage": "Track & manage",
+  "navSectionTools": "Tools",
+  "drawerUnpair": "Unpair this device",
+
+  "statusPreTransit": "Pre-transit",
+  "@statusPreTransit": {
+    "description": "EasyPost tracker status. Statuses are prose and translate; carrier names never do."
+  },
+  "statusInTransit": "In transit",
+  "statusOutForDelivery": "Out for delivery",
+  "statusDelivered": "Delivered",
+  "statusAvailableForPickup": "Available for pickup",
+  "statusReturnToSender": "Return to sender",
+  "statusFailure": "Failed",
+  "statusCancelled": "Cancelled",
+  "statusError": "Error",
+  "statusUnknown": "Unknown",
+
+  "carrierUnknown": "Unknown carrier",
+  "carrierUnknownShort": "Unknown",
+
+  "sortTooltip": "Sort",
+  "sortByStatus": "Sort by status",
+  "sortByCarrier": "Sort by carrier",
+  "sortByCode": "Sort by tracking code",
+  "sortByUpdated": "Sort by recently updated",
+  "filterTooltip": "Filter",
+  "filterHideDelivered": "Hide delivered",
+  "filterStatusHeading": "Status",
+  "filterCarrierHeading": "Carrier",
+  "filterReset": "Reset filters",
+  "trackersEmpty": "No shipments are being tracked yet.",
+  "trackersShowing": "Showing {shown} of {total}",
+  "@trackersShowing": {
+    "description": "Count line above a filtered tracker list.",
+    "placeholders": {
+      "shown": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "trackersNoMatch": "Nothing matches the current filters.",
+  "etaLabel": "ETA {date}",
+  "@etaLabel": {
+    "description": "Estimated delivery date on a tracker row, abbreviated to fit.",
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "detailEstimatedDelivery": "Estimated delivery {date}",
+  "@detailEstimatedDelivery": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "detailSignedBy": "Signed by {name}",
+  "@detailSignedBy": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "detailHistoryHeading": "History",
+  "@detailHistoryHeading": {
+    "description": "Heading above the scan events of one shipment."
+  },
+  "detailNoScanHistory": "No scan history yet.",
+  "detailMapUnavailable": "Map unavailable for these locations.",
+
+  "historyEmpty": "No shipments yet.",
+
+  "insuranceEmpty": "No insurance policies yet. Tap “Buy insurance”.",
+  "insuranceBuy": "Buy insurance",
+  "insuranceAmountRange": "Insured amount must be between $0.01 and $5,000 USD.",
+  "@insuranceAmountRange": {
+    "description": "EasyPost caps declared insurance at 5,000 US dollars and always reads the amount as USD, so the currency is not localised."
+  },
+  "insuranceNotEnabled": "This EasyPost account is not enabled for standalone insurance. Ask EasyPost support to enable it, or add insurance when buying the label instead.",
+  "insuranceFromAddress": "From address",
+  "insuranceToAddress": "To address",
+
+  "fieldTrackingCode": "Tracking code",
+  "fieldCarrierHint": "Carrier (e.g. USPS)",
+  "@fieldCarrierHint": {
+    "description": "USPS is a carrier name and stays in English."
+  },
+  "fieldInsuredAmount": "Insured amount (USD)",
+  "fieldName": "Name",
+  "fieldStreet": "Street",
+  "fieldCity": "City",
+  "fieldStateRegion": "State / region",
+  "fieldPostcode": "Postcode",
+  "fieldCountryIso": "Country (ISO, e.g. US)",
+  "fieldType": "Type",
+  "fieldAmountUsd": "Amount (USD)",
+  "fieldContactEmail": "Contact email",
+  "fieldDescription": "Description",
+
+  "validationRequired": "Required",
+  "validationEnterAmount": "Enter an amount",
+  "validationEnterEmail": "Enter an email",
+  "validationDescribeIssue": "Describe the issue",
+
+  "claimsEmpty": "No claims filed yet. Tap “File a claim”.",
+  "claimsFile": "File a claim",
+  "claimSubmit": "File claim",
+  "claimTypeDamage": "Damage",
+  "claimTypeTheft": "Theft",
+  "claimTypeLoss": "Loss",
+  "claimAttachmentNote": "Damage and theft claims need a supporting photo or invoice. File those on the desktop app, where documents can be attached.",
+  "claimAttachmentSnack": "Damage and theft claims need a supporting photo or invoice, which has to be attached on the desktop app. A loss claim can be filed here.",
+
+  "pickupsEmpty": "No pickups scheduled yet.",
+  "pickupCancelTitle": "Cancel pickup?",
+  "pickupCancelBody": "Cancel pickup {id}? This cannot be undone.",
+  "@pickupCancelBody": {
+    "placeholders": {
+      "id": { "type": "String" }
+    }
+  },
+  "pickupKeep": "Keep",
+  "pickupCancelConfirm": "Cancel pickup",
+  "actionCancel": "Cancel",
+
+  "reportsShipments": "Shipments",
+  "reportsTotalSpend": "Total spend",
+  "reportsByCarrier": "By carrier",
+  "reportsEmpty": "No purchased shipments to report yet.",
+  "reportsCarrierShipments": "Shipments: {count}",
+  "@reportsCarrierShipments": {
+    "description": "Subtitle under a carrier in the Reports breakdown. Written as a label and a number rather than a counted noun, so no locale needs a plural rule for it.",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "htsSearchLabel": "Search tariff codes",
+  "htsSearchHint": "e.g. copper wire",
+  "htsSearchButton": "Search",
+  "htsDisclaimer": "Reference lookup from the U.S. International Trade Commission. Correct classification remains the shipper’s responsibility.",
+  "htsPrompt": "Search for a tariff code above.",
+  "htsNoResults": "No matching tariff codes.",
+  "htsRateGeneral": "General {rate}",
+  "@htsRateGeneral": {
+    "placeholders": {
+      "rate": { "type": "String" }
+    }
+  },
+  "htsRateSpecial": "Special {rate}",
+  "@htsRateSpecial": {
+    "placeholders": {
+      "rate": { "type": "String" }
+    }
+  },
+  "htsRateOther": "Other {rate}",
+  "@htsRateOther": {
+    "placeholders": {
+      "rate": { "type": "String" }
+    }
+  },
+  "htsCopyTooltip": "Copy code",
+  "htsCopied": "Copied {code}",
+  "@htsCopied": {
+    "placeholders": {
+      "code": { "type": "String" }
+    }
+  },
+  "htsUnavailable": "The tariff service is unavailable (error {code}). Please try again.",
+  "@htsUnavailable": {
+    "placeholders": {
+      "code": { "type": "int" }
+    }
+  },
+
+  "pairTitle": "Pair with desktop",
+  "pairInstructions": "Open Easy-Post Desktop, choose “Pair mobile app”, and scan the QR code shown there.",
+  "pairEnterReviewCode": "Enter review code instead",
+  "pairReviewDialogTitle": "Enter review code",
+  "pairReviewCodeHint": "Review code",
+  "pairAction": "Pair",
+
+  "errorPairingCodeInvalid": "That pairing code is invalid or has expired. Generate a fresh one on the desktop.",
+  "errorReviewCodeRejected": "That review code was not accepted.",
+  "errorUnexpectedPairingResponse": "Unexpected response from the pairing service.",
+  "errorNotPaired": "This device is no longer paired. Pair again from the desktop.",
+  "errorNotPairedShort": "This device is no longer paired.",
+  "errorForbidden": "That action is not permitted from the app.",
+  "errorRequestFailed": "Request failed (error {code}).",
+  "@errorRequestFailed": {
+    "placeholders": {
+      "code": { "type": "int" }
+    }
+  }
+}

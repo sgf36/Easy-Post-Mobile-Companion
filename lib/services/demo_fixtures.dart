@@ -140,6 +140,91 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
       },
     ],
   },
+  // Six rows left the bottom 40% of a 6.9-inch screen empty, which reads as a
+  // thin app rather than a busy one. The five below fill the frame. The full
+  // range of statuses is already represented above, so these repeat states
+  // freely — what they add is carriers and volume, not new colours.
+  {
+    'id': 'trk_demo_07',
+    'tracking_code': 'EZ7000000007',
+    'carrier': 'UPS',
+    'status': 'in_transit',
+    'est_delivery_date': '2026-08-15',
+    'tracking_details': <Map<String, dynamic>>[
+      {
+        'status': 'in_transit',
+        'message': 'Departed from Facility',
+        'datetime': '2026-08-13T21:40:00Z',
+        'tracking_location': {'city': 'Birmingham', 'state': '', 'country': 'GB'},
+      },
+      {
+        'status': 'pre_transit',
+        'message': 'Shipping Label Created',
+        'datetime': '2026-08-13T08:55:00Z',
+        'tracking_location': {'city': 'Coventry', 'state': '', 'country': 'GB'},
+      },
+    ],
+  },
+  {
+    'id': 'trk_demo_08',
+    'tracking_code': 'EZ8000000008',
+    'carrier': 'DPDUK',
+    'status': 'available_for_pickup',
+    'est_delivery_date': '2026-08-14',
+    'tracking_details': <Map<String, dynamic>>[
+      {
+        'status': 'available_for_pickup',
+        'message': 'Held at Local Pickup Point',
+        'datetime': '2026-08-14T07:25:00Z',
+        'tracking_location': {'city': 'Cardiff', 'state': '', 'country': 'GB'},
+      },
+    ],
+  },
+  {
+    'id': 'trk_demo_09',
+    'tracking_code': 'EZ9000000009',
+    'carrier': 'CanadaPost',
+    'status': 'delivered',
+    'est_delivery_date': '2026-08-13',
+    'tracking_details': <Map<String, dynamic>>[
+      {
+        'status': 'delivered',
+        'message': 'Delivered to Reception',
+        'datetime': '2026-08-13T11:05:00Z',
+        'tracking_location': {'city': 'Toronto', 'state': 'ON', 'country': 'CA'},
+      },
+    ],
+  },
+  {
+    'id': 'trk_demo_10',
+    'tracking_code': 'EZ1000000010',
+    'carrier': 'Parcelforce',
+    'status': 'out_for_delivery',
+    'est_delivery_date': '2026-08-14',
+    'tracking_details': <Map<String, dynamic>>[
+      {
+        'status': 'out_for_delivery',
+        'message': 'On Vehicle for Delivery',
+        'datetime': '2026-08-14T07:50:00Z',
+        'tracking_location': {'city': 'Edinburgh', 'state': '', 'country': 'GB'},
+      },
+    ],
+  },
+  {
+    'id': 'trk_demo_11',
+    'tracking_code': 'EZ1100000011',
+    'carrier': 'DHLExpress',
+    'status': 'in_transit',
+    'est_delivery_date': '2026-08-16',
+    'tracking_details': <Map<String, dynamic>>[
+      {
+        'status': 'in_transit',
+        'message': 'Processed at Hub',
+        'datetime': '2026-08-14T02:15:00Z',
+        'tracking_location': {'city': 'Leipzig', 'state': '', 'country': 'DE'},
+      },
+    ],
+  },
 ];
 
 const List<Map<String, dynamic>> demoShipments = <Map<String, dynamic>>[
@@ -171,6 +256,42 @@ const List<Map<String, dynamic>> demoShipments = <Map<String, dynamic>>[
     'created_at': '2026-08-11T15:20:00Z',
     'selected_rate': {'carrier': 'FedEx', 'service': 'FEDEX_GROUND', 'rate': '11.20', 'currency': 'GBP'},
     'to_address': {'name': 'Peartree Ceramics', 'city': 'Manchester', 'state': '', 'country': 'GB'},
+  },
+  // Reports is a breakdown by carrier, so three shipments across three carriers
+  // gave it three one-shipment rows and nothing to compare. These add repeat
+  // business and a second currency per carrier, which is the case the screen
+  // exists to keep straight.
+  {
+    'id': 'shp_demo_04',
+    'tracking_code': 'EZ7000000007',
+    'status': 'in_transit',
+    'created_at': '2026-08-13T08:55:00Z',
+    'selected_rate': {'carrier': 'UPS', 'service': 'UPS_STANDARD', 'rate': '9.15', 'currency': 'GBP'},
+    'to_address': {'name': 'Ashgrove Tools', 'city': 'Birmingham', 'state': '', 'country': 'GB'},
+  },
+  {
+    'id': 'shp_demo_05',
+    'tracking_code': 'EZ1100000011',
+    'status': 'in_transit',
+    'created_at': '2026-08-13T18:30:00Z',
+    'selected_rate': {'carrier': 'DHLExpress', 'service': 'ExpressWorldwide', 'rate': '24.60', 'currency': 'GBP'},
+    'to_address': {'name': 'Nordlicht Optik', 'city': 'Leipzig', 'state': '', 'country': 'DE'},
+  },
+  {
+    'id': 'shp_demo_06',
+    'tracking_code': 'EZ1000000010',
+    'status': 'out_for_delivery',
+    'created_at': '2026-08-13T12:05:00Z',
+    'selected_rate': {'carrier': 'RoyalMailV3', 'service': 'RoyalMailTracked24', 'rate': '5.20', 'currency': 'GBP'},
+    'to_address': {'name': 'Cairnhill Prints', 'city': 'Edinburgh', 'state': '', 'country': 'GB'},
+  },
+  {
+    'id': 'shp_demo_07',
+    'tracking_code': 'EZ9000000009',
+    'status': 'delivered',
+    'created_at': '2026-08-11T09:40:00Z',
+    'selected_rate': {'carrier': 'USPS', 'service': 'GroundAdvantage', 'rate': '6.75', 'currency': 'USD'},
+    'to_address': {'name': 'Marlow & Fern', 'city': 'Toronto', 'state': 'ON', 'country': 'CA'},
   },
 ];
 

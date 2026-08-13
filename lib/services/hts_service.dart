@@ -38,6 +38,16 @@ class HtsResult {
   }
 }
 
+/// The tariff service refused or failed. Carries the status code so the UI can
+/// say so in the reader's language; see services/error_text.dart.
+class HtsUnavailableException implements Exception {
+  final int statusCode;
+  HtsUnavailableException(this.statusCode);
+  @override
+  String toString() =>
+      'The tariff service is unavailable (error $statusCode). Please try again.';
+}
+
 /// Live HTS code lookup against the U.S. International Trade Commission's public
 /// search endpoint (no key required). Mirrors the desktop HTS Lookup.
 Future<List<HtsResult>> searchHts(String keyword) async {
@@ -46,7 +56,7 @@ Future<List<HtsResult>> searchHts(String keyword) async {
       .get(uri, headers: {'accept': 'application/json'})
       .timeout(const Duration(seconds: 12));
   if (res.statusCode != 200) {
-    throw Exception('The tariff service is unavailable (error ${res.statusCode}). Please try again.');
+    throw HtsUnavailableException(res.statusCode);
   }
   final decoded = jsonDecode(res.body);
   final list = decoded is List

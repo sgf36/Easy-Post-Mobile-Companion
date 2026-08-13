@@ -16,7 +16,15 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.2.0+1
+# 1.0.0 is the marketing version, and it is now the only place one is written.
+# Three answers were in circulation: this file said 1.2.0, CI passed a hardcoded
+# --build-name=1.0.0 that overrode it, and the App Store version record is named
+# "1.0". Every build ever uploaded reported 1.0.0, and the app has never been
+# released, so the build name here is set to agree with what App Store Connect
+# already holds and CI no longer overrides it. The build NUMBER is still supplied
+# by CI (github.run_number), because it has to increase per upload and a file in
+# git cannot do that on its own.
+version: 1.0.0+1
 
 environment:
   sdk: ^3.12.2
@@ -30,6 +38,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Pinned by flutter_localizations, so `any` rather than a range that could
+  # disagree with the SDK's own constraint.
+  intl: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -67,6 +81,10 @@ flutter_launcher_icons:
 
 # The following section is specific to Flutter packages.
 flutter:
+
+  # Generate lib/l10n/app_localizations.dart from the ARB catalogues on build.
+  # Configured by l10n.yaml at the project root.
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

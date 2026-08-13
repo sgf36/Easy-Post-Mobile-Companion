@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
 import '../models/tracker.dart';
+import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import 'home_shell.dart';
@@ -66,9 +68,10 @@ class _TrackersScreenState extends State<TrackersScreen> {
   }
 
   void _openFilterSheet(List<Tracker> all) {
-    final statuses = {for (final t in all) t.status}.toList()
+    final t = AppLocalizations.of(context);
+    final statuses = {for (final tr in all) tr.status}.toList()
       ..sort((a, b) => statusOrder(a).compareTo(statusOrder(b)));
-    final carriers = {for (final t in all) t.carrier}.toList()..sort();
+    final carriers = {for (final tr in all) tr.carrier}.toList()..sort();
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -82,7 +85,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
               children: [
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Hide delivered'),
+                  title: Text(t.filterHideDelivered),
                   value: _hiddenStatuses.contains('delivered'),
                   onChanged: (v) {
                     setState(() => v ? _hiddenStatuses.add('delivered') : _hiddenStatuses.remove('delivered'));
@@ -90,7 +93,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
                   },
                 ),
                 const SizedBox(height: 8),
-                const Text('Status', style: TextStyle(fontWeight: FontWeight.w600)),
+                Text(t.filterStatusHeading, style: const TextStyle(fontWeight: FontWeight.w600)),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -98,7 +101,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
                   children: [
                     for (final s in statuses)
                       FilterChip(
-                        label: Text(statusStyle(s).label),
+                        label: Text(statusLabel(t, s)),
                         avatar: Icon(statusStyle(s).icon, size: 18, color: statusStyle(s).color),
                         selected: !_hiddenStatuses.contains(s),
                         onSelected: (sel) {
@@ -110,7 +113,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
                 ),
                 if (carriers.length > 1) ...[
                   const SizedBox(height: 16),
-                  const Text('Carrier', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text(t.filterCarrierHeading, style: const TextStyle(fontWeight: FontWeight.w600)),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
@@ -118,7 +121,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
                     children: [
                       for (final c in carriers)
                         FilterChip(
-                          label: Text(c.isEmpty ? 'Unknown' : carrierDisplayName(c)),
+                          label: Text(c.isEmpty ? t.carrierUnknownShort : carrierDisplayName(c)),
                           avatar: CircleAvatar(radius: 8, backgroundColor: carrierColor(c)),
                           selected: !_hiddenCarriers.contains(c),
                           onSelected: (sel) {
@@ -140,7 +143,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
                       });
                       setSheet(() {});
                     },
-                    child: const Text('Reset filters'),
+                    child: Text(t.filterReset),
                   ),
                 ),
               ],
@@ -153,28 +156,29 @@ class _TrackersScreenState extends State<TrackersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
       drawer: NavDrawer(nav: widget.nav),
       appBar: AppBar(
-        title: const Text('Tracking'),
+        title: Text(t.navTracking),
         actions: [
           PopupMenuButton<SortBy>(
             icon: const Icon(Icons.sort),
-            tooltip: 'Sort',
+            tooltip: t.sortTooltip,
             initialValue: _sort,
             onSelected: (s) => setState(() => _sort = s),
-            itemBuilder: (_) => const [
-              PopupMenuItem(value: SortBy.status, child: Text('Sort by status')),
-              PopupMenuItem(value: SortBy.carrier, child: Text('Sort by carrier')),
-              PopupMenuItem(value: SortBy.code, child: Text('Sort by tracking code')),
-              PopupMenuItem(value: SortBy.updated, child: Text('Sort by recently updated')),
+            itemBuilder: (_) => [
+              PopupMenuItem(value: SortBy.status, child: Text(t.sortByStatus)),
+              PopupMenuItem(value: SortBy.carrier, child: Text(t.sortByCarrier)),
+              PopupMenuItem(value: SortBy.code, child: Text(t.sortByCode)),
+              PopupMenuItem(value: SortBy.updated, child: Text(t.sortByUpdated)),
             ],
           ),
           FutureBuilder<List<Tracker>>(
             future: _future,
             builder: (_, snap) => IconButton(
               icon: Icon(_filtersActive ? Icons.filter_alt : Icons.filter_alt_outlined),
-              tooltip: 'Filter',
+              tooltip: t.filterTooltip,
               onPressed: snap.hasData ? () => _openFilterSheet(snap.data!) : null,
             ),
           ),
@@ -192,17 +196,17 @@ class _TrackersScreenState extends State<TrackersScreen> {
               return ListView(children: [
                 Padding(
                   padding: const EdgeInsets.all(24),
-                  child: Text('${snapshot.error}', textAlign: TextAlign.center),
+                  child: Text(describeError(t, snapshot.error), textAlign: TextAlign.center),
                 ),
               ]);
             }
             final all = snapshot.data ?? const [];
             final shown = _apply(all);
             if (all.isEmpty) {
-              return ListView(children: const [
+              return ListView(children: [
                 Padding(
-                  padding: EdgeInsets.all(24),
-                  child: Text('No shipments are being tracked yet.', textAlign: TextAlign.center),
+                  padding: const EdgeInsets.all(24),
+                  child: Text(t.trackersEmpty, textAlign: TextAlign.center),
                 ),
               ]);
             }
@@ -211,14 +215,14 @@ class _TrackersScreenState extends State<TrackersScreen> {
                 if (_filtersActive || shown.length != all.length)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                    child: Text('Showing ${shown.length} of ${all.length}',
+                    child: Text(t.trackersShowing(shown.length, all.length),
                         style: Theme.of(context).textTheme.bodySmall),
                   ),
-                for (final t in shown) _TrackerTile(tracker: t),
+                for (final tracker in shown) _TrackerTile(tracker: tracker),
                 if (shown.isEmpty)
-                  const Padding(
-                    padding: EdgeInsets.all(24),
-                    child: Text('Nothing matches the current filters.', textAlign: TextAlign.center),
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Text(t.trackersNoMatch, textAlign: TextAlign.center),
                   ),
               ],
             );
@@ -235,6 +239,7 @@ class _TrackerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     final ss = statusStyle(tracker.status);
     final cc = carrierColor(tracker.carrier);
     return ListTile(
@@ -246,12 +251,17 @@ class _TrackerTile extends StatelessWidget {
       subtitle: Row(
         children: [
           Text(
-            tracker.carrier.isEmpty ? 'Unknown carrier' : carrierDisplayName(tracker.carrier),
+            tracker.carrier.isEmpty ? t.carrierUnknown : carrierDisplayName(tracker.carrier),
             style: TextStyle(color: cc, fontWeight: FontWeight.w600),
           ),
           if (tracker.estDelivery != null) ...[
             const Text('  ·  '),
-            Flexible(child: Text('ETA ${formatDate(tracker.estDelivery)}', overflow: TextOverflow.ellipsis)),
+            Flexible(
+              child: Text(
+                t.etaLabel(formatDate(tracker.estDelivery, t.localeName)),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ],
       ),
@@ -261,7 +271,8 @@ class _TrackerTile extends StatelessWidget {
           color: ss.color.withValues(alpha: 0.12),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Text(ss.label, style: TextStyle(color: ss.color, fontSize: 12, fontWeight: FontWeight.w600)),
+        child: Text(statusLabel(t, tracker.status),
+            style: TextStyle(color: ss.color, fontSize: 12, fontWeight: FontWeight.w600)),
       ),
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => TrackerDetailScreen(tracker: tracker)),

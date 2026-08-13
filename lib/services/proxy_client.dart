@@ -6,10 +6,37 @@ import 'package:http/http.dart' as http;
 import 'demo_fixtures.dart';
 import 'pairing_store.dart';
 
+/// What went wrong, rather than what to say about it.
+///
+/// The client has no `BuildContext` and therefore no localisations, so it names
+/// the failure and the UI turns that into a sentence in the reader's language
+/// (`describeError` in services/error_text.dart). The one exception is
+/// [apiMessage], which carries EasyPost's own wording verbatim: it arrives from
+/// the API in English and inventing a translation for it would be inventing the
+/// content of somebody else's error.
+enum ProxyErrorKind {
+  pairingCodeInvalid,
+  reviewCodeRejected,
+  unexpectedPairingResponse,
+  notPaired,
+  notPairedShort,
+  forbidden,
+  requestFailed,
+  apiMessage,
+}
+
 /// A failure with a message safe to show the user.
 class ProxyException implements Exception {
+  final ProxyErrorKind kind;
+
+  /// English fallback, used for logs and by [toString].
   final String message;
-  ProxyException(this.message);
+
+  /// Set for [ProxyErrorKind.requestFailed]; interpolated into the message.
+  final int? statusCode;
+
+  ProxyException(this.kind, this.message, {this.statusCode});
+
   @override
   String toString() => message;
 }
@@ -46,7 +73,8 @@ class ProxyClient {
     return _asCredentials(
       proxyUrl,
       res,
-      onFail:
+      onFail: ProxyErrorKind.pairingCodeInvalid,
+      onFailMessage:
           'That pairing code is invalid or has expired. Generate a fresh one on the desktop.',
     );
   }
@@ -58,20 +86,27 @@ class ProxyClient {
       headers: const {'content-type': 'application/json'},
       body: jsonEncode({'code': code, 'platform': _platform}),
     );
-    return _asCredentials(proxyUrl, res, onFail: 'That review code was not accepted.');
+    return _asCredentials(
+      proxyUrl,
+      res,
+      onFail: ProxyErrorKind.reviewCodeRejected,
+      onFailMessage: 'That review code was not accepted.',
+    );
   }
 
   PairingCredentials _asCredentials(
     String proxyUrl,
     http.Response res, {
-    required String onFail,
+    required ProxyErrorKind onFail,
+    required String onFailMessage,
   }) {
-    if (res.statusCode != 200) throw ProxyException(onFail);
+    if (res.statusCode != 200) throw ProxyException(onFail, onFailMessage);
     final body = jsonDecode(res.body) as Map<String, dynamic>;
     final token = body['device_token'] as String?;
     final kek = body['kek'] as String?;
     if (token == null || kek == null) {
-      throw ProxyException('Unexpected response from the pairing service.');
+      throw ProxyException(ProxyErrorKind.unexpectedPairingResponse,
+          'Unexpected response from the pairing service.');
     }
     return PairingCredentials(deviceToken: token, kek: kek, proxyUrl: proxyUrl);
   }
@@ -90,13 +125,19 @@ class ProxyClient {
   ) async {
     final res = await http.get(Uri.parse('${c.proxyUrl}$path'), headers: _authHeaders(c));
     if (res.statusCode == 401) {
-      throw ProxyException('This device is no longer paired. Pair again from the desktop.');
+      throw ProxyException(ProxyErrorKind.notPaired,
+          'This device is no longer paired. Pair again from the desktop.');
     }
     if (res.statusCode == 403) {
-      throw ProxyException('That action is not permitted from the app.');
+      throw ProxyException(
+          ProxyErrorKind.forbidden, 'That action is not permitted from the app.');
     }
     if (res.statusCode != 200) {
-      throw ProxyException('Request failed (error ${res.statusCode}).');
+      throw ProxyException(
+        ProxyErrorKind.requestFailed,
+        'Request failed (error ${res.statusCode}).',
+        statusCode: res.statusCode,
+      );
     }
     final body = jsonDecode(res.body) as Map<String, dynamic>;
     return ((body[key] as List<dynamic>?) ?? const []).cast<Map<String, dynamic>>();
@@ -131,11 +172,26 @@ class ProxyClient {
     } catch (_) {
       data = {};
     }
-    if (res.statusCode == 401) throw ProxyException('This device is no longer paired.');
-    if (res.statusCode == 403) throw ProxyException('That action is not permitted from the app.');
+    if (res.statusCode == 401) {
+      throw ProxyException(
+          ProxyErrorKind.notPairedShort, 'This device is no longer paired.');
+    }
+    if (res.statusCode == 403) {
+      throw ProxyException(
+          ProxyErrorKind.forbidden, 'That action is not permitted from the app.');
+    }
     if (res.statusCode >= 400) {
       final err = (data is Map && data['error'] is Map) ? data['error']['message'] : null;
-      throw ProxyException(err?.toString() ?? 'Request failed (error ${res.statusCode}).');
+      if (err != null) {
+        // EasyPost's own wording. Shown as sent rather than paraphrased: it is
+        // the only account of what the API objected to.
+        throw ProxyException(ProxyErrorKind.apiMessage, err.toString());
+      }
+      throw ProxyException(
+        ProxyErrorKind.requestFailed,
+        'Request failed (error ${res.statusCode}).',
+        statusCode: res.statusCode,
+      );
     }
     return (data is Map) ? data.cast<String, dynamic>() : <String, dynamic>{};
   }

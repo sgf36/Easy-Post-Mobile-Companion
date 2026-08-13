@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import 'home_shell.dart';
@@ -38,13 +40,14 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Claims')),
+      appBar: AppBar(title: Text(t.navClaims)),
       drawer: NavDrawer(nav: widget.nav),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _openForm,
         icon: const Icon(Icons.add),
-        label: const Text('File a claim'),
+        label: Text(t.claimsFile),
       ),
       body: RefreshIndicator(
         onRefresh: _refresh,
@@ -55,11 +58,11 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             if (snap.hasError) {
-              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text('${snap.error}', textAlign: TextAlign.center))]);
+              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text(describeError(t, snap.error), textAlign: TextAlign.center))]);
             }
             final items = snap.data ?? const [];
             if (items.isEmpty) {
-              return ListView(children: const [Padding(padding: EdgeInsets.all(24), child: Text('No claims filed yet. Tap “File a claim”.', textAlign: TextAlign.center))]);
+              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text(t.claimsEmpty, textAlign: TextAlign.center))]);
             }
             return ListView.separated(
               itemCount: items.length,
@@ -114,16 +117,11 @@ class _ClaimFormState extends State<_ClaimForm> {
   bool get _needsAttachment => _type == 'damage' || _type == 'theft';
 
   Future<void> _submit() async {
+    final t = AppLocalizations.of(context);
     if (!_form.currentState!.validate()) return;
     if (_needsAttachment) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Damage and theft claims need a supporting photo or invoice, '
-            'which has to be attached on the desktop app. A loss claim can be '
-            'filed here.',
-          ),
-        ),
+        SnackBar(content: Text(t.claimAttachmentSnack)),
       );
       return;
     }
@@ -144,15 +142,17 @@ class _ClaimFormState extends State<_ClaimForm> {
     } catch (e) {
       if (mounted) {
         setState(() => _busy = false);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(describeError(t, e))));
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('File a claim')),
+      appBar: AppBar(title: Text(t.claimsFile)),
       body: Form(
         key: _form,
         child: ListView(
@@ -160,54 +160,58 @@ class _ClaimFormState extends State<_ClaimForm> {
           children: [
             TextFormField(
               controller: _tracking,
-              decoration: const InputDecoration(labelText: 'Tracking code', border: OutlineInputBorder()),
-              validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
+              decoration: InputDecoration(
+                  labelText: t.fieldTrackingCode, border: const OutlineInputBorder()),
+              validator: (v) => (v == null || v.trim().isEmpty) ? t.validationRequired : null,
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               initialValue: _type,
-              decoration: const InputDecoration(labelText: 'Type', border: OutlineInputBorder()),
-              items: const [
-                DropdownMenuItem(value: 'damage', child: Text('Damage')),
-                DropdownMenuItem(value: 'theft', child: Text('Theft')),
-                DropdownMenuItem(value: 'loss', child: Text('Loss')),
+              decoration:
+                  InputDecoration(labelText: t.fieldType, border: const OutlineInputBorder()),
+              items: [
+                DropdownMenuItem(value: 'damage', child: Text(t.claimTypeDamage)),
+                DropdownMenuItem(value: 'theft', child: Text(t.claimTypeTheft)),
+                DropdownMenuItem(value: 'loss', child: Text(t.claimTypeLoss)),
               ],
               onChanged: (v) => setState(() => _type = v ?? 'damage'),
             ),
             if (_needsAttachment) ...[
               const SizedBox(height: 8),
-              const Text(
-                'Damage and theft claims need a supporting photo or invoice. '
-                'File those on the desktop app, where documents can be attached.',
-              ),
+              Text(t.claimAttachmentNote),
             ],
             const SizedBox(height: 12),
             TextFormField(
               controller: _amount,
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              decoration: const InputDecoration(labelText: 'Amount (USD)', border: OutlineInputBorder()),
-              validator: (v) => (double.tryParse(v?.trim() ?? '') == null) ? 'Enter an amount' : null,
+              decoration: InputDecoration(
+                  labelText: t.fieldAmountUsd, border: const OutlineInputBorder()),
+              validator: (v) =>
+                  (double.tryParse(v?.trim() ?? '') == null) ? t.validationEnterAmount : null,
             ),
             const SizedBox(height: 12),
             TextFormField(
               controller: _email,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(labelText: 'Contact email', border: OutlineInputBorder()),
-              validator: (v) => (v == null || !v.contains('@')) ? 'Enter an email' : null,
+              decoration: InputDecoration(
+                  labelText: t.fieldContactEmail, border: const OutlineInputBorder()),
+              validator: (v) => (v == null || !v.contains('@')) ? t.validationEnterEmail : null,
             ),
             const SizedBox(height: 12),
             TextFormField(
               controller: _description,
               maxLines: 3,
-              decoration: const InputDecoration(labelText: 'Description', border: OutlineInputBorder()),
-              validator: (v) => (v == null || v.trim().isEmpty) ? 'Describe the issue' : null,
+              decoration: InputDecoration(
+                  labelText: t.fieldDescription, border: const OutlineInputBorder()),
+              validator: (v) =>
+                  (v == null || v.trim().isEmpty) ? t.validationDescribeIssue : null,
             ),
             const SizedBox(height: 20),
             FilledButton(
               onPressed: _busy ? null : _submit,
               child: _busy
                   ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
-                  : const Text('File claim'),
+                  : Text(t.claimSubmit),
             ),
           ],
         ),

@@ -5,6 +5,15 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+    inputs:
+      screenshots_only:
+        description: "Capture store screenshots without cutting a build"
+        type: boolean
+        default: false
+      locales:
+        description: "Languages to capture, comma-separated"
+        type: string
+        default: "en,de,es,fr,hi,ja,zh"
 
 env:
   FLUTTER_VERSION: "3.44.8"
@@ -21,12 +30,44 @@ jobs:
           channel: stable
           cache: true
       - run: flutter pub get
+      # The ARB catalogues are the source of truth and the Dart in lib/l10n is
+      # generated from them. Regenerating here means a hand-edited generated
+      # file cannot mask a catalogue that no longer compiles.
+      - run: flutter gen-l10n
       - run: flutter analyze
       - run: flutter test
 
+  # Splits the dispatch input into a JSON array for the screenshot matrix.
+  #
+  # This job exists because GitHub Actions expressions have no split() and no
+  # replace(), so `fromJSON` cannot be handed a comma-separated string. The
+  # desktop repo hit the same wall today and solved it the same way.
+  locales:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.split.outputs.matrix }}
+    steps:
+      - id: split
+        env:
+          LOCALES: ${{ inputs.locales }}
+        run: |
+          python3 - >> "$GITHUB_OUTPUT" <<'PY'
+          import json, os
+          items = [s.strip() for s in os.environ["LOCALES"].split(",") if s.strip()]
+          if not items:
+              raise SystemExit("no locales given")
+          print("matrix=" + json.dumps(items))
+          PY
+
   # Android: a Play-ready signed .aab when the keystore secrets exist, otherwise
   # a debug .apk so the build is still exercised end to end.
+  #
+  # Skipped on a screenshots-only dispatch. Recapturing a listing is a release
+  # chore that should not also mint a store build: every dispatch used to burn a
+  # github.run_number on an upload nobody asked for.
   android:
+    if: ${{ inputs.screenshots_only != true }}
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -65,16 +106,20 @@ jobs:
             echo "keyPassword=$KEY_PASSWORD"
           } > android/key.properties
 
+      # --build-number, not --build-name: the version name comes from pubspec.yaml
+      # so there is one place it is written, while the code has to increase on
+      # every upload, which a file in git cannot do. Without this every bundle
+      # carried versionCode 1 and Play would reject the second one.
       - name: Build signed App Bundle
         if: steps.signing.outputs.ready == 'true'
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --build-number=${{ github.run_number }}
 
       # A signed release APK for direct (sideload) download, offered in-app from
       # Tools > Android app while the Play listing is pending. Same signing config
       # as the bundle; uploaded alongside it by the artifact step below.
       - name: Build signed APK (direct download)
         if: steps.signing.outputs.ready == 'true'
-        run: flutter build apk --release
+        run: flutter build apk --release --build-number=${{ github.run_number }}
 
       - name: Build debug APK (no signing secrets yet)
         if: steps.signing.outputs.ready != 'true'
@@ -91,6 +136,7 @@ jobs:
   # iOS: a signed App Store .ipa when the certificate/profile secrets exist,
   # otherwise a --no-codesign compile check so the build is validated on macOS.
   ios:
+    if: ${{ inputs.screenshots_only != true }}
     needs: test
     runs-on: macos-latest
     steps:
@@ -169,12 +215,15 @@ jobs:
             echo "CODE_SIGN_IDENTITY=Apple Distribution"
           } >> ios/Flutter/Release.xcconfig
 
+      # The version name comes from pubspec.yaml. It used to be hardcoded here as
+      # 1.0.0 while pubspec said 1.2.0, so the file that looked authoritative was
+      # not; both now read 1.0.0 and only one of them is written down.
       - name: Build signed IPA
         if: steps.signing.outputs.ready == 'true'
         run: |
           flutter build ipa --release \
             --export-options-plist=ios/ExportOptions.plist \
-            --build-name=1.0.0 --build-number=${{ github.run_number }}
+            --build-number=${{ github.run_number }}
 
       # Upload to App Store Connect (TestFlight) when Apple ID creds are present
       # and this is a push to main (not a PR). Same altool path as the desktop
@@ -209,13 +258,21 @@ jobs:
   # and it cannot shell out from inside the simulator. It calls the host at each
   # settled frame; the host captures and answers only once the PNG is written,
   # which keeps the two in lockstep instead of sleeping and hoping.
+  #
+  # One leg per language. The App Store takes localised imagery for seven of the
+  # listing's twenty-eight languages and falls back to the English set for the
+  # rest, which is what both this listing and the Microsoft Store one already do.
   screenshots:
     if: github.event_name == 'workflow_dispatch'
-    needs: test
+    needs: [test, locales]
     runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        locale: ${{ fromJSON(needs.locales.outputs.matrix) }}
     env:
       DEVICE: iPhone 16 Pro Max
-      ASC_SHOTS_DIR: ${{ github.workspace }}/asc-screenshots
+      ASC_SHOTS_DIR: ${{ github.workspace }}/asc-screenshots/${{ matrix.locale }}
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -224,6 +281,7 @@ jobs:
           channel: stable
           cache: true
       - run: flutter pub get
+      - run: flutter gen-l10n
 
       # A fresh Xcode ships only the current generation's devices, but the
       # device TYPE is present in the runtime even when the device is not, so
@@ -258,7 +316,8 @@ jobs:
           done
           rm -f "$ASC_SHOTS_DIR/_warmup.png"
           flutter test integration_test/screenshots_test.dart \
-            -d "$DEVICE" --dart-define=SHOTS_REQUIRED=1 --dart-define=DEMO_FIXTURES=true
+            -d "$DEVICE" --dart-define=SHOTS_REQUIRED=1 --dart-define=DEMO_FIXTURES=true \
+            --dart-define=UI_LOCALE=${{ matrix.locale }}
 
       # The capture path has failed silently before: the server answered 200
       # whatever happened and the test caught its own errors, so a run that
@@ -282,5 +341,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ios-screenshots
+          name: ios-screenshots-${{ matrix.locale }}
           path: ${{ env.ASC_SHOTS_DIR }}

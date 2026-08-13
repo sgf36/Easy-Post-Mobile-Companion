@@ -10,16 +10,25 @@
 // iOS camera-permission alert that sits on top of every capture, and the doc
 // does not want the pairing screen in the store listing anyway.
 //
+// **Nothing here may be found by its English text.** The app is localised and
+// this same test drives the German, Japanese and Chinese captures, so every
+// finder is a widget type, an icon, or a tracking code -- none of which
+// translate. That extends to Flutter's own widgets: `find.byTooltip('Open
+// navigation menu')` and `tester.pageBack()` both match a MaterialLocalizations
+// string, so they find nothing outside English and are avoided here.
+//
 // Capture tooling only -- not part of the shipped app or its test suite.
 //
 // Usage, against a booted 6.9-inch simulator (iPhone 16 or 17 Pro Max):
 //
 //   python3 tool/shotserver.py &
-//   flutter test integration_test/screenshots_test.dart -d "iPhone 16 Pro Max"
+//   flutter test integration_test/screenshots_test.dart -d "iPhone 16 Pro Max" \
+//       --dart-define=DEMO_FIXTURES=true --dart-define=UI_LOCALE=de
 //
 // The PNGs land in ~/Desktop/asc-screenshots at 1320x2868.
 import 'package:easypost_mobile_companion/config.dart';
 import 'package:easypost_mobile_companion/main.dart' as app;
+import 'package:easypost_mobile_companion/screens/trackers_screen.dart';
 import 'package:easypost_mobile_companion/services/pairing_store.dart';
 import 'package:easypost_mobile_companion/services/proxy_client.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +38,11 @@ import 'package:integration_test/integration_test.dart';
 
 const String _reviewCode = 'epmc-demo-7f3a9c2e';
 const String _shotServer = 'http://127.0.0.1:8099';
+
+/// The in-transit fixture. A tracking code is the one label on the Tracking
+/// screen that is identical in every language, so the detail shot is opened by
+/// this rather than by tapping the row whose badge reads "In transit".
+const String _inTransitCode = 'EZ2000000002';
 
 /// Lets real async work (network, map tiles) run, then pumps frames so the
 /// result is on screen. `pumpAndSettle` is avoided where the map or a progress
@@ -87,23 +101,25 @@ Future<void> _step(String name, Future<void> Function() body) async {
   }
 }
 
-/// Opens the nav drawer from the current section and taps [section].
-Future<void> _drawerTo(WidgetTester tester, String section) async {
-  final Finder menu = find.byTooltip('Open navigation menu');
-  if (menu.evaluate().isNotEmpty) {
-    await tester.tap(menu.first);
-  } else {
-    final ScaffoldState scaffold = tester.firstState(find.byType(Scaffold));
-    scaffold.openDrawer();
-  }
+/// Opens the nav drawer and taps the section carrying [icon].
+///
+/// The drawer entries are identified by their icons, which are the same widget
+/// in every language; their labels are not.
+Future<void> _drawerTo(WidgetTester tester, IconData icon) async {
+  final ScaffoldState scaffold = tester.firstState(find.byType(Scaffold));
+  scaffold.openDrawer();
   await tester.pumpAndSettle();
-  await tester.tap(find.widgetWithText(ListTile, section).last);
+  await tester.tap(find.widgetWithIcon(ListTile, icon).last);
   await tester.pumpAndSettle();
   await _settle(tester, seconds: 4);
 }
 
+/// Pops the current route. `tester.pageBack()` looks for a tooltip reading
+/// "Back", which is a MaterialLocalizations string and therefore absent in
+/// every language but English.
 Future<void> _back(WidgetTester tester) async {
-  await tester.pageBack();
+  final NavigatorState navigator = tester.state(find.byType(Navigator).first);
+  navigator.pop();
   await tester.pumpAndSettle();
   await _settle(tester, seconds: 2);
 }
@@ -124,7 +140,7 @@ void main() {
     await tester.pumpAndSettle();
     await _settle(tester, seconds: 5);
 
-    expect(find.text('Tracking'), findsWidgets,
+    expect(find.byType(TrackersScreen), findsOneWidget,
         reason: 'seeded pairing should open straight on the Tracking screen');
 
     // --- 1) TRACKING: the colour-coded status list. ---
@@ -133,15 +149,13 @@ void main() {
       await _shot(tester, '01-tracking');
     });
 
-    // --- 2) SHIPMENT DETAIL: prefer an in-transit shipment for the map. ---
+    // --- 2) SHIPMENT DETAIL: the in-transit shipment, which has the journey. ---
     await _step('02-detail-map', () async {
-      Finder tile = find.widgetWithText(ListTile, 'In transit');
-      if (tile.evaluate().isEmpty) {
-        tile = find.widgetWithText(ListTile, 'Out for delivery');
-      }
-      if (tile.evaluate().isEmpty) {
-        tile = find.byType(ListTile);
-      }
+      Finder tile = find.widgetWithText(ListTile, _inTransitCode);
+      if (tile.evaluate().isEmpty) tile = find.byType(ListTile);
+      await tester.scrollUntilVisible(tile.first, 200,
+          scrollable: find.byType(Scrollable).first);
+      await tester.pumpAndSettle();
       await tester.tap(tile.first);
       await tester.pumpAndSettle();
       // Map tiles and geocoded pins need real network time.
@@ -152,9 +166,8 @@ void main() {
 
     // --- 3) INSURANCE: the purchase form. ---
     await _step('03-insurance', () async {
-      await _drawerTo(tester, 'Insurance');
-      await tester
-          .tap(find.widgetWithText(FloatingActionButton, 'Buy insurance'));
+      await _drawerTo(tester, Icons.verified_user);
+      await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle();
       await _settle(tester, seconds: 2);
       await _shot(tester, '03-insurance');
@@ -163,8 +176,8 @@ void main() {
 
     // --- 4) CLAIMS: the claim form. ---
     await _step('04-claims', () async {
-      await _drawerTo(tester, 'Claims');
-      await tester.tap(find.widgetWithText(FloatingActionButton, 'File a claim'));
+      await _drawerTo(tester, Icons.gavel);
+      await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle();
       await _settle(tester, seconds: 2);
       await _shot(tester, '04-claims');
@@ -173,17 +186,20 @@ void main() {
 
     // --- 5) REPORTS: per-carrier spend breakdown. ---
     await _step('05-reports', () async {
-      await _drawerTo(tester, 'Reports');
+      await _drawerTo(tester, Icons.bar_chart);
       await _settle(tester, seconds: 5);
       await _shot(tester, '05-reports');
     });
 
     // --- 6) HTS LOOKUP: duty rates for a sample search. ---
     await _step('06-hts', () async {
-      await _drawerTo(tester, 'HTS Lookup');
+      await _drawerTo(tester, Icons.travel_explore);
+      // "copper" is a keyword sent to a US tariff database, not UI text: the
+      // service indexes English descriptions, so it stays English in every
+      // locale or the search returns nothing to photograph.
       await tester.enterText(find.byType(TextField).first, 'copper');
       await tester.pumpAndSettle();
-      await tester.tap(find.widgetWithText(FilledButton, 'Search'));
+      await tester.tap(find.byType(FilledButton).first);
       await tester.pumpAndSettle();
       await _settle(tester, seconds: 8);
       await _shot(tester, '06-hts');

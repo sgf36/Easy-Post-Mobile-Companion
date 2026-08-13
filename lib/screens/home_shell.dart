@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import '../theme.dart';
@@ -15,14 +16,14 @@ import 'trackers_screen.dart';
 enum Section { tracking, history, insurance, claims, pickups, reports, hts }
 
 extension SectionMeta on Section {
-  String get label => switch (this) {
-        Section.tracking => 'Tracking',
-        Section.history => 'History',
-        Section.insurance => 'Insurance',
-        Section.claims => 'Claims',
-        Section.pickups => 'Pickups',
-        Section.reports => 'Reports',
-        Section.hts => 'HTS Lookup',
+  String label(AppLocalizations t) => switch (this) {
+        Section.tracking => t.navTracking,
+        Section.history => t.navHistory,
+        Section.insurance => t.navInsurance,
+        Section.claims => t.navClaims,
+        Section.pickups => t.navPickups,
+        Section.reports => t.navReports,
+        Section.hts => t.navHts,
       };
 
   IconData get icon => switch (this) {
@@ -65,12 +66,13 @@ class _HomeShellState extends State<HomeShell> {
     );
     final c = widget.creds;
     final proxy = ProxyClient();
+    final t = AppLocalizations.of(context);
     return switch (_section) {
       Section.tracking => TrackersScreen(creds: c, nav: nav),
       Section.history => ResourceListScreen(
           nav: nav,
-          title: 'History',
-          emptyText: 'No shipments yet.',
+          title: t.navHistory,
+          emptyText: t.historyEmpty,
           fetch: () => proxy.getShipments(c),
           row: (m) => ResourceRow(
             title: (m['tracking_code'] ?? m['id'] ?? '—').toString(),
@@ -102,6 +104,7 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Drawer(
       child: SafeArea(
         child: Column(
@@ -112,6 +115,9 @@ class NavDrawer extends StatelessWidget {
                 children: [
                   Image.asset('assets/icon/app_icon.png', height: 36, width: 36),
                   const SizedBox(width: 12),
+                  // The product name, shortened to fit the drawer header. A
+                  // brand, so it is not translated — same rule as the carrier
+                  // names.
                   const Expanded(
                     child: Text('Easy-Post Mobile',
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
@@ -123,10 +129,10 @@ class NavDrawer extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  _header('Track & manage'),
+                  _header(t.navSectionManage),
                   for (final s in [Section.tracking, Section.history, Section.insurance, Section.claims, Section.pickups])
                     _tile(context, s),
-                  _header('Tools'),
+                  _header(t.navSectionTools),
                   for (final s in [Section.reports, Section.hts]) _tile(context, s),
                 ],
               ),
@@ -134,7 +140,7 @@ class NavDrawer extends StatelessWidget {
             const Divider(height: 1),
             ListTile(
               leading: const Icon(Icons.link_off),
-              title: const Text('Unpair this device'),
+              title: Text(t.drawerUnpair),
               onTap: () {
                 Navigator.of(context).pop();
                 nav.onUnpair();
@@ -156,7 +162,7 @@ class NavDrawer extends StatelessWidget {
     final selected = s == nav.current;
     return ListTile(
       leading: Icon(s.icon, color: selected ? Brand.accent : null),
-      title: Text(s.label,
+      title: Text(s.label(AppLocalizations.of(context)),
           style: TextStyle(color: selected ? Brand.accent : null, fontWeight: selected ? FontWeight.w600 : null)),
       selected: selected,
       selectedTileColor: Brand.accentSoft,

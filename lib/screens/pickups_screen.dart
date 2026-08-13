@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import 'home_shell.dart';
@@ -31,16 +33,18 @@ class _PickupsScreenState extends State<PickupsScreen> {
   }
 
   Future<void> _cancel(Map<String, dynamic> pickup) async {
+    final t = AppLocalizations.of(context);
     final id = (pickup['id'] ?? '').toString();
     if (id.isEmpty) return;
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Cancel pickup?'),
-        content: Text('Cancel pickup $id? This cannot be undone.'),
+        title: Text(t.pickupCancelTitle),
+        content: Text(t.pickupCancelBody(id)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Keep')),
-          FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Cancel pickup')),
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(t.pickupKeep)),
+          FilledButton(
+              onPressed: () => Navigator.pop(ctx, true), child: Text(t.pickupCancelConfirm)),
         ],
       ),
     );
@@ -50,7 +54,10 @@ class _PickupsScreenState extends State<PickupsScreen> {
       await _proxy.cancelPickup(widget.creds, id);
       await _refresh();
     } catch (e) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(describeError(t, e))));
+      }
     } finally {
       if (mounted) setState(() => _busyId = null);
     }
@@ -58,8 +65,9 @@ class _PickupsScreenState extends State<PickupsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Pickups')),
+      appBar: AppBar(title: Text(t.navPickups)),
       drawer: NavDrawer(nav: widget.nav),
       body: RefreshIndicator(
         onRefresh: _refresh,
@@ -70,11 +78,11 @@ class _PickupsScreenState extends State<PickupsScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             if (snap.hasError) {
-              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text('${snap.error}', textAlign: TextAlign.center))]);
+              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text(describeError(t, snap.error), textAlign: TextAlign.center))]);
             }
             final items = snap.data ?? const [];
             if (items.isEmpty) {
-              return ListView(children: const [Padding(padding: EdgeInsets.all(24), child: Text('No pickups scheduled yet.', textAlign: TextAlign.center))]);
+              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text(t.pickupsEmpty, textAlign: TextAlign.center))]);
             }
             return ListView.separated(
               itemCount: items.length,
@@ -90,7 +98,7 @@ class _PickupsScreenState extends State<PickupsScreen> {
                   trailing: _busyId == id
                       ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
                       : (cancellable
-                          ? TextButton(onPressed: () => _cancel(m), child: const Text('Cancel'))
+                          ? TextButton(onPressed: () => _cancel(m), child: Text(t.actionCancel))
                           : null),
                 );
               },

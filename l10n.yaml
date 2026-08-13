@@ -1,0 +1,7 @@
+# Flutter gen-l10n. The ARB catalogues in lib/l10n are the source of truth;
+# app_en.arb is the template every other locale must match key for key, which
+# test/l10n_completeness_test.dart enforces.
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+nullable-getter: false

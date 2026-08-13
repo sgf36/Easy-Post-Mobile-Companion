@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../config.dart';
+import '../l10n/app_localizations.dart';
+import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 
@@ -47,6 +49,7 @@ class _PairScreenState extends State<PairScreen> {
   }
 
   Future<void> _pair(Future<PairingCredentials> Function() action) async {
+    final t = AppLocalizations.of(context);
     setState(() => _busy = true);
     try {
       final creds = await action();
@@ -55,7 +58,7 @@ class _PairScreenState extends State<PairScreen> {
       _handled = false;
       if (mounted) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(e.toString())));
+            .showSnackBar(SnackBar(content: Text(describeError(t, e))));
       }
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -63,22 +66,23 @@ class _PairScreenState extends State<PairScreen> {
   }
 
   Future<void> _enterReviewCode() async {
+    final t = AppLocalizations.of(context);
     final controller = TextEditingController();
     final code = await showDialog<String>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Enter review code'),
+        title: Text(t.pairReviewDialogTitle),
         content: TextField(
           controller: controller,
           autofocus: true,
-          decoration: const InputDecoration(hintText: 'Review code'),
+          decoration: InputDecoration(hintText: t.pairReviewCodeHint),
         ),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+              onPressed: () => Navigator.pop(ctx), child: Text(t.actionCancel)),
           FilledButton(
               onPressed: () => Navigator.pop(ctx, controller.text.trim()),
-              child: const Text('Pair')),
+              child: Text(t.pairAction)),
         ],
       ),
     );
@@ -88,8 +92,9 @@ class _PairScreenState extends State<PairScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Pair with desktop')),
+      appBar: AppBar(title: Text(t.pairTitle)),
       body: Column(
         children: [
           Padding(
@@ -98,18 +103,16 @@ class _PairScreenState extends State<PairScreen> {
               children: [
                 Image.asset('assets/icon/app_icon.png', height: 44, width: 44),
                 const SizedBox(width: 12),
-                const Expanded(
-                  child: Text('Easy-Post Mobile Companion',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: Text(t.appTitle,
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 16, 12),
-            child: Text(
-              'Open Easy-Post Desktop, choose "Pair mobile app", and scan the QR code shown there.',
-            ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+            child: Text(t.pairInstructions),
           ),
           Expanded(
             child: Stack(
@@ -124,7 +127,7 @@ class _PairScreenState extends State<PairScreen> {
             padding: const EdgeInsets.all(16),
             child: TextButton(
               onPressed: _busy ? null : _enterReviewCode,
-              child: const Text('Enter review code instead'),
+              child: Text(t.pairEnterReviewCode),
             ),
           ),
         ],

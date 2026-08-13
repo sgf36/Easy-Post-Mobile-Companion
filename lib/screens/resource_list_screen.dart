@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+import '../services/error_text.dart';
 import 'home_shell.dart';
 
 /// One row's display fields, derived from a raw EasyPost object.
@@ -63,7 +65,10 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
             }
             if (snap.hasError) {
               return ListView(children: [
-                Padding(padding: const EdgeInsets.all(24), child: Text('${snap.error}', textAlign: TextAlign.center)),
+                Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Text(describeError(AppLocalizations.of(context), snap.error),
+                        textAlign: TextAlign.center)),
               ]);
             }
             final items = snap.data ?? const [];

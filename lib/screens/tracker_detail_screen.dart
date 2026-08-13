@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../l10n/app_localizations.dart';
 import '../models/tracker.dart';
 import '../services/geocode.dart';
 
@@ -11,6 +12,7 @@ class TrackerDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     final ss = statusStyle(tracker.status);
     final cc = carrierColor(tracker.carrier);
     final events = tracker.events.reversed.toList(); // newest first
@@ -33,9 +35,10 @@ class TrackerDetailScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tracker.carrier.isEmpty ? 'Unknown carrier' : carrierDisplayName(tracker.carrier),
+                          Text(tracker.carrier.isEmpty ? t.carrierUnknown : carrierDisplayName(tracker.carrier),
                               style: TextStyle(color: cc, fontWeight: FontWeight.bold, fontSize: 16)),
-                          Text(ss.label, style: TextStyle(color: ss.color, fontWeight: FontWeight.w600)),
+                          Text(statusLabel(t, tracker.status),
+                              style: TextStyle(color: ss.color, fontWeight: FontWeight.w600)),
                         ],
                       ),
                     ),
@@ -46,9 +49,12 @@ class TrackerDetailScreen extends StatelessWidget {
                   _infoRow(Icons.info_outline,
                       statusDetailText(tracker.status, tracker.statusDetail)!),
                 if (tracker.estDelivery != null)
-                  _infoRow(Icons.event, 'Estimated delivery ${formatDate(tracker.estDelivery)}'),
+                  _infoRow(
+                      Icons.event,
+                      t.detailEstimatedDelivery(
+                          formatDate(tracker.estDelivery, t.localeName))),
                 if (tracker.signedBy != null && tracker.signedBy!.isNotEmpty)
-                  _infoRow(Icons.draw, 'Signed by ${tracker.signedBy}'),
+                  _infoRow(Icons.draw, t.detailSignedBy(tracker.signedBy!)),
               ],
             ),
           ),
@@ -59,12 +65,12 @@ class TrackerDetailScreen extends StatelessWidget {
           const Divider(height: 1),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: Text('History', style: Theme.of(context).textTheme.titleMedium),
+            child: Text(t.detailHistoryHeading, style: Theme.of(context).textTheme.titleMedium),
           ),
           if (events.isEmpty)
-            const Padding(
-              padding: EdgeInsets.all(24),
-              child: Text('No scan history yet.', textAlign: TextAlign.center),
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Text(t.detailNoScanHistory, textAlign: TextAlign.center),
             ),
           for (var i = 0; i < events.length; i++)
             _TimelineRow(event: events[i], isFirst: i == 0, isLast: i == events.length - 1),
@@ -94,6 +100,7 @@ class _TimelineRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     final ss = statusStyle(event.status);
     return IntrinsicHeight(
       child: Row(
@@ -116,11 +123,11 @@ class _TimelineRow extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(event.message.isEmpty ? ss.label : event.message,
+                  Text(event.message.isEmpty ? statusLabel(t, event.status) : event.message,
                       style: const TextStyle(fontWeight: FontWeight.w600)),
                   const SizedBox(height: 2),
                   Text(
-                    [event.locationLabel, formatDateTime(event.datetime)]
+                    [event.locationLabel, formatDateTime(event.datetime, t.localeName)]
                         .where((s) => s != null && s.isNotEmpty)
                         .join('  ·  '),
                     style: Theme.of(context).textTheme.bodySmall,
@@ -181,9 +188,12 @@ class _JourneyMapState extends State<_JourneyMap> {
       return const SizedBox(height: 220, child: Center(child: CircularProgressIndicator()));
     }
     if (_points.isEmpty) {
-      return const SizedBox(
+      return SizedBox(
         height: 60,
-        child: Center(child: Text('Map unavailable for these locations.', style: TextStyle(color: Colors.grey))),
+        child: Center(
+          child: Text(AppLocalizations.of(context).detailMapUnavailable,
+              style: const TextStyle(color: Colors.grey)),
+        ),
       );
     }
     return SizedBox(

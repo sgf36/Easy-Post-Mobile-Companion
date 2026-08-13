@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import 'home_shell.dart';
@@ -38,13 +40,14 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Insurance')),
+      appBar: AppBar(title: Text(t.navInsurance)),
       drawer: NavDrawer(nav: widget.nav),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _openForm,
         icon: const Icon(Icons.add),
-        label: const Text('Buy insurance'),
+        label: Text(t.insuranceBuy),
       ),
       body: RefreshIndicator(
         onRefresh: _refresh,
@@ -55,11 +58,11 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             if (snap.hasError) {
-              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text('${snap.error}', textAlign: TextAlign.center))]);
+              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text(describeError(t, snap.error), textAlign: TextAlign.center))]);
             }
             final items = snap.data ?? const [];
             if (items.isEmpty) {
-              return ListView(children: const [Padding(padding: EdgeInsets.all(24), child: Text('No insurance policies yet. Tap “Buy insurance”.', textAlign: TextAlign.center))]);
+              return ListView(children: [Padding(padding: const EdgeInsets.all(24), child: Text(t.insuranceEmpty, textAlign: TextAlign.center))]);
             }
             return ListView.separated(
               itemCount: items.length,
@@ -139,13 +142,12 @@ class _InsuranceFormState extends State<_InsuranceForm> {
   static const double maxInsuranceUsd = 5000;
 
   Future<void> _submit() async {
+    final t = AppLocalizations.of(context);
     if (!_form.currentState!.validate()) return;
     final amount = double.tryParse(_amount.text.trim());
     if (amount == null || amount <= 0 || amount > maxInsuranceUsd) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Insured amount must be between \$0.01 and \$5,000 USD.'),
-        ),
+        SnackBar(content: Text(t.insuranceAmountRange)),
       );
       return;
     }
@@ -167,61 +169,65 @@ class _InsuranceFormState extends State<_InsuranceForm> {
         // permission. Where it is switched off EasyPost answers "Your account
         // is not enabled for standalone insurance purchase" — a setting to take
         // up with EasyPost, not a mistake the user just made, so it is worth
-        // saying so rather than showing the raw error.
-        final raw = e.toString();
-        final message = raw.contains('not enabled for standalone insurance')
-            ? 'This EasyPost account is not enabled for standalone insurance. '
-                'Ask EasyPost support to enable it, or add insurance when '
-                'buying the label instead.'
-            : raw;
+        // saying so, in the reader's language, rather than passing the raw
+        // English error through as every other API failure is.
+        final message = e.toString().contains('not enabled for standalone insurance')
+            ? t.insuranceNotEnabled
+            : describeError(t, e);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
       }
     }
   }
 
-  Widget _field(TextEditingController c, String label, {bool required = true, TextInputType? kb}) => Padding(
+  Widget _field(AppLocalizations t, TextEditingController c, String label,
+          {bool required = true, TextInputType? kb}) =>
+      Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: TextFormField(
           controller: c,
           keyboardType: kb,
           decoration: InputDecoration(labelText: label, border: const OutlineInputBorder()),
-          validator: required ? (v) => (v == null || v.trim().isEmpty) ? 'Required' : null : null,
+          validator: required
+              ? (v) => (v == null || v.trim().isEmpty) ? t.validationRequired : null
+              : null,
         ),
       );
 
-  List<Widget> _address(String heading, _AddressFields a) => [
+  List<Widget> _address(AppLocalizations t, String heading, _AddressFields a) => [
         Padding(
           padding: const EdgeInsets.only(top: 8, bottom: 8),
           child: Text(heading, style: const TextStyle(fontWeight: FontWeight.w700)),
         ),
-        _field(a.name, 'Name'),
-        _field(a.street1, 'Street'),
-        _field(a.city, 'City'),
-        _field(a.state, 'State / region', required: false),
-        _field(a.zip, 'Postcode'),
-        _field(a.country, 'Country (ISO, e.g. US)'),
+        _field(t, a.name, t.fieldName),
+        _field(t, a.street1, t.fieldStreet),
+        _field(t, a.city, t.fieldCity),
+        _field(t, a.state, t.fieldStateRegion, required: false),
+        _field(t, a.zip, t.fieldPostcode),
+        _field(t, a.country, t.fieldCountryIso),
       ];
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Buy insurance')),
+      appBar: AppBar(title: Text(t.insuranceBuy)),
       body: Form(
         key: _form,
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            _field(_tracking, 'Tracking code'),
-            _field(_carrier, 'Carrier (e.g. USPS)'),
-            _field(_amount, 'Insured amount (USD)', kb: const TextInputType.numberWithOptions(decimal: true)),
-            ..._address('From address', _from),
-            ..._address('To address', _to),
+            _field(t, _tracking, t.fieldTrackingCode),
+            _field(t, _carrier, t.fieldCarrierHint),
+            _field(t, _amount, t.fieldInsuredAmount,
+                kb: const TextInputType.numberWithOptions(decimal: true)),
+            ..._address(t, t.insuranceFromAddress, _from),
+            ..._address(t, t.insuranceToAddress, _to),
             const SizedBox(height: 8),
             FilledButton(
               onPressed: _busy ? null : _submit,
               child: _busy
                   ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
-                  : const Text('Buy insurance'),
+                  : Text(t.insuranceBuy),
             ),
           ],
         ),
