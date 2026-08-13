@@ -274,10 +274,15 @@ class _TrackerTile extends StatelessWidget {
       // 110, not the 132 tried first: at 132 the longest subtitle in the shot
       // list — "Parcelforce · Prévu 14 août", a long carrier beside a long
       // status — was still a few points short.
+      // 11pt inside 6 of padding, not 12 inside 8. A cap only helps if the
+      // longest single word still fits inside it: at 12pt "Fehlgeschlagen"
+      // did not, and German published a badge reading "Fehlgeschlage" over
+      // "n". Wrapping between words is fine; wrapping inside one is not, and
+      // a word cannot be wrapped any other way.
       trailing: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 110),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
           decoration: BoxDecoration(
             color: ss.color.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(12),
@@ -285,7 +290,7 @@ class _TrackerTile extends StatelessWidget {
           child: Text(
             statusLabel(t, tracker.status),
             textAlign: TextAlign.center,
-            style: TextStyle(color: ss.color, fontSize: 12, fontWeight: FontWeight.w600),
+            style: TextStyle(color: ss.color, fontSize: 11, fontWeight: FontWeight.w600),
           ),
         ),
       ),
