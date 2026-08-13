@@ -255,7 +255,7 @@ class _TrackerTile extends StatelessWidget {
             style: TextStyle(color: cc, fontWeight: FontWeight.w600),
           ),
           if (tracker.estDelivery != null) ...[
-            const Text('  ·  '),
+            const Text(' · '),
             Flexible(
               child: Text(
                 t.etaLabel(formatDateShort(tracker.estDelivery, t.localeName)),
@@ -270,8 +270,12 @@ class _TrackerTile extends StatelessWidget {
       // the row, and an unbounded badge took that width from the subtitle,
       // which then ellipsised to "Prévu 14 …". Two lines of badge cost nothing:
       // the row is already tall enough for them.
+      //
+      // 110, not the 132 tried first: at 132 the longest subtitle in the shot
+      // list — "Parcelforce · Prévu 14 août", a long carrier beside a long
+      // status — was still a few points short.
       trailing: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 132),
+        constraints: const BoxConstraints(maxWidth: 110),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
