@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Build outputs that land under store/ during packaging and screenshot runs.
+# Named exactly, with trailing slashes, so they cannot catch the committed
+# store/asc-shots-<lang>/ sets — an earlier run swept an .aab and a retired
+# screenshot set into the index because nothing here excluded them.
+store/android-release/
+store/asc-shots/
+store/play-assets/
