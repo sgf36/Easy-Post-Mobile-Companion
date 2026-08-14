@@ -118,6 +118,29 @@ void main() {
     });
   });
 
+  group('statusText', () {
+    test('translates the status every list prints, in every language', () async {
+      // History, Insurance, Claims and Pickups all printed EasyPost's raw
+      // status, so one parcel read "Livré" in Tracking and "delivered" two
+      // screens away.
+      final en = await AppLocalizations.delegate.load(const Locale('en'));
+      final fr = await AppLocalizations.delegate.load(const Locale('fr'));
+
+      expect(statusText(en, 'delivered'), 'Delivered');
+      expect(statusText(fr, 'delivered'), isNot('Delivered'));
+      expect(statusText(fr, 'delivered'), statusLabel(fr, 'delivered'));
+    });
+
+    test('an absent status stays absent rather than becoming "Unknown"', () async {
+      final en = await AppLocalizations.delegate.load(const Locale('en'));
+      expect(statusText(en, null), '');
+      expect(statusText(en, ''), '');
+      expect(statusText(en, '   '), '');
+      // A status that is present but unrecognised still reads as words.
+      expect(statusText(en, 'nonsense'), en.statusUnknown);
+    });
+  });
+
   group('statuses translate, carriers do not', () {
     test('a status is prose and changes with the language', () async {
       final en = await AppLocalizations.delegate.load(const Locale('en'));

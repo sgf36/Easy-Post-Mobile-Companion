@@ -375,4 +375,46 @@ class AppLocalizationsHu extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'A kérés sikertelen ($code hiba).';
   }
+
+  @override
+  String get detailShipment => 'Küldemény';
+
+  @override
+  String get detailInsurancePolicy => 'Biztosítási kötvény';
+
+  @override
+  String get detailClaim => 'Kárigény';
+
+  @override
+  String get detailPickup => 'Átvétel';
+
+  @override
+  String get fieldCarrier => 'Szállító';
+
+  @override
+  String get fieldService => 'Szolgáltatás';
+
+  @override
+  String get fieldStatus => 'Állapot';
+
+  @override
+  String get fieldCreated => 'Létrehozva';
+
+  @override
+  String get fieldAmount => 'Összeg';
+
+  @override
+  String get fieldProvider => 'Szolgáltató';
+
+  @override
+  String get fieldReference => 'Hivatkozás';
+
+  @override
+  String get fieldPickupWindow => 'Átvételi időablak';
+
+  @override
+  String get fieldCost => 'Költség';
+
+  @override
+  String get detailNothingFurther => 'Nincs további részlet.';
 }

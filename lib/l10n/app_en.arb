@@ -1,11 +1,9 @@
 {
   "@@locale": "en",
-
   "appTitle": "Easy-Post Mobile Companion",
   "@appTitle": {
     "description": "Product name. A brand, so it is identical in every language."
   },
-
   "navTracking": "Tracking",
   "@navTracking": {
     "description": "Sidebar section: the list of tracked shipments."
@@ -25,7 +23,6 @@
   "navSectionManage": "Track & manage",
   "navSectionTools": "Tools",
   "drawerUnpair": "Unpair this device",
-
   "statusPreTransit": "Pre-transit",
   "@statusPreTransit": {
     "description": "EasyPost tracker status. Statuses are prose and translate; carrier names never do."
@@ -39,10 +36,8 @@
   "statusCancelled": "Cancelled",
   "statusError": "Error",
   "statusUnknown": "Unknown",
-
   "carrierUnknown": "Unknown carrier",
   "carrierUnknownShort": "Unknown",
-
   "sortTooltip": "Sort",
   "sortByStatus": "Sort by status",
   "sortByCarrier": "Sort by carrier",
@@ -58,8 +53,12 @@
   "@trackersShowing": {
     "description": "Count line above a filtered tracker list.",
     "placeholders": {
-      "shown": { "type": "int" },
-      "total": { "type": "int" }
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "trackersNoMatch": "Nothing matches the current filters.",
@@ -67,20 +66,25 @@
   "@etaLabel": {
     "description": "Estimated delivery date on a tracker row, abbreviated to fit.",
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
-
   "detailEstimatedDelivery": "Estimated delivery {date}",
   "@detailEstimatedDelivery": {
     "placeholders": {
-      "date": { "type": "String" }
+      "date": {
+        "type": "String"
+      }
     }
   },
   "detailSignedBy": "Signed by {name}",
   "@detailSignedBy": {
     "placeholders": {
-      "name": { "type": "String" }
+      "name": {
+        "type": "String"
+      }
     }
   },
   "detailHistoryHeading": "History",
@@ -89,9 +93,7 @@
   },
   "detailNoScanHistory": "No scan history yet.",
   "detailMapUnavailable": "Map unavailable for these locations.",
-
   "historyEmpty": "No shipments yet.",
-
   "insuranceEmpty": "No insurance policies yet. Tap “Buy insurance”.",
   "insuranceBuy": "Buy insurance",
   "insuranceAmountRange": "Insured amount must be between $0.01 and $5,000 USD.",
@@ -101,7 +103,6 @@
   "insuranceNotEnabled": "This EasyPost account is not enabled for standalone insurance. Ask EasyPost support to enable it, or add insurance when buying the label instead.",
   "insuranceFromAddress": "From address",
   "insuranceToAddress": "To address",
-
   "fieldTrackingCode": "Tracking code",
   "fieldCarrierHint": "Carrier (e.g. USPS)",
   "@fieldCarrierHint": {
@@ -118,12 +119,10 @@
   "fieldAmountUsd": "Amount (USD)",
   "fieldContactEmail": "Contact email",
   "fieldDescription": "Description",
-
   "validationRequired": "Required",
   "validationEnterAmount": "Enter an amount",
   "validationEnterEmail": "Enter an email",
   "validationDescribeIssue": "Describe the issue",
-
   "claimsEmpty": "No claims filed yet. Tap “File a claim”.",
   "claimsFile": "File a claim",
   "claimSubmit": "File claim",
@@ -132,19 +131,19 @@
   "claimTypeLoss": "Loss",
   "claimAttachmentNote": "Damage and theft claims need a supporting photo or invoice. File those on the desktop app, where documents can be attached.",
   "claimAttachmentSnack": "Damage and theft claims need a supporting photo or invoice, which has to be attached on the desktop app. A loss claim can be filed here.",
-
   "pickupsEmpty": "No pickups scheduled yet.",
   "pickupCancelTitle": "Cancel pickup?",
   "pickupCancelBody": "Cancel pickup {id}? This cannot be undone.",
   "@pickupCancelBody": {
     "placeholders": {
-      "id": { "type": "String" }
+      "id": {
+        "type": "String"
+      }
     }
   },
   "pickupKeep": "Keep",
   "pickupCancelConfirm": "Cancel pickup",
   "actionCancel": "Cancel",
-
   "reportsShipments": "Shipments",
   "reportsTotalSpend": "Total spend",
   "reportsByCarrier": "By carrier",
@@ -153,10 +152,11 @@
   "@reportsCarrierShipments": {
     "description": "Subtitle under a carrier in the Reports breakdown. Written as a label and a number rather than a counted noun, so no locale needs a plural rule for it.",
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
-
   "htsSearchLabel": "Search tariff codes",
   "htsSearchHint": "e.g. copper wire",
   "htsSearchButton": "Search",
@@ -166,42 +166,50 @@
   "htsRateGeneral": "General {rate}",
   "@htsRateGeneral": {
     "placeholders": {
-      "rate": { "type": "String" }
+      "rate": {
+        "type": "String"
+      }
     }
   },
   "htsRateSpecial": "Special {rate}",
   "@htsRateSpecial": {
     "placeholders": {
-      "rate": { "type": "String" }
+      "rate": {
+        "type": "String"
+      }
     }
   },
   "htsRateOther": "Other {rate}",
   "@htsRateOther": {
     "placeholders": {
-      "rate": { "type": "String" }
+      "rate": {
+        "type": "String"
+      }
     }
   },
   "htsCopyTooltip": "Copy code",
   "htsCopied": "Copied {code}",
   "@htsCopied": {
     "placeholders": {
-      "code": { "type": "String" }
+      "code": {
+        "type": "String"
+      }
     }
   },
   "htsUnavailable": "The tariff service is unavailable (error {code}). Please try again.",
   "@htsUnavailable": {
     "placeholders": {
-      "code": { "type": "int" }
+      "code": {
+        "type": "int"
+      }
     }
   },
-
   "pairTitle": "Pair with desktop",
   "pairInstructions": "Open Easy-Post Desktop, choose “Pair mobile app”, and scan the QR code shown there.",
   "pairEnterReviewCode": "Enter review code instead",
   "pairReviewDialogTitle": "Enter review code",
   "pairReviewCodeHint": "Review code",
   "pairAction": "Pair",
-
   "errorPairingCodeInvalid": "That pairing code is invalid or has expired. Generate a fresh one on the desktop.",
   "errorReviewCodeRejected": "That review code was not accepted.",
   "errorUnexpectedPairingResponse": "Unexpected response from the pairing service.",
@@ -211,7 +219,65 @@
   "errorRequestFailed": "Request failed (error {code}).",
   "@errorRequestFailed": {
     "placeholders": {
-      "code": { "type": "int" }
+      "code": {
+        "type": "int"
+      }
     }
+  },
+  "detailShipment": "Shipment",
+  "@detailShipment": {
+    "description": "Title of the shipment detail page, opened from History."
+  },
+  "detailInsurancePolicy": "Insurance policy",
+  "@detailInsurancePolicy": {
+    "description": "Title of the insurance policy detail page."
+  },
+  "detailClaim": "Claim",
+  "@detailClaim": {
+    "description": "Title of the claim detail page."
+  },
+  "detailPickup": "Pickup",
+  "@detailPickup": {
+    "description": "Title of the scheduled pickup detail page."
+  },
+  "fieldCarrier": "Carrier",
+  "@fieldCarrier": {
+    "description": "Field label: the carrier brand, e.g. USPS. The value is never translated."
+  },
+  "fieldService": "Service",
+  "@fieldService": {
+    "description": "Field label: the carrier's service level."
+  },
+  "fieldStatus": "Status",
+  "@fieldStatus": {
+    "description": "Field label: the status of a shipment, claim or pickup."
+  },
+  "fieldCreated": "Created",
+  "@fieldCreated": {
+    "description": "Field label: when the record was created."
+  },
+  "fieldAmount": "Amount",
+  "@fieldAmount": {
+    "description": "Field label: an insured or claimed amount of money."
+  },
+  "fieldProvider": "Provider",
+  "@fieldProvider": {
+    "description": "Field label: the insurance provider."
+  },
+  "fieldReference": "Reference",
+  "@fieldReference": {
+    "description": "Field label: the user's own reference for a pickup."
+  },
+  "fieldPickupWindow": "Pickup window",
+  "@fieldPickupWindow": {
+    "description": "Field label: the time window a carrier will collect within."
+  },
+  "fieldCost": "Cost",
+  "@fieldCost": {
+    "description": "Field label: what a shipment cost to buy."
+  },
+  "detailNothingFurther": "No further details.",
+  "@detailNothingFurther": {
+    "description": "Shown when a record carries no fields worth listing."
   }
 }

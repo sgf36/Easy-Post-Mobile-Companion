@@ -371,4 +371,46 @@ class AppLocalizationsMs extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Permintaan gagal (ralat $code).';
   }
+
+  @override
+  String get detailShipment => 'Penghantaran';
+
+  @override
+  String get detailInsurancePolicy => 'Polisi insurans';
+
+  @override
+  String get detailClaim => 'Tuntutan';
+
+  @override
+  String get detailPickup => 'Pengambilan';
+
+  @override
+  String get fieldCarrier => 'Kurier';
+
+  @override
+  String get fieldService => 'Perkhidmatan';
+
+  @override
+  String get fieldStatus => 'Status';
+
+  @override
+  String get fieldCreated => 'Dicipta';
+
+  @override
+  String get fieldAmount => 'Jumlah';
+
+  @override
+  String get fieldProvider => 'Penyedia';
+
+  @override
+  String get fieldReference => 'Rujukan';
+
+  @override
+  String get fieldPickupWindow => 'Tempoh pengambilan';
+
+  @override
+  String get fieldCost => 'Kos';
+
+  @override
+  String get detailNothingFurther => 'Tiada butiran lanjut.';
 }

@@ -1,8 +1,6 @@
 {
   "@@locale": "vi",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Theo dõi",
   "navHistory": "Lịch sử",
   "navInsurance": "Bảo hiểm",
@@ -13,7 +11,6 @@
   "navSectionManage": "Theo dõi và quản lý",
   "navSectionTools": "Công cụ",
   "drawerUnpair": "Hủy ghép nối thiết bị này",
-
   "statusPreTransit": "Trước khi vận chuyển",
   "statusInTransit": "Đang vận chuyển",
   "statusOutForDelivery": "Đang giao hàng",
@@ -24,10 +21,8 @@
   "statusCancelled": "Đã hủy",
   "statusError": "Lỗi",
   "statusUnknown": "Không rõ",
-
   "carrierUnknown": "Không rõ đơn vị vận chuyển",
   "carrierUnknownShort": "Không rõ",
-
   "sortTooltip": "Sắp xếp",
   "sortByStatus": "Sắp xếp theo trạng thái",
   "sortByCarrier": "Sắp xếp theo đơn vị vận chuyển",
@@ -42,22 +37,18 @@
   "trackersShowing": "Hiển thị {shown} trên {total}",
   "trackersNoMatch": "Không có gì khớp với bộ lọc hiện tại.",
   "etaLabel": "Dự kiến {date}",
-
   "detailEstimatedDelivery": "Ngày giao hàng dự kiến {date}",
   "detailSignedBy": "Người ký nhận: {name}",
   "detailHistoryHeading": "Lịch sử",
   "detailNoScanHistory": "Chưa có lần quét nào.",
   "detailMapUnavailable": "Không có bản đồ cho những địa điểm này.",
-
   "historyEmpty": "Chưa có lô hàng nào.",
-
   "insuranceEmpty": "Chưa có hợp đồng bảo hiểm. Chạm vào «Mua bảo hiểm».",
   "insuranceBuy": "Mua bảo hiểm",
   "insuranceAmountRange": "Giá trị bảo hiểm phải nằm trong khoảng 0,01 đến 5.000 USD.",
   "insuranceNotEnabled": "Tài khoản EasyPost này chưa được bật bảo hiểm độc lập. Hãy đề nghị bộ phận hỗ trợ EasyPost bật tính năng này, hoặc thêm bảo hiểm khi mua nhãn.",
   "insuranceFromAddress": "Địa chỉ người gửi",
   "insuranceToAddress": "Địa chỉ người nhận",
-
   "fieldTrackingCode": "Mã vận đơn",
   "fieldCarrierHint": "Đơn vị vận chuyển (ví dụ USPS)",
   "fieldInsuredAmount": "Giá trị bảo hiểm (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Số tiền (USD)",
   "fieldContactEmail": "Email liên hệ",
   "fieldDescription": "Mô tả",
-
   "validationRequired": "Bắt buộc",
   "validationEnterAmount": "Nhập số tiền",
   "validationEnterEmail": "Nhập email",
   "validationDescribeIssue": "Mô tả sự cố",
-
   "claimsEmpty": "Chưa có yêu cầu bồi thường. Chạm vào «Gửi yêu cầu bồi thường».",
   "claimsFile": "Gửi yêu cầu bồi thường",
   "claimSubmit": "Nộp yêu cầu",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Thất lạc",
   "claimAttachmentNote": "Yêu cầu bồi thường hư hỏng và bị đánh cắp cần ảnh chụp hoặc hóa đơn làm chứng từ. Hãy gửi từ ứng dụng máy tính, nơi có thể đính kèm tài liệu.",
   "claimAttachmentSnack": "Yêu cầu bồi thường hư hỏng và bị đánh cắp cần chứng từ, chỉ đính kèm được trong ứng dụng máy tính. Yêu cầu bồi thường thất lạc có thể gửi tại đây.",
-
   "pickupsEmpty": "Chưa có lịch lấy hàng nào.",
   "pickupCancelTitle": "Hủy lịch lấy hàng?",
   "pickupCancelBody": "Hủy lịch lấy hàng {id}? Thao tác này không thể hoàn tác.",
   "pickupKeep": "Giữ lại",
   "pickupCancelConfirm": "Hủy lịch lấy hàng",
   "actionCancel": "Hủy",
-
   "reportsShipments": "Lô hàng",
   "reportsTotalSpend": "Tổng chi tiêu",
   "reportsByCarrier": "Theo đơn vị vận chuyển",
   "reportsEmpty": "Chưa có lô hàng đã mua nào để báo cáo.",
   "reportsCarrierShipments": "Lô hàng: {count}",
-
   "htsSearchLabel": "Tìm mã thuế quan",
   "htsSearchHint": "ví dụ dây đồng",
   "htsSearchButton": "Tìm kiếm",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Sao chép mã",
   "htsCopied": "Đã sao chép {code}",
   "htsUnavailable": "Dịch vụ thuế quan không khả dụng (lỗi {code}). Vui lòng thử lại.",
-
   "pairTitle": "Ghép nối với máy tính",
   "pairInstructions": "Mở Easy-Post Desktop, chọn «Ghép nối ứng dụng di động» rồi quét mã QR hiển thị ở đó.",
   "pairEnterReviewCode": "Nhập mã đánh giá thay thế",
   "pairReviewDialogTitle": "Nhập mã đánh giá",
   "pairReviewCodeHint": "Mã đánh giá",
   "pairAction": "Ghép nối",
-
   "errorPairingCodeInvalid": "Mã ghép nối này không hợp lệ hoặc đã hết hạn. Hãy tạo mã mới trên máy tính.",
   "errorReviewCodeRejected": "Mã đánh giá này không được chấp nhận.",
   "errorUnexpectedPairingResponse": "Phản hồi không mong đợi từ dịch vụ ghép nối.",
   "errorNotPaired": "Thiết bị này không còn được ghép nối. Hãy ghép nối lại từ máy tính.",
   "errorNotPairedShort": "Thiết bị này không còn được ghép nối.",
   "errorForbidden": "Thao tác này không được phép từ ứng dụng.",
-  "errorRequestFailed": "Yêu cầu thất bại (lỗi {code})."
+  "errorRequestFailed": "Yêu cầu thất bại (lỗi {code}).",
+  "detailShipment": "Lô hàng",
+  "detailInsurancePolicy": "Hợp đồng bảo hiểm",
+  "detailClaim": "Yêu cầu bồi thường",
+  "detailPickup": "Lấy hàng",
+  "fieldCarrier": "Đơn vị vận chuyển",
+  "fieldService": "Dịch vụ",
+  "fieldStatus": "Trạng thái",
+  "fieldCreated": "Đã tạo",
+  "fieldAmount": "Số tiền",
+  "fieldProvider": "Nhà cung cấp",
+  "fieldReference": "Tham chiếu",
+  "fieldPickupWindow": "Khung giờ lấy hàng",
+  "fieldCost": "Chi phí",
+  "detailNothingFurther": "Không có thêm chi tiết."
 }

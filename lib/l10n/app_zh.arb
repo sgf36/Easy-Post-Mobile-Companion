@@ -1,8 +1,6 @@
 {
   "@@locale": "zh",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "追踪",
   "navHistory": "历史",
   "navInsurance": "保险",
@@ -13,7 +11,6 @@
   "navSectionManage": "跟踪与管理",
   "navSectionTools": "工具",
   "drawerUnpair": "解除本设备配对",
-
   "statusPreTransit": "待发货",
   "statusInTransit": "运输中",
   "statusOutForDelivery": "派送中",
@@ -24,10 +21,8 @@
   "statusCancelled": "已取消",
   "statusError": "错误",
   "statusUnknown": "未知",
-
   "carrierUnknown": "承运商未知",
   "carrierUnknownShort": "未知",
-
   "sortTooltip": "排序",
   "sortByStatus": "按状态排序",
   "sortByCarrier": "按承运商排序",
@@ -42,22 +37,18 @@
   "trackersShowing": "显示 {total} 件中的 {shown} 件",
   "trackersNoMatch": "没有符合当前筛选条件的内容。",
   "etaLabel": "预计 {date}",
-
   "detailEstimatedDelivery": "预计送达 {date}",
   "detailSignedBy": "签收人：{name}",
   "detailHistoryHeading": "历史",
   "detailNoScanHistory": "暂无扫描记录。",
   "detailMapUnavailable": "这些地点暂无地图。",
-
   "historyEmpty": "暂无包裹。",
-
   "insuranceEmpty": "暂无保单。点按“购买保险”。",
   "insuranceBuy": "购买保险",
   "insuranceAmountRange": "投保金额必须介于 0.01 至 5,000 美元之间。",
   "insuranceNotEnabled": "此 EasyPost 账户未启用独立保险。请联系 EasyPost 支持团队开通，或在购买面单时添加保险。",
   "insuranceFromAddress": "寄件地址",
   "insuranceToAddress": "收件地址",
-
   "fieldTrackingCode": "追踪号",
   "fieldCarrierHint": "承运商（例如 USPS）",
   "fieldInsuredAmount": "投保金额（美元）",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "金额（美元）",
   "fieldContactEmail": "联系邮箱",
   "fieldDescription": "说明",
-
   "validationRequired": "必填",
   "validationEnterAmount": "请输入金额",
   "validationEnterEmail": "请输入邮箱地址",
   "validationDescribeIssue": "请描述问题",
-
   "claimsEmpty": "暂无理赔。点按“提交理赔”。",
   "claimsFile": "提交理赔",
   "claimSubmit": "发送理赔",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "丢失",
   "claimAttachmentNote": "损坏与被盗理赔需要照片或发票作为凭证。请在可添加附件的桌面应用中提交。",
   "claimAttachmentSnack": "损坏与被盗理赔需要凭证，只能在桌面应用中添加附件。丢失理赔可以在此提交。",
-
   "pickupsEmpty": "尚未预约取件。",
   "pickupCancelTitle": "取消取件？",
   "pickupCancelBody": "取消取件 {id}？此操作无法撤销。",
   "pickupKeep": "保留",
   "pickupCancelConfirm": "取消取件",
   "actionCancel": "取消",
-
   "reportsShipments": "包裹数",
   "reportsTotalSpend": "总支出",
   "reportsByCarrier": "按承运商",
   "reportsEmpty": "暂无已购买的包裹可供统计。",
   "reportsCarrierShipments": "包裹：{count}",
-
   "htsSearchLabel": "搜索关税编码",
   "htsSearchHint": "例如 铜线",
   "htsSearchButton": "搜索",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "复制编码",
   "htsCopied": "已复制 {code}",
   "htsUnavailable": "关税服务不可用（错误 {code}）。请重试。",
-
   "pairTitle": "与桌面端配对",
   "pairInstructions": "打开 Easy-Post Desktop，选择“配对移动应用”，然后扫描其中显示的二维码。",
   "pairEnterReviewCode": "改为输入审核代码",
   "pairReviewDialogTitle": "输入审核代码",
   "pairReviewCodeHint": "审核代码",
   "pairAction": "配对",
-
   "errorPairingCodeInvalid": "该配对码无效或已过期。请在桌面端重新生成。",
   "errorReviewCodeRejected": "该审核代码未被接受。",
   "errorUnexpectedPairingResponse": "配对服务返回了意外响应。",
   "errorNotPaired": "此设备已不再配对。请从桌面端重新配对。",
   "errorNotPairedShort": "此设备已不再配对。",
   "errorForbidden": "应用不允许执行该操作。",
-  "errorRequestFailed": "请求失败（错误 {code}）。"
+  "errorRequestFailed": "请求失败（错误 {code}）。",
+  "detailShipment": "运单",
+  "detailInsurancePolicy": "保险单",
+  "detailClaim": "理赔",
+  "detailPickup": "取件",
+  "fieldCarrier": "承运商",
+  "fieldService": "服务",
+  "fieldStatus": "状态",
+  "fieldCreated": "创建时间",
+  "fieldAmount": "金额",
+  "fieldProvider": "提供方",
+  "fieldReference": "参考编号",
+  "fieldPickupWindow": "取件时间段",
+  "fieldCost": "费用",
+  "detailNothingFurther": "没有更多详细信息。"
 }

@@ -364,4 +364,46 @@ class AppLocalizationsZh extends AppLocalizations {
   String errorRequestFailed(int code) {
     return '请求失败（错误 $code）。';
   }
+
+  @override
+  String get detailShipment => '运单';
+
+  @override
+  String get detailInsurancePolicy => '保险单';
+
+  @override
+  String get detailClaim => '理赔';
+
+  @override
+  String get detailPickup => '取件';
+
+  @override
+  String get fieldCarrier => '承运商';
+
+  @override
+  String get fieldService => '服务';
+
+  @override
+  String get fieldStatus => '状态';
+
+  @override
+  String get fieldCreated => '创建时间';
+
+  @override
+  String get fieldAmount => '金额';
+
+  @override
+  String get fieldProvider => '提供方';
+
+  @override
+  String get fieldReference => '参考编号';
+
+  @override
+  String get fieldPickupWindow => '取件时间段';
+
+  @override
+  String get fieldCost => '费用';
+
+  @override
+  String get detailNothingFurther => '没有更多详细信息。';
 }

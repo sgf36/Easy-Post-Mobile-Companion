@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../services/error_text.dart';
+import '../theme.dart';
 import 'home_shell.dart';
 
 /// One row's display fields, derived from a raw EasyPost object.
@@ -22,6 +23,11 @@ class ResourceListScreen extends StatefulWidget {
   final Future<List<Map<String, dynamic>>> Function() fetch;
   final ResourceRow Function(Map<String, dynamic>) row;
 
+  /// Builds the page a row opens onto. Supplied by the caller because only it
+  /// knows what the raw record means; a null builder leaves rows inert, which
+  /// is what every list here used to be.
+  final Widget Function(Map<String, dynamic>)? detail;
+
   const ResourceListScreen({
     super.key,
     required this.nav,
@@ -29,10 +35,30 @@ class ResourceListScreen extends StatefulWidget {
     required this.emptyText,
     required this.fetch,
     required this.row,
+    this.detail,
   });
 
   @override
   State<ResourceListScreen> createState() => _ResourceListScreenState();
+}
+
+/// The trailing text, followed by a chevron when the row opens onto something.
+///
+/// Without the chevron a tappable row and an inert one look identical, and the
+/// only way to find out which this is would be to tap it.
+Widget? _trailing(ResourceRow r, {required bool showChevron}) {
+  if (r.trailing.isEmpty && !showChevron) return null;
+  return Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      if (r.trailing.isNotEmpty) Text(r.trailing),
+      if (showChevron)
+        const Padding(
+          padding: EdgeInsetsDirectional.only(start: 4),
+          child: Icon(Icons.chevron_right, size: 20, color: Brand.muted),
+        ),
+    ],
+  );
 }
 
 class _ResourceListScreenState extends State<ResourceListScreen> {
@@ -82,10 +108,16 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
               separatorBuilder: (_, _) => const Divider(height: 1),
               itemBuilder: (context, i) {
                 final r = widget.row(items[i]);
+                final build = widget.detail;
                 return ListTile(
                   title: Text(r.title, style: const TextStyle(fontWeight: FontWeight.w600)),
                   subtitle: r.subtitle.isEmpty ? null : Text(r.subtitle),
-                  trailing: r.trailing.isEmpty ? null : Text(r.trailing),
+                  trailing: _trailing(r, showChevron: build != null),
+                  onTap: build == null
+                      ? null
+                      : () => Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_) => build(items[i])),
+                          ),
                 );
               },
             );

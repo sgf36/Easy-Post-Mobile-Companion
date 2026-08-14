@@ -1,8 +1,6 @@
 {
   "@@locale": "he",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "מעקב",
   "navHistory": "היסטוריה",
   "navInsurance": "ביטוח",
@@ -13,7 +11,6 @@
   "navSectionManage": "מעקב וניהול",
   "navSectionTools": "כלים",
   "drawerUnpair": "ביטול הצימוד של מכשיר זה",
-
   "statusPreTransit": "לפני משלוח",
   "statusInTransit": "בדרך",
   "statusOutForDelivery": "יצא למסירה",
@@ -24,10 +21,8 @@
   "statusCancelled": "בוטל",
   "statusError": "שגיאה",
   "statusUnknown": "לא ידוע",
-
   "carrierUnknown": "חברת שילוח לא ידועה",
   "carrierUnknownShort": "לא ידוע",
-
   "sortTooltip": "מיון",
   "sortByStatus": "מיון לפי סטטוס",
   "sortByCarrier": "מיון לפי חברת שילוח",
@@ -42,22 +37,18 @@
   "trackersShowing": "מוצגים {shown} מתוך {total}",
   "trackersNoMatch": "אין תוצאות לסינון הנוכחי.",
   "etaLabel": "צפוי {date}",
-
   "detailEstimatedDelivery": "אספקה משוערת {date}",
   "detailSignedBy": "נחתם על ידי {name}",
   "detailHistoryHeading": "היסטוריה",
   "detailNoScanHistory": "אין עדיין סריקות.",
   "detailMapUnavailable": "מפה אינה זמינה עבור מיקומים אלה.",
-
   "historyEmpty": "אין עדיין משלוחים.",
-
   "insuranceEmpty": "אין עדיין פוליסות. יש להקיש על «רכישת ביטוח».",
   "insuranceBuy": "רכישת ביטוח",
   "insuranceAmountRange": "סכום הביטוח חייב להיות בין 0.01 ל‑5,000 דולר ארה״ב.",
   "insuranceNotEnabled": "חשבון EasyPost זה אינו מאושר לביטוח עצמאי. יש לבקש מהתמיכה של EasyPost להפעיל זאת, או להוסיף ביטוח בעת רכישת התווית.",
   "insuranceFromAddress": "כתובת השולח",
   "insuranceToAddress": "כתובת הנמען",
-
   "fieldTrackingCode": "מספר מעקב",
   "fieldCarrierHint": "חברת שילוח (למשל USPS)",
   "fieldInsuredAmount": "סכום ביטוח (דולר ארה״ב)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "סכום (דולר ארה״ב)",
   "fieldContactEmail": "אימייל ליצירת קשר",
   "fieldDescription": "תיאור",
-
   "validationRequired": "שדה חובה",
   "validationEnterAmount": "יש להזין סכום",
   "validationEnterEmail": "יש להזין אימייל",
   "validationDescribeIssue": "יש לתאר את הבעיה",
-
   "claimsEmpty": "אין עדיין תביעות. יש להקיש על «הגשת תביעה».",
   "claimsFile": "הגשת תביעה",
   "claimSubmit": "שליחת התביעה",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "אובדן",
   "claimAttachmentNote": "תביעות נזק וגניבה מחייבות תמונה או חשבונית כאסמכתה. יש להגיש אותן ביישום המחשב, שבו אפשר לצרף מסמכים.",
   "claimAttachmentSnack": "תביעות נזק וגניבה מחייבות אסמכתה, שניתן לצרף רק ביישום המחשב. תביעת אובדן אפשר להגיש כאן.",
-
   "pickupsEmpty": "לא נקבעו עדיין איסופים.",
   "pickupCancelTitle": "לבטל את האיסוף?",
   "pickupCancelBody": "לבטל את האיסוף {id}? לא ניתן לבטל פעולה זו.",
   "pickupKeep": "להשאיר",
   "pickupCancelConfirm": "ביטול האיסוף",
   "actionCancel": "ביטול",
-
   "reportsShipments": "משלוחים",
   "reportsTotalSpend": "סך ההוצאות",
   "reportsByCarrier": "לפי חברת שילוח",
   "reportsEmpty": "אין עדיין משלוחים שנרכשו לדיווח.",
   "reportsCarrierShipments": "משלוחים: {count}",
-
   "htsSearchLabel": "חיפוש קודי מכס",
   "htsSearchHint": "למשל חוט נחושת",
   "htsSearchButton": "חיפוש",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "העתקת הקוד",
   "htsCopied": "{code} הועתק",
   "htsUnavailable": "שירות המכס אינו זמין (שגיאה {code}). יש לנסות שוב.",
-
   "pairTitle": "צימוד למחשב",
   "pairInstructions": "יש לפתוח את Easy-Post Desktop, לבחור «צימוד אפליקציית הנייד» ולסרוק את קוד ה‑QR המוצג שם.",
   "pairEnterReviewCode": "הזנת קוד בדיקה במקום",
   "pairReviewDialogTitle": "הזנת קוד בדיקה",
   "pairReviewCodeHint": "קוד בדיקה",
   "pairAction": "צימוד",
-
   "errorPairingCodeInvalid": "קוד הצימוד אינו תקף או שפג תוקפו. יש להפיק קוד חדש במחשב.",
   "errorReviewCodeRejected": "קוד הבדיקה לא התקבל.",
   "errorUnexpectedPairingResponse": "תגובה בלתי צפויה משירות הצימוד.",
   "errorNotPaired": "המכשיר אינו מצומד עוד. יש לצמד אותו מחדש מהמחשב.",
   "errorNotPairedShort": "המכשיר אינו מצומד עוד.",
   "errorForbidden": "פעולה זו אינה מותרת מהאפליקציה.",
-  "errorRequestFailed": "הבקשה נכשלה (שגיאה {code})."
+  "errorRequestFailed": "הבקשה נכשלה (שגיאה {code}).",
+  "detailShipment": "משלוח",
+  "detailInsurancePolicy": "פוליסת ביטוח",
+  "detailClaim": "תביעה",
+  "detailPickup": "איסוף",
+  "fieldCarrier": "מוביל",
+  "fieldService": "שירות",
+  "fieldStatus": "סטטוס",
+  "fieldCreated": "נוצר",
+  "fieldAmount": "סכום",
+  "fieldProvider": "ספק",
+  "fieldReference": "אסמכתא",
+  "fieldPickupWindow": "חלון איסוף",
+  "fieldCost": "עלות",
+  "detailNothingFurther": "אין פרטים נוספים."
 }

@@ -367,4 +367,46 @@ class AppLocalizationsKo extends AppLocalizations {
   String errorRequestFailed(int code) {
     return '요청이 실패했습니다 (오류 $code).';
   }
+
+  @override
+  String get detailShipment => '배송';
+
+  @override
+  String get detailInsurancePolicy => '보험 증권';
+
+  @override
+  String get detailClaim => '청구';
+
+  @override
+  String get detailPickup => '수거';
+
+  @override
+  String get fieldCarrier => '배송업체';
+
+  @override
+  String get fieldService => '서비스';
+
+  @override
+  String get fieldStatus => '상태';
+
+  @override
+  String get fieldCreated => '생성일';
+
+  @override
+  String get fieldAmount => '금액';
+
+  @override
+  String get fieldProvider => '제공업체';
+
+  @override
+  String get fieldReference => '참조번호';
+
+  @override
+  String get fieldPickupWindow => '수거 시간대';
+
+  @override
+  String get fieldCost => '비용';
+
+  @override
+  String get detailNothingFurther => '추가 정보가 없습니다.';
 }

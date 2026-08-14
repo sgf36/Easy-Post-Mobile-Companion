@@ -1,8 +1,6 @@
 {
   "@@locale": "ar",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "التتبع",
   "navHistory": "السجل",
   "navInsurance": "التأمين",
@@ -13,7 +11,6 @@
   "navSectionManage": "التتبع والإدارة",
   "navSectionTools": "الأدوات",
   "drawerUnpair": "إلغاء إقران هذا الجهاز",
-
   "statusPreTransit": "قبل الشحن",
   "statusInTransit": "قيد الشحن",
   "statusOutForDelivery": "خارج للتسليم",
@@ -24,10 +21,8 @@
   "statusCancelled": "ملغى",
   "statusError": "خطأ",
   "statusUnknown": "غير معروف",
-
   "carrierUnknown": "شركة شحن غير معروفة",
   "carrierUnknownShort": "غير معروف",
-
   "sortTooltip": "ترتيب",
   "sortByStatus": "الترتيب حسب الحالة",
   "sortByCarrier": "الترتيب حسب شركة الشحن",
@@ -42,22 +37,18 @@
   "trackersShowing": "عرض {shown} من {total}",
   "trackersNoMatch": "لا شيء يطابق عوامل التصفية الحالية.",
   "etaLabel": "متوقع {date}",
-
   "detailEstimatedDelivery": "التسليم المقدر {date}",
   "detailSignedBy": "وقّع بالاستلام {name}",
   "detailHistoryHeading": "السجل",
   "detailNoScanHistory": "لا توجد عمليات مسح بعد.",
   "detailMapUnavailable": "الخريطة غير متاحة لهذه المواقع.",
-
   "historyEmpty": "لا توجد شحنات بعد.",
-
   "insuranceEmpty": "لا توجد وثائق تأمين بعد. اضغط «شراء التأمين».",
   "insuranceBuy": "شراء التأمين",
   "insuranceAmountRange": "يجب أن تتراوح قيمة التأمين بين 0.01 و5000 دولار أمريكي.",
   "insuranceNotEnabled": "حساب EasyPost هذا غير مفعَّل للتأمين المستقل. اطلب من دعم EasyPost تفعيله، أو أضف التأمين عند شراء الملصق.",
   "insuranceFromAddress": "عنوان المرسِل",
   "insuranceToAddress": "عنوان المستلِم",
-
   "fieldTrackingCode": "رقم التتبع",
   "fieldCarrierHint": "شركة الشحن (مثل USPS)",
   "fieldInsuredAmount": "قيمة التأمين (دولار أمريكي)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "المبلغ (دولار أمريكي)",
   "fieldContactEmail": "البريد الإلكتروني للتواصل",
   "fieldDescription": "الوصف",
-
   "validationRequired": "مطلوب",
   "validationEnterAmount": "أدخل مبلغًا",
   "validationEnterEmail": "أدخل بريدًا إلكترونيًا",
   "validationDescribeIssue": "صف المشكلة",
-
   "claimsEmpty": "لا توجد مطالبات بعد. اضغط «تقديم مطالبة».",
   "claimsFile": "تقديم مطالبة",
   "claimSubmit": "إرسال المطالبة",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "فقدان",
   "claimAttachmentNote": "تتطلب مطالبات التلف والسرقة صورة أو فاتورة كمستند داعم. قدِّمها من تطبيق سطح المكتب حيث يمكن إرفاق المستندات.",
   "claimAttachmentSnack": "تتطلب مطالبات التلف والسرقة مستندًا داعمًا لا يمكن إرفاقه إلا من تطبيق سطح المكتب. أما مطالبة الفقدان فيمكن تقديمها هنا.",
-
   "pickupsEmpty": "لا توجد عمليات استلام مجدولة بعد.",
   "pickupCancelTitle": "إلغاء الاستلام؟",
   "pickupCancelBody": "إلغاء الاستلام {id}؟ لا يمكن التراجع عن ذلك.",
   "pickupKeep": "الإبقاء عليه",
   "pickupCancelConfirm": "إلغاء الاستلام",
   "actionCancel": "إلغاء",
-
   "reportsShipments": "الشحنات",
   "reportsTotalSpend": "إجمالي الإنفاق",
   "reportsByCarrier": "حسب شركة الشحن",
   "reportsEmpty": "لا توجد شحنات مشتراة لعرضها في التقرير بعد.",
   "reportsCarrierShipments": "الشحنات: {count}",
-
   "htsSearchLabel": "البحث عن رموز التعريفة الجمركية",
   "htsSearchHint": "مثل سلك نحاسي",
   "htsSearchButton": "بحث",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "نسخ الرمز",
   "htsCopied": "تم نسخ {code}",
   "htsUnavailable": "خدمة التعريفة الجمركية غير متاحة (خطأ {code}). يُرجى المحاولة مرة أخرى.",
-
   "pairTitle": "الإقران مع سطح المكتب",
   "pairInstructions": "افتح Easy-Post Desktop، واختر «إقران التطبيق المحمول»، ثم امسح رمز QR المعروض هناك.",
   "pairEnterReviewCode": "إدخال رمز المراجعة بدلاً من ذلك",
   "pairReviewDialogTitle": "إدخال رمز المراجعة",
   "pairReviewCodeHint": "رمز المراجعة",
   "pairAction": "إقران",
-
   "errorPairingCodeInvalid": "رمز الإقران هذا غير صالح أو منتهي الصلاحية. أنشئ رمزًا جديدًا على سطح المكتب.",
   "errorReviewCodeRejected": "لم يتم قبول رمز المراجعة هذا.",
   "errorUnexpectedPairingResponse": "استجابة غير متوقعة من خدمة الإقران.",
   "errorNotPaired": "لم يعد هذا الجهاز مقترنًا. أعد الإقران من سطح المكتب.",
   "errorNotPairedShort": "لم يعد هذا الجهاز مقترنًا.",
   "errorForbidden": "هذا الإجراء غير مسموح به من التطبيق.",
-  "errorRequestFailed": "فشل الطلب (خطأ {code})."
+  "errorRequestFailed": "فشل الطلب (خطأ {code}).",
+  "detailShipment": "شحنة",
+  "detailInsurancePolicy": "وثيقة التأمين",
+  "detailClaim": "مطالبة",
+  "detailPickup": "استلام",
+  "fieldCarrier": "شركة الشحن",
+  "fieldService": "الخدمة",
+  "fieldStatus": "الحالة",
+  "fieldCreated": "تاريخ الإنشاء",
+  "fieldAmount": "المبلغ",
+  "fieldProvider": "مزود الخدمة",
+  "fieldReference": "المرجع",
+  "fieldPickupWindow": "نافذة الاستلام",
+  "fieldCost": "التكلفة",
+  "detailNothingFurther": "لا توجد تفاصيل إضافية."
 }

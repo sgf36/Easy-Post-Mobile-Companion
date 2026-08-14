@@ -1,8 +1,6 @@
 {
   "@@locale": "ms",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Penjejakan",
   "navHistory": "Sejarah",
   "navInsurance": "Insurans",
@@ -13,7 +11,6 @@
   "navSectionManage": "Jejak dan urus",
   "navSectionTools": "Alat",
   "drawerUnpair": "Nyahgandingkan peranti ini",
-
   "statusPreTransit": "Sebelum penghantaran",
   "statusInTransit": "Dalam penghantaran",
   "statusOutForDelivery": "Dalam penghantaran akhir",
@@ -24,10 +21,8 @@
   "statusCancelled": "Dibatalkan",
   "statusError": "Ralat",
   "statusUnknown": "Tidak diketahui",
-
   "carrierUnknown": "Syarikat penghantaran tidak diketahui",
   "carrierUnknownShort": "Tidak diketahui",
-
   "sortTooltip": "Isih",
   "sortByStatus": "Isih mengikut status",
   "sortByCarrier": "Isih mengikut syarikat penghantaran",
@@ -42,22 +37,18 @@
   "trackersShowing": "Memaparkan {shown} daripada {total}",
   "trackersNoMatch": "Tiada yang sepadan dengan penapis semasa.",
   "etaLabel": "Angg. {date}",
-
   "detailEstimatedDelivery": "Anggaran penghantaran {date}",
   "detailSignedBy": "Ditandatangani oleh {name}",
   "detailHistoryHeading": "Sejarah",
   "detailNoScanHistory": "Belum ada rekod imbasan.",
   "detailMapUnavailable": "Peta tidak tersedia untuk lokasi ini.",
-
   "historyEmpty": "Belum ada penghantaran.",
-
   "insuranceEmpty": "Belum ada polisi. Ketik «Beli insurans».",
   "insuranceBuy": "Beli insurans",
   "insuranceAmountRange": "Nilai dilindungi mestilah antara 0.01 dan 5,000 USD.",
   "insuranceNotEnabled": "Akaun EasyPost ini tidak didayakan untuk insurans berasingan. Minta sokongan EasyPost mendayakannya, atau tambah insurans semasa membeli label.",
   "insuranceFromAddress": "Alamat penghantar",
   "insuranceToAddress": "Alamat penerima",
-
   "fieldTrackingCode": "Kod penjejakan",
   "fieldCarrierHint": "Syarikat penghantaran (cth. USPS)",
   "fieldInsuredAmount": "Nilai dilindungi (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Jumlah (USD)",
   "fieldContactEmail": "E-mel hubungan",
   "fieldDescription": "Penerangan",
-
   "validationRequired": "Diperlukan",
   "validationEnterAmount": "Masukkan jumlah",
   "validationEnterEmail": "Masukkan e-mel",
   "validationDescribeIssue": "Terangkan masalahnya",
-
   "claimsEmpty": "Belum ada tuntutan. Ketik «Failkan tuntutan».",
   "claimsFile": "Failkan tuntutan",
   "claimSubmit": "Hantar tuntutan",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Kehilangan",
   "claimAttachmentNote": "Tuntutan kerosakan dan kecurian memerlukan foto atau invois sebagai bukti. Failkannya dalam aplikasi desktop, tempat dokumen boleh dilampirkan.",
   "claimAttachmentSnack": "Tuntutan kerosakan dan kecurian memerlukan bukti yang hanya boleh dilampirkan dalam aplikasi desktop. Tuntutan kehilangan boleh difailkan di sini.",
-
   "pickupsEmpty": "Belum ada pengambilan dijadualkan.",
   "pickupCancelTitle": "Batalkan pengambilan?",
   "pickupCancelBody": "Batalkan pengambilan {id}? Tindakan ini tidak boleh dibatalkan.",
   "pickupKeep": "Kekalkan",
   "pickupCancelConfirm": "Batalkan pengambilan",
   "actionCancel": "Batal",
-
   "reportsShipments": "Penghantaran",
   "reportsTotalSpend": "Jumlah perbelanjaan",
   "reportsByCarrier": "Mengikut syarikat penghantaran",
   "reportsEmpty": "Belum ada penghantaran dibeli untuk dilaporkan.",
   "reportsCarrierShipments": "Penghantaran: {count}",
-
   "htsSearchLabel": "Cari kod tarif",
   "htsSearchHint": "cth. dawai tembaga",
   "htsSearchButton": "Cari",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Salin kod",
   "htsCopied": "{code} disalin",
   "htsUnavailable": "Perkhidmatan tarif tidak tersedia (ralat {code}). Sila cuba lagi.",
-
   "pairTitle": "Gandingkan dengan desktop",
   "pairInstructions": "Buka Easy-Post Desktop, pilih «Gandingkan aplikasi mudah alih», kemudian imbas kod QR yang dipaparkan.",
   "pairEnterReviewCode": "Masukkan kod semakan sebaliknya",
   "pairReviewDialogTitle": "Masukkan kod semakan",
   "pairReviewCodeHint": "Kod semakan",
   "pairAction": "Gandingkan",
-
   "errorPairingCodeInvalid": "Kod gandingan ini tidak sah atau telah tamat tempoh. Jana yang baharu pada desktop.",
   "errorReviewCodeRejected": "Kod semakan ini tidak diterima.",
   "errorUnexpectedPairingResponse": "Respons tidak dijangka daripada perkhidmatan gandingan.",
   "errorNotPaired": "Peranti ini tidak lagi digandingkan. Gandingkannya semula dari desktop.",
   "errorNotPairedShort": "Peranti ini tidak lagi digandingkan.",
   "errorForbidden": "Tindakan itu tidak dibenarkan daripada aplikasi.",
-  "errorRequestFailed": "Permintaan gagal (ralat {code})."
+  "errorRequestFailed": "Permintaan gagal (ralat {code}).",
+  "detailShipment": "Penghantaran",
+  "detailInsurancePolicy": "Polisi insurans",
+  "detailClaim": "Tuntutan",
+  "detailPickup": "Pengambilan",
+  "fieldCarrier": "Kurier",
+  "fieldService": "Perkhidmatan",
+  "fieldStatus": "Status",
+  "fieldCreated": "Dicipta",
+  "fieldAmount": "Jumlah",
+  "fieldProvider": "Penyedia",
+  "fieldReference": "Rujukan",
+  "fieldPickupWindow": "Tempoh pengambilan",
+  "fieldCost": "Kos",
+  "detailNothingFurther": "Tiada butiran lanjut."
 }

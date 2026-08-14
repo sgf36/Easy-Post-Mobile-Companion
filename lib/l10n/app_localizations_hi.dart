@@ -375,4 +375,46 @@ class AppLocalizationsHi extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'अनुरोध विफल (त्रुटि $code)।';
   }
+
+  @override
+  String get detailShipment => 'शिपमेंट';
+
+  @override
+  String get detailInsurancePolicy => 'बीमा पॉलिसी';
+
+  @override
+  String get detailClaim => 'दावा';
+
+  @override
+  String get detailPickup => 'पिकअप';
+
+  @override
+  String get fieldCarrier => 'वाहक';
+
+  @override
+  String get fieldService => 'सेवा';
+
+  @override
+  String get fieldStatus => 'स्थिति';
+
+  @override
+  String get fieldCreated => 'बनाया गया';
+
+  @override
+  String get fieldAmount => 'राशि';
+
+  @override
+  String get fieldProvider => 'प्रदाता';
+
+  @override
+  String get fieldReference => 'संदर्भ';
+
+  @override
+  String get fieldPickupWindow => 'पिकअप अवधि';
+
+  @override
+  String get fieldCost => 'लागत';
+
+  @override
+  String get detailNothingFurther => 'कोई अतिरिक्त विवरण नहीं।';
 }

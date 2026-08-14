@@ -116,14 +116,18 @@ class ProxyClient {
         'x-ep-kek': c.kek,
       };
 
-  /// GET an allow-listed EasyPost collection through the proxy and return the
-  /// array under [key] (e.g. "trackers", "shipments").
-  Future<List<Map<String, dynamic>>> _getList(
-    PairingCredentials c,
-    String path,
-    String key,
-  ) async {
-    final res = await http.get(Uri.parse('${c.proxyUrl}$path'), headers: _authHeaders(c));
+  /// EasyPost caps a collection response and reports the rest through
+  /// `has_more`; one page is what a bare GET returns.
+  static const int _pageSize = 100;
+
+  /// A backstop against walking an implausibly large account, not a display
+  /// limit — set far above any small shipper's history. If it is ever reached
+  /// the list is short by design rather than by accident.
+  static const int _maxItems = 1000;
+
+  /// GET one page of an allow-listed EasyPost collection through the proxy.
+  Future<Map<String, dynamic>> _getPage(PairingCredentials c, Uri uri) async {
+    final res = await http.get(uri, headers: _authHeaders(c));
     if (res.statusCode == 401) {
       throw ProxyException(ProxyErrorKind.notPaired,
           'This device is no longer paired. Pair again from the desktop.');
@@ -139,8 +143,49 @@ class ProxyClient {
         statusCode: res.statusCode,
       );
     }
-    final body = jsonDecode(res.body) as Map<String, dynamic>;
-    return ((body[key] as List<dynamic>?) ?? const []).cast<Map<String, dynamic>>();
+    return jsonDecode(res.body) as Map<String, dynamic>;
+  }
+
+  /// Every item in an allow-listed EasyPost collection, not just the first page.
+  ///
+  /// This was a single unparameterised GET, so it took whatever one page
+  /// EasyPost chose to return and dropped the remainder without a word. In the
+  /// review account that meant 25 of 54 trackers — and because EasyPost returns
+  /// newest first while the app sorts by journey order, the ones that arrived
+  /// were the most recent batch, all of them delivered. The app looked like it
+  /// could only ever show delivered parcels; in fact it had never been sent the
+  /// others.
+  ///
+  /// A real account fails the same way and worse: a shipper with several
+  /// hundred parcels would see a truncated history with nothing on screen
+  /// admitting it. Silent truncation reads as "this is everything", so this
+  /// follows `has_more` to the end.
+  Future<List<Map<String, dynamic>>> _getList(
+    PairingCredentials c,
+    String path,
+    String key,
+  ) async {
+    final out = <Map<String, dynamic>>[];
+    final base = Uri.parse('${c.proxyUrl}$path');
+    String? beforeId;
+    while (true) {
+      final uri = base.replace(queryParameters: <String, String>{
+        ...base.queryParameters,
+        'page_size': '$_pageSize',
+        'before_id': ?beforeId,
+      });
+      final body = await _getPage(c, uri);
+      final items =
+          ((body[key] as List<dynamic>?) ?? const []).cast<Map<String, dynamic>>();
+      if (items.isEmpty) break;
+      out.addAll(items);
+      final lastId = items.last['id']?.toString();
+      if (body['has_more'] != true || lastId == null || out.length >= _maxItems) {
+        break;
+      }
+      beforeId = lastId;
+    }
+    return out;
   }
 
   Future<List<Map<String, dynamic>>> getTrackers(PairingCredentials c) =>

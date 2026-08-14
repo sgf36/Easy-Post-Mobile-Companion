@@ -370,4 +370,46 @@ class AppLocalizationsHr extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Zahtjev nije uspio (greška $code).';
   }
+
+  @override
+  String get detailShipment => 'Pošiljka';
+
+  @override
+  String get detailInsurancePolicy => 'Polica osiguranja';
+
+  @override
+  String get detailClaim => 'Odštetni zahtjev';
+
+  @override
+  String get detailPickup => 'Preuzimanje';
+
+  @override
+  String get fieldCarrier => 'Prijevoznik';
+
+  @override
+  String get fieldService => 'Usluga';
+
+  @override
+  String get fieldStatus => 'Status';
+
+  @override
+  String get fieldCreated => 'Stvoreno';
+
+  @override
+  String get fieldAmount => 'Iznos';
+
+  @override
+  String get fieldProvider => 'Pružatelj';
+
+  @override
+  String get fieldReference => 'Referenca';
+
+  @override
+  String get fieldPickupWindow => 'Razdoblje preuzimanja';
+
+  @override
+  String get fieldCost => 'Cijena';
+
+  @override
+  String get detailNothingFurther => 'Nema dodatnih pojedinosti.';
 }

@@ -1,8 +1,6 @@
 {
   "@@locale": "ro",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Urmărire",
   "navHistory": "Istoric",
   "navInsurance": "Asigurare",
@@ -13,7 +11,6 @@
   "navSectionManage": "Urmărire și gestionare",
   "navSectionTools": "Instrumente",
   "drawerUnpair": "Deconectează acest dispozitiv",
-
   "statusPreTransit": "Înainte de transport",
   "statusInTransit": "În tranzit",
   "statusOutForDelivery": "Ieșit pentru livrare",
@@ -24,10 +21,8 @@
   "statusCancelled": "Anulat",
   "statusError": "Eroare",
   "statusUnknown": "Necunoscut",
-
   "carrierUnknown": "Curier necunoscut",
   "carrierUnknownShort": "Necunoscut",
-
   "sortTooltip": "Sortare",
   "sortByStatus": "Sortează după stare",
   "sortByCarrier": "Sortează după curier",
@@ -42,22 +37,18 @@
   "trackersShowing": "Se afișează {shown} din {total}",
   "trackersNoMatch": "Nimic nu corespunde filtrelor curente.",
   "etaLabel": "Est. {date}",
-
   "detailEstimatedDelivery": "Livrare estimată {date}",
   "detailSignedBy": "Semnat de {name}",
   "detailHistoryHeading": "Istoric",
   "detailNoScanHistory": "Încă nu există scanări.",
   "detailMapUnavailable": "Harta nu este disponibilă pentru aceste locații.",
-
   "historyEmpty": "Încă nu există expedieri.",
-
   "insuranceEmpty": "Încă nu există polițe. Apasă „Achiziționează asigurare”.",
   "insuranceBuy": "Achiziționează asigurare",
   "insuranceAmountRange": "Suma asigurată trebuie să fie între 0,01 și 5.000 USD.",
   "insuranceNotEnabled": "Acest cont EasyPost nu are activată asigurarea independentă. Cere asistenței EasyPost să o activeze sau adaugă asigurarea la cumpărarea etichetei.",
   "insuranceFromAddress": "Adresa expeditorului",
   "insuranceToAddress": "Adresa destinatarului",
-
   "fieldTrackingCode": "Cod de urmărire",
   "fieldCarrierHint": "Curier (ex. USPS)",
   "fieldInsuredAmount": "Sumă asigurată (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Sumă (USD)",
   "fieldContactEmail": "E-mail de contact",
   "fieldDescription": "Descriere",
-
   "validationRequired": "Obligatoriu",
   "validationEnterAmount": "Introdu o sumă",
   "validationEnterEmail": "Introdu un e-mail",
   "validationDescribeIssue": "Descrie problema",
-
   "claimsEmpty": "Încă nu există reclamații. Apasă „Depune o reclamație”.",
   "claimsFile": "Depune o reclamație",
   "claimSubmit": "Trimite reclamația",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Pierdere",
   "claimAttachmentNote": "Reclamațiile pentru deteriorare și furt necesită o fotografie sau o factură ca dovadă. Depune-le din aplicația desktop, unde se pot atașa documente.",
   "claimAttachmentSnack": "Reclamațiile pentru deteriorare și furt necesită o dovadă, care poate fi atașată doar în aplicația desktop. O reclamație pentru pierdere poate fi depusă aici.",
-
   "pickupsEmpty": "Nu este programată încă nicio ridicare.",
   "pickupCancelTitle": "Anulezi ridicarea?",
   "pickupCancelBody": "Anulezi ridicarea {id}? Această acțiune nu poate fi anulată.",
   "pickupKeep": "Păstrează",
   "pickupCancelConfirm": "Anulează ridicarea",
   "actionCancel": "Anulează",
-
   "reportsShipments": "Expedieri",
   "reportsTotalSpend": "Cheltuieli totale",
   "reportsByCarrier": "Pe curier",
   "reportsEmpty": "Încă nu există expedieri cumpărate de raportat.",
   "reportsCarrierShipments": "Expedieri: {count}",
-
   "htsSearchLabel": "Caută coduri tarifare",
   "htsSearchHint": "ex. sârmă de cupru",
   "htsSearchButton": "Caută",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Copiază codul",
   "htsCopied": "{code} copiat",
   "htsUnavailable": "Serviciul tarifar este indisponibil (eroare {code}). Încearcă din nou.",
-
   "pairTitle": "Asociază cu desktopul",
   "pairInstructions": "Deschide Easy-Post Desktop, alege „Asociere aplicație mobilă” și scanează codul QR afișat acolo.",
   "pairEnterReviewCode": "Introdu în schimb un cod de evaluare",
   "pairReviewDialogTitle": "Introdu codul de evaluare",
   "pairReviewCodeHint": "Cod de evaluare",
   "pairAction": "Asociază",
-
   "errorPairingCodeInvalid": "Acest cod de asociere este invalid sau a expirat. Generează unul nou pe desktop.",
   "errorReviewCodeRejected": "Acest cod de evaluare nu a fost acceptat.",
   "errorUnexpectedPairingResponse": "Răspuns neașteptat de la serviciul de asociere.",
   "errorNotPaired": "Acest dispozitiv nu mai este asociat. Asociază-l din nou de pe desktop.",
   "errorNotPairedShort": "Acest dispozitiv nu mai este asociat.",
   "errorForbidden": "Această acțiune nu este permisă din aplicație.",
-  "errorRequestFailed": "Cererea a eșuat (eroare {code})."
+  "errorRequestFailed": "Cererea a eșuat (eroare {code}).",
+  "detailShipment": "Expediere",
+  "detailInsurancePolicy": "Poliță de asigurare",
+  "detailClaim": "Reclamație",
+  "detailPickup": "Ridicare",
+  "fieldCarrier": "Curier",
+  "fieldService": "Serviciu",
+  "fieldStatus": "Stare",
+  "fieldCreated": "Creat",
+  "fieldAmount": "Sumă",
+  "fieldProvider": "Furnizor",
+  "fieldReference": "Referință",
+  "fieldPickupWindow": "Interval de ridicare",
+  "fieldCost": "Cost",
+  "detailNothingFurther": "Nu există alte detalii."
 }

@@ -1,8 +1,6 @@
 {
   "@@locale": "hr",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Praćenje",
   "navHistory": "Povijest",
   "navInsurance": "Osiguranje",
@@ -13,7 +11,6 @@
   "navSectionManage": "Praćenje i upravljanje",
   "navSectionTools": "Alati",
   "drawerUnpair": "Odspoji ovaj uređaj",
-
   "statusPreTransit": "Prije prijevoza",
   "statusInTransit": "U prijevozu",
   "statusOutForDelivery": "Na dostavi",
@@ -24,10 +21,8 @@
   "statusCancelled": "Otkazano",
   "statusError": "Greška",
   "statusUnknown": "Nepoznato",
-
   "carrierUnknown": "Nepoznat dostavljač",
   "carrierUnknownShort": "Nepoznat",
-
   "sortTooltip": "Razvrstaj",
   "sortByStatus": "Razvrstaj po statusu",
   "sortByCarrier": "Razvrstaj po dostavljaču",
@@ -42,22 +37,18 @@
   "trackersShowing": "Prikazano {shown} od {total}",
   "trackersNoMatch": "Ništa ne odgovara trenutnim filtrima.",
   "etaLabel": "Procj. {date}",
-
   "detailEstimatedDelivery": "Procijenjena dostava {date}",
   "detailSignedBy": "Potpisao/la {name}",
   "detailHistoryHeading": "Povijest",
   "detailNoScanHistory": "Još nema zabilježenih očitanja.",
   "detailMapUnavailable": "Karta nije dostupna za ove lokacije.",
-
   "historyEmpty": "Još nema pošiljaka.",
-
   "insuranceEmpty": "Još nema polica. Dodirnite „Kupi osiguranje”.",
   "insuranceBuy": "Kupi osiguranje",
   "insuranceAmountRange": "Osigurani iznos mora biti između 0,01 i 5.000 USD.",
   "insuranceNotEnabled": "Ovaj EasyPost račun nema omogućeno samostalno osiguranje. Zatražite od EasyPost podrške da ga omogući ili dodajte osiguranje pri kupnji naljepnice.",
   "insuranceFromAddress": "Adresa pošiljatelja",
   "insuranceToAddress": "Adresa primatelja",
-
   "fieldTrackingCode": "Broj za praćenje",
   "fieldCarrierHint": "Dostavljač (npr. USPS)",
   "fieldInsuredAmount": "Osigurani iznos (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Iznos (USD)",
   "fieldContactEmail": "Kontakt e-pošta",
   "fieldDescription": "Opis",
-
   "validationRequired": "Obavezno",
   "validationEnterAmount": "Unesite iznos",
   "validationEnterEmail": "Unesite e-poštu",
   "validationDescribeIssue": "Opišite problem",
-
   "claimsEmpty": "Još nema zahtjeva. Dodirnite „Podnesi zahtjev”.",
   "claimsFile": "Podnesi zahtjev",
   "claimSubmit": "Pošalji zahtjev",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Gubitak",
   "claimAttachmentNote": "Zahtjevi za oštećenje i krađu zahtijevaju fotografiju ili račun kao dokaz. Podnesite ih u desktop aplikaciji, gdje se dokumenti mogu priložiti.",
   "claimAttachmentSnack": "Zahtjevi za oštećenje i krađu zahtijevaju dokaz koji se može priložiti samo u desktop aplikaciji. Zahtjev za gubitak može se podnijeti ovdje.",
-
   "pickupsEmpty": "Još nije zakazano nijedno preuzimanje.",
   "pickupCancelTitle": "Otkazati preuzimanje?",
   "pickupCancelBody": "Otkazati preuzimanje {id}? Ovo se ne može poništiti.",
   "pickupKeep": "Zadrži",
   "pickupCancelConfirm": "Otkaži preuzimanje",
   "actionCancel": "Odustani",
-
   "reportsShipments": "Pošiljke",
   "reportsTotalSpend": "Ukupna potrošnja",
   "reportsByCarrier": "Po dostavljaču",
   "reportsEmpty": "Još nema kupljenih pošiljaka za izvještaj.",
   "reportsCarrierShipments": "Pošiljke: {count}",
-
   "htsSearchLabel": "Pretraži carinske oznake",
   "htsSearchHint": "npr. bakrena žica",
   "htsSearchButton": "Pretraži",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Kopiraj kod",
   "htsCopied": "Kopirano {code}",
   "htsUnavailable": "Carinska usluga nije dostupna (greška {code}). Pokušajte ponovno.",
-
   "pairTitle": "Upari s računalom",
   "pairInstructions": "Otvorite Easy-Post Desktop, odaberite „Uparivanje mobilne aplikacije” i skenirajte prikazani QR kod.",
   "pairEnterReviewCode": "Umjesto toga unesite kod za recenziju",
   "pairReviewDialogTitle": "Unesite kod za recenziju",
   "pairReviewCodeHint": "Kod za recenziju",
   "pairAction": "Upari",
-
   "errorPairingCodeInvalid": "Taj kod za uparivanje nije valjan ili je istekao. Generirajte novi na računalu.",
   "errorReviewCodeRejected": "Taj kod za recenziju nije prihvaćen.",
   "errorUnexpectedPairingResponse": "Neočekivani odgovor usluge uparivanja.",
   "errorNotPaired": "Ovaj uređaj više nije uparen. Uparite ga ponovno s računala.",
   "errorNotPairedShort": "Ovaj uređaj više nije uparen.",
   "errorForbidden": "Ta radnja nije dopuštena iz aplikacije.",
-  "errorRequestFailed": "Zahtjev nije uspio (greška {code})."
+  "errorRequestFailed": "Zahtjev nije uspio (greška {code}).",
+  "detailShipment": "Pošiljka",
+  "detailInsurancePolicy": "Polica osiguranja",
+  "detailClaim": "Odštetni zahtjev",
+  "detailPickup": "Preuzimanje",
+  "fieldCarrier": "Prijevoznik",
+  "fieldService": "Usluga",
+  "fieldStatus": "Status",
+  "fieldCreated": "Stvoreno",
+  "fieldAmount": "Iznos",
+  "fieldProvider": "Pružatelj",
+  "fieldReference": "Referenca",
+  "fieldPickupWindow": "Razdoblje preuzimanja",
+  "fieldCost": "Cijena",
+  "detailNothingFurther": "Nema dodatnih pojedinosti."
 }

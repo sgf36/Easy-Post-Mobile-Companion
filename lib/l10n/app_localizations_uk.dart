@@ -372,4 +372,46 @@ class AppLocalizationsUk extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Запит не виконано (помилка $code).';
   }
+
+  @override
+  String get detailShipment => 'Відправлення';
+
+  @override
+  String get detailInsurancePolicy => 'Страховий поліс';
+
+  @override
+  String get detailClaim => 'Претензія';
+
+  @override
+  String get detailPickup => 'Забір';
+
+  @override
+  String get fieldCarrier => 'Перевізник';
+
+  @override
+  String get fieldService => 'Послуга';
+
+  @override
+  String get fieldStatus => 'Статус';
+
+  @override
+  String get fieldCreated => 'Створено';
+
+  @override
+  String get fieldAmount => 'Сума';
+
+  @override
+  String get fieldProvider => 'Постачальник';
+
+  @override
+  String get fieldReference => 'Посилання';
+
+  @override
+  String get fieldPickupWindow => 'Інтервал забору';
+
+  @override
+  String get fieldCost => 'Вартість';
+
+  @override
+  String get detailNothingFurther => 'Додаткових відомостей немає.';
 }

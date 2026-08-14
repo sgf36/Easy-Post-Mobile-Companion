@@ -374,4 +374,46 @@ class AppLocalizationsCs extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Požadavek se nezdařil (chyba $code).';
   }
+
+  @override
+  String get detailShipment => 'Zásilka';
+
+  @override
+  String get detailInsurancePolicy => 'Pojistka';
+
+  @override
+  String get detailClaim => 'Reklamace';
+
+  @override
+  String get detailPickup => 'Svoz';
+
+  @override
+  String get fieldCarrier => 'Dopravce';
+
+  @override
+  String get fieldService => 'Služba';
+
+  @override
+  String get fieldStatus => 'Stav';
+
+  @override
+  String get fieldCreated => 'Vytvořeno';
+
+  @override
+  String get fieldAmount => 'Částka';
+
+  @override
+  String get fieldProvider => 'Poskytovatel';
+
+  @override
+  String get fieldReference => 'Reference';
+
+  @override
+  String get fieldPickupWindow => 'Časové okno svozu';
+
+  @override
+  String get fieldCost => 'Cena';
+
+  @override
+  String get detailNothingFurther => 'Žádné další podrobnosti.';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import '../models/tracker.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
 import '../theme.dart';
@@ -9,6 +10,7 @@ import 'hts_screen.dart';
 import 'insurance_screen.dart';
 import 'pickups_screen.dart';
 import 'reports_screen.dart';
+import 'resource_detail_screen.dart';
 import 'resource_list_screen.dart';
 import 'trackers_screen.dart';
 
@@ -77,8 +79,35 @@ class _HomeShellState extends State<HomeShell> {
           row: (m) => ResourceRow(
             title: (m['tracking_code'] ?? m['id'] ?? '—').toString(),
             subtitle: _addr(m['to_address']),
-            trailing: (m['status'] ?? '').toString(),
+            // Through statusLabel, not raw. A shipment's status is the same
+            // vocabulary a tracker's is, so printing it verbatim here left
+            // History reading "delivered" beside a Tracking row reading
+            // "Livré" for the same parcel. Statuses translate; only the
+            // carrier brands do not.
+            trailing: statusText(t, m['status']),
           ),
+          detail: (m) {
+            final rate = m['selected_rate'] as Map<String, dynamic>?;
+            return ResourceDetailScreen(
+              title: t.detailShipment,
+              heading: (m['tracking_code'] ?? m['id'] ?? '—').toString(),
+              fields: [
+                DetailField(t.fieldStatus, statusText(t, m['status'])),
+                DetailField(t.fieldCarrier,
+                    carrierDisplayName((rate?['carrier'] ?? '').toString())),
+                DetailField(t.fieldService, (rate?['service'] ?? '').toString()),
+                DetailField(
+                  t.fieldCost,
+                  formatMoney(rate?['rate'],
+                      currency: (rate?['currency'] ?? 'USD').toString(),
+                      locale: t.localeName),
+                ),
+                DetailField(t.insuranceFromAddress, formatAddress(m['from_address'])),
+                DetailField(t.insuranceToAddress, formatAddress(m['to_address'])),
+                DetailField(t.fieldCreated, _when(t, m['created_at'])),
+              ],
+            );
+          },
         ),
       Section.insurance => InsuranceScreen(nav: nav, creds: c),
       Section.claims => ClaimsScreen(nav: nav, creds: c),
@@ -87,6 +116,11 @@ class _HomeShellState extends State<HomeShell> {
       Section.hts => HtsScreen(nav: nav),
     };
   }
+
+  /// An EasyPost timestamp in the reader's own date format, or nothing at all
+  /// when it is absent or unparseable — never the raw ISO string.
+  static String _when(AppLocalizations t, dynamic raw) =>
+      formatDateTime(DateTime.tryParse((raw ?? '').toString()), t.localeName);
 
   static String _addr(dynamic a) {
     if (a is Map) {

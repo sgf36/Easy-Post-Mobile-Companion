@@ -1,8 +1,6 @@
 {
   "@@locale": "cs",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Sledování",
   "navHistory": "Historie",
   "navInsurance": "Pojištění",
@@ -13,7 +11,6 @@
   "navSectionManage": "Sledování a správa",
   "navSectionTools": "Nástroje",
   "drawerUnpair": "Zrušit spárování tohoto zařízení",
-
   "statusPreTransit": "Před přepravou",
   "statusInTransit": "Na cestě",
   "statusOutForDelivery": "Na cestě k doručení",
@@ -24,10 +21,8 @@
   "statusCancelled": "Zrušeno",
   "statusError": "Chyba",
   "statusUnknown": "Neznámé",
-
   "carrierUnknown": "Neznámý dopravce",
   "carrierUnknownShort": "Neznámý",
-
   "sortTooltip": "Seřadit",
   "sortByStatus": "Seřadit podle stavu",
   "sortByCarrier": "Seřadit podle dopravce",
@@ -42,22 +37,18 @@
   "trackersShowing": "Zobrazeno {shown} z {total}",
   "trackersNoMatch": "Aktuálním filtrům nic neodpovídá.",
   "etaLabel": "Odh. {date}",
-
   "detailEstimatedDelivery": "Odhadované doručení {date}",
   "detailSignedBy": "Podepsal(a) {name}",
   "detailHistoryHeading": "Historie",
   "detailNoScanHistory": "Zatím žádné záznamy o skenování.",
   "detailMapUnavailable": "Pro tato místa není mapa k dispozici.",
-
   "historyEmpty": "Zatím žádné zásilky.",
-
   "insuranceEmpty": "Zatím žádné pojistky. Klepněte na „Zakoupit pojištění“.",
   "insuranceBuy": "Zakoupit pojištění",
   "insuranceAmountRange": "Pojistná částka musí být mezi 0,01 a 5 000 USD.",
   "insuranceNotEnabled": "Tento účet EasyPost nemá povoleno samostatné pojištění. Požádejte podporu EasyPost o jeho povolení, nebo pojištění přidejte při nákupu štítku.",
   "insuranceFromAddress": "Adresa odesílatele",
   "insuranceToAddress": "Adresa příjemce",
-
   "fieldTrackingCode": "Sledovací číslo",
   "fieldCarrierHint": "Dopravce (např. USPS)",
   "fieldInsuredAmount": "Pojistná částka (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Částka (USD)",
   "fieldContactEmail": "Kontaktní e-mail",
   "fieldDescription": "Popis",
-
   "validationRequired": "Povinné",
   "validationEnterAmount": "Zadejte částku",
   "validationEnterEmail": "Zadejte e-mail",
   "validationDescribeIssue": "Popište problém",
-
   "claimsEmpty": "Zatím žádné reklamace. Klepněte na „Podat reklamaci“.",
   "claimsFile": "Podat reklamaci",
   "claimSubmit": "Odeslat reklamaci",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Ztráta",
   "claimAttachmentNote": "Reklamace poškození a odcizení vyžadují fotografii nebo fakturu jako doklad. Podejte je v desktopové aplikaci, kde lze dokumenty přiložit.",
   "claimAttachmentSnack": "Reklamace poškození a odcizení vyžadují doklad, který lze přiložit jen v desktopové aplikaci. Reklamaci ztráty lze podat zde.",
-
   "pickupsEmpty": "Zatím není naplánováno žádné vyzvednutí.",
   "pickupCancelTitle": "Zrušit vyzvednutí?",
   "pickupCancelBody": "Zrušit vyzvednutí {id}? Tuto akci nelze vzít zpět.",
   "pickupKeep": "Ponechat",
   "pickupCancelConfirm": "Zrušit vyzvednutí",
   "actionCancel": "Zrušit",
-
   "reportsShipments": "Zásilky",
   "reportsTotalSpend": "Celkové výdaje",
   "reportsByCarrier": "Podle dopravce",
   "reportsEmpty": "Zatím nejsou k dispozici žádné zakoupené zásilky.",
   "reportsCarrierShipments": "Zásilky: {count}",
-
   "htsSearchLabel": "Hledat celní kódy",
   "htsSearchHint": "např. měděný drát",
   "htsSearchButton": "Hledat",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Kopírovat kód",
   "htsCopied": "Zkopírováno {code}",
   "htsUnavailable": "Celní služba je nedostupná (chyba {code}). Zkuste to znovu.",
-
   "pairTitle": "Spárovat s počítačem",
   "pairInstructions": "Otevřete Easy-Post Desktop, zvolte „Spárovat mobilní aplikaci“ a naskenujte zobrazený QR kód.",
   "pairEnterReviewCode": "Zadat místo toho kód pro recenzenta",
   "pairReviewDialogTitle": "Zadat kód pro recenzenta",
   "pairReviewCodeHint": "Kód pro recenzenta",
   "pairAction": "Spárovat",
-
   "errorPairingCodeInvalid": "Tento párovací kód je neplatný nebo vypršel. Vygenerujte nový v počítači.",
   "errorReviewCodeRejected": "Tento kód pro recenzenta nebyl přijat.",
   "errorUnexpectedPairingResponse": "Neočekávaná odpověď párovací služby.",
   "errorNotPaired": "Toto zařízení již není spárováno. Spárujte je znovu z počítače.",
   "errorNotPairedShort": "Toto zařízení již není spárováno.",
   "errorForbidden": "Tato akce není z aplikace povolena.",
-  "errorRequestFailed": "Požadavek se nezdařil (chyba {code})."
+  "errorRequestFailed": "Požadavek se nezdařil (chyba {code}).",
+  "detailShipment": "Zásilka",
+  "detailInsurancePolicy": "Pojistka",
+  "detailClaim": "Reklamace",
+  "detailPickup": "Svoz",
+  "fieldCarrier": "Dopravce",
+  "fieldService": "Služba",
+  "fieldStatus": "Stav",
+  "fieldCreated": "Vytvořeno",
+  "fieldAmount": "Částka",
+  "fieldProvider": "Poskytovatel",
+  "fieldReference": "Reference",
+  "fieldPickupWindow": "Časové okno svozu",
+  "fieldCost": "Cena",
+  "detailNothingFurther": "Žádné další podrobnosti."
 }

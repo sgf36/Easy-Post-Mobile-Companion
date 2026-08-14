@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import '../models/tracker.dart';
 import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
+import '../theme.dart';
 import 'home_shell.dart';
+import 'resource_detail_screen.dart';
 
 class PickupsScreen extends StatefulWidget {
   final AppNav nav;
@@ -94,12 +97,37 @@ class _PickupsScreenState extends State<PickupsScreen> {
                 final cancellable = status != 'cancelled' && status != 'canceled';
                 return ListTile(
                   title: Text(id, style: const TextStyle(fontWeight: FontWeight.w600)),
-                  subtitle: Text([m['reference'], status].where((s) => s != null && '$s'.isNotEmpty).join('  ·  ')),
+                  subtitle: Text([m['reference'], statusText(t, status)]
+                      .where((s) => s != null && '$s'.isNotEmpty)
+                      .join('  ·  ')),
                   trailing: _busyId == id
                       ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
                       : (cancellable
                           ? TextButton(onPressed: () => _cancel(m), child: Text(t.actionCancel))
-                          : null),
+                          : const Icon(Icons.chevron_right, size: 20, color: Brand.muted)),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => ResourceDetailScreen(
+                        title: t.detailPickup,
+                        heading: id,
+                        fields: [
+                          DetailField(t.fieldStatus, statusText(t, status)),
+                          DetailField(t.fieldReference, (m['reference'] ?? '').toString()),
+                          DetailField(t.fieldPickupWindow, _window(t, m)),
+                          // A pickup's address is where the carrier collects
+                          // from, which is what "From address" already says.
+                          DetailField(
+                              t.insuranceFromAddress, formatAddress(m['address'])),
+                          DetailField(
+                            t.fieldCreated,
+                            formatDateTime(
+                                DateTime.tryParse((m['created_at'] ?? '').toString()),
+                                t.localeName),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             );
@@ -108,4 +136,19 @@ class _PickupsScreenState extends State<PickupsScreen> {
       ),
     );
   }
+}
+
+/// The collection window as one phrase: "15 Aug 2026, 09:00 – 15 Aug 2026, 17:00".
+///
+/// An en dash rather than a hyphen, and both ends formatted for the reader's
+/// locale. Degrades to whichever end exists instead of printing a dangling
+/// separator, because EasyPost fills only `min_datetime` on some carriers.
+String _window(AppLocalizations t, Map<String, dynamic> m) {
+  final from = formatDateTime(
+      DateTime.tryParse((m['min_datetime'] ?? '').toString()), t.localeName);
+  final to = formatDateTime(
+      DateTime.tryParse((m['max_datetime'] ?? '').toString()), t.localeName);
+  if (from.isEmpty) return to;
+  if (to.isEmpty) return from;
+  return '$from – $to';
 }

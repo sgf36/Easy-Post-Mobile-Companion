@@ -377,4 +377,46 @@ class AppLocalizationsEl extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Το αίτημα απέτυχε (σφάλμα $code).';
   }
+
+  @override
+  String get detailShipment => 'Αποστολή';
+
+  @override
+  String get detailInsurancePolicy => 'Ασφαλιστήριο';
+
+  @override
+  String get detailClaim => 'Απαίτηση';
+
+  @override
+  String get detailPickup => 'Παραλαβή';
+
+  @override
+  String get fieldCarrier => 'Μεταφορέας';
+
+  @override
+  String get fieldService => 'Υπηρεσία';
+
+  @override
+  String get fieldStatus => 'Κατάσταση';
+
+  @override
+  String get fieldCreated => 'Δημιουργήθηκε';
+
+  @override
+  String get fieldAmount => 'Ποσό';
+
+  @override
+  String get fieldProvider => 'Πάροχος';
+
+  @override
+  String get fieldReference => 'Αναφορά';
+
+  @override
+  String get fieldPickupWindow => 'Χρονικό παράθυρο παραλαβής';
+
+  @override
+  String get fieldCost => 'Κόστος';
+
+  @override
+  String get detailNothingFurther => 'Δεν υπάρχουν περισσότερες λεπτομέρειες.';
 }

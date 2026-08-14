@@ -1,8 +1,6 @@
 {
   "@@locale": "tr",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Takip",
   "navHistory": "Geçmiş",
   "navInsurance": "Sigorta",
@@ -13,7 +11,6 @@
   "navSectionManage": "Takip ve yönetim",
   "navSectionTools": "Araçlar",
   "drawerUnpair": "Bu cihazın eşleşmesini kaldır",
-
   "statusPreTransit": "Taşımadan önce",
   "statusInTransit": "Yolda",
   "statusOutForDelivery": "Dağıtımda",
@@ -24,10 +21,8 @@
   "statusCancelled": "İptal edildi",
   "statusError": "Hata",
   "statusUnknown": "Bilinmiyor",
-
   "carrierUnknown": "Bilinmeyen kargo şirketi",
   "carrierUnknownShort": "Bilinmiyor",
-
   "sortTooltip": "Sırala",
   "sortByStatus": "Duruma göre sırala",
   "sortByCarrier": "Kargo şirketine göre sırala",
@@ -42,22 +37,18 @@
   "trackersShowing": "{total} gönderiden {shown} tanesi gösteriliyor",
   "trackersNoMatch": "Geçerli filtrelerle eşleşen bir şey yok.",
   "etaLabel": "Tahmini {date}",
-
   "detailEstimatedDelivery": "Tahmini teslimat {date}",
   "detailSignedBy": "İmzalayan: {name}",
   "detailHistoryHeading": "Geçmiş",
   "detailNoScanHistory": "Henüz okutma kaydı yok.",
   "detailMapUnavailable": "Bu konumlar için harita kullanılamıyor.",
-
   "historyEmpty": "Henüz gönderi yok.",
-
   "insuranceEmpty": "Henüz poliçe yok. “Sigorta satın al” seçeneğine dokunun.",
   "insuranceBuy": "Sigorta satın al",
   "insuranceAmountRange": "Sigorta tutarı 0,01 ile 5.000 USD arasında olmalıdır.",
   "insuranceNotEnabled": "Bu EasyPost hesabı bağımsız sigorta için etkin değil. EasyPost desteğinden etkinleştirmesini isteyin veya etiketi satın alırken sigorta ekleyin.",
   "insuranceFromAddress": "Gönderici adresi",
   "insuranceToAddress": "Alıcı adresi",
-
   "fieldTrackingCode": "Takip numarası",
   "fieldCarrierHint": "Kargo şirketi (ör. USPS)",
   "fieldInsuredAmount": "Sigorta tutarı (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Tutar (USD)",
   "fieldContactEmail": "İletişim e-postası",
   "fieldDescription": "Açıklama",
-
   "validationRequired": "Zorunlu",
   "validationEnterAmount": "Bir tutar girin",
   "validationEnterEmail": "Bir e-posta girin",
   "validationDescribeIssue": "Sorunu açıklayın",
-
   "claimsEmpty": "Henüz talep yok. “Talep oluştur” seçeneğine dokunun.",
   "claimsFile": "Talep oluştur",
   "claimSubmit": "Talebi gönder",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Kayıp",
   "claimAttachmentNote": "Hasar ve hırsızlık talepleri için fotoğraf veya fatura gibi bir belge gerekir. Bunları belge eklenebilen masaüstü uygulamasından oluşturun.",
   "claimAttachmentSnack": "Hasar ve hırsızlık talepleri için yalnızca masaüstü uygulamasında eklenebilen bir belge gerekir. Kayıp talebi burada oluşturulabilir.",
-
   "pickupsEmpty": "Henüz planlanmış kargo alımı yok.",
   "pickupCancelTitle": "Kargo alımı iptal edilsin mi?",
   "pickupCancelBody": "{id} kargo alımı iptal edilsin mi? Bu işlem geri alınamaz.",
   "pickupKeep": "Vazgeç",
   "pickupCancelConfirm": "Kargo alımını iptal et",
   "actionCancel": "İptal",
-
   "reportsShipments": "Gönderiler",
   "reportsTotalSpend": "Toplam harcama",
   "reportsByCarrier": "Kargo şirketine göre",
   "reportsEmpty": "Raporlanacak satın alınmış gönderi yok.",
   "reportsCarrierShipments": "Gönderi: {count}",
-
   "htsSearchLabel": "Gümrük tarife kodu ara",
   "htsSearchHint": "ör. bakır tel",
   "htsSearchButton": "Ara",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Kodu kopyala",
   "htsCopied": "{code} kopyalandı",
   "htsUnavailable": "Tarife hizmeti kullanılamıyor (hata {code}). Lütfen tekrar deneyin.",
-
   "pairTitle": "Masaüstüyle eşleştir",
   "pairInstructions": "Easy-Post Desktop’ı açın, “Mobil uygulamayı eşleştir” seçeneğini seçin ve orada görünen QR kodunu okutun.",
   "pairEnterReviewCode": "Bunun yerine inceleme kodu gir",
   "pairReviewDialogTitle": "İnceleme kodunu girin",
   "pairReviewCodeHint": "İnceleme kodu",
   "pairAction": "Eşleştir",
-
   "errorPairingCodeInvalid": "Bu eşleştirme kodu geçersiz veya süresi dolmuş. Masaüstünde yenisini oluşturun.",
   "errorReviewCodeRejected": "Bu inceleme kodu kabul edilmedi.",
   "errorUnexpectedPairingResponse": "Eşleştirme hizmetinden beklenmeyen yanıt.",
   "errorNotPaired": "Bu cihaz artık eşleşmiş değil. Masaüstünden yeniden eşleştirin.",
   "errorNotPairedShort": "Bu cihaz artık eşleşmiş değil.",
   "errorForbidden": "Bu işleme uygulamadan izin verilmiyor.",
-  "errorRequestFailed": "İstek başarısız oldu (hata {code})."
+  "errorRequestFailed": "İstek başarısız oldu (hata {code}).",
+  "detailShipment": "Gönderi",
+  "detailInsurancePolicy": "Sigorta poliçesi",
+  "detailClaim": "Talep",
+  "detailPickup": "Alım",
+  "fieldCarrier": "Taşıyıcı",
+  "fieldService": "Hizmet",
+  "fieldStatus": "Durum",
+  "fieldCreated": "Oluşturuldu",
+  "fieldAmount": "Tutar",
+  "fieldProvider": "Sağlayıcı",
+  "fieldReference": "Referans",
+  "fieldPickupWindow": "Alım zaman aralığı",
+  "fieldCost": "Maliyet",
+  "detailNothingFurther": "Başka ayrıntı yok."
 }

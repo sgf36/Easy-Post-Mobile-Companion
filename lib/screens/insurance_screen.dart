@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import '../models/tracker.dart';
 import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
+import '../theme.dart';
 import 'home_shell.dart';
+import 'resource_detail_screen.dart';
 
 class InsuranceScreen extends StatefulWidget {
   final AppNav nav;
@@ -69,10 +72,55 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
               separatorBuilder: (_, _) => const Divider(height: 1),
               itemBuilder: (context, i) {
                 final m = items[i];
+                final heading = (m['tracking_code'] ?? m['id'] ?? '—').toString();
                 return ListTile(
-                  title: Text((m['tracking_code'] ?? m['id'] ?? '—').toString(), style: const TextStyle(fontWeight: FontWeight.w600)),
+                  title: Text(heading, style: const TextStyle(fontWeight: FontWeight.w600)),
                   subtitle: Text((m['provider'] ?? m['carrier'] ?? '').toString()),
-                  trailing: Text(m['amount'] == null ? '' : '\$${m['amount']}'),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(formatMoney(m['amount'],
+                          currency: (m['currency'] ?? 'USD').toString(),
+                          locale: t.localeName)),
+                      const Padding(
+                        padding: EdgeInsetsDirectional.only(start: 4),
+                        child: Icon(Icons.chevron_right, size: 20, color: Brand.muted),
+                      ),
+                    ],
+                  ),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => ResourceDetailScreen(
+                        title: t.detailInsurancePolicy,
+                        heading: heading,
+                        fields: [
+                          DetailField(t.fieldStatus, statusText(t, m['status'])),
+                          DetailField(t.fieldProvider,
+                              (m['provider'] ?? m['carrier'] ?? '').toString()),
+                          DetailField(
+                            t.fieldAmount,
+                            formatMoney(m['amount'],
+                                currency: (m['currency'] ?? 'USD').toString(),
+                                locale: t.localeName),
+                          ),
+                          DetailField(
+                            t.fieldCost,
+                            formatMoney(m['fee'],
+                                currency: (m['currency'] ?? 'USD').toString(),
+                                locale: t.localeName),
+                          ),
+                          DetailField(t.insuranceFromAddress, formatAddress(m['from_address'])),
+                          DetailField(t.insuranceToAddress, formatAddress(m['to_address'])),
+                          DetailField(
+                            t.fieldCreated,
+                            formatDateTime(
+                                DateTime.tryParse((m['created_at'] ?? '').toString()),
+                                t.localeName),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             );

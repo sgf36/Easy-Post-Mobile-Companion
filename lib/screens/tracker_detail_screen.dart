@@ -218,6 +218,28 @@ class _JourneyMapState extends State<_JourneyMap> {
                 Polyline(points: _points, color: const Color(0xFF2B6CB0), strokeWidth: 3),
               ],
             ),
+          // Required, not decorative. OpenStreetMap's data is licensed under
+          // the ODbL, which obliges anything displaying it to credit the
+          // contributors; the tiles were being drawn with no credit at all.
+          // Left untranslated on purpose — it is the attribution string the
+          // licence names, and it travels as-is for the same reason a carrier
+          // brand does.
+          const Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: EdgeInsets.all(4),
+              child: ColoredBox(
+                color: Color(0xCCFFFFFF),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  child: Text(
+                    '© OpenStreetMap contributors',
+                    style: TextStyle(fontSize: 9, color: Color(0xFF424242)),
+                  ),
+                ),
+              ),
+            ),
+          ),
           MarkerLayer(
             markers: [
               for (var i = 0; i < _points.length; i++)

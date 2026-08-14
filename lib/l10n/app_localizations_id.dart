@@ -370,4 +370,46 @@ class AppLocalizationsId extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Permintaan gagal (kesalahan $code).';
   }
+
+  @override
+  String get detailShipment => 'Pengiriman';
+
+  @override
+  String get detailInsurancePolicy => 'Polis asuransi';
+
+  @override
+  String get detailClaim => 'Klaim';
+
+  @override
+  String get detailPickup => 'Penjemputan';
+
+  @override
+  String get fieldCarrier => 'Kurir';
+
+  @override
+  String get fieldService => 'Layanan';
+
+  @override
+  String get fieldStatus => 'Status';
+
+  @override
+  String get fieldCreated => 'Dibuat';
+
+  @override
+  String get fieldAmount => 'Jumlah';
+
+  @override
+  String get fieldProvider => 'Penyedia';
+
+  @override
+  String get fieldReference => 'Referensi';
+
+  @override
+  String get fieldPickupWindow => 'Jendela penjemputan';
+
+  @override
+  String get fieldCost => 'Biaya';
+
+  @override
+  String get detailNothingFurther => 'Tidak ada detail lain.';
 }

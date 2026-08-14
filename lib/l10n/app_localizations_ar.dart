@@ -370,4 +370,46 @@ class AppLocalizationsAr extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'فشل الطلب (خطأ $code).';
   }
+
+  @override
+  String get detailShipment => 'شحنة';
+
+  @override
+  String get detailInsurancePolicy => 'وثيقة التأمين';
+
+  @override
+  String get detailClaim => 'مطالبة';
+
+  @override
+  String get detailPickup => 'استلام';
+
+  @override
+  String get fieldCarrier => 'شركة الشحن';
+
+  @override
+  String get fieldService => 'الخدمة';
+
+  @override
+  String get fieldStatus => 'الحالة';
+
+  @override
+  String get fieldCreated => 'تاريخ الإنشاء';
+
+  @override
+  String get fieldAmount => 'المبلغ';
+
+  @override
+  String get fieldProvider => 'مزود الخدمة';
+
+  @override
+  String get fieldReference => 'المرجع';
+
+  @override
+  String get fieldPickupWindow => 'نافذة الاستلام';
+
+  @override
+  String get fieldCost => 'التكلفة';
+
+  @override
+  String get detailNothingFurther => 'لا توجد تفاصيل إضافية.';
 }

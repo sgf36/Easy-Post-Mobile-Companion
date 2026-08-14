@@ -1,8 +1,6 @@
 {
   "@@locale": "pt",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Rastreamento",
   "navHistory": "Histórico",
   "navInsurance": "Seguro",
@@ -13,7 +11,6 @@
   "navSectionManage": "Rastrear e gerenciar",
   "navSectionTools": "Ferramentas",
   "drawerUnpair": "Desparear este dispositivo",
-
   "statusPreTransit": "Antes do transporte",
   "statusInTransit": "Em trânsito",
   "statusOutForDelivery": "Saiu para entrega",
@@ -24,10 +21,8 @@
   "statusCancelled": "Cancelado",
   "statusError": "Erro",
   "statusUnknown": "Desconhecido",
-
   "carrierUnknown": "Transportadora desconhecida",
   "carrierUnknownShort": "Desconhecida",
-
   "sortTooltip": "Ordenar",
   "sortByStatus": "Ordenar por status",
   "sortByCarrier": "Ordenar por transportadora",
@@ -42,22 +37,18 @@
   "trackersShowing": "Mostrando {shown} de {total}",
   "trackersNoMatch": "Nada corresponde aos filtros atuais.",
   "etaLabel": "Prev. {date}",
-
   "detailEstimatedDelivery": "Entrega estimada {date}",
   "detailSignedBy": "Assinado por {name}",
   "detailHistoryHeading": "Histórico",
   "detailNoScanHistory": "Ainda sem registros de leitura.",
   "detailMapUnavailable": "Mapa indisponível para estes locais.",
-
   "historyEmpty": "Ainda não há envios.",
-
   "insuranceEmpty": "Ainda não há apólices. Toque em «Comprar seguro».",
   "insuranceBuy": "Comprar seguro",
   "insuranceAmountRange": "O valor segurado deve estar entre 0,01 e 5.000 USD.",
   "insuranceNotEnabled": "Esta conta EasyPost não está habilitada para seguro avulso. Peça ao suporte da EasyPost para habilitar, ou adicione o seguro ao comprar a etiqueta.",
   "insuranceFromAddress": "Endereço de origem",
   "insuranceToAddress": "Endereço de destino",
-
   "fieldTrackingCode": "Código de rastreamento",
   "fieldCarrierHint": "Transportadora (ex.: USPS)",
   "fieldInsuredAmount": "Valor segurado (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Valor (USD)",
   "fieldContactEmail": "E-mail de contato",
   "fieldDescription": "Descrição",
-
   "validationRequired": "Obrigatório",
   "validationEnterAmount": "Informe um valor",
   "validationEnterEmail": "Informe um e-mail",
   "validationDescribeIssue": "Descreva o problema",
-
   "claimsEmpty": "Ainda não há reclamações. Toque em «Abrir uma reclamação».",
   "claimsFile": "Abrir uma reclamação",
   "claimSubmit": "Registrar reclamação",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Perda",
   "claimAttachmentNote": "Reclamações de dano e roubo exigem uma foto ou nota fiscal como comprovante. Registre-as no aplicativo de desktop, onde é possível anexar documentos.",
   "claimAttachmentSnack": "Reclamações de dano e roubo exigem um comprovante, que só pode ser anexado no aplicativo de desktop. Uma reclamação de perda pode ser registrada aqui.",
-
   "pickupsEmpty": "Ainda não há coletas agendadas.",
   "pickupCancelTitle": "Cancelar a coleta?",
   "pickupCancelBody": "Cancelar a coleta {id}? Esta ação não pode ser desfeita.",
   "pickupKeep": "Manter",
   "pickupCancelConfirm": "Cancelar coleta",
   "actionCancel": "Cancelar",
-
   "reportsShipments": "Envios",
   "reportsTotalSpend": "Gasto total",
   "reportsByCarrier": "Por transportadora",
   "reportsEmpty": "Ainda não há envios comprados para relatar.",
   "reportsCarrierShipments": "Envios: {count}",
-
   "htsSearchLabel": "Pesquisar códigos tarifários",
   "htsSearchHint": "ex.: fio de cobre",
   "htsSearchButton": "Pesquisar",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Copiar código",
   "htsCopied": "{code} copiado",
   "htsUnavailable": "O serviço tarifário está indisponível (erro {code}). Tente novamente.",
-
   "pairTitle": "Parear com o desktop",
   "pairInstructions": "Abra o Easy-Post Desktop, escolha «Parear aplicativo móvel» e leia o código QR exibido.",
   "pairEnterReviewCode": "Inserir um código de revisão",
   "pairReviewDialogTitle": "Inserir código de revisão",
   "pairReviewCodeHint": "Código de revisão",
   "pairAction": "Parear",
-
   "errorPairingCodeInvalid": "Esse código de pareamento é inválido ou expirou. Gere um novo no desktop.",
   "errorReviewCodeRejected": "Esse código de revisão não foi aceito.",
   "errorUnexpectedPairingResponse": "Resposta inesperada do serviço de pareamento.",
   "errorNotPaired": "Este dispositivo não está mais pareado. Pareie-o novamente pelo desktop.",
   "errorNotPairedShort": "Este dispositivo não está mais pareado.",
   "errorForbidden": "Essa ação não é permitida pelo aplicativo.",
-  "errorRequestFailed": "A solicitação falhou (erro {code})."
+  "errorRequestFailed": "A solicitação falhou (erro {code}).",
+  "detailShipment": "Envio",
+  "detailInsurancePolicy": "Apólice de seguro",
+  "detailClaim": "Reclamação",
+  "detailPickup": "Recolha",
+  "fieldCarrier": "Transportadora",
+  "fieldService": "Serviço",
+  "fieldStatus": "Estado",
+  "fieldCreated": "Criado",
+  "fieldAmount": "Valor",
+  "fieldProvider": "Fornecedor",
+  "fieldReference": "Referência",
+  "fieldPickupWindow": "Janela de recolha",
+  "fieldCost": "Custo",
+  "detailNothingFurther": "Sem mais detalhes."
 }

@@ -373,4 +373,46 @@ class AppLocalizationsFr extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Échec de la requête (erreur $code).';
   }
+
+  @override
+  String get detailShipment => 'Envoi';
+
+  @override
+  String get detailInsurancePolicy => 'Police d\'assurance';
+
+  @override
+  String get detailClaim => 'Réclamation';
+
+  @override
+  String get detailPickup => 'Enlèvement';
+
+  @override
+  String get fieldCarrier => 'Transporteur';
+
+  @override
+  String get fieldService => 'Service';
+
+  @override
+  String get fieldStatus => 'Statut';
+
+  @override
+  String get fieldCreated => 'Créé le';
+
+  @override
+  String get fieldAmount => 'Montant';
+
+  @override
+  String get fieldProvider => 'Fournisseur';
+
+  @override
+  String get fieldReference => 'Référence';
+
+  @override
+  String get fieldPickupWindow => 'Créneau d\'enlèvement';
+
+  @override
+  String get fieldCost => 'Coût';
+
+  @override
+  String get detailNothingFurther => 'Aucun détail supplémentaire.';
 }

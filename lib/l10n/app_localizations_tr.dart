@@ -372,4 +372,46 @@ class AppLocalizationsTr extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'İstek başarısız oldu (hata $code).';
   }
+
+  @override
+  String get detailShipment => 'Gönderi';
+
+  @override
+  String get detailInsurancePolicy => 'Sigorta poliçesi';
+
+  @override
+  String get detailClaim => 'Talep';
+
+  @override
+  String get detailPickup => 'Alım';
+
+  @override
+  String get fieldCarrier => 'Taşıyıcı';
+
+  @override
+  String get fieldService => 'Hizmet';
+
+  @override
+  String get fieldStatus => 'Durum';
+
+  @override
+  String get fieldCreated => 'Oluşturuldu';
+
+  @override
+  String get fieldAmount => 'Tutar';
+
+  @override
+  String get fieldProvider => 'Sağlayıcı';
+
+  @override
+  String get fieldReference => 'Referans';
+
+  @override
+  String get fieldPickupWindow => 'Alım zaman aralığı';
+
+  @override
+  String get fieldCost => 'Maliyet';
+
+  @override
+  String get detailNothingFurther => 'Başka ayrıntı yok.';
 }

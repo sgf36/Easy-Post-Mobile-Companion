@@ -375,4 +375,46 @@ class AppLocalizationsEs extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'La solicitud ha fallado (error $code).';
   }
+
+  @override
+  String get detailShipment => 'Envío';
+
+  @override
+  String get detailInsurancePolicy => 'Póliza de seguro';
+
+  @override
+  String get detailClaim => 'Reclamación';
+
+  @override
+  String get detailPickup => 'Recogida';
+
+  @override
+  String get fieldCarrier => 'Transportista';
+
+  @override
+  String get fieldService => 'Servicio';
+
+  @override
+  String get fieldStatus => 'Estado';
+
+  @override
+  String get fieldCreated => 'Creado';
+
+  @override
+  String get fieldAmount => 'Importe';
+
+  @override
+  String get fieldProvider => 'Proveedor';
+
+  @override
+  String get fieldReference => 'Referencia';
+
+  @override
+  String get fieldPickupWindow => 'Franja de recogida';
+
+  @override
+  String get fieldCost => 'Coste';
+
+  @override
+  String get detailNothingFurther => 'No hay más detalles.';
 }

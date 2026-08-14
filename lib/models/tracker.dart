@@ -151,6 +151,19 @@ String statusLabel(AppLocalizations t, String status) {
   }
 }
 
+/// The translated status of a raw record, or nothing when it carries none.
+///
+/// Shipments, insurance policies, claims and pickups all use the same status
+/// vocabulary as trackers, and all four lists were printing it verbatim — so
+/// History read "delivered" beside a Tracking row reading "Livré" for the same
+/// parcel. An absent status stays absent rather than becoming "Unknown":
+/// stamping a word on every unlabelled record asserts something the API did
+/// not say.
+String statusText(AppLocalizations t, Object? raw) {
+  final status = (raw ?? '').toString().trim();
+  return status.isEmpty ? '' : statusLabel(t, status);
+}
+
 /// Sort priority — journey order, ending with terminal/exception states.
 int statusOrder(String status) {
   const order = [
@@ -299,11 +312,67 @@ String? statusDetailText(String status, String? statusDetail) {
 /// in German is not a near miss but a different number. It defaults to English
 /// so the pure formatting tests need not carry a locale around.
 String formatSpend(Map<String, double> byCurrency, {String locale = 'en'}) {
-  final number = NumberFormat.decimalPatternDigits(locale: locale, decimalDigits: 2);
-  if (byCurrency.isEmpty) return number.format(0);
+  if (byCurrency.isEmpty) {
+    return NumberFormat.decimalPatternDigits(locale: locale, decimalDigits: 2).format(0);
+  }
   final entries = byCurrency.entries.toList()
     ..sort((a, b) => b.value.compareTo(a.value));
   return entries
-      .map((e) => '${number.format(e.value)}${e.key.isEmpty ? '' : ' ${e.key}'}')
+      .map((e) => formatMoney(e.value, currency: e.key, locale: locale))
       .join(' · ');
+}
+
+/// A postal address on one line: "Acme Ltd, 10 Downing Street, London, GB".
+///
+/// EasyPost address objects use empty strings as readily as nulls and any line
+/// may be absent, so the parts are filtered and joined rather than templated —
+/// a template prints a trail of orphaned commas for every field the address
+/// does not carry. Repeats are dropped too, because `name` and `company` are
+/// frequently the same string and printing it twice looks like a bug.
+String formatAddress(Object? address) {
+  if (address is! Map) return '';
+  const order = [
+    'name',
+    'company',
+    'street1',
+    'street2',
+    'city',
+    'state',
+    'zip',
+    'country',
+  ];
+  final seen = <String>{};
+  final parts = <String>[];
+  for (final field in order) {
+    final value = address[field]?.toString().trim() ?? '';
+    if (value.isEmpty || !seen.add(value.toLowerCase())) continue;
+    parts.add(value);
+  }
+  return parts.join(', ');
+}
+
+/// One money value with its currency: "5,000.00 USD".
+///
+/// EasyPost returns amounts as strings carrying five decimal places, so a five
+/// thousand dollar insurance policy arrives as the string "5000.00000". Passed
+/// straight into a widget that produced "$5000.00000" — no thousands
+/// separator, three digits of invented precision, and a dollar sign hardcoded
+/// regardless of what the figure is actually denominated in.
+///
+/// Presentation deliberately matches [formatSpend]: grouped by the locale's own
+/// rules, two decimals, and the currency as a code rather than a symbol. One
+/// money idiom across the app, and no symbol asserted for a currency the API
+/// did not name.
+///
+/// Returns an empty string when the amount is absent or unparseable, rather
+/// than "0.00" — a missing figure and a zero figure are different claims, and
+/// only one of them is safe to put on screen.
+String formatMoney(Object? amount, {String currency = 'USD', String locale = 'en'}) {
+  if (amount == null) return '';
+  final value =
+      amount is num ? amount.toDouble() : double.tryParse(amount.toString().trim());
+  if (value == null) return '';
+  final number = NumberFormat.decimalPatternDigits(locale: locale, decimalDigits: 2);
+  final code = currency.trim().toUpperCase();
+  return code.isEmpty ? number.format(value) : '${number.format(value)} $code';
 }

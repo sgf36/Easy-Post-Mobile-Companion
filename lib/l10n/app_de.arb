@@ -1,8 +1,6 @@
 {
   "@@locale": "de",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Sendungsverfolgung",
   "navHistory": "Verlauf",
   "navInsurance": "Versicherung",
@@ -13,7 +11,6 @@
   "navSectionManage": "Verfolgen & verwalten",
   "navSectionTools": "Werkzeuge",
   "drawerUnpair": "Kopplung dieses Geräts aufheben",
-
   "statusPreTransit": "Vor dem Transport",
   "statusInTransit": "Unterwegs",
   "statusOutForDelivery": "In Zustellung",
@@ -24,10 +21,8 @@
   "statusCancelled": "Storniert",
   "statusError": "Fehler",
   "statusUnknown": "Unbekannt",
-
   "carrierUnknown": "Unbekannter Versanddienstleister",
   "carrierUnknownShort": "Unbekannt",
-
   "sortTooltip": "Sortieren",
   "sortByStatus": "Nach Status sortieren",
   "sortByCarrier": "Nach Versanddienstleister sortieren",
@@ -42,22 +37,18 @@
   "trackersShowing": "{shown} von {total} angezeigt",
   "trackersNoMatch": "Nichts entspricht den aktuellen Filtern.",
   "etaLabel": "Vsl. {date}",
-
   "detailEstimatedDelivery": "Voraussichtliche Zustellung {date}",
   "detailSignedBy": "Unterschrieben von {name}",
   "detailHistoryHeading": "Verlauf",
   "detailNoScanHistory": "Noch keine Scan-Ereignisse.",
   "detailMapUnavailable": "Für diese Orte ist keine Karte verfügbar.",
-
   "historyEmpty": "Noch keine Sendungen.",
-
   "insuranceEmpty": "Noch keine Versicherungen. Tippen Sie auf „Versicherung abschließen“.",
   "insuranceBuy": "Versicherung abschließen",
   "insuranceAmountRange": "Der Versicherungswert muss zwischen 0,01 und 5.000 USD liegen.",
   "insuranceNotEnabled": "Dieses EasyPost-Konto ist nicht für eigenständige Versicherungen freigeschaltet. Bitten Sie den EasyPost-Support um die Freischaltung oder fügen Sie die Versicherung stattdessen beim Kauf des Etiketts hinzu.",
   "insuranceFromAddress": "Absenderadresse",
   "insuranceToAddress": "Empfängeradresse",
-
   "fieldTrackingCode": "Sendungsnummer",
   "fieldCarrierHint": "Versanddienstleister (z. B. USPS)",
   "fieldInsuredAmount": "Versicherungswert (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Betrag (USD)",
   "fieldContactEmail": "Kontakt-E-Mail",
   "fieldDescription": "Beschreibung",
-
   "validationRequired": "Erforderlich",
   "validationEnterAmount": "Betrag eingeben",
   "validationEnterEmail": "E-Mail-Adresse eingeben",
   "validationDescribeIssue": "Beschreiben Sie das Problem",
-
   "claimsEmpty": "Noch keine Schadensfälle. Tippen Sie auf „Schadensfall melden“.",
   "claimsFile": "Schadensfall melden",
   "claimSubmit": "Schadensfall einreichen",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Verlust",
   "claimAttachmentNote": "Bei Beschädigung und Diebstahl ist ein Foto oder eine Rechnung als Nachweis erforderlich. Melden Sie diese Fälle in der Desktop-App, wo Dokumente angehängt werden können.",
   "claimAttachmentSnack": "Bei Beschädigung und Diebstahl ist ein Nachweis erforderlich, der nur in der Desktop-App angehängt werden kann. Ein Verlustfall kann hier gemeldet werden.",
-
   "pickupsEmpty": "Noch keine Abholungen geplant.",
   "pickupCancelTitle": "Abholung stornieren?",
   "pickupCancelBody": "Abholung {id} stornieren? Das kann nicht rückgängig gemacht werden.",
   "pickupKeep": "Behalten",
   "pickupCancelConfirm": "Abholung stornieren",
   "actionCancel": "Abbrechen",
-
   "reportsShipments": "Sendungen",
   "reportsTotalSpend": "Gesamtausgaben",
   "reportsByCarrier": "Nach Versanddienstleister",
   "reportsEmpty": "Noch keine gekauften Sendungen für einen Bericht.",
   "reportsCarrierShipments": "Sendungen: {count}",
-
   "htsSearchLabel": "Zolltarifnummern suchen",
   "htsSearchHint": "z. B. Kupferdraht",
   "htsSearchButton": "Suchen",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Code kopieren",
   "htsCopied": "{code} kopiert",
   "htsUnavailable": "Der Zolltarifdienst ist nicht verfügbar (Fehler {code}). Bitte erneut versuchen.",
-
   "pairTitle": "Mit Desktop koppeln",
   "pairInstructions": "Öffnen Sie Easy-Post Desktop, wählen Sie „Mobile App koppeln“ und scannen Sie den dort angezeigten QR-Code.",
   "pairEnterReviewCode": "Stattdessen Prüfcode eingeben",
   "pairReviewDialogTitle": "Prüfcode eingeben",
   "pairReviewCodeHint": "Prüfcode",
   "pairAction": "Koppeln",
-
   "errorPairingCodeInvalid": "Dieser Kopplungscode ist ungültig oder abgelaufen. Erzeugen Sie auf dem Desktop einen neuen.",
   "errorReviewCodeRejected": "Dieser Prüfcode wurde nicht akzeptiert.",
   "errorUnexpectedPairingResponse": "Unerwartete Antwort des Kopplungsdienstes.",
   "errorNotPaired": "Dieses Gerät ist nicht mehr gekoppelt. Koppeln Sie es erneut vom Desktop aus.",
   "errorNotPairedShort": "Dieses Gerät ist nicht mehr gekoppelt.",
   "errorForbidden": "Diese Aktion ist aus der App nicht zulässig.",
-  "errorRequestFailed": "Anfrage fehlgeschlagen (Fehler {code})."
+  "errorRequestFailed": "Anfrage fehlgeschlagen (Fehler {code}).",
+  "detailShipment": "Sendung",
+  "detailInsurancePolicy": "Versicherungspolice",
+  "detailClaim": "Schadensfall",
+  "detailPickup": "Abholung",
+  "fieldCarrier": "Versanddienstleister",
+  "fieldService": "Service",
+  "fieldStatus": "Status",
+  "fieldCreated": "Erstellt",
+  "fieldAmount": "Betrag",
+  "fieldProvider": "Anbieter",
+  "fieldReference": "Referenz",
+  "fieldPickupWindow": "Abholzeitraum",
+  "fieldCost": "Kosten",
+  "detailNothingFurther": "Keine weiteren Angaben."
 }

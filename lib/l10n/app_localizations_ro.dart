@@ -374,4 +374,46 @@ class AppLocalizationsRo extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Cererea a eșuat (eroare $code).';
   }
+
+  @override
+  String get detailShipment => 'Expediere';
+
+  @override
+  String get detailInsurancePolicy => 'Poliță de asigurare';
+
+  @override
+  String get detailClaim => 'Reclamație';
+
+  @override
+  String get detailPickup => 'Ridicare';
+
+  @override
+  String get fieldCarrier => 'Curier';
+
+  @override
+  String get fieldService => 'Serviciu';
+
+  @override
+  String get fieldStatus => 'Stare';
+
+  @override
+  String get fieldCreated => 'Creat';
+
+  @override
+  String get fieldAmount => 'Sumă';
+
+  @override
+  String get fieldProvider => 'Furnizor';
+
+  @override
+  String get fieldReference => 'Referință';
+
+  @override
+  String get fieldPickupWindow => 'Interval de ridicare';
+
+  @override
+  String get fieldCost => 'Cost';
+
+  @override
+  String get detailNothingFurther => 'Nu există alte detalii.';
 }

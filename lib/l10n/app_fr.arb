@@ -1,8 +1,6 @@
 {
   "@@locale": "fr",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Suivi",
   "navHistory": "Historique",
   "navInsurance": "Assurance",
@@ -13,7 +11,6 @@
   "navSectionManage": "Suivi et gestion",
   "navSectionTools": "Outils",
   "drawerUnpair": "Dissocier cet appareil",
-
   "statusPreTransit": "Avant expédition",
   "statusInTransit": "En transit",
   "statusOutForDelivery": "En cours de livraison",
@@ -24,10 +21,8 @@
   "statusCancelled": "Annulé",
   "statusError": "Erreur",
   "statusUnknown": "Inconnu",
-
   "carrierUnknown": "Transporteur inconnu",
   "carrierUnknownShort": "Inconnu",
-
   "sortTooltip": "Trier",
   "sortByStatus": "Trier par statut",
   "sortByCarrier": "Trier par transporteur",
@@ -42,22 +37,18 @@
   "trackersShowing": "{shown} sur {total} affichés",
   "trackersNoMatch": "Rien ne correspond aux filtres actuels.",
   "etaLabel": "Prévu {date}",
-
   "detailEstimatedDelivery": "Livraison estimée le {date}",
   "detailSignedBy": "Signé par {name}",
   "detailHistoryHeading": "Historique",
   "detailNoScanHistory": "Aucun scan pour le moment.",
   "detailMapUnavailable": "Carte indisponible pour ces lieux.",
-
   "historyEmpty": "Aucune expédition pour le moment.",
-
   "insuranceEmpty": "Aucune assurance pour le moment. Appuyez sur « Souscrire une assurance ».",
   "insuranceBuy": "Souscrire une assurance",
   "insuranceAmountRange": "La valeur assurée doit être comprise entre 0,01 et 5 000 USD.",
   "insuranceNotEnabled": "Ce compte EasyPost n’est pas autorisé à souscrire une assurance autonome. Demandez à l’assistance EasyPost de l’activer, ou ajoutez plutôt l’assurance lors de l’achat de l’étiquette.",
   "insuranceFromAddress": "Adresse d’expédition",
   "insuranceToAddress": "Adresse de livraison",
-
   "fieldTrackingCode": "Numéro de suivi",
   "fieldCarrierHint": "Transporteur (ex. USPS)",
   "fieldInsuredAmount": "Valeur assurée (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Montant (USD)",
   "fieldContactEmail": "E-mail de contact",
   "fieldDescription": "Description",
-
   "validationRequired": "Obligatoire",
   "validationEnterAmount": "Saisissez un montant",
   "validationEnterEmail": "Saisissez une adresse e-mail",
   "validationDescribeIssue": "Décrivez le problème",
-
   "claimsEmpty": "Aucune réclamation pour le moment. Appuyez sur « Déposer une réclamation ».",
   "claimsFile": "Déposer une réclamation",
   "claimSubmit": "Déposer la réclamation",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Perte",
   "claimAttachmentNote": "Les réclamations pour dommage et vol exigent une photo ou une facture justificative. Déposez-les depuis l’application de bureau, où des documents peuvent être joints.",
   "claimAttachmentSnack": "Les réclamations pour dommage et vol exigent un justificatif, qui ne peut être joint que depuis l’application de bureau. Une réclamation pour perte peut être déposée ici.",
-
   "pickupsEmpty": "Aucun enlèvement programmé.",
   "pickupCancelTitle": "Annuler l’enlèvement ?",
   "pickupCancelBody": "Annuler l’enlèvement {id} ? Cette action est irréversible.",
   "pickupKeep": "Conserver",
   "pickupCancelConfirm": "Annuler l’enlèvement",
   "actionCancel": "Annuler",
-
   "reportsShipments": "Expéditions",
   "reportsTotalSpend": "Dépenses totales",
   "reportsByCarrier": "Par transporteur",
   "reportsEmpty": "Aucune expédition achetée à présenter.",
   "reportsCarrierShipments": "Expéditions : {count}",
-
   "htsSearchLabel": "Rechercher des codes tarifaires",
   "htsSearchHint": "ex. fil de cuivre",
   "htsSearchButton": "Rechercher",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Copier le code",
   "htsCopied": "{code} copié",
   "htsUnavailable": "Le service tarifaire est indisponible (erreur {code}). Veuillez réessayer.",
-
   "pairTitle": "Jumeler avec le bureau",
   "pairInstructions": "Ouvrez Easy-Post Desktop, choisissez « Jumeler l’application mobile », puis scannez le QR code affiché.",
   "pairEnterReviewCode": "Saisir un code de test à la place",
   "pairReviewDialogTitle": "Saisir un code de test",
   "pairReviewCodeHint": "Code de test",
   "pairAction": "Jumeler",
-
   "errorPairingCodeInvalid": "Ce code de jumelage est invalide ou expiré. Générez-en un nouveau sur le bureau.",
   "errorReviewCodeRejected": "Ce code de test n’a pas été accepté.",
   "errorUnexpectedPairingResponse": "Réponse inattendue du service de jumelage.",
   "errorNotPaired": "Cet appareil n’est plus jumelé. Jumelez-le à nouveau depuis le bureau.",
   "errorNotPairedShort": "Cet appareil n’est plus jumelé.",
   "errorForbidden": "Cette action n’est pas autorisée depuis l’application.",
-  "errorRequestFailed": "Échec de la requête (erreur {code})."
+  "errorRequestFailed": "Échec de la requête (erreur {code}).",
+  "detailShipment": "Envoi",
+  "detailInsurancePolicy": "Police d'assurance",
+  "detailClaim": "Réclamation",
+  "detailPickup": "Enlèvement",
+  "fieldCarrier": "Transporteur",
+  "fieldService": "Service",
+  "fieldStatus": "Statut",
+  "fieldCreated": "Créé le",
+  "fieldAmount": "Montant",
+  "fieldProvider": "Fournisseur",
+  "fieldReference": "Référence",
+  "fieldPickupWindow": "Créneau d'enlèvement",
+  "fieldCost": "Coût",
+  "detailNothingFurther": "Aucun détail supplémentaire."
 }

@@ -1,8 +1,6 @@
 {
   "@@locale": "es",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Seguimiento",
   "navHistory": "Historial",
   "navInsurance": "Seguro",
@@ -13,7 +11,6 @@
   "navSectionManage": "Seguimiento y gestión",
   "navSectionTools": "Herramientas",
   "drawerUnpair": "Desvincular este dispositivo",
-
   "statusPreTransit": "Pendiente de envío",
   "statusInTransit": "En tránsito",
   "statusOutForDelivery": "En reparto",
@@ -24,10 +21,8 @@
   "statusCancelled": "Cancelado",
   "statusError": "Error",
   "statusUnknown": "Desconocido",
-
   "carrierUnknown": "Transportista desconocido",
   "carrierUnknownShort": "Desconocido",
-
   "sortTooltip": "Ordenar",
   "sortByStatus": "Ordenar por estado",
   "sortByCarrier": "Ordenar por transportista",
@@ -42,22 +37,18 @@
   "trackersShowing": "Mostrando {shown} de {total}",
   "trackersNoMatch": "Nada coincide con los filtros actuales.",
   "etaLabel": "Prev. {date}",
-
   "detailEstimatedDelivery": "Entrega estimada {date}",
   "detailSignedBy": "Firmado por {name}",
   "detailHistoryHeading": "Historial",
   "detailNoScanHistory": "Todavía no hay registros de escaneo.",
   "detailMapUnavailable": "Mapa no disponible para estas ubicaciones.",
-
   "historyEmpty": "Todavía no hay envíos.",
-
   "insuranceEmpty": "Todavía no hay pólizas. Pulsa «Comprar seguro».",
   "insuranceBuy": "Comprar seguro",
   "insuranceAmountRange": "El valor asegurado debe estar entre 0,01 y 5.000 USD.",
   "insuranceNotEnabled": "Esta cuenta de EasyPost no está habilitada para el seguro independiente. Pide al soporte de EasyPost que lo habilite, o añade el seguro al comprar la etiqueta.",
   "insuranceFromAddress": "Dirección de origen",
   "insuranceToAddress": "Dirección de destino",
-
   "fieldTrackingCode": "Número de seguimiento",
   "fieldCarrierHint": "Transportista (p. ej. USPS)",
   "fieldInsuredAmount": "Valor asegurado (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Importe (USD)",
   "fieldContactEmail": "Correo de contacto",
   "fieldDescription": "Descripción",
-
   "validationRequired": "Obligatorio",
   "validationEnterAmount": "Introduce un importe",
   "validationEnterEmail": "Introduce un correo electrónico",
   "validationDescribeIssue": "Describe el problema",
-
   "claimsEmpty": "Todavía no hay reclamaciones. Pulsa «Presentar una reclamación».",
   "claimsFile": "Presentar una reclamación",
   "claimSubmit": "Presentar reclamación",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Pérdida",
   "claimAttachmentNote": "Las reclamaciones por daño y robo necesitan una foto o factura justificativa. Preséntalas en la aplicación de escritorio, donde se pueden adjuntar documentos.",
   "claimAttachmentSnack": "Las reclamaciones por daño y robo necesitan un justificante, que solo se puede adjuntar en la aplicación de escritorio. Una reclamación por pérdida sí se puede presentar aquí.",
-
   "pickupsEmpty": "Todavía no hay recogidas programadas.",
   "pickupCancelTitle": "¿Cancelar la recogida?",
   "pickupCancelBody": "¿Cancelar la recogida {id}? Esta acción no se puede deshacer.",
   "pickupKeep": "Mantener",
   "pickupCancelConfirm": "Cancelar recogida",
   "actionCancel": "Cancelar",
-
   "reportsShipments": "Envíos",
   "reportsTotalSpend": "Gasto total",
   "reportsByCarrier": "Por transportista",
   "reportsEmpty": "Todavía no hay envíos comprados que informar.",
   "reportsCarrierShipments": "Envíos: {count}",
-
   "htsSearchLabel": "Buscar códigos arancelarios",
   "htsSearchHint": "p. ej. hilo de cobre",
   "htsSearchButton": "Buscar",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Copiar código",
   "htsCopied": "{code} copiado",
   "htsUnavailable": "El servicio arancelario no está disponible (error {code}). Inténtalo de nuevo.",
-
   "pairTitle": "Vincular con el escritorio",
   "pairInstructions": "Abre Easy-Post Desktop, elige «Emparejar aplicación móvil» y escanea el código QR que aparece.",
   "pairEnterReviewCode": "Introducir un código de revisión",
   "pairReviewDialogTitle": "Introducir código de revisión",
   "pairReviewCodeHint": "Código de revisión",
   "pairAction": "Vincular",
-
   "errorPairingCodeInvalid": "Ese código de vinculación no es válido o ha caducado. Genera uno nuevo en el escritorio.",
   "errorReviewCodeRejected": "Ese código de revisión no se ha aceptado.",
   "errorUnexpectedPairingResponse": "Respuesta inesperada del servicio de vinculación.",
   "errorNotPaired": "Este dispositivo ya no está vinculado. Vuelve a vincularlo desde el escritorio.",
   "errorNotPairedShort": "Este dispositivo ya no está vinculado.",
   "errorForbidden": "Esa acción no está permitida desde la aplicación.",
-  "errorRequestFailed": "La solicitud ha fallado (error {code})."
+  "errorRequestFailed": "La solicitud ha fallado (error {code}).",
+  "detailShipment": "Envío",
+  "detailInsurancePolicy": "Póliza de seguro",
+  "detailClaim": "Reclamación",
+  "detailPickup": "Recogida",
+  "fieldCarrier": "Transportista",
+  "fieldService": "Servicio",
+  "fieldStatus": "Estado",
+  "fieldCreated": "Creado",
+  "fieldAmount": "Importe",
+  "fieldProvider": "Proveedor",
+  "fieldReference": "Referencia",
+  "fieldPickupWindow": "Franja de recogida",
+  "fieldCost": "Coste",
+  "detailNothingFurther": "No hay más detalles."
 }

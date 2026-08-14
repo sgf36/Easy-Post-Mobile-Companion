@@ -367,4 +367,46 @@ class AppLocalizationsJa extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'リクエストに失敗しました (エラー $code)。';
   }
+
+  @override
+  String get detailShipment => '配送';
+
+  @override
+  String get detailInsurancePolicy => '保険証券';
+
+  @override
+  String get detailClaim => '請求';
+
+  @override
+  String get detailPickup => '集荷';
+
+  @override
+  String get fieldCarrier => '配送業者';
+
+  @override
+  String get fieldService => 'サービス';
+
+  @override
+  String get fieldStatus => 'ステータス';
+
+  @override
+  String get fieldCreated => '作成日';
+
+  @override
+  String get fieldAmount => '金額';
+
+  @override
+  String get fieldProvider => '提供元';
+
+  @override
+  String get fieldReference => '参照番号';
+
+  @override
+  String get fieldPickupWindow => '集荷時間帯';
+
+  @override
+  String get fieldCost => '料金';
+
+  @override
+  String get detailNothingFurther => 'これ以上の詳細はありません。';
 }

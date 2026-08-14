@@ -1,8 +1,6 @@
 {
   "@@locale": "th",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "ติดตามพัสดุ",
   "navHistory": "ประวัติ",
   "navInsurance": "ประกัน",
@@ -13,7 +11,6 @@
   "navSectionManage": "ติดตามและจัดการ",
   "navSectionTools": "เครื่องมือ",
   "drawerUnpair": "ยกเลิกการจับคู่อุปกรณ์นี้",
-
   "statusPreTransit": "ก่อนขนส่ง",
   "statusInTransit": "อยู่ระหว่างขนส่ง",
   "statusOutForDelivery": "กำลังนำส่ง",
@@ -24,10 +21,8 @@
   "statusCancelled": "ยกเลิกแล้ว",
   "statusError": "ข้อผิดพลาด",
   "statusUnknown": "ไม่ทราบ",
-
   "carrierUnknown": "ไม่ทราบผู้ให้บริการขนส่ง",
   "carrierUnknownShort": "ไม่ทราบ",
-
   "sortTooltip": "เรียงลำดับ",
   "sortByStatus": "เรียงตามสถานะ",
   "sortByCarrier": "เรียงตามผู้ให้บริการขนส่ง",
@@ -42,22 +37,18 @@
   "trackersShowing": "แสดง {shown} จาก {total}",
   "trackersNoMatch": "ไม่มีรายการที่ตรงกับตัวกรองปัจจุบัน",
   "etaLabel": "คาดว่า {date}",
-
   "detailEstimatedDelivery": "กำหนดส่งโดยประมาณ {date}",
   "detailSignedBy": "ผู้รับลงชื่อ {name}",
   "detailHistoryHeading": "ประวัติ",
   "detailNoScanHistory": "ยังไม่มีข้อมูลการสแกน",
   "detailMapUnavailable": "ไม่มีแผนที่สำหรับตำแหน่งเหล่านี้",
-
   "historyEmpty": "ยังไม่มีพัสดุ",
-
   "insuranceEmpty": "ยังไม่มีกรมธรรม์ แตะ «ซื้อประกัน»",
   "insuranceBuy": "ซื้อประกัน",
   "insuranceAmountRange": "มูลค่าเอาประกันต้องอยู่ระหว่าง 0.01 ถึง 5,000 USD",
   "insuranceNotEnabled": "บัญชี EasyPost นี้ไม่ได้เปิดใช้งานประกันแบบแยกต่างหาก โปรดขอให้ฝ่ายสนับสนุนของ EasyPost เปิดใช้งาน หรือเพิ่มประกันตอนซื้อใบปะหน้าแทน",
   "insuranceFromAddress": "ที่อยู่ผู้ส่ง",
   "insuranceToAddress": "ที่อยู่ผู้รับ",
-
   "fieldTrackingCode": "เลขพัสดุ",
   "fieldCarrierHint": "ผู้ให้บริการขนส่ง (เช่น USPS)",
   "fieldInsuredAmount": "มูลค่าเอาประกัน (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "จำนวนเงิน (USD)",
   "fieldContactEmail": "อีเมลติดต่อ",
   "fieldDescription": "รายละเอียด",
-
   "validationRequired": "จำเป็น",
   "validationEnterAmount": "กรอกจำนวนเงิน",
   "validationEnterEmail": "กรอกอีเมล",
   "validationDescribeIssue": "อธิบายปัญหา",
-
   "claimsEmpty": "ยังไม่มีการยื่นเคลม แตะ «ยื่นเคลม»",
   "claimsFile": "ยื่นเคลม",
   "claimSubmit": "ส่งเคลม",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "สูญหาย",
   "claimAttachmentNote": "เคลมกรณีเสียหายและถูกขโมยต้องมีรูปถ่ายหรือใบแจ้งหนี้เป็นหลักฐาน โปรดยื่นผ่านแอปบนเดสก์ท็อปซึ่งแนบเอกสารได้",
   "claimAttachmentSnack": "เคลมกรณีเสียหายและถูกขโมยต้องมีหลักฐานซึ่งแนบได้เฉพาะในแอปบนเดสก์ท็อป ส่วนเคลมกรณีสูญหายยื่นที่นี่ได้",
-
   "pickupsEmpty": "ยังไม่มีการนัดรับพัสดุ",
   "pickupCancelTitle": "ยกเลิกการนัดรับพัสดุ?",
   "pickupCancelBody": "ยกเลิกการนัดรับพัสดุ {id} หรือไม่ การกระทำนี้ย้อนกลับไม่ได้",
   "pickupKeep": "เก็บไว้",
   "pickupCancelConfirm": "ยกเลิกการนัดรับ",
   "actionCancel": "ยกเลิก",
-
   "reportsShipments": "พัสดุ",
   "reportsTotalSpend": "ค่าใช้จ่ายรวม",
   "reportsByCarrier": "ตามผู้ให้บริการขนส่ง",
   "reportsEmpty": "ยังไม่มีพัสดุที่ซื้อแล้วสำหรับรายงาน",
   "reportsCarrierShipments": "พัสดุ: {count}",
-
   "htsSearchLabel": "ค้นหารหัสพิกัดศุลกากร",
   "htsSearchHint": "เช่น ลวดทองแดง",
   "htsSearchButton": "ค้นหา",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "คัดลอกรหัส",
   "htsCopied": "คัดลอก {code} แล้ว",
   "htsUnavailable": "บริการพิกัดศุลกากรไม่พร้อมใช้งาน (ข้อผิดพลาด {code}) โปรดลองอีกครั้ง",
-
   "pairTitle": "จับคู่กับเดสก์ท็อป",
   "pairInstructions": "เปิด Easy-Post Desktop เลือก «จับคู่แอปมือถือ» แล้วสแกนรหัส QR ที่แสดงอยู่",
   "pairEnterReviewCode": "กรอกรหัสสำหรับผู้ตรวจสอบแทน",
   "pairReviewDialogTitle": "กรอกรหัสสำหรับผู้ตรวจสอบ",
   "pairReviewCodeHint": "รหัสสำหรับผู้ตรวจสอบ",
   "pairAction": "จับคู่",
-
   "errorPairingCodeInvalid": "รหัสจับคู่นี้ไม่ถูกต้องหรือหมดอายุแล้ว โปรดสร้างรหัสใหม่บนเดสก์ท็อป",
   "errorReviewCodeRejected": "รหัสสำหรับผู้ตรวจสอบนี้ไม่ได้รับการยอมรับ",
   "errorUnexpectedPairingResponse": "การตอบกลับที่ไม่คาดคิดจากบริการจับคู่",
   "errorNotPaired": "อุปกรณ์นี้ไม่ได้จับคู่อีกต่อไป โปรดจับคู่ใหม่จากเดสก์ท็อป",
   "errorNotPairedShort": "อุปกรณ์นี้ไม่ได้จับคู่อีกต่อไป",
   "errorForbidden": "ไม่อนุญาตให้ดำเนินการนี้จากแอป",
-  "errorRequestFailed": "คำขอล้มเหลว (ข้อผิดพลาด {code})"
+  "errorRequestFailed": "คำขอล้มเหลว (ข้อผิดพลาด {code})",
+  "detailShipment": "การจัดส่ง",
+  "detailInsurancePolicy": "กรมธรรม์ประกันภัย",
+  "detailClaim": "การเรียกร้อง",
+  "detailPickup": "การเข้ารับพัสดุ",
+  "fieldCarrier": "ผู้ให้บริการขนส่ง",
+  "fieldService": "บริการ",
+  "fieldStatus": "สถานะ",
+  "fieldCreated": "สร้างเมื่อ",
+  "fieldAmount": "จำนวนเงิน",
+  "fieldProvider": "ผู้ให้บริการ",
+  "fieldReference": "หมายเลขอ้างอิง",
+  "fieldPickupWindow": "ช่วงเวลาเข้ารับพัสดุ",
+  "fieldCost": "ค่าใช้จ่าย",
+  "detailNothingFurther": "ไม่มีรายละเอียดเพิ่มเติม"
 }

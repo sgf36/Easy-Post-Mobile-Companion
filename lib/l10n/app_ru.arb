@@ -1,8 +1,6 @@
 {
   "@@locale": "ru",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Отслеживание",
   "navHistory": "История",
   "navInsurance": "Страхование",
@@ -13,7 +11,6 @@
   "navSectionManage": "Отслеживание и управление",
   "navSectionTools": "Инструменты",
   "drawerUnpair": "Отвязать это устройство",
-
   "statusPreTransit": "До отправки",
   "statusInTransit": "В пути",
   "statusOutForDelivery": "Курьер в пути",
@@ -24,10 +21,8 @@
   "statusCancelled": "Отменено",
   "statusError": "Ошибка",
   "statusUnknown": "Неизвестно",
-
   "carrierUnknown": "Неизвестный перевозчик",
   "carrierUnknownShort": "Неизвестно",
-
   "sortTooltip": "Сортировка",
   "sortByStatus": "Сортировать по статусу",
   "sortByCarrier": "Сортировать по перевозчику",
@@ -42,22 +37,18 @@
   "trackersShowing": "Показано {shown} из {total}",
   "trackersNoMatch": "Ничего не соответствует текущим фильтрам.",
   "etaLabel": "Ожид. {date}",
-
   "detailEstimatedDelivery": "Ожидаемая доставка {date}",
   "detailSignedBy": "Подпись получателя: {name}",
   "detailHistoryHeading": "История",
   "detailNoScanHistory": "Событий сканирования пока нет.",
   "detailMapUnavailable": "Карта для этих мест недоступна.",
-
   "historyEmpty": "Отправлений пока нет.",
-
   "insuranceEmpty": "Полисов пока нет. Нажмите «Оформить страховку».",
   "insuranceBuy": "Оформить страховку",
   "insuranceAmountRange": "Страховая сумма должна быть от 0,01 до 5 000 USD.",
   "insuranceNotEnabled": "Для этого аккаунта EasyPost не включено отдельное страхование. Обратитесь в поддержку EasyPost, чтобы его включили, или добавляйте страховку при покупке этикетки.",
   "insuranceFromAddress": "Адрес отправителя",
   "insuranceToAddress": "Адрес получателя",
-
   "fieldTrackingCode": "Номер отслеживания",
   "fieldCarrierHint": "Перевозчик (например, USPS)",
   "fieldInsuredAmount": "Страховая сумма (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Сумма (USD)",
   "fieldContactEmail": "Контактный email",
   "fieldDescription": "Описание",
-
   "validationRequired": "Обязательно",
   "validationEnterAmount": "Введите сумму",
   "validationEnterEmail": "Введите адрес эл. почты",
   "validationDescribeIssue": "Опишите проблему",
-
   "claimsEmpty": "Претензий пока нет. Нажмите «Подать претензию».",
   "claimsFile": "Подать претензию",
   "claimSubmit": "Отправить претензию",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Утрата",
   "claimAttachmentNote": "Для претензий о повреждении и краже нужны фотография или счёт в качестве подтверждения. Подавайте их в настольном приложении, где можно приложить документы.",
   "claimAttachmentSnack": "Для претензий о повреждении и краже нужно подтверждение, которое прикладывается только в настольном приложении. Претензию об утрате можно подать здесь.",
-
   "pickupsEmpty": "Заборов груза пока не запланировано.",
   "pickupCancelTitle": "Отменить забор груза?",
   "pickupCancelBody": "Отменить забор груза {id}? Это действие необратимо.",
   "pickupKeep": "Оставить",
   "pickupCancelConfirm": "Отменить забор",
   "actionCancel": "Отмена",
-
   "reportsShipments": "Отправления",
   "reportsTotalSpend": "Общие расходы",
   "reportsByCarrier": "По перевозчикам",
   "reportsEmpty": "Оплаченных отправлений для отчёта пока нет.",
   "reportsCarrierShipments": "Отправления: {count}",
-
   "htsSearchLabel": "Поиск тарифных кодов",
   "htsSearchHint": "например, медная проволока",
   "htsSearchButton": "Искать",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Копировать код",
   "htsCopied": "{code} скопирован",
   "htsUnavailable": "Тарифная служба недоступна (ошибка {code}). Повторите попытку.",
-
   "pairTitle": "Сопряжение с компьютером",
   "pairInstructions": "Откройте Easy-Post Desktop, выберите «Сопряжение с мобильным приложением» и отсканируйте показанный QR-код.",
   "pairEnterReviewCode": "Ввести код проверки",
   "pairReviewDialogTitle": "Ввод кода проверки",
   "pairReviewCodeHint": "Код проверки",
   "pairAction": "Связать",
-
   "errorPairingCodeInvalid": "Этот код сопряжения недействителен или истёк. Создайте новый на компьютере.",
   "errorReviewCodeRejected": "Этот код проверки не принят.",
   "errorUnexpectedPairingResponse": "Неожиданный ответ службы сопряжения.",
   "errorNotPaired": "Это устройство больше не связано. Выполните сопряжение заново с компьютера.",
   "errorNotPairedShort": "Это устройство больше не связано.",
   "errorForbidden": "Это действие недоступно из приложения.",
-  "errorRequestFailed": "Запрос не выполнен (ошибка {code})."
+  "errorRequestFailed": "Запрос не выполнен (ошибка {code}).",
+  "detailShipment": "Отправление",
+  "detailInsurancePolicy": "Страховой полис",
+  "detailClaim": "Претензия",
+  "detailPickup": "Забор",
+  "fieldCarrier": "Перевозчик",
+  "fieldService": "Услуга",
+  "fieldStatus": "Статус",
+  "fieldCreated": "Создано",
+  "fieldAmount": "Сумма",
+  "fieldProvider": "Поставщик",
+  "fieldReference": "Ссылка",
+  "fieldPickupWindow": "Интервал забора",
+  "fieldCost": "Стоимость",
+  "detailNothingFurther": "Дополнительных сведений нет."
 }

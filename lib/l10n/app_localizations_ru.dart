@@ -371,4 +371,46 @@ class AppLocalizationsRu extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Запрос не выполнен (ошибка $code).';
   }
+
+  @override
+  String get detailShipment => 'Отправление';
+
+  @override
+  String get detailInsurancePolicy => 'Страховой полис';
+
+  @override
+  String get detailClaim => 'Претензия';
+
+  @override
+  String get detailPickup => 'Забор';
+
+  @override
+  String get fieldCarrier => 'Перевозчик';
+
+  @override
+  String get fieldService => 'Услуга';
+
+  @override
+  String get fieldStatus => 'Статус';
+
+  @override
+  String get fieldCreated => 'Создано';
+
+  @override
+  String get fieldAmount => 'Сумма';
+
+  @override
+  String get fieldProvider => 'Поставщик';
+
+  @override
+  String get fieldReference => 'Ссылка';
+
+  @override
+  String get fieldPickupWindow => 'Интервал забора';
+
+  @override
+  String get fieldCost => 'Стоимость';
+
+  @override
+  String get detailNothingFurther => 'Дополнительных сведений нет.';
 }

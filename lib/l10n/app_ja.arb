@@ -1,8 +1,6 @@
 {
   "@@locale": "ja",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "追跡",
   "navHistory": "履歴",
   "navInsurance": "保険",
@@ -13,7 +11,6 @@
   "navSectionManage": "追跡と管理",
   "navSectionTools": "ツール",
   "drawerUnpair": "このデバイスのペアリングを解除",
-
   "statusPreTransit": "発送準備中",
   "statusInTransit": "輸送中",
   "statusOutForDelivery": "配達中",
@@ -24,10 +21,8 @@
   "statusCancelled": "キャンセル済み",
   "statusError": "エラー",
   "statusUnknown": "不明",
-
   "carrierUnknown": "配送業者不明",
   "carrierUnknownShort": "不明",
-
   "sortTooltip": "並べ替え",
   "sortByStatus": "状況で並べ替え",
   "sortByCarrier": "配送業者で並べ替え",
@@ -42,22 +37,18 @@
   "trackersShowing": "{total} 件中 {shown} 件を表示",
   "trackersNoMatch": "現在の絞り込み条件に一致するものはありません。",
   "etaLabel": "予定 {date}",
-
   "detailEstimatedDelivery": "配達予定日 {date}",
   "detailSignedBy": "受領サイン: {name}",
   "detailHistoryHeading": "履歴",
   "detailNoScanHistory": "スキャン履歴はまだありません。",
   "detailMapUnavailable": "これらの地点の地図は利用できません。",
-
   "historyEmpty": "荷物はまだありません。",
-
   "insuranceEmpty": "保険はまだありません。「保険を購入」をタップしてください。",
   "insuranceBuy": "保険を購入",
   "insuranceAmountRange": "保険金額は 0.01〜5,000 USD の範囲で入力してください。",
   "insuranceNotEnabled": "この EasyPost アカウントでは単独保険が有効になっていません。EasyPost サポートに有効化を依頼するか、ラベル購入時に保険を追加してください。",
   "insuranceFromAddress": "差出人の住所",
   "insuranceToAddress": "宛先の住所",
-
   "fieldTrackingCode": "追跡番号",
   "fieldCarrierHint": "配送業者 (例: USPS)",
   "fieldInsuredAmount": "保険金額 (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "金額 (USD)",
   "fieldContactEmail": "連絡先メール",
   "fieldDescription": "説明",
-
   "validationRequired": "必須",
   "validationEnterAmount": "金額を入力してください",
   "validationEnterEmail": "メールアドレスを入力してください",
   "validationDescribeIssue": "問題を記入してください",
-
   "claimsEmpty": "請求はまだありません。「保険金を請求」をタップしてください。",
   "claimsFile": "保険金を請求",
   "claimSubmit": "請求を提出",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "紛失",
   "claimAttachmentNote": "破損と盗難の請求には、写真や請求書などの証憑が必要です。書類を添付できるデスクトップアプリから提出してください。",
   "claimAttachmentSnack": "破損と盗難の請求には証憑が必要で、添付はデスクトップアプリからのみ行えます。紛失の請求はここから提出できます。",
-
   "pickupsEmpty": "予約された集荷はまだありません。",
   "pickupCancelTitle": "集荷をキャンセルしますか？",
   "pickupCancelBody": "集荷 {id} をキャンセルしますか？この操作は取り消せません。",
   "pickupKeep": "そのままにする",
   "pickupCancelConfirm": "集荷をキャンセル",
   "actionCancel": "キャンセル",
-
   "reportsShipments": "荷物",
   "reportsTotalSpend": "支出合計",
   "reportsByCarrier": "配送業者別",
   "reportsEmpty": "レポートに表示できる購入済みの荷物はまだありません。",
   "reportsCarrierShipments": "荷物: {count}",
-
   "htsSearchLabel": "関税分類番号を検索",
   "htsSearchHint": "例: 銅線",
   "htsSearchButton": "検索",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "コードをコピー",
   "htsCopied": "{code} をコピーしました",
   "htsUnavailable": "関税サービスを利用できません (エラー {code})。もう一度お試しください。",
-
   "pairTitle": "デスクトップとペアリング",
   "pairInstructions": "Easy-Post Desktop を開き、「モバイルアプリをペアリング」を選んで、表示された QR コードを読み取ってください。",
   "pairEnterReviewCode": "代わりに審査用コードを入力",
   "pairReviewDialogTitle": "審査用コードを入力",
   "pairReviewCodeHint": "審査用コード",
   "pairAction": "ペアリング",
-
   "errorPairingCodeInvalid": "このペアリングコードは無効か期限切れです。デスクトップで新しいコードを生成してください。",
   "errorReviewCodeRejected": "この審査用コードは受け付けられませんでした。",
   "errorUnexpectedPairingResponse": "ペアリングサービスから予期しない応答がありました。",
   "errorNotPaired": "このデバイスのペアリングは解除されています。デスクトップから再度ペアリングしてください。",
   "errorNotPairedShort": "このデバイスのペアリングは解除されています。",
   "errorForbidden": "この操作はアプリからは許可されていません。",
-  "errorRequestFailed": "リクエストに失敗しました (エラー {code})。"
+  "errorRequestFailed": "リクエストに失敗しました (エラー {code})。",
+  "detailShipment": "配送",
+  "detailInsurancePolicy": "保険証券",
+  "detailClaim": "請求",
+  "detailPickup": "集荷",
+  "fieldCarrier": "配送業者",
+  "fieldService": "サービス",
+  "fieldStatus": "ステータス",
+  "fieldCreated": "作成日",
+  "fieldAmount": "金額",
+  "fieldProvider": "提供元",
+  "fieldReference": "参照番号",
+  "fieldPickupWindow": "集荷時間帯",
+  "fieldCost": "料金",
+  "detailNothingFurther": "これ以上の詳細はありません。"
 }

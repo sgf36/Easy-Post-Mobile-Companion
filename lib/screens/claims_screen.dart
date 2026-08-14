@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import '../models/tracker.dart';
 import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
+import '../theme.dart';
 import 'home_shell.dart';
+import 'resource_detail_screen.dart';
 
 class ClaimsScreen extends StatefulWidget {
   final AppNav nav;
@@ -69,10 +72,48 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
               separatorBuilder: (_, _) => const Divider(height: 1),
               itemBuilder: (context, i) {
                 final m = items[i];
+                final heading = (m['tracking_code'] ?? m['id'] ?? '—').toString();
                 return ListTile(
-                  title: Text((m['tracking_code'] ?? m['id'] ?? '—').toString(), style: const TextStyle(fontWeight: FontWeight.w600)),
-                  subtitle: Text((m['type'] ?? '').toString()),
-                  trailing: Text((m['status'] ?? '').toString()),
+                  title: Text(heading, style: const TextStyle(fontWeight: FontWeight.w600)),
+                  subtitle: Text(_claimType(t, m['type'])),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(statusText(t, m['status'])),
+                      const Padding(
+                        padding: EdgeInsetsDirectional.only(start: 4),
+                        child: Icon(Icons.chevron_right, size: 20, color: Brand.muted),
+                      ),
+                    ],
+                  ),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => ResourceDetailScreen(
+                        title: t.detailClaim,
+                        heading: heading,
+                        fields: [
+                          DetailField(t.fieldStatus, statusText(t, m['status'])),
+                          DetailField(t.fieldType, _claimType(t, m['type'])),
+                          DetailField(
+                            t.fieldAmount,
+                            formatMoney(m['requested_amount'] ?? m['amount'],
+                                currency: (m['currency'] ?? 'USD').toString(),
+                                locale: t.localeName),
+                          ),
+                          DetailField(t.fieldTrackingCode,
+                              (m['tracking_code'] ?? '').toString()),
+                          DetailField(t.fieldDescription,
+                              (m['description'] ?? '').toString()),
+                          DetailField(
+                            t.fieldCreated,
+                            formatDateTime(
+                                DateTime.tryParse((m['created_at'] ?? '').toString()),
+                                t.localeName),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             );
@@ -80,6 +121,26 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
         ),
       ),
     );
+  }
+}
+
+/// The claim type in the reader's language.
+///
+/// EasyPost sends the enum — "damage" — and the list printed it raw, in
+/// English, beside a status that does translate. Total by construction: an
+/// unrecognised type is tidied rather than dropped, since hiding it would lose
+/// the only thing distinguishing one claim from another.
+String _claimType(AppLocalizations t, Object? raw) {
+  final type = (raw ?? '').toString().trim();
+  switch (type.toLowerCase()) {
+    case 'damage':
+      return t.claimTypeDamage;
+    case 'theft':
+      return t.claimTypeTheft;
+    case 'loss':
+      return t.claimTypeLoss;
+    default:
+      return type.replaceAll('_', ' ');
   }
 }
 

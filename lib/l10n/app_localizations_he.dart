@@ -370,4 +370,46 @@ class AppLocalizationsHe extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'הבקשה נכשלה (שגיאה $code).';
   }
+
+  @override
+  String get detailShipment => 'משלוח';
+
+  @override
+  String get detailInsurancePolicy => 'פוליסת ביטוח';
+
+  @override
+  String get detailClaim => 'תביעה';
+
+  @override
+  String get detailPickup => 'איסוף';
+
+  @override
+  String get fieldCarrier => 'מוביל';
+
+  @override
+  String get fieldService => 'שירות';
+
+  @override
+  String get fieldStatus => 'סטטוס';
+
+  @override
+  String get fieldCreated => 'נוצר';
+
+  @override
+  String get fieldAmount => 'סכום';
+
+  @override
+  String get fieldProvider => 'ספק';
+
+  @override
+  String get fieldReference => 'אסמכתא';
+
+  @override
+  String get fieldPickupWindow => 'חלון איסוף';
+
+  @override
+  String get fieldCost => 'עלות';
+
+  @override
+  String get detailNothingFurther => 'אין פרטים נוספים.';
 }

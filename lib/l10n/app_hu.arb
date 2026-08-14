@@ -1,8 +1,6 @@
 {
   "@@locale": "hu",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Nyomkövetés",
   "navHistory": "Előzmények",
   "navInsurance": "Biztosítás",
@@ -13,7 +11,6 @@
   "navSectionManage": "Követés és kezelés",
   "navSectionTools": "Eszközök",
   "drawerUnpair": "Eszköz párosításának megszüntetése",
-
   "statusPreTransit": "Szállítás előtt",
   "statusInTransit": "Úton",
   "statusOutForDelivery": "Kiszállítás alatt",
@@ -24,10 +21,8 @@
   "statusCancelled": "Törölve",
   "statusError": "Hiba",
   "statusUnknown": "Ismeretlen",
-
   "carrierUnknown": "Ismeretlen szállító",
   "carrierUnknownShort": "Ismeretlen",
-
   "sortTooltip": "Rendezés",
   "sortByStatus": "Rendezés állapot szerint",
   "sortByCarrier": "Rendezés szállító szerint",
@@ -42,22 +37,18 @@
   "trackersShowing": "{total} közül {shown} látható",
   "trackersNoMatch": "Semmi sem felel meg a jelenlegi szűrőknek.",
   "etaLabel": "Vár. {date}",
-
   "detailEstimatedDelivery": "Becsült kézbesítés: {date}",
   "detailSignedBy": "Aláírta: {name}",
   "detailHistoryHeading": "Előzmények",
   "detailNoScanHistory": "Még nincs beolvasási esemény.",
   "detailMapUnavailable": "Ezekhez a helyekhez nem érhető el térkép.",
-
   "historyEmpty": "Még nincsenek küldemények.",
-
   "insuranceEmpty": "Még nincs biztosítás. Koppintson a „Biztosítás vásárlása” gombra.",
   "insuranceBuy": "Biztosítás vásárlása",
   "insuranceAmountRange": "A biztosított összegnek 0,01 és 5000 USD között kell lennie.",
   "insuranceNotEnabled": "Ez az EasyPost-fiók nem jogosult önálló biztosításra. Kérje az EasyPost ügyfélszolgálatától az engedélyezését, vagy adjon hozzá biztosítást a címke vásárlásakor.",
   "insuranceFromAddress": "Feladó címe",
   "insuranceToAddress": "Címzett címe",
-
   "fieldTrackingCode": "Nyomkövetési szám",
   "fieldCarrierHint": "Szállító (pl. USPS)",
   "fieldInsuredAmount": "Biztosított összeg (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Összeg (USD)",
   "fieldContactEmail": "Kapcsolattartási e-mail",
   "fieldDescription": "Leírás",
-
   "validationRequired": "Kötelező",
   "validationEnterAmount": "Adjon meg egy összeget",
   "validationEnterEmail": "Adjon meg egy e-mail-címet",
   "validationDescribeIssue": "Írja le a problémát",
-
   "claimsEmpty": "Még nincs kárigény. Koppintson a „Kárigény benyújtása” gombra.",
   "claimsFile": "Kárigény benyújtása",
   "claimSubmit": "Kárigény elküldése",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Elvesztés",
   "claimAttachmentNote": "A sérüléssel és lopással kapcsolatos kárigényekhez fénykép vagy számla szükséges igazolásként. Ezeket az asztali alkalmazásban nyújtsa be, ahol dokumentum csatolható.",
   "claimAttachmentSnack": "A sérüléssel és lopással kapcsolatos kárigényekhez igazolás szükséges, amelyet csak az asztali alkalmazásban lehet csatolni. Elvesztés miatti kárigény itt is benyújtható.",
-
   "pickupsEmpty": "Még nincs ütemezett átvétel.",
   "pickupCancelTitle": "Törli az átvételt?",
   "pickupCancelBody": "Törli a(z) {id} átvételt? Ez nem vonható vissza.",
   "pickupKeep": "Megtartás",
   "pickupCancelConfirm": "Átvétel törlése",
   "actionCancel": "Mégse",
-
   "reportsShipments": "Küldemények",
   "reportsTotalSpend": "Teljes kiadás",
   "reportsByCarrier": "Szállítónként",
   "reportsEmpty": "Még nincs megvásárolt küldemény a jelentéshez.",
   "reportsCarrierShipments": "Küldemények: {count}",
-
   "htsSearchLabel": "Vámtarifaszámok keresése",
   "htsSearchHint": "pl. rézhuzal",
   "htsSearchButton": "Keresés",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Kód másolása",
   "htsCopied": "{code} másolva",
   "htsUnavailable": "A vámtarifa-szolgáltatás nem érhető el ({code} hiba). Próbálja újra.",
-
   "pairTitle": "Párosítás az asztali alkalmazással",
   "pairInstructions": "Nyissa meg az Easy-Post Desktopot, válassza a „Mobilalkalmazás párosítása” lehetőséget, majd olvassa be az ott megjelenő QR-kódot.",
   "pairEnterReviewCode": "Inkább ellenőrzési kód megadása",
   "pairReviewDialogTitle": "Ellenőrzési kód megadása",
   "pairReviewCodeHint": "Ellenőrzési kód",
   "pairAction": "Párosítás",
-
   "errorPairingCodeInvalid": "Ez a párosítási kód érvénytelen vagy lejárt. Hozzon létre újat az asztali alkalmazásban.",
   "errorReviewCodeRejected": "Ezt az ellenőrzési kódot nem fogadta el a rendszer.",
   "errorUnexpectedPairingResponse": "Váratlan válasz a párosítási szolgáltatástól.",
   "errorNotPaired": "Ez az eszköz már nincs párosítva. Párosítsa újra az asztali alkalmazásból.",
   "errorNotPairedShort": "Ez az eszköz már nincs párosítva.",
   "errorForbidden": "Ez a művelet nem engedélyezett az alkalmazásból.",
-  "errorRequestFailed": "A kérés sikertelen ({code} hiba)."
+  "errorRequestFailed": "A kérés sikertelen ({code} hiba).",
+  "detailShipment": "Küldemény",
+  "detailInsurancePolicy": "Biztosítási kötvény",
+  "detailClaim": "Kárigény",
+  "detailPickup": "Átvétel",
+  "fieldCarrier": "Szállító",
+  "fieldService": "Szolgáltatás",
+  "fieldStatus": "Állapot",
+  "fieldCreated": "Létrehozva",
+  "fieldAmount": "Összeg",
+  "fieldProvider": "Szolgáltató",
+  "fieldReference": "Hivatkozás",
+  "fieldPickupWindow": "Átvételi időablak",
+  "fieldCost": "Költség",
+  "detailNothingFurther": "Nincs további részlet."
 }

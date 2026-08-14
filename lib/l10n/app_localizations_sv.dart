@@ -374,4 +374,46 @@ class AppLocalizationsSv extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Begäran misslyckades (fel $code).';
   }
+
+  @override
+  String get detailShipment => 'Försändelse';
+
+  @override
+  String get detailInsurancePolicy => 'Försäkringsbrev';
+
+  @override
+  String get detailClaim => 'Skadeanmälan';
+
+  @override
+  String get detailPickup => 'Upphämtning';
+
+  @override
+  String get fieldCarrier => 'Transportör';
+
+  @override
+  String get fieldService => 'Tjänst';
+
+  @override
+  String get fieldStatus => 'Status';
+
+  @override
+  String get fieldCreated => 'Skapad';
+
+  @override
+  String get fieldAmount => 'Belopp';
+
+  @override
+  String get fieldProvider => 'Leverantör';
+
+  @override
+  String get fieldReference => 'Referens';
+
+  @override
+  String get fieldPickupWindow => 'Upphämtningsfönster';
+
+  @override
+  String get fieldCost => 'Kostnad';
+
+  @override
+  String get detailNothingFurther => 'Inga fler uppgifter.';
 }

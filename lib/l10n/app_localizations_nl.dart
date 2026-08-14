@@ -374,4 +374,46 @@ class AppLocalizationsNl extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Verzoek mislukt (fout $code).';
   }
+
+  @override
+  String get detailShipment => 'Zending';
+
+  @override
+  String get detailInsurancePolicy => 'Verzekeringspolis';
+
+  @override
+  String get detailClaim => 'Claim';
+
+  @override
+  String get detailPickup => 'Ophaling';
+
+  @override
+  String get fieldCarrier => 'Vervoerder';
+
+  @override
+  String get fieldService => 'Service';
+
+  @override
+  String get fieldStatus => 'Status';
+
+  @override
+  String get fieldCreated => 'Aangemaakt';
+
+  @override
+  String get fieldAmount => 'Bedrag';
+
+  @override
+  String get fieldProvider => 'Aanbieder';
+
+  @override
+  String get fieldReference => 'Referentie';
+
+  @override
+  String get fieldPickupWindow => 'Ophaalvenster';
+
+  @override
+  String get fieldCost => 'Kosten';
+
+  @override
+  String get detailNothingFurther => 'Geen verdere gegevens.';
 }

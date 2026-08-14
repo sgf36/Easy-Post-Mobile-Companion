@@ -807,6 +807,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Request failed (error {code}).'**
   String errorRequestFailed(int code);
+
+  /// Title of the shipment detail page, opened from History.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipment'**
+  String get detailShipment;
+
+  /// Title of the insurance policy detail page.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance policy'**
+  String get detailInsurancePolicy;
+
+  /// Title of the claim detail page.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim'**
+  String get detailClaim;
+
+  /// Title of the scheduled pickup detail page.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup'**
+  String get detailPickup;
+
+  /// Field label: the carrier brand, e.g. USPS. The value is never translated.
+  ///
+  /// In en, this message translates to:
+  /// **'Carrier'**
+  String get fieldCarrier;
+
+  /// Field label: the carrier's service level.
+  ///
+  /// In en, this message translates to:
+  /// **'Service'**
+  String get fieldService;
+
+  /// Field label: the status of a shipment, claim or pickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get fieldStatus;
+
+  /// Field label: when the record was created.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get fieldCreated;
+
+  /// Field label: an insured or claimed amount of money.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get fieldAmount;
+
+  /// Field label: the insurance provider.
+  ///
+  /// In en, this message translates to:
+  /// **'Provider'**
+  String get fieldProvider;
+
+  /// Field label: the user's own reference for a pickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference'**
+  String get fieldReference;
+
+  /// Field label: the time window a carrier will collect within.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup window'**
+  String get fieldPickupWindow;
+
+  /// Field label: what a shipment cost to buy.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost'**
+  String get fieldCost;
+
+  /// Shown when a record carries no fields worth listing.
+  ///
+  /// In en, this message translates to:
+  /// **'No further details.'**
+  String get detailNothingFurther;
 }
 
 class _AppLocalizationsDelegate

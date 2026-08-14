@@ -1,8 +1,6 @@
 {
   "@@locale": "uk",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Відстеження",
   "navHistory": "Історія",
   "navInsurance": "Страхування",
@@ -13,7 +11,6 @@
   "navSectionManage": "Відстеження та керування",
   "navSectionTools": "Інструменти",
   "drawerUnpair": "Відв’язати цей пристрій",
-
   "statusPreTransit": "До відправлення",
   "statusInTransit": "У дорозі",
   "statusOutForDelivery": "Курʼєр у дорозі",
@@ -24,10 +21,8 @@
   "statusCancelled": "Скасовано",
   "statusError": "Помилка",
   "statusUnknown": "Невідомо",
-
   "carrierUnknown": "Невідомий перевізник",
   "carrierUnknownShort": "Невідомо",
-
   "sortTooltip": "Сортування",
   "sortByStatus": "Сортувати за статусом",
   "sortByCarrier": "Сортувати за перевізником",
@@ -42,22 +37,18 @@
   "trackersShowing": "Показано {shown} із {total}",
   "trackersNoMatch": "Нічого не відповідає поточним фільтрам.",
   "etaLabel": "Орієнт. {date}",
-
   "detailEstimatedDelivery": "Орієнтовна доставка {date}",
   "detailSignedBy": "Підпис одержувача: {name}",
   "detailHistoryHeading": "Історія",
   "detailNoScanHistory": "Подій сканування ще немає.",
   "detailMapUnavailable": "Карта для цих місць недоступна.",
-
   "historyEmpty": "Відправлень ще немає.",
-
   "insuranceEmpty": "Полісів ще немає. Торкніться «Придбати страхування».",
   "insuranceBuy": "Придбати страхування",
   "insuranceAmountRange": "Страхова сума має бути від 0,01 до 5 000 USD.",
   "insuranceNotEnabled": "Цей обліковий запис EasyPost не має дозволу на окреме страхування. Попросіть службу підтримки EasyPost увімкнути його або додавайте страхування під час придбання етикетки.",
   "insuranceFromAddress": "Адреса відправника",
   "insuranceToAddress": "Адреса одержувача",
-
   "fieldTrackingCode": "Номер відстеження",
   "fieldCarrierHint": "Перевізник (наприклад, USPS)",
   "fieldInsuredAmount": "Страхова сума (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Сума (USD)",
   "fieldContactEmail": "Контактна електронна пошта",
   "fieldDescription": "Опис",
-
   "validationRequired": "Обов’язково",
   "validationEnterAmount": "Введіть суму",
   "validationEnterEmail": "Введіть електронну пошту",
   "validationDescribeIssue": "Опишіть проблему",
-
   "claimsEmpty": "Претензій ще немає. Торкніться «Подати претензію».",
   "claimsFile": "Подати претензію",
   "claimSubmit": "Надіслати претензію",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Втрата",
   "claimAttachmentNote": "Претензії щодо пошкодження та крадіжки потребують фотографії або рахунку як підтвердження. Подавайте їх у настільному застосунку, де можна долучити документи.",
   "claimAttachmentSnack": "Претензії щодо пошкодження та крадіжки потребують підтвердження, яке можна долучити лише в настільному застосунку. Претензію щодо втрати можна подати тут.",
-
   "pickupsEmpty": "Заборів ще не заплановано.",
   "pickupCancelTitle": "Скасувати забір?",
   "pickupCancelBody": "Скасувати забір {id}? Цю дію неможливо скасувати.",
   "pickupKeep": "Залишити",
   "pickupCancelConfirm": "Скасувати забір",
   "actionCancel": "Скасувати",
-
   "reportsShipments": "Відправлення",
   "reportsTotalSpend": "Загальні витрати",
   "reportsByCarrier": "За перевізником",
   "reportsEmpty": "Оплачених відправлень для звіту ще немає.",
   "reportsCarrierShipments": "Відправлення: {count}",
-
   "htsSearchLabel": "Пошук тарифних кодів",
   "htsSearchHint": "наприклад, мідний дріт",
   "htsSearchButton": "Шукати",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Скопіювати код",
   "htsCopied": "{code} скопійовано",
   "htsUnavailable": "Тарифна служба недоступна (помилка {code}). Спробуйте ще раз.",
-
   "pairTitle": "Прив’язати до комп’ютера",
   "pairInstructions": "Відкрийте Easy-Post Desktop, виберіть «Прив’язати мобільний додаток» і відскануйте показаний QR-код.",
   "pairEnterReviewCode": "Ввести код перевірки",
   "pairReviewDialogTitle": "Введення коду перевірки",
   "pairReviewCodeHint": "Код перевірки",
   "pairAction": "Прив’язати",
-
   "errorPairingCodeInvalid": "Цей код прив’язки недійсний або застарів. Створіть новий на комп’ютері.",
   "errorReviewCodeRejected": "Цей код перевірки не прийнято.",
   "errorUnexpectedPairingResponse": "Неочікувана відповідь служби прив’язки.",
   "errorNotPaired": "Цей пристрій більше не прив’язано. Прив’яжіть його знову з комп’ютера.",
   "errorNotPairedShort": "Цей пристрій більше не прив’язано.",
   "errorForbidden": "Ця дія недоступна з додатка.",
-  "errorRequestFailed": "Запит не виконано (помилка {code})."
+  "errorRequestFailed": "Запит не виконано (помилка {code}).",
+  "detailShipment": "Відправлення",
+  "detailInsurancePolicy": "Страховий поліс",
+  "detailClaim": "Претензія",
+  "detailPickup": "Забір",
+  "fieldCarrier": "Перевізник",
+  "fieldService": "Послуга",
+  "fieldStatus": "Статус",
+  "fieldCreated": "Створено",
+  "fieldAmount": "Сума",
+  "fieldProvider": "Постачальник",
+  "fieldReference": "Посилання",
+  "fieldPickupWindow": "Інтервал забору",
+  "fieldCost": "Вартість",
+  "detailNothingFurther": "Додаткових відомостей немає."
 }

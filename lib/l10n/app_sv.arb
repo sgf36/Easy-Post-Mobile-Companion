@@ -1,8 +1,6 @@
 {
   "@@locale": "sv",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Spårning",
   "navHistory": "Historik",
   "navInsurance": "Försäkring",
@@ -13,7 +11,6 @@
   "navSectionManage": "Spåra och hantera",
   "navSectionTools": "Verktyg",
   "drawerUnpair": "Koppla bort den här enheten",
-
   "statusPreTransit": "Före transport",
   "statusInTransit": "Under transport",
   "statusOutForDelivery": "Ute för leverans",
@@ -24,10 +21,8 @@
   "statusCancelled": "Avbruten",
   "statusError": "Fel",
   "statusUnknown": "Okänd",
-
   "carrierUnknown": "Okänd transportör",
   "carrierUnknownShort": "Okänd",
-
   "sortTooltip": "Sortera",
   "sortByStatus": "Sortera efter status",
   "sortByCarrier": "Sortera efter transportör",
@@ -42,22 +37,18 @@
   "trackersShowing": "Visar {shown} av {total}",
   "trackersNoMatch": "Inget matchar de aktuella filtren.",
   "etaLabel": "Ber. {date}",
-
   "detailEstimatedDelivery": "Beräknad leverans {date}",
   "detailSignedBy": "Signerad av {name}",
   "detailHistoryHeading": "Historik",
   "detailNoScanHistory": "Inga avläsningar ännu.",
   "detailMapUnavailable": "Karta är inte tillgänglig för dessa platser.",
-
   "historyEmpty": "Inga försändelser ännu.",
-
   "insuranceEmpty": "Inga försäkringar ännu. Tryck på ”Köp försäkring”.",
   "insuranceBuy": "Köp försäkring",
   "insuranceAmountRange": "Det försäkrade värdet måste ligga mellan 0,01 och 5 000 USD.",
   "insuranceNotEnabled": "Det här EasyPost-kontot är inte aktiverat för fristående försäkring. Be EasyPosts support att aktivera det, eller lägg till försäkring när fraktsedeln köps.",
   "insuranceFromAddress": "Avsändaradress",
   "insuranceToAddress": "Mottagaradress",
-
   "fieldTrackingCode": "Spårningsnummer",
   "fieldCarrierHint": "Transportör (t.ex. USPS)",
   "fieldInsuredAmount": "Försäkrat värde (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Belopp (USD)",
   "fieldContactEmail": "Kontakt-e-post",
   "fieldDescription": "Beskrivning",
-
   "validationRequired": "Obligatoriskt",
   "validationEnterAmount": "Ange ett belopp",
   "validationEnterEmail": "Ange en e-postadress",
   "validationDescribeIssue": "Beskriv problemet",
-
   "claimsEmpty": "Inga skadeanmälningar ännu. Tryck på ”Gör en skadeanmälan”.",
   "claimsFile": "Gör en skadeanmälan",
   "claimSubmit": "Skicka anmälan",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Förlust",
   "claimAttachmentNote": "Anmälningar om skada och stöld kräver ett foto eller en faktura som underlag. Gör dem i skrivbordsappen, där dokument kan bifogas.",
   "claimAttachmentSnack": "Anmälningar om skada och stöld kräver ett underlag, som bara kan bifogas i skrivbordsappen. En förlustanmälan kan göras här.",
-
   "pickupsEmpty": "Inga upphämtningar är bokade ännu.",
   "pickupCancelTitle": "Avbryta upphämtningen?",
   "pickupCancelBody": "Avbryta upphämtning {id}? Det går inte att ångra.",
   "pickupKeep": "Behåll",
   "pickupCancelConfirm": "Avbryt upphämtning",
   "actionCancel": "Avbryt",
-
   "reportsShipments": "Försändelser",
   "reportsTotalSpend": "Totala utgifter",
   "reportsByCarrier": "Per transportör",
   "reportsEmpty": "Inga köpta försändelser att rapportera ännu.",
   "reportsCarrierShipments": "Försändelser: {count}",
-
   "htsSearchLabel": "Sök tullkoder",
   "htsSearchHint": "t.ex. koppartråd",
   "htsSearchButton": "Sök",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Kopiera kod",
   "htsCopied": "{code} kopierad",
   "htsUnavailable": "Tulltjänsten är inte tillgänglig (fel {code}). Försök igen.",
-
   "pairTitle": "Parkoppla med datorn",
   "pairInstructions": "Öppna Easy-Post Desktop, välj ”Parkoppla mobilapp” och skanna QR-koden som visas där.",
   "pairEnterReviewCode": "Ange en granskningskod i stället",
   "pairReviewDialogTitle": "Ange granskningskod",
   "pairReviewCodeHint": "Granskningskod",
   "pairAction": "Parkoppla",
-
   "errorPairingCodeInvalid": "Den parkopplingskoden är ogiltig eller har gått ut. Skapa en ny på datorn.",
   "errorReviewCodeRejected": "Den granskningskoden godtogs inte.",
   "errorUnexpectedPairingResponse": "Oväntat svar från parkopplingstjänsten.",
   "errorNotPaired": "Den här enheten är inte längre parkopplad. Parkoppla den igen från datorn.",
   "errorNotPairedShort": "Den här enheten är inte längre parkopplad.",
   "errorForbidden": "Den åtgärden är inte tillåten från appen.",
-  "errorRequestFailed": "Begäran misslyckades (fel {code})."
+  "errorRequestFailed": "Begäran misslyckades (fel {code}).",
+  "detailShipment": "Försändelse",
+  "detailInsurancePolicy": "Försäkringsbrev",
+  "detailClaim": "Skadeanmälan",
+  "detailPickup": "Upphämtning",
+  "fieldCarrier": "Transportör",
+  "fieldService": "Tjänst",
+  "fieldStatus": "Status",
+  "fieldCreated": "Skapad",
+  "fieldAmount": "Belopp",
+  "fieldProvider": "Leverantör",
+  "fieldReference": "Referens",
+  "fieldPickupWindow": "Upphämtningsfönster",
+  "fieldCost": "Kostnad",
+  "detailNothingFurther": "Inga fler uppgifter."
 }

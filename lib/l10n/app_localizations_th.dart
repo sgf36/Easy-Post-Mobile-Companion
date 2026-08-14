@@ -371,4 +371,46 @@ class AppLocalizationsTh extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'คำขอล้มเหลว (ข้อผิดพลาด $code)';
   }
+
+  @override
+  String get detailShipment => 'การจัดส่ง';
+
+  @override
+  String get detailInsurancePolicy => 'กรมธรรม์ประกันภัย';
+
+  @override
+  String get detailClaim => 'การเรียกร้อง';
+
+  @override
+  String get detailPickup => 'การเข้ารับพัสดุ';
+
+  @override
+  String get fieldCarrier => 'ผู้ให้บริการขนส่ง';
+
+  @override
+  String get fieldService => 'บริการ';
+
+  @override
+  String get fieldStatus => 'สถานะ';
+
+  @override
+  String get fieldCreated => 'สร้างเมื่อ';
+
+  @override
+  String get fieldAmount => 'จำนวนเงิน';
+
+  @override
+  String get fieldProvider => 'ผู้ให้บริการ';
+
+  @override
+  String get fieldReference => 'หมายเลขอ้างอิง';
+
+  @override
+  String get fieldPickupWindow => 'ช่วงเวลาเข้ารับพัสดุ';
+
+  @override
+  String get fieldCost => 'ค่าใช้จ่าย';
+
+  @override
+  String get detailNothingFurther => 'ไม่มีรายละเอียดเพิ่มเติม';
 }

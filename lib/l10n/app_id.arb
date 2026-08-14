@@ -1,8 +1,6 @@
 {
   "@@locale": "id",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "Pelacakan",
   "navHistory": "Riwayat",
   "navInsurance": "Asuransi",
@@ -13,7 +11,6 @@
   "navSectionManage": "Lacak dan kelola",
   "navSectionTools": "Alat",
   "drawerUnpair": "Putuskan pasangan perangkat ini",
-
   "statusPreTransit": "Sebelum pengiriman",
   "statusInTransit": "Dalam pengiriman",
   "statusOutForDelivery": "Sedang diantar",
@@ -24,10 +21,8 @@
   "statusCancelled": "Dibatalkan",
   "statusError": "Kesalahan",
   "statusUnknown": "Tidak diketahui",
-
   "carrierUnknown": "Kurir tidak diketahui",
   "carrierUnknownShort": "Tidak diketahui",
-
   "sortTooltip": "Urutkan",
   "sortByStatus": "Urutkan menurut status",
   "sortByCarrier": "Urutkan menurut kurir",
@@ -42,22 +37,18 @@
   "trackersShowing": "Menampilkan {shown} dari {total}",
   "trackersNoMatch": "Tidak ada yang cocok dengan filter saat ini.",
   "etaLabel": "Perk. {date}",
-
   "detailEstimatedDelivery": "Estimasi pengiriman {date}",
   "detailSignedBy": "Ditandatangani oleh {name}",
   "detailHistoryHeading": "Riwayat",
   "detailNoScanHistory": "Belum ada catatan pemindaian.",
   "detailMapUnavailable": "Peta tidak tersedia untuk lokasi ini.",
-
   "historyEmpty": "Belum ada pengiriman.",
-
   "insuranceEmpty": "Belum ada polis. Ketuk «Beli asuransi».",
   "insuranceBuy": "Beli asuransi",
   "insuranceAmountRange": "Nilai pertanggungan harus antara 0,01 dan 5.000 USD.",
   "insuranceNotEnabled": "Akun EasyPost ini tidak diaktifkan untuk asuransi mandiri. Minta dukungan EasyPost mengaktifkannya, atau tambahkan asuransi saat membeli label.",
   "insuranceFromAddress": "Alamat pengirim",
   "insuranceToAddress": "Alamat penerima",
-
   "fieldTrackingCode": "Nomor resi",
   "fieldCarrierHint": "Kurir (mis. USPS)",
   "fieldInsuredAmount": "Nilai pertanggungan (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "Jumlah (USD)",
   "fieldContactEmail": "Email kontak",
   "fieldDescription": "Deskripsi",
-
   "validationRequired": "Wajib diisi",
   "validationEnterAmount": "Masukkan jumlah",
   "validationEnterEmail": "Masukkan email",
   "validationDescribeIssue": "Jelaskan masalahnya",
-
   "claimsEmpty": "Belum ada klaim. Ketuk «Ajukan klaim».",
   "claimsFile": "Ajukan klaim",
   "claimSubmit": "Kirim klaim",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "Kehilangan",
   "claimAttachmentNote": "Klaim kerusakan dan pencurian memerlukan foto atau faktur sebagai bukti. Ajukan lewat aplikasi desktop, tempat dokumen dapat dilampirkan.",
   "claimAttachmentSnack": "Klaim kerusakan dan pencurian memerlukan bukti yang hanya dapat dilampirkan di aplikasi desktop. Klaim kehilangan dapat diajukan di sini.",
-
   "pickupsEmpty": "Belum ada penjemputan terjadwal.",
   "pickupCancelTitle": "Batalkan penjemputan?",
   "pickupCancelBody": "Batalkan penjemputan {id}? Tindakan ini tidak dapat dibatalkan.",
   "pickupKeep": "Pertahankan",
   "pickupCancelConfirm": "Batalkan penjemputan",
   "actionCancel": "Batal",
-
   "reportsShipments": "Pengiriman",
   "reportsTotalSpend": "Total pengeluaran",
   "reportsByCarrier": "Per kurir",
   "reportsEmpty": "Belum ada pengiriman terbeli untuk dilaporkan.",
   "reportsCarrierShipments": "Pengiriman: {count}",
-
   "htsSearchLabel": "Cari kode tarif",
   "htsSearchHint": "mis. kawat tembaga",
   "htsSearchButton": "Cari",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "Salin kode",
   "htsCopied": "{code} disalin",
   "htsUnavailable": "Layanan tarif tidak tersedia (kesalahan {code}). Silakan coba lagi.",
-
   "pairTitle": "Pasangkan dengan desktop",
   "pairInstructions": "Buka Easy-Post Desktop, pilih «Pasangkan aplikasi seluler», lalu pindai kode QR yang ditampilkan.",
   "pairEnterReviewCode": "Masukkan kode peninjauan saja",
   "pairReviewDialogTitle": "Masukkan kode peninjauan",
   "pairReviewCodeHint": "Kode peninjauan",
   "pairAction": "Pasangkan",
-
   "errorPairingCodeInvalid": "Kode pemasangan ini tidak valid atau telah kedaluwarsa. Buat yang baru di desktop.",
   "errorReviewCodeRejected": "Kode peninjauan ini tidak diterima.",
   "errorUnexpectedPairingResponse": "Respons tak terduga dari layanan pemasangan.",
   "errorNotPaired": "Perangkat ini tidak lagi terpasang. Pasangkan lagi dari desktop.",
   "errorNotPairedShort": "Perangkat ini tidak lagi terpasang.",
   "errorForbidden": "Tindakan itu tidak diizinkan dari aplikasi.",
-  "errorRequestFailed": "Permintaan gagal (kesalahan {code})."
+  "errorRequestFailed": "Permintaan gagal (kesalahan {code}).",
+  "detailShipment": "Pengiriman",
+  "detailInsurancePolicy": "Polis asuransi",
+  "detailClaim": "Klaim",
+  "detailPickup": "Penjemputan",
+  "fieldCarrier": "Kurir",
+  "fieldService": "Layanan",
+  "fieldStatus": "Status",
+  "fieldCreated": "Dibuat",
+  "fieldAmount": "Jumlah",
+  "fieldProvider": "Penyedia",
+  "fieldReference": "Referensi",
+  "fieldPickupWindow": "Jendela penjemputan",
+  "fieldCost": "Biaya",
+  "detailNothingFurther": "Tidak ada detail lain."
 }

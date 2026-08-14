@@ -80,6 +80,73 @@ void main() {
 /// Store capture showed "26.45 USD" for 8.40 USD plus 6.85 and 11.20 GBP — a
 /// wrong number, stated confidently, on a public listing.
 void _spendTests() {
+  group('formatAddress', () {
+    test('joins only the lines the address actually carries', () {
+      expect(
+        formatAddress({
+          'name': 'Acme Ltd',
+          'street1': '10 Downing Street',
+          'street2': '',
+          'city': 'London',
+          'state': null,
+          'zip': 'SW1A 2AA',
+          'country': 'GB',
+        }),
+        'Acme Ltd, 10 Downing Street, London, SW1A 2AA, GB',
+      );
+    });
+
+    test('does not print a company that merely repeats the name', () {
+      expect(
+        formatAddress({'name': 'Acme Ltd', 'company': 'ACME LTD', 'city': 'London'}),
+        'Acme Ltd, London',
+      );
+    });
+
+    test('an absent or malformed address is empty, not a row of commas', () {
+      expect(formatAddress(null), '');
+      expect(formatAddress('221B Baker Street'), '');
+      expect(formatAddress(const {}), '');
+      expect(formatAddress(const {'city': '', 'country': ''}), '');
+    });
+  });
+
+  group('formatMoney', () {
+    test('renders the exact string the Insurance list got wrong', () {
+      // EasyPost sends an insurance amount as "5000.00000". The list printed
+      // '$' + that, verbatim: "$5000.00000".
+      expect(formatMoney('5000.00000'), '5,000.00 USD');
+    });
+
+    test('groups thousands and stops at two decimals', () {
+      expect(formatMoney('1234567.89123'), '1,234,567.89 USD');
+      expect(formatMoney(42), '42.00 USD');
+    });
+
+    test('never asserts a currency symbol', () {
+      expect(formatMoney('10.00', currency: 'EUR'), isNot(contains(r'$')));
+      expect(formatMoney('10.00', currency: 'EUR'), '10.00 EUR');
+    });
+
+    test('follows the locale rather than a hardcoded separator', () {
+      // German swaps both separators; "1.234,56" is a different number in
+      // English, so this is a correctness case and not a cosmetic one.
+      expect(formatMoney('1234.56', locale: 'de'), '1.234,56 USD');
+    });
+
+    test('a missing amount stays missing rather than becoming zero', () {
+      expect(formatMoney(null), '');
+      expect(formatMoney(''), '');
+      expect(formatMoney('not a number'), '');
+      // A real zero is still a figure worth printing.
+      expect(formatMoney('0'), '0.00 USD');
+    });
+
+    test('an unnamed currency prints the figure alone', () {
+      expect(formatMoney('12.5', currency: ''), '12.50');
+    });
+  });
+
   group('formatSpend', () {
     test('keeps currencies apart instead of summing them', () {
       // Exactly the fixture data that produced the bad screenshot.

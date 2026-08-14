@@ -1,8 +1,6 @@
 {
   "@@locale": "hi",
-
   "appTitle": "Easy-Post Mobile Companion",
-
   "navTracking": "ट्रैकिंग",
   "navHistory": "इतिहास",
   "navInsurance": "बीमा",
@@ -13,7 +11,6 @@
   "navSectionManage": "ट्रैकिंग और प्रबंधन",
   "navSectionTools": "उपकरण",
   "drawerUnpair": "इस डिवाइस का युग्मन हटाएँ",
-
   "statusPreTransit": "परिवहन से पहले",
   "statusInTransit": "रास्ते में",
   "statusOutForDelivery": "डिलीवरी के लिए निकला",
@@ -24,10 +21,8 @@
   "statusCancelled": "रद्द",
   "statusError": "त्रुटि",
   "statusUnknown": "अज्ञात",
-
   "carrierUnknown": "अज्ञात कैरियर",
   "carrierUnknownShort": "अज्ञात",
-
   "sortTooltip": "क्रमबद्ध करें",
   "sortByStatus": "स्थिति के अनुसार क्रमबद्ध करें",
   "sortByCarrier": "कैरियर के अनुसार क्रमबद्ध करें",
@@ -42,22 +37,18 @@
   "trackersShowing": "{total} में से {shown} दिखाए जा रहे हैं",
   "trackersNoMatch": "वर्तमान फ़िल्टर से कुछ भी मेल नहीं खाता।",
   "etaLabel": "अनु. {date}",
-
   "detailEstimatedDelivery": "अनुमानित डिलीवरी {date}",
   "detailSignedBy": "{name} द्वारा हस्ताक्षरित",
   "detailHistoryHeading": "इतिहास",
   "detailNoScanHistory": "अभी तक कोई स्कैन रिकॉर्ड नहीं।",
   "detailMapUnavailable": "इन स्थानों के लिए मानचित्र उपलब्ध नहीं है।",
-
   "historyEmpty": "अभी तक कोई शिपमेंट नहीं।",
-
   "insuranceEmpty": "अभी तक कोई बीमा पॉलिसी नहीं। «बीमा खरीदें» पर टैप करें।",
   "insuranceBuy": "बीमा खरीदें",
   "insuranceAmountRange": "बीमित राशि 0.01 और 5,000 USD के बीच होनी चाहिए।",
   "insuranceNotEnabled": "यह EasyPost खाता स्वतंत्र बीमा के लिए सक्षम नहीं है। EasyPost सहायता से इसे सक्षम कराने को कहें, या लेबल खरीदते समय बीमा जोड़ें।",
   "insuranceFromAddress": "प्रेषक का पता",
   "insuranceToAddress": "प्राप्तकर्ता का पता",
-
   "fieldTrackingCode": "ट्रैकिंग कोड",
   "fieldCarrierHint": "कैरियर (जैसे USPS)",
   "fieldInsuredAmount": "बीमित राशि (USD)",
@@ -71,12 +62,10 @@
   "fieldAmountUsd": "राशि (USD)",
   "fieldContactEmail": "संपर्क ईमेल",
   "fieldDescription": "विवरण",
-
   "validationRequired": "आवश्यक",
   "validationEnterAmount": "राशि दर्ज करें",
   "validationEnterEmail": "ईमेल दर्ज करें",
   "validationDescribeIssue": "समस्या का वर्णन करें",
-
   "claimsEmpty": "अभी तक कोई दावा दर्ज नहीं। «दावा दर्ज करें» पर टैप करें।",
   "claimsFile": "दावा दर्ज करें",
   "claimSubmit": "दावा भेजें",
@@ -85,20 +74,17 @@
   "claimTypeLoss": "हानि",
   "claimAttachmentNote": "क्षति और चोरी के दावों के लिए प्रमाण के तौर पर फ़ोटो या चालान आवश्यक है। इन्हें डेस्कटॉप ऐप से दर्ज करें, जहाँ दस्तावेज़ संलग्न किए जा सकते हैं।",
   "claimAttachmentSnack": "क्षति और चोरी के दावों के लिए प्रमाण आवश्यक है, जिसे केवल डेस्कटॉप ऐप में संलग्न किया जा सकता है। हानि का दावा यहाँ दर्ज किया जा सकता है।",
-
   "pickupsEmpty": "अभी तक कोई पिकअप निर्धारित नहीं।",
   "pickupCancelTitle": "पिकअप रद्द करें?",
   "pickupCancelBody": "पिकअप {id} रद्द करें? इसे पूर्ववत नहीं किया जा सकता।",
   "pickupKeep": "रहने दें",
   "pickupCancelConfirm": "पिकअप रद्द करें",
   "actionCancel": "रद्द करें",
-
   "reportsShipments": "शिपमेंट",
   "reportsTotalSpend": "कुल खर्च",
   "reportsByCarrier": "कैरियर के अनुसार",
   "reportsEmpty": "रिपोर्ट के लिए अभी तक कोई खरीदा गया शिपमेंट नहीं।",
   "reportsCarrierShipments": "शिपमेंट: {count}",
-
   "htsSearchLabel": "टैरिफ कोड खोजें",
   "htsSearchHint": "जैसे तांबे का तार",
   "htsSearchButton": "खोजें",
@@ -111,19 +97,31 @@
   "htsCopyTooltip": "कोड कॉपी करें",
   "htsCopied": "{code} कॉपी किया गया",
   "htsUnavailable": "टैरिफ सेवा उपलब्ध नहीं है (त्रुटि {code})। कृपया पुनः प्रयास करें।",
-
   "pairTitle": "डेस्कटॉप से जोड़ें",
   "pairInstructions": "Easy-Post Desktop खोलें, «मोबाइल ऐप जोड़ें» चुनें और वहाँ दिखाया गया QR कोड स्कैन करें।",
   "pairEnterReviewCode": "इसके बजाय समीक्षा कोड दर्ज करें",
   "pairReviewDialogTitle": "समीक्षा कोड दर्ज करें",
   "pairReviewCodeHint": "समीक्षा कोड",
   "pairAction": "जोड़ें",
-
   "errorPairingCodeInvalid": "यह युग्मन कोड अमान्य है या समाप्त हो चुका है। डेस्कटॉप पर नया कोड बनाएँ।",
   "errorReviewCodeRejected": "यह समीक्षा कोड स्वीकार नहीं किया गया।",
   "errorUnexpectedPairingResponse": "युग्मन सेवा से अप्रत्याशित प्रतिक्रिया।",
   "errorNotPaired": "यह डिवाइस अब युग्मित नहीं है। डेस्कटॉप से दोबारा जोड़ें।",
   "errorNotPairedShort": "यह डिवाइस अब युग्मित नहीं है।",
   "errorForbidden": "यह क्रिया ऐप से अनुमत नहीं है।",
-  "errorRequestFailed": "अनुरोध विफल (त्रुटि {code})।"
+  "errorRequestFailed": "अनुरोध विफल (त्रुटि {code})।",
+  "detailShipment": "शिपमेंट",
+  "detailInsurancePolicy": "बीमा पॉलिसी",
+  "detailClaim": "दावा",
+  "detailPickup": "पिकअप",
+  "fieldCarrier": "वाहक",
+  "fieldService": "सेवा",
+  "fieldStatus": "स्थिति",
+  "fieldCreated": "बनाया गया",
+  "fieldAmount": "राशि",
+  "fieldProvider": "प्रदाता",
+  "fieldReference": "संदर्भ",
+  "fieldPickupWindow": "पिकअप अवधि",
+  "fieldCost": "लागत",
+  "detailNothingFurther": "कोई अतिरिक्त विवरण नहीं।"
 }

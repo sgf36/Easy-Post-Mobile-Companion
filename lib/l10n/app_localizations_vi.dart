@@ -372,4 +372,46 @@ class AppLocalizationsVi extends AppLocalizations {
   String errorRequestFailed(int code) {
     return 'Yêu cầu thất bại (lỗi $code).';
   }
+
+  @override
+  String get detailShipment => 'Lô hàng';
+
+  @override
+  String get detailInsurancePolicy => 'Hợp đồng bảo hiểm';
+
+  @override
+  String get detailClaim => 'Yêu cầu bồi thường';
+
+  @override
+  String get detailPickup => 'Lấy hàng';
+
+  @override
+  String get fieldCarrier => 'Đơn vị vận chuyển';
+
+  @override
+  String get fieldService => 'Dịch vụ';
+
+  @override
+  String get fieldStatus => 'Trạng thái';
+
+  @override
+  String get fieldCreated => 'Đã tạo';
+
+  @override
+  String get fieldAmount => 'Số tiền';
+
+  @override
+  String get fieldProvider => 'Nhà cung cấp';
+
+  @override
+  String get fieldReference => 'Tham chiếu';
+
+  @override
+  String get fieldPickupWindow => 'Khung giờ lấy hàng';
+
+  @override
+  String get fieldCost => 'Chi phí';
+
+  @override
+  String get detailNothingFurther => 'Không có thêm chi tiết.';
 }
