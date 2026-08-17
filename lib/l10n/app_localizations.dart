@@ -409,7 +409,7 @@ abstract class AppLocalizations {
   /// No description provided for @insuranceEmpty.
   ///
   /// In en, this message translates to:
-  /// **'No insurance policies yet. Tap “Buy insurance”.'**
+  /// **'No insurance policies yet.'**
   String get insuranceEmpty;
 
   /// No description provided for @insuranceBuy.
@@ -547,7 +547,7 @@ abstract class AppLocalizations {
   /// No description provided for @claimsEmpty.
   ///
   /// In en, this message translates to:
-  /// **'No claims filed yet. Tap “File a claim”.'**
+  /// **'No claims filed yet.'**
   String get claimsEmpty;
 
   /// No description provided for @claimsFile.

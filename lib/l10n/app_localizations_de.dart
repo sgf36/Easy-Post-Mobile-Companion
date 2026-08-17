@@ -147,8 +147,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get historyEmpty => 'Noch keine Sendungen.';
 
   @override
-  String get insuranceEmpty =>
-      'Noch keine Versicherungen. Tippen Sie auf „Versicherung abschließen“.';
+  String get insuranceEmpty => 'Noch keine Versicherungen.';
 
   @override
   String get insuranceBuy => 'Versicherung abschließen';
@@ -219,8 +218,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get validationDescribeIssue => 'Beschreiben Sie das Problem';
 
   @override
-  String get claimsEmpty =>
-      'Noch keine Schadensfälle. Tippen Sie auf „Schadensfall melden“.';
+  String get claimsEmpty => 'Noch keine Schadensfälle.';
 
   @override
   String get claimsFile => 'Schadensfall melden';

@@ -146,7 +146,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get historyEmpty => 'لا توجد شحنات بعد.';
 
   @override
-  String get insuranceEmpty => 'لا توجد وثائق تأمين بعد. اضغط «شراء التأمين».';
+  String get insuranceEmpty => 'لا توجد وثائق تأمين بعد.';
 
   @override
   String get insuranceBuy => 'شراء التأمين';
@@ -217,7 +217,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get validationDescribeIssue => 'صف المشكلة';
 
   @override
-  String get claimsEmpty => 'لا توجد مطالبات بعد. اضغط «تقديم مطالبة».';
+  String get claimsEmpty => 'لا توجد مطالبات بعد.';
 
   @override
   String get claimsFile => 'تقديم مطالبة';

@@ -94,7 +94,7 @@
   "detailNoScanHistory": "No scan history yet.",
   "detailMapUnavailable": "Map unavailable for these locations.",
   "historyEmpty": "No shipments yet.",
-  "insuranceEmpty": "No insurance policies yet. Tap “Buy insurance”.",
+  "insuranceEmpty": "No insurance policies yet.",
   "insuranceBuy": "Buy insurance",
   "insuranceAmountRange": "Insured amount must be between $0.01 and $5,000 USD.",
   "@insuranceAmountRange": {
@@ -123,7 +123,7 @@
   "validationEnterAmount": "Enter an amount",
   "validationEnterEmail": "Enter an email",
   "validationDescribeIssue": "Describe the issue",
-  "claimsEmpty": "No claims filed yet. Tap “File a claim”.",
+  "claimsEmpty": "No claims filed yet.",
   "claimsFile": "File a claim",
   "claimSubmit": "File claim",
   "claimTypeDamage": "Damage",

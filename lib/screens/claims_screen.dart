@@ -34,24 +34,16 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
     await f.catchError((_) => <Map<String, dynamic>>[]);
   }
 
-  Future<void> _openForm() async {
-    final created = await Navigator.of(context).push<bool>(
-      MaterialPageRoute(builder: (_) => _ClaimForm(creds: widget.creds, proxy: _proxy)),
-    );
-    if (created == true) _refresh();
-  }
-
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: Text(t.navClaims)),
       drawer: NavDrawer(nav: widget.nav),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _openForm,
-        icon: const Icon(Icons.add),
-        label: Text(t.claimsFile),
-      ),
+      // Filing a claim is deliberately absent on mobile — see the note in
+      // insurance_screen.dart. Apple rejected 1.0 under guideline 5.1.1(ix),
+      // which restricts highly regulated services to organization accounts.
+      // This screen only shows claims raised from the desktop application.
       body: RefreshIndicator(
         onRefresh: _refresh,
         child: FutureBuilder<List<Map<String, dynamic>>>(
@@ -141,142 +133,5 @@ String _claimType(AppLocalizations t, Object? raw) {
       return t.claimTypeLoss;
     default:
       return type.replaceAll('_', ' ');
-  }
-}
-
-class _ClaimForm extends StatefulWidget {
-  final PairingCredentials creds;
-  final ProxyClient proxy;
-  const _ClaimForm({required this.creds, required this.proxy});
-
-  @override
-  State<_ClaimForm> createState() => _ClaimFormState();
-}
-
-class _ClaimFormState extends State<_ClaimForm> {
-  final _form = GlobalKey<FormState>();
-  final _tracking = TextEditingController();
-  final _amount = TextEditingController();
-  final _email = TextEditingController();
-  final _description = TextEditingController();
-  String _type = 'damage';
-  bool _busy = false;
-
-  @override
-  void dispose() {
-    _tracking.dispose();
-    _amount.dispose();
-    _email.dispose();
-    _description.dispose();
-    super.dispose();
-  }
-
-  /// Damage and theft claims are refused by EasyPost without at least one
-  /// supporting document ("At least one supporting documentation attachment is
-  /// required for theft or damage claims"). The phone cannot attach one yet, so
-  /// this says so plainly instead of sending a request that always fails.
-  bool get _needsAttachment => _type == 'damage' || _type == 'theft';
-
-  Future<void> _submit() async {
-    final t = AppLocalizations.of(context);
-    if (!_form.currentState!.validate()) return;
-    if (_needsAttachment) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(t.claimAttachmentSnack)),
-      );
-      return;
-    }
-    setState(() => _busy = true);
-    try {
-      await widget.proxy.fileClaim(widget.creds, {
-        'tracking_code': _tracking.text.trim(),
-        'type': _type,
-        'amount': _amount.text.trim(),
-        // `contact_email`, not `email`. EasyPost rejects the request outright
-        // otherwise — "contact_email: field required" — so every claim filed
-        // from the phone failed, whatever was typed here.
-        'contact_email': _email.text.trim(),
-        'description': _description.text.trim(),
-      });
-      if (!mounted) return;
-      Navigator.of(context).pop(true);
-    } catch (e) {
-      if (mounted) {
-        setState(() => _busy = false);
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(describeError(t, e))));
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final t = AppLocalizations.of(context);
-    return Scaffold(
-      appBar: AppBar(title: Text(t.claimsFile)),
-      body: Form(
-        key: _form,
-        child: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            TextFormField(
-              controller: _tracking,
-              decoration: InputDecoration(
-                  labelText: t.fieldTrackingCode, border: const OutlineInputBorder()),
-              validator: (v) => (v == null || v.trim().isEmpty) ? t.validationRequired : null,
-            ),
-            const SizedBox(height: 12),
-            DropdownButtonFormField<String>(
-              initialValue: _type,
-              decoration:
-                  InputDecoration(labelText: t.fieldType, border: const OutlineInputBorder()),
-              items: [
-                DropdownMenuItem(value: 'damage', child: Text(t.claimTypeDamage)),
-                DropdownMenuItem(value: 'theft', child: Text(t.claimTypeTheft)),
-                DropdownMenuItem(value: 'loss', child: Text(t.claimTypeLoss)),
-              ],
-              onChanged: (v) => setState(() => _type = v ?? 'damage'),
-            ),
-            if (_needsAttachment) ...[
-              const SizedBox(height: 8),
-              Text(t.claimAttachmentNote),
-            ],
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: _amount,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              decoration: InputDecoration(
-                  labelText: t.fieldAmountUsd, border: const OutlineInputBorder()),
-              validator: (v) =>
-                  (double.tryParse(v?.trim() ?? '') == null) ? t.validationEnterAmount : null,
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: _email,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  labelText: t.fieldContactEmail, border: const OutlineInputBorder()),
-              validator: (v) => (v == null || !v.contains('@')) ? t.validationEnterEmail : null,
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: _description,
-              maxLines: 3,
-              decoration: InputDecoration(
-                  labelText: t.fieldDescription, border: const OutlineInputBorder()),
-              validator: (v) =>
-                  (v == null || v.trim().isEmpty) ? t.validationDescribeIssue : null,
-            ),
-            const SizedBox(height: 20),
-            FilledButton(
-              onPressed: _busy ? null : _submit,
-              child: _busy
-                  ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
-                  : Text(t.claimSubmit),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

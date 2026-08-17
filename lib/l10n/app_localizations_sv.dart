@@ -147,8 +147,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get historyEmpty => 'Inga försändelser ännu.';
 
   @override
-  String get insuranceEmpty =>
-      'Inga försäkringar ännu. Tryck på ”Köp försäkring”.';
+  String get insuranceEmpty => 'Inga försäkringar ännu.';
 
   @override
   String get insuranceBuy => 'Köp försäkring';
@@ -219,8 +218,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get validationDescribeIssue => 'Beskriv problemet';
 
   @override
-  String get claimsEmpty =>
-      'Inga skadeanmälningar ännu. Tryck på ”Gör en skadeanmälan”.';
+  String get claimsEmpty => 'Inga skadeanmälningar ännu.';
 
   @override
   String get claimsFile => 'Gör en skadeanmälan';

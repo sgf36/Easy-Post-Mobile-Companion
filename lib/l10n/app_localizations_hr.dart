@@ -146,7 +146,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get historyEmpty => 'Još nema pošiljaka.';
 
   @override
-  String get insuranceEmpty => 'Još nema polica. Dodirnite „Kupi osiguranje”.';
+  String get insuranceEmpty => 'Još nema polica.';
 
   @override
   String get insuranceBuy => 'Kupi osiguranje';
@@ -217,7 +217,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get validationDescribeIssue => 'Opišite problem';
 
   @override
-  String get claimsEmpty => 'Još nema zahtjeva. Dodirnite „Podnesi zahtjev”.';
+  String get claimsEmpty => 'Još nema zahtjeva.';
 
   @override
   String get claimsFile => 'Podnesi zahtjev';

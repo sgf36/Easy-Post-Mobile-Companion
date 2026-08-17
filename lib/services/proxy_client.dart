@@ -241,14 +241,21 @@ class ProxyClient {
     return (data is Map) ? data.cast<String, dynamic>() : <String, dynamic>{};
   }
 
-  /// Buy standalone insurance. `insurance` carries tracking_code, carrier,
-  /// amount and the to/from addresses.
-  Future<Map<String, dynamic>> buyInsurance(PairingCredentials c, Map<String, dynamic> insurance) =>
-      _post(c, '/ep/insurances', {'insurance': insurance});
-
-  /// File a claim (fields sent at the top level per the EasyPost claims API).
-  Future<Map<String, dynamic>> fileClaim(PairingCredentials c, Map<String, dynamic> claim) =>
-      _post(c, '/ep/claims', claim);
+  // There is deliberately no method to buy insurance or file a claim.
+  //
+  // Both existed in 1.0 and both were removed after App Review rejected that
+  // build under guideline 5.1.1(ix): buying insurance and filing claims count
+  // as "highly regulated services", which Apple permits only from a Developer
+  // Program account enrolled as an organization rather than an individual.
+  //
+  // They are absent rather than merely unreachable from the interface, so that
+  // adding a button cannot silently restore a regulated action. Both remain
+  // available in Easy-Post Desktop, which is not distributed through Apple's
+  // review process on Windows and does not carry this restriction.
+  //
+  // If the account is ever enrolled as an organization, restore them together
+  // with the listing text and the reviewer notes, all three of which now state
+  // that the mobile application is read-only.
 
   /// Cancel a scheduled pickup.
   Future<Map<String, dynamic>> cancelPickup(PairingCredentials c, String id) =>

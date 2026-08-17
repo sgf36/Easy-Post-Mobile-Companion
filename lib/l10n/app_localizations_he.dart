@@ -146,7 +146,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get historyEmpty => 'אין עדיין משלוחים.';
 
   @override
-  String get insuranceEmpty => 'אין עדיין פוליסות. יש להקיש על «רכישת ביטוח».';
+  String get insuranceEmpty => 'אין עדיין פוליסות.';
 
   @override
   String get insuranceBuy => 'רכישת ביטוח';
@@ -217,7 +217,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get validationDescribeIssue => 'יש לתאר את הבעיה';
 
   @override
-  String get claimsEmpty => 'אין עדיין תביעות. יש להקיש על «הגשת תביעה».';
+  String get claimsEmpty => 'אין עדיין תביעות.';
 
   @override
   String get claimsFile => 'הגשת תביעה';
