@@ -146,7 +146,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get historyEmpty => '아직 배송 내역이 없습니다.';
 
   @override
-  String get insuranceEmpty => '아직 보험이 없습니다. ‘보험 구매’를 누르세요.';
+  String get insuranceEmpty => '아직 보험이 없습니다.';
 
   @override
   String get insuranceBuy => '보험 구매';
@@ -216,7 +216,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get validationDescribeIssue => '문제를 설명하세요';
 
   @override
-  String get claimsEmpty => '아직 청구가 없습니다. ‘배상 청구하기’를 누르세요.';
+  String get claimsEmpty => '아직 청구가 없습니다.';
 
   @override
   String get claimsFile => '배상 청구하기';

@@ -147,8 +147,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get historyEmpty => 'Δεν υπάρχουν ακόμη αποστολές.';
 
   @override
-  String get insuranceEmpty =>
-      'Δεν υπάρχουν ακόμη ασφαλιστήρια. Πατήστε «Αγορά ασφάλισης».';
+  String get insuranceEmpty => 'Δεν υπάρχουν ακόμη ασφαλιστήρια.';
 
   @override
   String get insuranceBuy => 'Αγορά ασφάλισης';
@@ -219,8 +218,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get validationDescribeIssue => 'Περιγράψτε το πρόβλημα';
 
   @override
-  String get claimsEmpty =>
-      'Δεν υπάρχουν ακόμη αιτήματα. Πατήστε «Υποβολή αιτήματος».';
+  String get claimsEmpty => 'Δεν υπάρχουν ακόμη αιτήματα.';
 
   @override
   String get claimsFile => 'Υποβολή αιτήματος';

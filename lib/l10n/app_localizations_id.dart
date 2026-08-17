@@ -146,7 +146,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get historyEmpty => 'Belum ada pengiriman.';
 
   @override
-  String get insuranceEmpty => 'Belum ada polis. Ketuk «Beli asuransi».';
+  String get insuranceEmpty => 'Belum ada polis.';
 
   @override
   String get insuranceBuy => 'Beli asuransi';
@@ -217,7 +217,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get validationDescribeIssue => 'Jelaskan masalahnya';
 
   @override
-  String get claimsEmpty => 'Belum ada klaim. Ketuk «Ajukan klaim».';
+  String get claimsEmpty => 'Belum ada klaim.';
 
   @override
   String get claimsFile => 'Ajukan klaim';

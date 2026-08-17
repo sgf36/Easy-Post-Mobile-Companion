@@ -146,7 +146,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get historyEmpty => 'ยังไม่มีพัสดุ';
 
   @override
-  String get insuranceEmpty => 'ยังไม่มีกรมธรรม์ แตะ «ซื้อประกัน»';
+  String get insuranceEmpty => 'ยังไม่มีกรมธรรม์';
 
   @override
   String get insuranceBuy => 'ซื้อประกัน';
@@ -217,7 +217,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get validationDescribeIssue => 'อธิบายปัญหา';
 
   @override
-  String get claimsEmpty => 'ยังไม่มีการยื่นเคลม แตะ «ยื่นเคลม»';
+  String get claimsEmpty => 'ยังไม่มีการยื่นเคลม';
 
   @override
   String get claimsFile => 'ยื่นเคลม';

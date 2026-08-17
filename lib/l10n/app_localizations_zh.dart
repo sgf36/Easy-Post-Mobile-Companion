@@ -146,7 +146,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get historyEmpty => '暂无包裹。';
 
   @override
-  String get insuranceEmpty => '暂无保单。点按“购买保险”。';
+  String get insuranceEmpty => '暂无保单。';
 
   @override
   String get insuranceBuy => '购买保险';
@@ -216,7 +216,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get validationDescribeIssue => '请描述问题';
 
   @override
-  String get claimsEmpty => '暂无理赔。点按“提交理赔”。';
+  String get claimsEmpty => '暂无理赔。';
 
   @override
   String get claimsFile => '提交理赔';

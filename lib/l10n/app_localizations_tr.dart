@@ -146,8 +146,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get historyEmpty => 'Henüz gönderi yok.';
 
   @override
-  String get insuranceEmpty =>
-      'Henüz poliçe yok. “Sigorta satın al” seçeneğine dokunun.';
+  String get insuranceEmpty => 'Henüz poliçe yok.';
 
   @override
   String get insuranceBuy => 'Sigorta satın al';
@@ -218,8 +217,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get validationDescribeIssue => 'Sorunu açıklayın';
 
   @override
-  String get claimsEmpty =>
-      'Henüz talep yok. “Talep oluştur” seçeneğine dokunun.';
+  String get claimsEmpty => 'Henüz talep yok.';
 
   @override
   String get claimsFile => 'Talep oluştur';

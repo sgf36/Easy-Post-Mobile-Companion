@@ -146,8 +146,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get historyEmpty => 'Zatím žádné zásilky.';
 
   @override
-  String get insuranceEmpty =>
-      'Zatím žádné pojistky. Klepněte na „Zakoupit pojištění“.';
+  String get insuranceEmpty => 'Zatím žádné pojistky.';
 
   @override
   String get insuranceBuy => 'Zakoupit pojištění';
@@ -218,8 +217,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get validationDescribeIssue => 'Popište problém';
 
   @override
-  String get claimsEmpty =>
-      'Zatím žádné reklamace. Klepněte na „Podat reklamaci“.';
+  String get claimsEmpty => 'Zatím žádné reklamace.';
 
   @override
   String get claimsFile => 'Podat reklamaci';

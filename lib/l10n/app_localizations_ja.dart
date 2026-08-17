@@ -146,7 +146,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get historyEmpty => '荷物はまだありません。';
 
   @override
-  String get insuranceEmpty => '保険はまだありません。「保険を購入」をタップしてください。';
+  String get insuranceEmpty => '保険はまだありません。';
 
   @override
   String get insuranceBuy => '保険を購入';
@@ -216,7 +216,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get validationDescribeIssue => '問題を記入してください';
 
   @override
-  String get claimsEmpty => '請求はまだありません。「保険金を請求」をタップしてください。';
+  String get claimsEmpty => '請求はまだありません。';
 
   @override
   String get claimsFile => '保険金を請求';

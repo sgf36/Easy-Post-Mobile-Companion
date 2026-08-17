@@ -147,8 +147,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get historyEmpty => 'Încă nu există expedieri.';
 
   @override
-  String get insuranceEmpty =>
-      'Încă nu există polițe. Apasă „Achiziționează asigurare”.';
+  String get insuranceEmpty => 'Încă nu există polițe.';
 
   @override
   String get insuranceBuy => 'Achiziționează asigurare';
@@ -219,8 +218,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get validationDescribeIssue => 'Descrie problema';
 
   @override
-  String get claimsEmpty =>
-      'Încă nu există reclamații. Apasă „Depune o reclamație”.';
+  String get claimsEmpty => 'Încă nu există reclamații.';
 
   @override
   String get claimsFile => 'Depune o reclamație';

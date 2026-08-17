@@ -146,8 +146,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get historyEmpty => 'Aucune expédition pour le moment.';
 
   @override
-  String get insuranceEmpty =>
-      'Aucune assurance pour le moment. Appuyez sur « Souscrire une assurance ».';
+  String get insuranceEmpty => 'Aucune assurance pour le moment.';
 
   @override
   String get insuranceBuy => 'Souscrire une assurance';
@@ -218,8 +217,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get validationDescribeIssue => 'Décrivez le problème';
 
   @override
-  String get claimsEmpty =>
-      'Aucune réclamation pour le moment. Appuyez sur « Déposer une réclamation ».';
+  String get claimsEmpty => 'Aucune réclamation pour le moment.';
 
   @override
   String get claimsFile => 'Déposer une réclamation';

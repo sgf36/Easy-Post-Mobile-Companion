@@ -147,8 +147,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get historyEmpty => 'Nog geen zendingen.';
 
   @override
-  String get insuranceEmpty =>
-      'Nog geen verzekeringen. Tik op ‘Verzekering afsluiten’.';
+  String get insuranceEmpty => 'Nog geen verzekeringen.';
 
   @override
   String get insuranceBuy => 'Verzekering afsluiten';
@@ -219,7 +218,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get validationDescribeIssue => 'Beschrijf het probleem';
 
   @override
-  String get claimsEmpty => 'Nog geen claims. Tik op ‘Claim indienen’.';
+  String get claimsEmpty => 'Nog geen claims.';
 
   @override
   String get claimsFile => 'Claim indienen';

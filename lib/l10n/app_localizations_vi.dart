@@ -146,8 +146,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get historyEmpty => 'Chưa có lô hàng nào.';
 
   @override
-  String get insuranceEmpty =>
-      'Chưa có hợp đồng bảo hiểm. Chạm vào «Mua bảo hiểm».';
+  String get insuranceEmpty => 'Chưa có hợp đồng bảo hiểm.';
 
   @override
   String get insuranceBuy => 'Mua bảo hiểm';
@@ -218,8 +217,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get validationDescribeIssue => 'Mô tả sự cố';
 
   @override
-  String get claimsEmpty =>
-      'Chưa có yêu cầu bồi thường. Chạm vào «Gửi yêu cầu bồi thường».';
+  String get claimsEmpty => 'Chưa có yêu cầu bồi thường.';
 
   @override
   String get claimsFile => 'Gửi yêu cầu bồi thường';

@@ -147,8 +147,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get historyEmpty => 'Még nincsenek küldemények.';
 
   @override
-  String get insuranceEmpty =>
-      'Még nincs biztosítás. Koppintson a „Biztosítás vásárlása” gombra.';
+  String get insuranceEmpty => 'Még nincs biztosítás.';
 
   @override
   String get insuranceBuy => 'Biztosítás vásárlása';
@@ -219,8 +218,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get validationDescribeIssue => 'Írja le a problémát';
 
   @override
-  String get claimsEmpty =>
-      'Még nincs kárigény. Koppintson a „Kárigény benyújtása” gombra.';
+  String get claimsEmpty => 'Még nincs kárigény.';
 
   @override
   String get claimsFile => 'Kárigény benyújtása';

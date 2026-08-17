@@ -146,7 +146,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get historyEmpty => 'Brak przesyłek.';
 
   @override
-  String get insuranceEmpty => 'Brak polis. Dotknij „Kup ubezpieczenie”.';
+  String get insuranceEmpty => 'Brak polis.';
 
   @override
   String get insuranceBuy => 'Kup ubezpieczenie';
@@ -217,7 +217,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get validationDescribeIssue => 'Opisz problem';
 
   @override
-  String get claimsEmpty => 'Brak roszczeń. Dotknij „Złóż roszczenie”.';
+  String get claimsEmpty => 'Brak roszczeń.';
 
   @override
   String get claimsFile => 'Złóż roszczenie';

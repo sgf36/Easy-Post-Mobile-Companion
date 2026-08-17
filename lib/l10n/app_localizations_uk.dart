@@ -146,8 +146,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get historyEmpty => 'Відправлень ще немає.';
 
   @override
-  String get insuranceEmpty =>
-      'Полісів ще немає. Торкніться «Придбати страхування».';
+  String get insuranceEmpty => 'Полісів ще немає.';
 
   @override
   String get insuranceBuy => 'Придбати страхування';
@@ -218,8 +217,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get validationDescribeIssue => 'Опишіть проблему';
 
   @override
-  String get claimsEmpty =>
-      'Претензій ще немає. Торкніться «Подати претензію».';
+  String get claimsEmpty => 'Претензій ще немає.';
 
   @override
   String get claimsFile => 'Подати претензію';

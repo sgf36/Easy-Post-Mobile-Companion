@@ -148,8 +148,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get historyEmpty => 'अभी तक कोई शिपमेंट नहीं।';
 
   @override
-  String get insuranceEmpty =>
-      'अभी तक कोई बीमा पॉलिसी नहीं। «बीमा खरीदें» पर टैप करें।';
+  String get insuranceEmpty => 'अभी तक कोई बीमा पॉलिसी नहीं।';
 
   @override
   String get insuranceBuy => 'बीमा खरीदें';
@@ -220,8 +219,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get validationDescribeIssue => 'समस्या का वर्णन करें';
 
   @override
-  String get claimsEmpty =>
-      'अभी तक कोई दावा दर्ज नहीं। «दावा दर्ज करें» पर टैप करें।';
+  String get claimsEmpty => 'अभी तक कोई दावा दर्ज नहीं।';
 
   @override
   String get claimsFile => 'दावा दर्ज करें';
