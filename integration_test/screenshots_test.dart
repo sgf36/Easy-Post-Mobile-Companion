@@ -164,24 +164,29 @@ void main() {
       await _back(tester);
     });
 
-    // --- 3) INSURANCE: the purchase form. ---
+    // --- 3) INSURANCE: the policies already on the account, read only. ---
+    //
+    // This used to tap a floating action button and photograph the "Buy
+    // insurance" form. That form no longer exists: buying insurance and filing
+    // claims were removed from the app because App Review treats insurance as a
+    // highly regulated service under guideline 5.1.1(ix), which an individual
+    // developer account may not offer. Tapping a FloatingActionButton here now
+    // fails outright, and the shipped 1.0 screenshots still advertise both
+    // forms — a store listing showing functionality the binary does not have.
+    //
+    // So capture the list itself, like reports and HTS below: no tap, no route
+    // to pop.
     await _step('03-insurance', () async {
       await _drawerTo(tester, Icons.verified_user);
-      await tester.tap(find.byType(FloatingActionButton));
-      await tester.pumpAndSettle();
-      await _settle(tester, seconds: 2);
+      await _settle(tester, seconds: 3);
       await _shot(tester, '03-insurance');
-      await _back(tester);
     });
 
-    // --- 4) CLAIMS: the claim form. ---
+    // --- 4) CLAIMS: claims raised on the account and their status. ---
     await _step('04-claims', () async {
       await _drawerTo(tester, Icons.gavel);
-      await tester.tap(find.byType(FloatingActionButton));
-      await tester.pumpAndSettle();
-      await _settle(tester, seconds: 2);
+      await _settle(tester, seconds: 3);
       await _shot(tester, '04-claims');
-      await _back(tester);
     });
 
     // --- 5) REPORTS: per-carrier spend breakdown. ---
