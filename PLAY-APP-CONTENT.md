@@ -126,10 +126,29 @@ backend sits behind both. Either that reasoning is wrong and "none" is right, or
 the App Store answers understate what is held and should be revised. Worth
 deciding once rather than twice.
 
-### Submitting it by API
+### Submitted 2026-08-21 — `204`
 
-`applications.dataSafety` takes the **contents of the CSV** that Play Console's
-Data safety section imports, not a JSON body of answers. Export the template
-from the Console first — Data safety > Export — so the column set matches the
-schema version Google is currently accepting; a hand-authored CSV against a
-guessed template either errors or, worse, declares something nobody chose.
+Filed by `tool/play_data_safety.py`, which edits Google's own export rather than
+authoring a CSV. That matters: the export is 782 rows over 217 questions, with
+machine identifiers per data type and per purpose, and `REQUIRED` and
+`SINGLE_CHOICE` items among them. A question left out is filed as **false**, not
+rejected — so a hand-written CSV does not fail loudly, it declares something
+nobody chose.
+
+Seventeen answers were set:
+
+| | |
+|---|---|
+| Data types | `PSL_DEVICE_ID`, `PSL_PURCHASE_HISTORY`, `PSL_USER_INTERACTION` |
+| For each | collected not shared, **not** ephemeral, collection required, purpose App functionality only |
+| Deletion | `DATA_DELETION_YES`, with the privacy policy as the delete-data URL |
+| Already set in the export | collects personal data, encrypted in transit, no account creation |
+
+No `REQUIRED` question was left blank — the script checks and refuses to submit
+otherwise, and refuses too if any answer it holds matches no row in the export,
+which is how a renamed identifier would show up.
+
+**There is no way to read the declaration back.** The endpoint is POST-only;
+`GET .../dataSafety` is a 404. So the export is the only source of the current
+question set, and Google revises the form — export again before amending rather
+than reusing an old file.

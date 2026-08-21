@@ -55,16 +55,15 @@ A paid, activated Easy-Post Desktop licence is required to pair. Easy-Post Deskt
 CONTACT_EMAIL = "Apps@spencerfields.com"
 CONTACT_WEBSITE = "https://easy-post.spencerfields.com/mobile.html"
 
-# Withheld. Every file in store/play-assets is a 7 August capture taken against
-# the LIVE account, before commit 55064b3 switched capture to invented fixtures.
-# 01-tracking carries what read as real USPS tracking numbers —
-# 9405500208303120843618, CM000000986US — beside the invented EZ… ones, and puts
-# every parcel on one carrier. 03-insurance and 04-claims additionally photograph
-# the "Buy insurance" and "File a claim" forms removed in 1.0.1.
+# 03-insurance and 04-claims are captured but not listed, as on the App Store:
+# the claims fixture carries no status, so that frame reads "Unknown" twice with
+# no icon.
 #
-# The App Store set was recaptured for exactly these reasons. Android has not
-# been, so there is nothing here fit for a public listing yet.
-SCREENSHOTS: list[str] = []
+# These are the emulator captures against the demo fixtures. The 7 August set
+# they replaced was taken against the live account and carried real-looking USPS
+# tracking numbers — see the commit that recaptured them.
+SCREENSHOTS = ["01-tracking.png", "02-detail-map.png", "05-reports.png",
+               "06-hts.png", "07-refunds.png"]
 
 GRAPHICS = {"icon": "icon-512.png", "featureGraphic": "feature-graphic-1024x500.png"}
 
@@ -128,12 +127,13 @@ def main():
         # Images hang off /listings/{language}/{imageType} — upload, list and
         # delete alike. The /images/ path in the reference does not answer at
         # all: it 404s with Google's HTML error page, which reads as a bad image
-        # type rather than a bad path, and a DELETE against it fails silently.
-        # Replace rather than append: uploading again otherwise adds a second
-        # copy, and the listing shows both.
-        requests.delete(
-            f"{BASE}/applications/{PACKAGE}/edits/{edit}/listings/{LANGUAGE}/{kind}",
-            headers=h, timeout=60)
+        # type rather than a bad path.
+        #
+        # No delete first. icon and featureGraphic hold one image and an upload
+        # replaces it; deleting in the same edit lost the featureGraphic once,
+        # with the upload still answering 200 and the committed listing carrying
+        # nothing. Only the collection below is cleared, where appending really
+        # would duplicate.
         with open(path, "rb") as fh:
             r = requests.post(
                 f"{UPLOAD}/applications/{PACKAGE}/edits/{edit}/listings/{LANGUAGE}/{kind}",
@@ -166,6 +166,25 @@ def main():
     check(requests.post(f"{BASE}/applications/{PACKAGE}/edits/{edit}:commit",
                         headers=h, timeout=300), "commit")
     print("committed")
+
+    # Read it back. An upload answering 200 is not the same as a committed
+    # listing carrying the image — that exact gap swallowed a featureGraphic —
+    # so the script disagrees with itself rather than reporting success twice.
+    verify = requests.post(f"{BASE}/applications/{PACKAGE}/edits", headers=h, timeout=60).json()["id"]
+    expected = {"icon": 1, "featureGraphic": 1, "phoneScreenshots": len(SCREENSHOTS)}
+    wrong = []
+    for kind, want in expected.items():
+        r = requests.get(
+            f"{BASE}/applications/{PACKAGE}/edits/{verify}/listings/{LANGUAGE}/{kind}",
+            headers=h, timeout=60)
+        got = len(r.json().get("images", [])) if r.status_code == 200 else -1
+        print(f"  verified {kind:17} {got}/{want}")
+        if got != want:
+            wrong.append(f"{kind}: {got} not {want}")
+    requests.delete(f"{BASE}/applications/{PACKAGE}/edits/{verify}", headers=h, timeout=60)
+    if wrong:
+        sys.exit("committed, but the listing does not match: " + "; ".join(wrong))
+    print("listing verified")
 
 
 if __name__ == "__main__":
