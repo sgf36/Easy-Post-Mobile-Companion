@@ -16,15 +16,20 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-# 1.0.0 is the marketing version, and it is now the only place one is written.
-# Three answers were in circulation: this file said 1.2.0, CI passed a hardcoded
-# --build-name=1.0.0 that overrode it, and the App Store version record is named
-# "1.0". Every build ever uploaded reported 1.0.0, and the app has never been
-# released, so the build name here is set to agree with what App Store Connect
-# already holds and CI no longer overrides it. The build NUMBER is still supplied
-# by CI (github.run_number), because it has to increase per upload and a file in
-# git cannot do that on its own.
-version: 1.0.1+1
+# The marketing version, and the only place one is written. CI used to pass a
+# hardcoded --build-name that overrode it while this file said something else
+# again; it no longer does, so this line is the single answer.
+#
+# It has to go up, not just the build number. 1.0.1 is on the App Store, and
+# Apple closes a pre-release train once its version ships: another upload
+# calling itself 1.0.1 comes back as 90186 "train is closed" and 90062
+# "CFBundleShortVersionString must contain a higher version than the previously
+# approved version". 1.1.0 because the Refunds section is a feature.
+#
+# The build NUMBER is still supplied by CI (github.run_number), because it has
+# to increase per upload and a file in git cannot do that on its own. The last
+# one Apple holds is 56.
+version: 1.1.0+1
 
 environment:
   sdk: ^3.12.2

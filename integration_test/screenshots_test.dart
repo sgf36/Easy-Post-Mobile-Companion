@@ -196,6 +196,23 @@ void main() {
       await _shot(tester, '05-reports');
     });
 
+    // --- 7) REFUNDS: where each refund request has got to. ---
+    //
+    // Numbered 07 and captured before 06 on purpose. The number is the slot in
+    // the store listing, and taking one of the first six would silently reorder
+    // a listing that is already live; the capture order is just whatever costs
+    // the fewest drawer taps, and this one is a drawer tap away from Reports
+    // while HTS ends on a populated search.
+    //
+    // The fixtures carry one shipment in each of the three refund states, so
+    // this frame shows the waiting, refused and settled rows together — which
+    // is the whole reason the screen exists.
+    await _step('07-refunds', () async {
+      await _drawerTo(tester, Icons.currency_exchange);
+      await _settle(tester, seconds: 3);
+      await _shot(tester, '07-refunds');
+    });
+
     // --- 6) HTS LOOKUP: duty rates for a sample search. ---
     await _step('06-hts', () async {
       await _drawerTo(tester, Icons.travel_explore);

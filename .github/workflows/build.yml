@@ -328,7 +328,7 @@ jobs:
           set -euo pipefail
           COUNT=$(ls -1 "$ASC_SHOTS_DIR"/*.png 2>/dev/null | wc -l | tr -d ' ')
           echo "captured $COUNT png(s)"
-          [ "$COUNT" -ge 6 ] || { echo "::error::expected at least 6 screenshots, got $COUNT"; exit 1; }
+          [ "$COUNT" -ge 7 ] || { echo "::error::expected at least 7 screenshots, got $COUNT"; exit 1; }
           for f in "$ASC_SHOTS_DIR"/*.png; do
             SIZE=$(sips -g pixelWidth -g pixelHeight "$f" | awk '/pixel/{printf "%s",$2"x"}' | sed 's/x$//')
             echo "  $(basename "$f")  $SIZE"

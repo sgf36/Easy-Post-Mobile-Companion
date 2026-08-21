@@ -13,6 +13,7 @@ hang off the **version**; the subtitle hangs off the **app info**.
 | `description` | `appStoreVersionLocalizations` | `POST/PATCH /v1/appStoreVersionLocalizations` |
 | `keywords` | `appStoreVersionLocalizations` | as above |
 | `promotionalText` | `appStoreVersionLocalizations` | as above |
+| `whatsNew` | `appStoreVersionLocalizations` | as above |
 | `subtitle` | `appInfoLocalizations` | `POST/PATCH /v1/appInfoLocalizations` |
 
 `appInfoLocalizations` also carries `name`, which is **not** in this file: the
@@ -34,14 +35,25 @@ app buys or prints labels — it does not; that is the desktop app — and that 
 The tightest field by a distance is the subtitle. German lands at 26 characters
 and Hungarian at 29 against a limit of 30; neither has room for a longer verb.
 
-## No `whatsNew`
+## `whatsNew` — present since 1.1.0, and only correct on an update
 
-Deliberately absent. Every version record here is an initial release and App
-Store Connect rejects the attribute outright on one:
+It used to be deliberately absent, because every version record this file had
+fed was an initial release and App Store Connect rejects the attribute outright
+on one:
 
 ```
 409 STATE_ERROR: Attribute 'whatsNew' cannot be edited at this time
 ```
+
+1.1.0 is an update, where the opposite holds: Apple requires a release note and
+a locale missing one blocks the submission rather than just that language. The
+text currently in the file describes the Refunds section.
+
+Two consequences. It has to be rewritten for each release rather than left to
+go stale, and if this file is ever fed to a *first* release again — a second
+app, a new platform record — the field must come back out or the 409 above
+returns. `test/asc_metadata_test.dart` now requires it, so that removal is a
+deliberate edit in two places, not an omission.
 
 ## Screenshots are not in this file
 
