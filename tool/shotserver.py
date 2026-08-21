@@ -23,6 +23,29 @@ if PLATFORM not in ("ios", "android"):
 # like a rendering bug.
 ANDROID_SERIAL = os.environ.get("ANDROID_SERIAL", "")
 
+
+def _adb() -> str:
+    """The adb binary, which is not necessarily on PATH.
+
+    A GitHub runner has the SDK installed but leaves platform-tools off PATH, so
+    a bare "adb" raises FileNotFoundError inside the request handler — once per
+    request, as an unhandled traceback, while the caller sees only a dropped
+    connection.
+    """
+    explicit = os.environ.get("ADB")
+    if explicit:
+        return explicit
+    for root in (os.environ.get("ANDROID_HOME"), os.environ.get("ANDROID_SDK_ROOT")):
+        if root:
+            candidate = os.path.join(root, "platform-tools", "adb")
+            for path in (candidate, candidate + ".exe"):
+                if os.path.exists(path):
+                    return path
+    return "adb"
+
+
+ADB = _adb()
+
 # Overridable so CI can write into the workspace, where upload-artifact can see
 # it. A GitHub runner's ~/Desktop is not a useful place to leave build output.
 OUT = os.path.expanduser(os.environ.get("ASC_SHOTS_DIR", "~/Desktop/asc-screenshots"))
@@ -42,7 +65,7 @@ def capture(dest):
     # the right size and will not open. exec-out is a clean binary channel.
     serial = ["-s", ANDROID_SERIAL] if ANDROID_SERIAL else []
     result = subprocess.run(
-        ["adb", *serial, "exec-out", "screencap", "-p"], capture_output=True
+        [ADB, *serial, "exec-out", "screencap", "-p"], capture_output=True
     )
     if result.returncode == 0 and result.stdout:
         with open(dest, "wb") as fh:
@@ -55,7 +78,20 @@ class Handler(http.server.BaseHTTPRequestHandler):
         query = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
         name = query.get("name", ["shot"])[0]
         dest = os.path.join(OUT, name + ".png")
-        result = capture(dest)
+        # A missing tool used to escape as an unhandled traceback per request,
+        # leaving the caller with a dropped connection and no reason. Answer
+        # with the reason instead.
+        try:
+            result = capture(dest)
+        except OSError as e:
+            body = f"capture tool failed: {e}".encode()
+            print("FAILED %s: %s" % (name, e), flush=True)
+            self.send_response(500)
+            self.send_header("Content-Type", "text/plain")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
         # A failed capture must answer with a failure.
         #
         # This used to reply "200 ok" whatever happened, and the caller catches
@@ -82,5 +118,5 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    print("shotserver (%s) listening on 127.0.0.1:8099 -> %s" % (PLATFORM, OUT), flush=True)
+    print("shotserver (%s, %s) listening on 127.0.0.1:8099 -> %s" % (PLATFORM, ADB if PLATFORM == "android" else "simctl", OUT), flush=True)
     http.server.HTTPServer(("127.0.0.1", 8099), Handler).serve_forever()

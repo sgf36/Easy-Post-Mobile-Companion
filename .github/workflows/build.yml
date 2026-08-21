@@ -419,9 +419,26 @@ jobs:
           python3 tool/shotserver.py &
           SERVER=$!
           trap 'kill $SERVER 2>/dev/null || true' EXIT
+
+          # The warmup is the only chance to find out the server cannot capture
+          # before three attempts have each run a full build. It used to loop
+          # twenty times, ignore twenty failures and carry on: adb was not on
+          # PATH, every shot failed, and the run spent two minutes proving it
+          # three times. A server that cannot take one picture will not take
+          # seven.
+          WARM=0
           for i in $(seq 1 20); do
-            curl -fsS "http://127.0.0.1:8099/shot?name=_warmup" >/dev/null && break || sleep 1
+            if curl -fsS "http://127.0.0.1:8099/shot?name=_warmup" >/dev/null 2>&1; then
+              WARM=1
+              break
+            fi
+            sleep 1
           done
+          if [ "$WARM" != "1" ]; then
+            echo "::error::the shot server could not take a warmup capture"
+            curl -s "http://127.0.0.1:8099/shot?name=_warmup" || true
+            exit 1
+          fi
           rm -f "$ASC_SHOTS_DIR/_warmup.png"
 
           # Same watchdog as the iOS leg, for the same reason: the gap between
