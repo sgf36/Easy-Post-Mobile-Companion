@@ -149,18 +149,52 @@ requires). Matches the desktop app mark.
 
 ## App Privacy questionnaire (Data collection)
 
-The companion collects no analytics and no advertising identifiers. For the
-"App Privacy" nutrition label, the honest answers are:
+> **⚠ What is live is wrong and needs correcting in App Store Connect.** The
+> declaration submitted with 1.0 says nothing at all is collected. That does not
+> survive reading the backend. Corrected answers below; this is Console-only, so
+> it cannot be scripted — see the note at the end.
 
-- **Data used to track you:** none
-- **Data linked to you:** none
-- **Data not linked to you:** none
+The companion collects no analytics and no advertising identifiers, and shipment
+data genuinely is not collected: `handleEp` in the proxy forwards each request to
+EasyPost and returns the response body without writing or logging it, and the
+decrypted key is dropped immediately after use. Data transmitted and processed
+ephemerally without being stored is not "collected" under either store's rules,
+so tracking numbers, addresses and parcel statuses stay out of the declaration.
 
-The one nuance to declare accurately: shipment data is fetched on demand through
-the relay and shown in the app; it is not collected, stored off-device or shared
-by the developer. If Apple's flow insists on a category, "Purchases" and
-"Other Usage Data" are *not* persisted by the developer, so they remain
-unchecked. The privacy policy URL above carries the full statement.
+**What is stored is the pairing record**, in the proxy's `devices` table
+(`EasyPost-Desktop-App/server/easypost-mobile-proxy/schema.sql`): a device
+token, a push token, the licence order and tier, the platform, and created and
+last-seen timestamps. That is persisted rather than ephemeral, and
+`license_order` ties it to an identifiable customer. "None" does not describe it.
+
+The answers:
+
+| Apple category | Item | Why |
+|---|---|---|
+| Identifiers | Device ID | `device_token`, and `push_token` for notifications |
+| Purchases | Purchase History | `license_order` and `license_tier` — which licence a device is bound to |
+| Usage Data | Product Interaction | `last_seen`, updated on each call |
+
+- **Purpose:** App Functionality only. Not analytics, not advertising, not
+  personalisation, not product improvement.
+- **Linked to the user:** yes, all three — `license_order` identifies a customer.
+- **Used to track you:** **no.** Nothing is joined with third-party data, no
+  advertising identifier is read, and nothing leaves the Supplier. EasyPost
+  receives a shipment request as the service being called, which is processing
+  on the developer's behalf rather than sharing.
+- **Deletion:** unpairing revokes and removes the device row.
+
+The privacy policy URL above carries the full statement.
+
+**There is no API for this.** The App Store Connect API exposes no data-usage
+resources — `appDataUsages`, `appDataUsageCategories` and the rest all 404 under
+an App Manager key. fastlane's `upload_app_privacy_details_to_app_store` reaches
+Apple's *private* endpoints with an Apple ID session instead, which is why it
+cannot use an API key. So this is entered by hand in App Store Connect under
+App Privacy.
+
+`PLAY-APP-CONTENT.md` derives the equivalent Play answers from the same
+evidence. The two should stay in step: one backend, one set of facts.
 
 ---
 
