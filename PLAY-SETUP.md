@@ -34,7 +34,7 @@ here can be scripted: Google has no API for granting API access to itself.
 2. **Service account** — IAM & Admin > Service Accounts > Create. A name like
    `play-ci` is enough. It needs **no** Google Cloud role: its power comes from
    Play Console in step 4, not from Cloud IAM. Copy its email address, which
-   looks like `play-ci@PROJECT.iam.gserviceaccount.com`.
+   looks like `play-ci@claude-automation-apps.iam.gserviceaccount.com`.
 
 3. **Key** — on that service account, Keys > Add key > Create new key > **JSON**.
    The file downloads once and Google keeps no copy.
@@ -57,11 +57,16 @@ here can be scripted: Google has no API for granting API access to itself.
    If **Users and permissions** is not in the sidebar, you are inside an app.
    Go up to "All apps" first; the item is account-level.
 
-5. **The secret** — in Git Bash, substituting the real filename of the key
-   downloaded in step 3:
+5. **The secret** — in Git Bash. The filename below is the one used on
+   2026-08-21; a re-issued key will have a different suffix.
+
+   Note the `<`. `gh secret set` reads the value from standard input, so the
+   path is redirected into it rather than passed as an argument — given as an
+   argument, gh rejects it. PowerShell has no `<` operator; there, use
+   `Get-Content -Raw <path> | gh secret set PLAY_SERVICE_ACCOUNT_JSON --repo sgf36/Easy-Post-Mobile-Companion`.
 
    ```bash
-   gh secret set PLAY_SERVICE_ACCOUNT_JSON --repo sgf36/Easy-Post-Mobile-Companion < "/c/Users/SpencerFields/Downloads/play-ci-KEY.json"
+   gh secret set PLAY_SERVICE_ACCOUNT_JSON --repo sgf36/Easy-Post-Mobile-Companion < "/c/Users/SpencerFields/Downloads/claude-automation-apps-50d08e28fe44.json"
    ```
 
    Redirecting the file means the key never appears in shell history or on a
@@ -70,7 +75,7 @@ here can be scripted: Google has no API for granting API access to itself.
 ## Checking it worked
 
 ```bash
-PLAY_SERVICE_ACCOUNT_JSON="/c/Users/SpencerFields/Downloads/play-ci-KEY.json" python "/c/Users/SpencerFields/OneDrive - Spencer Fields/Apps/Claude/easypost_mobile_companion/tool/play_upload.py" --check
+PLAY_SERVICE_ACCOUNT_JSON="/c/Users/SpencerFields/Downloads/claude-automation-apps-50d08e28fe44.json" python "/c/Users/SpencerFields/OneDrive - Spencer Fields/Apps/Claude/easypost_mobile_companion/tool/play_upload.py" --check
 ```
 
 `python`, not `python3`: the `python3` on PATH here is a shim in `~/bin` rather
@@ -85,7 +90,7 @@ copy that matters, and the file in `Downloads` is a credential lying in the
 open.
 
 ```bash
-rm "/c/Users/SpencerFields/Downloads/play-ci-KEY.json"
+rm "/c/Users/SpencerFields/Downloads/claude-automation-apps-50d08e28fe44.json"
 ```
 
 The two failures worth recognising:
