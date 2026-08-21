@@ -402,6 +402,17 @@ jobs:
             cat /tmp/emulator.log
             exit 1
           fi
+          # The app talks to the shot server at 127.0.0.1:8099. On the iOS
+          # Simulator that is the host, because the simulator shares the host's
+          # network stack. On an Android emulator it is the emulator's own
+          # loopback, so the app dials itself and gets ECONNREFUSED. `adb
+          # reverse` maps the emulator's 127.0.0.1:8099 back to the host, which
+          # keeps one address in the test for both platforms.
+          "$ADB" reverse tcp:8099 tcp:8099
+          "$ADB" reverse --list | grep -q "tcp:8099" || {
+            echo "::error::adb reverse did not take — the app cannot reach the shot server"
+            exit 1
+          }
           "$ADB" shell wm density 440
           # Animations left on make a "settled" frame a lie: the test pumps
           # until Flutter is idle, but a system transition can still be part-way
@@ -426,6 +437,13 @@ jobs:
           # PATH, every shot failed, and the run spent two minutes proving it
           # three times. A server that cannot take one picture will not take
           # seven.
+          #
+          # Note what this does NOT prove. The warmup is a curl from the host,
+          # so it says the server can capture — not that the app can reach it.
+          # Those are different failures and the second one has happened: the
+          # warmup passed while every shot from inside the emulator was refused,
+          # because 127.0.0.1 there is the emulator, not the host. The `adb
+          # reverse` check in the boot step is what covers that half.
           WARM=0
           for i in $(seq 1 20); do
             if curl -fsS "http://127.0.0.1:8099/shot?name=_warmup" >/dev/null 2>&1; then
@@ -473,6 +491,10 @@ jobs:
             echo "::warning::attempt $attempt failed (exit $code)"
             [ "$attempt" = 3 ] && break
             "$ADB" uninstall "$PACKAGE" || true
+            # Idempotent, and cheap insurance: a reconnect drops the mapping and
+            # the next attempt would fail every shot for a reason that looks
+            # nothing like a lost adb connection.
+            "$ADB" reverse tcp:8099 tcp:8099 || true
           done
           echo "::error::capture failed after 3 attempts"
           exit 1
