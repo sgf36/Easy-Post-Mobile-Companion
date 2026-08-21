@@ -57,26 +57,36 @@ here can be scripted: Google has no API for granting API access to itself.
    If **Users and permissions** is not in the sidebar, you are inside an app.
    Go up to "All apps" first; the item is account-level.
 
-5. **The secret** — from a shell in this repo:
+5. **The secret** — in Git Bash, substituting the real filename of the key
+   downloaded in step 3:
 
-   ```
-   gh secret set PLAY_SERVICE_ACCOUNT_JSON --repo sgf36/Easy-Post-Mobile-Companion < ~/Downloads/play-ci-<id>.json
+   ```bash
+   gh secret set PLAY_SERVICE_ACCOUNT_JSON --repo sgf36/Easy-Post-Mobile-Companion < "/c/Users/SpencerFields/Downloads/play-ci-KEY.json"
    ```
 
    Redirecting the file means the key never appears in shell history or on a
-   terminal. Delete the download afterwards: the secret is now the only copy
-   that matters, and the file in `~/Downloads` is a credential lying in the
-   open.
+   terminal.
 
 ## Checking it worked
 
+```bash
+PLAY_SERVICE_ACCOUNT_JSON="/c/Users/SpencerFields/Downloads/play-ci-KEY.json" python "/c/Users/SpencerFields/OneDrive - Spencer Fields/Apps/Claude/easypost_mobile_companion/tool/play_upload.py" --check
 ```
-PLAY_SERVICE_ACCOUNT_JSON=~/Downloads/play-ci-<id>.json python3 tool/play_upload.py --check
-```
+
+`python`, not `python3`: the `python3` on PATH here is a shim in `~/bin` rather
+than the 3.14 install the rest of this workspace uses.
 
 `--check` creates an edit and immediately discards it. That proves both halves
 — the key authenticates, *and* it can see this particular app. A token on its
 own proves only the first, and step 4 is the half that usually goes wrong.
+
+Once it passes, delete the downloaded key. The repository secret is now the
+copy that matters, and the file in `Downloads` is a credential lying in the
+open.
+
+```bash
+rm "/c/Users/SpencerFields/Downloads/play-ci-KEY.json"
+```
 
 The two failures worth recognising:
 
