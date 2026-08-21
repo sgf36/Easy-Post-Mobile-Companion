@@ -14,6 +14,11 @@ on:
         description: "Languages to capture, comma-separated"
         type: string
         default: "en,de,es,fr,hi,ja,zh"
+      play_track:
+        description: "Play track for this build. Production is not offered here."
+        type: choice
+        default: internal
+        options: [internal, alpha, beta]
 
 env:
   FLUTTER_VERSION: "3.44.8"
@@ -132,6 +137,50 @@ jobs:
           path: |
             build/app/outputs/bundle/release/*.aab
             build/app/outputs/flutter-apk/*.apk
+
+      # Push the bundle to a Play testing track, so an Android build reaches a
+      # phone the way an iOS one already reaches TestFlight. Until this existed
+      # the only Android channel was a direct APK download, which is a snapshot
+      # with no update path: whoever installed one was stranded on it.
+      #
+      # Never production. The track choice tops out at beta, here and in
+      # tool/play_upload.py, so a release to the public stays a deliberate act
+      # in the Console rather than a default on the job that also does routine
+      # test uploads.
+      #
+      # Gated on the secret like the signing steps above, and skipped on pull
+      # requests: a fork's PR must not be able to publish, and an internal
+      # release per PR would burn a versionCode each time.
+      - id: play
+        if: steps.signing.outputs.ready == 'true'
+        env:
+          PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$PLAY_JSON" ]; then echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; fi
+
+      # The commit message reaches the script through the environment, never
+      # through the command line. Interpolating it into `run:` would put
+      # attacker-controlled text into a shell — a commit titled with a
+      # backtick or a quote is enough — and would break on any newline.
+      - name: Upload to Play (${{ inputs.play_track || 'internal' }})
+        if: steps.play.outputs.ready == 'true' && github.event_name != 'pull_request'
+        env:
+          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          PLAY_TRACK: ${{ inputs.play_track || 'internal' }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet --disable-pip-version-check PyJWT requests cryptography
+          NOTES=$(printf '%s' "${COMMIT_MESSAGE:-}" | head -1)
+          [ -n "$NOTES" ] || NOTES="Build $RUN_NUMBER"
+          python3 tool/play_upload.py \
+            --aab build/app/outputs/bundle/release/app-release.aab \
+            --track "$PLAY_TRACK" --notes "$NOTES"
+
+      - name: Play upload skipped
+        if: steps.play.outputs.ready != 'true'
+        run: echo "::notice::PLAY_SERVICE_ACCOUNT_JSON is not set — see PLAY-SETUP.md. The bundle is in the android artifact."
 
   # iOS: a signed App Store .ipa when the certificate/profile secrets exist,
   # otherwise a --no-codesign compile check so the build is validated on macOS.
