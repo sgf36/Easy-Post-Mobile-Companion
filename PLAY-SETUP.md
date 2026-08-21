@@ -19,26 +19,43 @@ notice and leaves the bundle in the `android` artifact; nothing fails.
 Steps 1 to 5 are done signed in as the Play developer account owner. Nothing
 here can be scripted: Google has no API for granting API access to itself.
 
+> **There is no "Setup > API access" page, and no Cloud project to link.**
+> That was the old flow and it is what most guides still describe. Google
+> retired it — its own documentation now states that you no longer need to link
+> a developer account to a Google Cloud project. The service account is invited
+> into Play Console like a person, by email address, under **Users and
+> permissions**.
+
 1. **Google Cloud** — at <https://console.cloud.google.com>, create a project
-   (or reuse one) and enable the **Google Play Android Developer API**.
+   (or reuse one) and enable the **Google Play Android Developer API**. The
+   project is only somewhere for the service account to live; nothing links it
+   to Play.
 
 2. **Service account** — IAM & Admin > Service Accounts > Create. A name like
    `play-ci` is enough. It needs **no** Google Cloud role: its power comes from
-   Play Console in step 4, not from Cloud IAM.
+   Play Console in step 4, not from Cloud IAM. Copy its email address, which
+   looks like `play-ci@PROJECT.iam.gserviceaccount.com`.
 
 3. **Key** — on that service account, Keys > Add key > Create new key > **JSON**.
    The file downloads once and Google keeps no copy.
 
-4. **Play Console** — <https://play.google.com/console> > Setup > **API access**.
-   Link the Cloud project from step 1. The service account appears in the list;
-   choose **Manage Play Console permissions** and grant it, on the
-   *Easy-Post Mobile Companion* app only:
+4. **Play Console** — <https://play.google.com/console>, at the **account**
+   level rather than inside the app, go to **Users and permissions** >
+   **Invite new users**.
 
-   - **Release to testing tracks** — what the upload needs
-   - *not* Release to production, and *not* account-level admin
+   - Paste the service account email from step 2 into the email field. It is
+     invited exactly as a person would be; there is no separate service-account
+     list.
+   - On the **App permissions** tab, **Add app**, choose *Easy-Post Mobile
+     Companion*, and **Apply**. Granting it on the app rather than the account
+     means a leaked key cannot touch anything else.
+   - Enable **Release to testing tracks**. Leave *Release to production* and
+     anything account-level off.
+   - **Invite user** to save. There is no email to accept — a service account
+     takes effect immediately.
 
-   Grant it on the app rather than the whole account, so a leaked key cannot
-   touch anything else.
+   If **Users and permissions** is not in the sidebar, you are inside an app.
+   Go up to "All apps" first; the item is account-level.
 
 5. **The secret** — from a shell in this repo:
 
@@ -65,8 +82,11 @@ The two failures worth recognising:
 
 | | |
 |---|---|
-| `401` | The key is valid but has no permission on this app. Step 4 was skipped or granted at the wrong scope. |
+| `401` | The key is valid but has no permission on this app. The invitation in step 4 was not saved, or the app was not added on the App permissions tab. |
 | `404` | No such app, as far as this service account is concerned. Either the app has not been created in Play Console at all, or the permission was granted on a different one. |
+
+A permission change can take a few minutes to reach the API. If step 4 looks
+right and `--check` still fails, wait and run it again before changing anything.
 
 ## What CI does with it
 
