@@ -123,5 +123,12 @@
   "fieldReference": "Referensi",
   "fieldPickupWindow": "Jendela penjemputan",
   "fieldCost": "Biaya",
-  "detailNothingFurther": "Tidak ada detail lain."
+  "detailNothingFurther": "Tidak ada detail lain.",
+  "navRefunds": "Pengembalian dana",
+  "refundsEmpty": "Belum ada pengembalian dana yang diminta.",
+  "detailRefund": "Permintaan pengembalian dana",
+  "fieldRefundStatus": "Pengembalian dana",
+  "refundStatusSubmitted": "Dikirim",
+  "refundStatusRefunded": "Dikembalikan",
+  "refundStatusRejected": "Ditolak"
 }

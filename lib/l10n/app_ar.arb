@@ -123,5 +123,12 @@
   "fieldReference": "المرجع",
   "fieldPickupWindow": "نافذة الاستلام",
   "fieldCost": "التكلفة",
-  "detailNothingFurther": "لا توجد تفاصيل إضافية."
+  "detailNothingFurther": "لا توجد تفاصيل إضافية.",
+  "navRefunds": "المبالغ المستردة",
+  "refundsEmpty": "لم يتم طلب أي مبالغ مستردة بعد.",
+  "detailRefund": "طلب استرداد",
+  "fieldRefundStatus": "الاسترداد",
+  "refundStatusSubmitted": "تم الإرسال",
+  "refundStatusRefunded": "تم الاسترداد",
+  "refundStatusRejected": "مرفوض"
 }

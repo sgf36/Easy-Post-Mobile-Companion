@@ -62,7 +62,7 @@ python3 tool/shotserver.py &                                  # writes to ~/Desk
 flutter test integration_test/screenshots_test.dart -d "iPhone 16 Pro Max"
 ```
 
-Expect `All tests passed!` and six PNGs. The run takes ~2 minutes after the
+Expect `All tests passed!` and seven PNGs. The run takes ~2 minutes after the
 Xcode build. If `-d` picks the wrong device, list with `flutter devices` and pass
 the simulator UDID instead.
 
@@ -72,14 +72,20 @@ The shots, in filename order:
 |---|---|
 | `01-tracking.png` | The colour-coded status list (flagship) — carrier colours, status icons |
 | `02-detail-map.png` | An in-transit shipment: scan timeline + journey map with pins |
-| `03-insurance.png` | Insurance → "Buy insurance": tracking code, carrier, amount, from/to address |
-| `04-claims.png` | Claims → "File a claim": type dropdown, amount, email, description |
+| `03-insurance.png` | Insurance: the policies already on the account |
+| `04-claims.png` | Claims: claims raised on the account and their status |
 | `05-reports.png` | Reports: per-carrier spend breakdown |
 | `06-hts.png` | HTS Lookup: "copper" results with duty rates |
+| `07-refunds.png` | Refunds: one row in each state — waiting, refused, settled |
 
-All six are wanted, but Apple uses only the first three on the install sheet, so
-keep **Tracking, Detail+map, and one management action (Insurance)** as the first
-three in filename order.
+03 and 04 photograph lists, not forms. The "Buy insurance" and "File a claim"
+forms were removed from the app in 1.0.1 under App Review guideline 5.1.1(ix),
+and 1.0's screenshots outlived them by a release.
+
+All seven are wanted, but Apple uses only the first three on the install sheet,
+so keep **Tracking, Detail+map and Insurance** as the first three in filename
+order. Refunds is numbered last because the six ahead of it are already live on
+the listing and renumbering would reorder it.
 
 ## 3. How pairing works in the capture run
 
@@ -109,7 +115,7 @@ with the hamburger menu (top-left) and capture each screen from the table above:
 ```bash
 mkdir -p ~/Desktop/asc-screenshots
 xcrun simctl io booted screenshot ~/Desktop/asc-screenshots/01-tracking.png
-# …navigate, repeat for 02-detail-map … 06-hts
+# …navigate, repeat for 02-detail-map … 07-refunds
 ```
 
 Aim for clean frames — no half-open menus, and give the detail screen ~2s for the

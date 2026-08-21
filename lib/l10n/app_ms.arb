@@ -123,5 +123,12 @@
   "fieldReference": "Rujukan",
   "fieldPickupWindow": "Tempoh pengambilan",
   "fieldCost": "Kos",
-  "detailNothingFurther": "Tiada butiran lanjut."
+  "detailNothingFurther": "Tiada butiran lanjut.",
+  "navRefunds": "Bayaran balik",
+  "refundsEmpty": "Belum ada bayaran balik yang dipohon.",
+  "detailRefund": "Permohonan bayaran balik",
+  "fieldRefundStatus": "Bayaran balik",
+  "refundStatusSubmitted": "Dihantar",
+  "refundStatusRefunded": "Dibayar balik",
+  "refundStatusRejected": "Ditolak"
 }

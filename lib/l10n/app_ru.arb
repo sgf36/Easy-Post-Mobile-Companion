@@ -123,5 +123,12 @@
   "fieldReference": "Ссылка",
   "fieldPickupWindow": "Интервал забора",
   "fieldCost": "Стоимость",
-  "detailNothingFurther": "Дополнительных сведений нет."
+  "detailNothingFurther": "Дополнительных сведений нет.",
+  "navRefunds": "Возвраты средств",
+  "refundsEmpty": "Возвраты средств пока не запрашивались.",
+  "detailRefund": "Запрос на возврат",
+  "fieldRefundStatus": "Возврат",
+  "refundStatusSubmitted": "Отправлен",
+  "refundStatusRefunded": "Возвращён",
+  "refundStatusRejected": "Отклонён"
 }

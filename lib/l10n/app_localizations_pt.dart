@@ -413,4 +413,25 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Sem mais detalhes.';
+
+  @override
+  String get navRefunds => 'Reembolsos';
+
+  @override
+  String get refundsEmpty => 'Ainda não foi solicitado nenhum reembolso.';
+
+  @override
+  String get detailRefund => 'Pedido de reembolso';
+
+  @override
+  String get fieldRefundStatus => 'Reembolso';
+
+  @override
+  String get refundStatusSubmitted => 'Enviado';
+
+  @override
+  String get refundStatusRefunded => 'Reembolsado';
+
+  @override
+  String get refundStatusRejected => 'Recusado';
 }

@@ -123,5 +123,12 @@
   "fieldReference": "Referens",
   "fieldPickupWindow": "Upphämtningsfönster",
   "fieldCost": "Kostnad",
-  "detailNothingFurther": "Inga fler uppgifter."
+  "detailNothingFurther": "Inga fler uppgifter.",
+  "navRefunds": "Återbetalningar",
+  "refundsEmpty": "Inga återbetalningar har begärts ännu.",
+  "detailRefund": "Begäran om återbetalning",
+  "fieldRefundStatus": "Återbetalning",
+  "refundStatusSubmitted": "Skickad",
+  "refundStatusRefunded": "Återbetald",
+  "refundStatusRejected": "Avvisad"
 }

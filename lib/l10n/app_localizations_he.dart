@@ -412,4 +412,25 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'אין פרטים נוספים.';
+
+  @override
+  String get navRefunds => 'החזרים';
+
+  @override
+  String get refundsEmpty => 'עדיין לא התבקשו החזרים.';
+
+  @override
+  String get detailRefund => 'בקשת החזר';
+
+  @override
+  String get fieldRefundStatus => 'החזר';
+
+  @override
+  String get refundStatusSubmitted => 'נשלחה';
+
+  @override
+  String get refundStatusRefunded => 'הוחזר';
+
+  @override
+  String get refundStatusRejected => 'נדחה';
 }

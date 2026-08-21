@@ -413,4 +413,25 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'ไม่มีรายละเอียดเพิ่มเติม';
+
+  @override
+  String get navRefunds => 'การคืนเงิน';
+
+  @override
+  String get refundsEmpty => 'ยังไม่มีการขอคืนเงิน';
+
+  @override
+  String get detailRefund => 'คำขอคืนเงิน';
+
+  @override
+  String get fieldRefundStatus => 'การคืนเงิน';
+
+  @override
+  String get refundStatusSubmitted => 'ส่งแล้ว';
+
+  @override
+  String get refundStatusRefunded => 'คืนเงินแล้ว';
+
+  @override
+  String get refundStatusRejected => 'ถูกปฏิเสธ';
 }

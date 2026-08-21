@@ -123,5 +123,12 @@
   "fieldReference": "Reference",
   "fieldPickupWindow": "Časové okno svozu",
   "fieldCost": "Cena",
-  "detailNothingFurther": "Žádné další podrobnosti."
+  "detailNothingFurther": "Žádné další podrobnosti.",
+  "navRefunds": "Refundace",
+  "refundsEmpty": "Zatím nebyla vyžádána žádná refundace.",
+  "detailRefund": "Žádost o refundaci",
+  "fieldRefundStatus": "Refundace",
+  "refundStatusSubmitted": "Odesláno",
+  "refundStatusRefunded": "Refundováno",
+  "refundStatusRejected": "Zamítnuto"
 }

@@ -412,4 +412,25 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Không có thêm chi tiết.';
+
+  @override
+  String get navRefunds => 'Hoàn tiền';
+
+  @override
+  String get refundsEmpty => 'Chưa có yêu cầu hoàn tiền nào.';
+
+  @override
+  String get detailRefund => 'Yêu cầu hoàn tiền';
+
+  @override
+  String get fieldRefundStatus => 'Hoàn tiền';
+
+  @override
+  String get refundStatusSubmitted => 'Đã gửi';
+
+  @override
+  String get refundStatusRefunded => 'Đã hoàn tiền';
+
+  @override
+  String get refundStatusRejected => 'Bị từ chối';
 }

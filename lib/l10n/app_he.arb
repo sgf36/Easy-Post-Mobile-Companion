@@ -123,5 +123,12 @@
   "fieldReference": "אסמכתא",
   "fieldPickupWindow": "חלון איסוף",
   "fieldCost": "עלות",
-  "detailNothingFurther": "אין פרטים נוספים."
+  "detailNothingFurther": "אין פרטים נוספים.",
+  "navRefunds": "החזרים",
+  "refundsEmpty": "עדיין לא התבקשו החזרים.",
+  "detailRefund": "בקשת החזר",
+  "fieldRefundStatus": "החזר",
+  "refundStatusSubmitted": "נשלחה",
+  "refundStatusRefunded": "הוחזר",
+  "refundStatusRejected": "נדחה"
 }

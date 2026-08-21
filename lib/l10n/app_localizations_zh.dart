@@ -406,4 +406,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get detailNothingFurther => '没有更多详细信息。';
+
+  @override
+  String get navRefunds => '退款';
+
+  @override
+  String get refundsEmpty => '尚未申请退款。';
+
+  @override
+  String get detailRefund => '退款申请';
+
+  @override
+  String get fieldRefundStatus => '退款';
+
+  @override
+  String get refundStatusSubmitted => '已提交';
+
+  @override
+  String get refundStatusRefunded => '已退款';
+
+  @override
+  String get refundStatusRejected => '已拒绝';
 }

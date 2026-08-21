@@ -123,5 +123,12 @@
   "fieldReference": "Referință",
   "fieldPickupWindow": "Interval de ridicare",
   "fieldCost": "Cost",
-  "detailNothingFurther": "Nu există alte detalii."
+  "detailNothingFurther": "Nu există alte detalii.",
+  "navRefunds": "Rambursări",
+  "refundsEmpty": "Nu a fost solicitată încă nicio rambursare.",
+  "detailRefund": "Cerere de rambursare",
+  "fieldRefundStatus": "Rambursare",
+  "refundStatusSubmitted": "Trimisă",
+  "refundStatusRefunded": "Rambursată",
+  "refundStatusRejected": "Respinsă"
 }

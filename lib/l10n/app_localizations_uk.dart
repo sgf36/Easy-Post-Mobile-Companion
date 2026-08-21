@@ -412,4 +412,25 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Додаткових відомостей немає.';
+
+  @override
+  String get navRefunds => 'Повернення коштів';
+
+  @override
+  String get refundsEmpty => 'Повернення коштів ще не запитувалися.';
+
+  @override
+  String get detailRefund => 'Запит на повернення';
+
+  @override
+  String get fieldRefundStatus => 'Повернення';
+
+  @override
+  String get refundStatusSubmitted => 'Надіслано';
+
+  @override
+  String get refundStatusRefunded => 'Повернено';
+
+  @override
+  String get refundStatusRejected => 'Відхилено';
 }

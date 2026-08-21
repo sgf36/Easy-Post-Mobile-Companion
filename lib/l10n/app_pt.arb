@@ -123,5 +123,12 @@
   "fieldReference": "Referência",
   "fieldPickupWindow": "Janela de recolha",
   "fieldCost": "Custo",
-  "detailNothingFurther": "Sem mais detalhes."
+  "detailNothingFurther": "Sem mais detalhes.",
+  "navRefunds": "Reembolsos",
+  "refundsEmpty": "Ainda não foi solicitado nenhum reembolso.",
+  "detailRefund": "Pedido de reembolso",
+  "fieldRefundStatus": "Reembolso",
+  "refundStatusSubmitted": "Enviado",
+  "refundStatusRefunded": "Reembolsado",
+  "refundStatusRejected": "Recusado"
 }

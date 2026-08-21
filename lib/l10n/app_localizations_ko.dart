@@ -409,4 +409,25 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get detailNothingFurther => '추가 정보가 없습니다.';
+
+  @override
+  String get navRefunds => '환불';
+
+  @override
+  String get refundsEmpty => '아직 요청된 환불이 없습니다.';
+
+  @override
+  String get detailRefund => '환불 요청';
+
+  @override
+  String get fieldRefundStatus => '환불';
+
+  @override
+  String get refundStatusSubmitted => '제출됨';
+
+  @override
+  String get refundStatusRefunded => '환불됨';
+
+  @override
+  String get refundStatusRejected => '거부됨';
 }

@@ -123,5 +123,12 @@
   "fieldReference": "Riferimento",
   "fieldPickupWindow": "Finestra di ritiro",
   "fieldCost": "Costo",
-  "detailNothingFurther": "Nessun altro dettaglio."
+  "detailNothingFurther": "Nessun altro dettaglio.",
+  "navRefunds": "Rimborsi",
+  "refundsEmpty": "Nessun rimborso richiesto finora.",
+  "detailRefund": "Richiesta di rimborso",
+  "fieldRefundStatus": "Rimborso",
+  "refundStatusSubmitted": "Inviata",
+  "refundStatusRefunded": "Rimborsata",
+  "refundStatusRejected": "Rifiutata"
 }

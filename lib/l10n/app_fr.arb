@@ -123,5 +123,12 @@
   "fieldReference": "Référence",
   "fieldPickupWindow": "Créneau d'enlèvement",
   "fieldCost": "Coût",
-  "detailNothingFurther": "Aucun détail supplémentaire."
+  "detailNothingFurther": "Aucun détail supplémentaire.",
+  "navRefunds": "Remboursements",
+  "refundsEmpty": "Aucun remboursement n'a encore été demandé.",
+  "detailRefund": "Demande de remboursement",
+  "fieldRefundStatus": "Remboursement",
+  "refundStatusSubmitted": "Envoyée",
+  "refundStatusRefunded": "Remboursée",
+  "refundStatusRejected": "Refusée"
 }

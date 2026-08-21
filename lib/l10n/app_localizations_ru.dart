@@ -412,4 +412,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Дополнительных сведений нет.';
+
+  @override
+  String get navRefunds => 'Возвраты средств';
+
+  @override
+  String get refundsEmpty => 'Возвраты средств пока не запрашивались.';
+
+  @override
+  String get detailRefund => 'Запрос на возврат';
+
+  @override
+  String get fieldRefundStatus => 'Возврат';
+
+  @override
+  String get refundStatusSubmitted => 'Отправлен';
+
+  @override
+  String get refundStatusRefunded => 'Возвращён';
+
+  @override
+  String get refundStatusRejected => 'Отклонён';
 }

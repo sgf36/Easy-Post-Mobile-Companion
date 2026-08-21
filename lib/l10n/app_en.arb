@@ -279,5 +279,33 @@
   "detailNothingFurther": "No further details.",
   "@detailNothingFurther": {
     "description": "Shown when a record carries no fields worth listing."
+  },
+  "navRefunds": "Refunds",
+  "@navRefunds": {
+    "description": "Navigation label for the section listing refund requests on bought labels."
+  },
+  "refundsEmpty": "No refunds have been requested yet.",
+  "@refundsEmpty": {
+    "description": "Shown when no label in the account has had a refund requested."
+  },
+  "detailRefund": "Refund request",
+  "@detailRefund": {
+    "description": "Title of the screen showing one refund request in full."
+  },
+  "fieldRefundStatus": "Refund",
+  "@fieldRefundStatus": {
+    "description": "Field label for how far a refund request has got. Sits beside the parcel’s own status, which is a different thing, so keep the two distinguishable."
+  },
+  "refundStatusSubmitted": "Submitted",
+  "@refundStatusSubmitted": {
+    "description": "Refund state: asked for, and the carrier has not answered yet."
+  },
+  "refundStatusRefunded": "Refunded",
+  "@refundStatusRefunded": {
+    "description": "Refund state: the carrier agreed and credited the label."
+  },
+  "refundStatusRejected": "Rejected",
+  "@refundStatusRejected": {
+    "description": "Refund state: the carrier refused, usually because the label was used."
   }
 }

@@ -123,5 +123,12 @@
   "fieldReference": "Referenz",
   "fieldPickupWindow": "Abholzeitraum",
   "fieldCost": "Kosten",
-  "detailNothingFurther": "Keine weiteren Angaben."
+  "detailNothingFurther": "Keine weiteren Angaben.",
+  "navRefunds": "Erstattungen",
+  "refundsEmpty": "Es wurden noch keine Erstattungen beantragt.",
+  "detailRefund": "Erstattungsantrag",
+  "fieldRefundStatus": "Erstattung",
+  "refundStatusSubmitted": "Eingereicht",
+  "refundStatusRefunded": "Erstattet",
+  "refundStatusRejected": "Abgelehnt"
 }

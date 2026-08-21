@@ -5,6 +5,13 @@ Oxford commas, no abbreviations in prose (specialist search terms excepted in
 the keyword field), no pronouns, refined register. Character ceilings are
 Apple's; counts are noted where a field is constrained.
 
+> **`store/asc-metadata.json` is the source of truth** for description,
+> keywords, promotional text, release notes and subtitle, in all 28 listing
+> languages, and it is what is fed to the API. It is checked on every push by
+> `test/asc_metadata_test.dart`. This file is the English draft and the notes
+> around it — the fields below are kept in step by hand, so where the two
+> disagree, the JSON is what shipped.
+
 ---
 
 ## App information (localisation-independent)
@@ -12,7 +19,7 @@ Apple's; counts are noted where a field is constrained.
 | Field | Value |
 |---|---|
 | **Name** (≤30) | `Easy-Post Mobile Companion` — 26 |
-| **Subtitle** (≤30) | `Track, insure and file claims` — 29 |
+| **Subtitle** (≤30) | `Track parcels and refunds` — 25 |
 | **Bundle ID** | `com.spencerfields.easypostmobilecompanion` |
 | **Primary category** | Business |
 | **Secondary category** | Productivity |
@@ -20,23 +27,30 @@ Apple's; counts are noted where a field is constrained.
 | **Price** | Free (the paid licence lives on Easy-Post Desktop) |
 | **Copyright** | `2026 Spencer Fields` |
 
+> **The subtitle changed in 1.1.0.** It read "Track, insure and file claims"
+> through 1.0 and 1.0.1, naming two actions the app stopped offering in 1.0.1
+> under guideline 5.1.1(ix). It now names the tracking list and the refunds
+> list. All 28 are in `store/asc-metadata.json`; the two with no headroom left
+> — Arabic and French — were shortened to noun phrases rather than run at
+> exactly 30 characters, since a subtitle at the cap cannot be edited again
+> without a rewrite.
+
 ### URLs
 
 | Field | Value | Status |
 |---|---|---|
-| **Marketing URL** | `https://easy-post.spencerfields.com/mobile.html` | ⚠ page written, not yet deployed |
-| **Support URL** | `https://easy-post.spencerfields.com/mobile.html` | ⚠ same |
-| **Privacy Policy URL** | `https://easy-post.spencerfields.com/mobile-privacy.html` | ⚠ **required for submission** — written, not yet deployed |
+| **Marketing URL** | `https://easy-post.spencerfields.com/mobile.html` | live, set on the version |
+| **Support URL** | `https://easy-post.spencerfields.com/mobile.html` | live, set on the version |
+| **Privacy Policy URL** | `https://easy-post.spencerfields.com/mobile-privacy.html` | live, set on every `appInfoLocalization` — a submission blocker if it is ever missing from one |
 
 ---
 
 ## Promotional text (≤170)
 
 > The Easy-Post shipping console, now on iPhone. Pair once with a QR code, then
-> track parcels, buy insurance, file claims and look up tariff codes from
-> anywhere.
+> track parcels, follow refund requests and look up tariff codes from anywhere.
 
-*(≈158 characters. Editable after release without a new binary.)*
+*(155 characters. Editable after release without a new binary.)*
 
 ---
 
@@ -67,9 +81,8 @@ delivery status. Open any shipment for the full scan history and a map of the
 journey from origin to latest location.
 
 MANAGE ON THE MOVE
-• Buy insurance against loss or damage
-• File a claim on an insured parcel, with type, value and supporting detail
 • Review and cancel scheduled collections
+• Follow every refund request from submitted through to refunded or rejected
 • Browse the full shipment history at a glance
 
 TOOLS FOR INTERNATIONAL POST
@@ -89,32 +102,40 @@ Desktop is available for Windows and macOS from easy-post.spencerfields.com.
 
 ---
 
-## What's New (version 1.0.0 — first release)
+## What's New (version 1.1.0)
 
-First release of the Easy-Post Mobile Companion. Pair with Easy-Post Desktop to
-track shipments, buy insurance, file claims, manage collections, read spending
-reports and look up tariff codes on the move.
+This update adds a Refunds section. Every shipment with a refund request on it
+is gathered in one place — still waiting, refused or settled — with the parcel's
+own status, carrier, service and label cost beside it. Requesting a refund
+remains a desktop task; the companion reports on requests already made.
+
+Translated into all 28 listing languages in `store/asc-metadata.json` under
+`whatsNew`. Apple requires the field on an update and rejects it on a first
+release, so it belongs to this version rather than to the file in general.
 
 ---
 
-## Screenshots — required, not yet captured
+## Screenshots
 
-Apple requires at least one screenshot for the 6.9-inch iPhone display; a
-6.5-inch set is strongly advised for older-device coverage. Android frames are
-not accepted, so these must come from the iOS simulator on the Cloud Mac using
-`CAPTURE-IOS-SCREENSHOTS.md`.
+Captured by CI, not by hand: the `Build` workflow's `screenshots` job boots a
+6.9-inch simulator on a hosted macOS runner and drives
+`integration_test/screenshots_test.dart` against the demo fixtures. One leg per
+language, seven languages localised (`en de es fr hi ja zh`), the remaining
+twenty-one falling back to English. Sources live in `store/asc-shots-<lang>/`.
+`CAPTURE-IOS-SCREENSHOTS.md` covers the local route and the shot list.
 
-Recommended set (portrait), captured against the review-code demo device so the
-lists are populated:
+The set (portrait, 1320×2868):
 
 1. **Tracking** — the colour-coded status list (the flagship screen)
 2. **Shipment detail** — scan timeline plus the journey map
-3. **Insurance / Buy insurance** — the management action
-4. **Claims / File a claim** — the form
+3. **Insurance** — the policies already on the account
+4. **Claims** — claims raised on the account and their status
 5. **Reports** — the per-carrier spending breakdown
 6. **HTS Lookup** — an international-post tool
+7. **Refunds** — one row in each state: waiting, refused, settled
 
-App preview video is optional and out of scope for the first release.
+3 and 4 are lists rather than forms, because the forms were removed in 1.0.1
+under guideline 5.1.1(ix). App preview video remains out of scope.
 
 ---
 
@@ -143,15 +164,30 @@ unchecked. The privacy policy URL above carries the full statement.
 
 ---
 
-## Pre-submission checklist (blockers marked ⚠)
+## Release checklist
 
-- [ ] ⚠ Deploy `mobile.html` and `mobile-privacy.html` to the live domain (cPanel UAPI)
-- [ ] ⚠ Capture the iOS simulator screenshot set on the Cloud Mac
-- [ ] Upload the 1024 icon
-- [ ] Paste name, subtitle, promotional text, description, keywords
-- [ ] Set the three URLs
-- [ ] Set categories, age rating, price, copyright
-- [ ] Complete the App Privacy questionnaire
-- [ ] Attach the build (the TestFlight upload from CI provides it)
-- [ ] Localise (mirror the desktop language set) — optional for first submission
+Everything below the rule was done for 1.0 and 1.0.1 and does not recur. What a
+release actually costs is the short list first.
+
+Per release:
+
+- [ ] Bump the marketing version in `pubspec.yaml` — Apple closes a pre-release
+      train once its version ships, so the build number alone is not enough
+- [ ] Write `whatsNew` in all 28 locales in `store/asc-metadata.json`
+- [ ] Recapture screenshots if a new screen belongs on the listing, and refresh
+      `store/asc-shots-<lang>/`
+- [ ] Merge to `main`, which builds and uploads to TestFlight
+- [ ] Create the version record, push the metadata, attach the build
 - [ ] Final review, then submit for App Review (explicit go-ahead required)
+
+---
+
+Settled, and carried forward automatically:
+
+- [x] `mobile.html` and `mobile-privacy.html` deployed to the live domain
+- [x] 1024 icon uploaded
+- [x] Name, subtitle, promotional text, description, keywords
+- [x] Marketing, support and privacy policy URLs
+- [x] Categories, age rating, price, copyright
+- [x] App Privacy questionnaire
+- [x] Localised into all 28 listing languages

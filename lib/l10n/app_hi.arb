@@ -123,5 +123,12 @@
   "fieldReference": "संदर्भ",
   "fieldPickupWindow": "पिकअप अवधि",
   "fieldCost": "लागत",
-  "detailNothingFurther": "कोई अतिरिक्त विवरण नहीं।"
+  "detailNothingFurther": "कोई अतिरिक्त विवरण नहीं।",
+  "navRefunds": "रिफ़ंड",
+  "refundsEmpty": "अभी तक कोई रिफ़ंड नहीं मांगा गया है।",
+  "detailRefund": "रिफ़ंड अनुरोध",
+  "fieldRefundStatus": "रिफ़ंड",
+  "refundStatusSubmitted": "सबमिट किया गया",
+  "refundStatusRefunded": "रिफ़ंड हो गया",
+  "refundStatusRejected": "अस्वीकृत"
 }

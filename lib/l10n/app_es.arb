@@ -123,5 +123,12 @@
   "fieldReference": "Referencia",
   "fieldPickupWindow": "Franja de recogida",
   "fieldCost": "Coste",
-  "detailNothingFurther": "No hay más detalles."
+  "detailNothingFurther": "No hay más detalles.",
+  "navRefunds": "Reembolsos",
+  "refundsEmpty": "Todavía no se ha solicitado ningún reembolso.",
+  "detailRefund": "Solicitud de reembolso",
+  "fieldRefundStatus": "Reembolso",
+  "refundStatusSubmitted": "Enviado",
+  "refundStatusRefunded": "Reembolsado",
+  "refundStatusRejected": "Rechazado"
 }

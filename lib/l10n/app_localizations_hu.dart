@@ -415,4 +415,25 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Nincs további részlet.';
+
+  @override
+  String get navRefunds => 'Visszatérítések';
+
+  @override
+  String get refundsEmpty => 'Még nem kért visszatérítést.';
+
+  @override
+  String get detailRefund => 'Visszatérítési kérelem';
+
+  @override
+  String get fieldRefundStatus => 'Visszatérítés';
+
+  @override
+  String get refundStatusSubmitted => 'Elküldve';
+
+  @override
+  String get refundStatusRefunded => 'Visszatérítve';
+
+  @override
+  String get refundStatusRejected => 'Elutasítva';
 }

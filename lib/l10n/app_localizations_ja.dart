@@ -409,4 +409,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'これ以上の詳細はありません。';
+
+  @override
+  String get navRefunds => '返金';
+
+  @override
+  String get refundsEmpty => '返金はまだ申請されていません。';
+
+  @override
+  String get detailRefund => '返金リクエスト';
+
+  @override
+  String get fieldRefundStatus => '返金';
+
+  @override
+  String get refundStatusSubmitted => '申請済み';
+
+  @override
+  String get refundStatusRefunded => '返金済み';
+
+  @override
+  String get refundStatusRejected => '却下';
 }

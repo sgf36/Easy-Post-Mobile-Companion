@@ -412,4 +412,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'No further details.';
+
+  @override
+  String get navRefunds => 'Refunds';
+
+  @override
+  String get refundsEmpty => 'No refunds have been requested yet.';
+
+  @override
+  String get detailRefund => 'Refund request';
+
+  @override
+  String get fieldRefundStatus => 'Refund';
+
+  @override
+  String get refundStatusSubmitted => 'Submitted';
+
+  @override
+  String get refundStatusRefunded => 'Refunded';
+
+  @override
+  String get refundStatusRejected => 'Rejected';
 }

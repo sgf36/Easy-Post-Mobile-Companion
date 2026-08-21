@@ -123,5 +123,12 @@
   "fieldReference": "Hivatkozás",
   "fieldPickupWindow": "Átvételi időablak",
   "fieldCost": "Költség",
-  "detailNothingFurther": "Nincs további részlet."
+  "detailNothingFurther": "Nincs további részlet.",
+  "navRefunds": "Visszatérítések",
+  "refundsEmpty": "Még nem kért visszatérítést.",
+  "detailRefund": "Visszatérítési kérelem",
+  "fieldRefundStatus": "Visszatérítés",
+  "refundStatusSubmitted": "Elküldve",
+  "refundStatusRefunded": "Visszatérítve",
+  "refundStatusRejected": "Elutasítva"
 }

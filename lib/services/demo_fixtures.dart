@@ -328,6 +328,9 @@ const List<Map<String, dynamic>> demoShipments = <Map<String, dynamic>>[
     'created_at': '2026-08-10T16:15:00Z',
     'selected_rate': {'carrier': 'Evri', 'service': 'Standard', 'rate': '3.45', 'currency': 'GBP'},
     'to_address': {'name': 'Kelvinside Bindery', 'city': 'Glasgow', 'state': '', 'country': 'GB'},
+    // A label that was used, so the carrier refused the refund. The Refunds
+    // screen exists mostly for this case and for the one still waiting.
+    'refund_status': 'rejected',
   },
   {
     'id': 'shp_demo_09',
@@ -336,6 +339,27 @@ const List<Map<String, dynamic>> demoShipments = <Map<String, dynamic>>[
     'created_at': '2026-08-12T11:00:00Z',
     'selected_rate': {'carrier': 'DPDUK', 'service': 'NextDay', 'rate': '7.30', 'currency': 'GBP'},
     'to_address': {'name': 'Taff Vale Cycles', 'city': 'Cardiff', 'state': '', 'country': 'GB'},
+  },
+  // Two unused labels, bought and then not needed, which is what a refund
+  // request usually is. They are `pre_transit` because a label a carrier will
+  // refund is one that never entered the network.
+  {
+    'id': 'shp_demo_10',
+    'tracking_code': 'EZ1200000012',
+    'status': 'pre_transit',
+    'created_at': '2026-08-13T14:45:00Z',
+    'selected_rate': {'carrier': 'USPS', 'service': 'Priority', 'rate': '9.80', 'currency': 'USD'},
+    'to_address': {'name': 'Alder & Vine', 'city': 'Portland', 'state': 'OR', 'country': 'US'},
+    'refund_status': 'submitted',
+  },
+  {
+    'id': 'shp_demo_11',
+    'tracking_code': 'EZ1300000013',
+    'status': 'pre_transit',
+    'created_at': '2026-08-10T10:05:00Z',
+    'selected_rate': {'carrier': 'RoyalMailV3', 'service': 'RoyalMailTracked48', 'rate': '4.15', 'currency': 'GBP'},
+    'to_address': {'name': 'Netherby Frames', 'city': 'Carlisle', 'state': '', 'country': 'GB'},
+    'refund_status': 'refunded',
   },
 ];
 

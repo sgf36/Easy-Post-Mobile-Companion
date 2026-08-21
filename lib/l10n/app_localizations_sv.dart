@@ -414,4 +414,25 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Inga fler uppgifter.';
+
+  @override
+  String get navRefunds => 'Återbetalningar';
+
+  @override
+  String get refundsEmpty => 'Inga återbetalningar har begärts ännu.';
+
+  @override
+  String get detailRefund => 'Begäran om återbetalning';
+
+  @override
+  String get fieldRefundStatus => 'Återbetalning';
+
+  @override
+  String get refundStatusSubmitted => 'Skickad';
+
+  @override
+  String get refundStatusRefunded => 'Återbetald';
+
+  @override
+  String get refundStatusRejected => 'Avvisad';
 }
