@@ -103,6 +103,47 @@ The two failures worth recognising:
 A permission change can take a few minutes to reach the API. If step 4 looks
 right and `--check` still fails, wait and run it again before changing anything.
 
+## Getting a build onto a phone before the first release publishes
+
+The internal track's tester opt-in link — Testing > Internal testing > Testers >
+**Copy link** — is greyed out until the app has been **published**. A first
+release sits in "Pending publication" while Google reviews it, and no link
+exists in the meantime. Being on the tester list does not help: there is nothing
+to opt into yet.
+
+**Internal app sharing** is the way round it. Different mechanism, no track and
+no review, and it returns a URL that installs the exact bundle:
+
+```bash
+python "/c/Users/SpencerFields/OneDrive - Spencer Fields/Apps/Claude/easypost_mobile_companion/tool/play_upload.py" --share --aab "<path to app-release.aab>"
+```
+
+On the phone, internal app sharing has to be switched on first: **Play Store >
+profile > Settings > About > tap "Play Store version" seven times**. Then open
+the link.
+
+This is a sideways step, not a replacement. Once the first release publishes,
+the opt-in link appears and the internal track updates like any other app,
+which is the point of the whole exercise.
+
+## Keeping the key on a workstation
+
+CI reads the key from the repository secret. For running the script by hand,
+put it in the Windows credential store rather than leaving JSON in `Downloads`:
+
+```bash
+python -c "import keyring,sys;keyring.set_password('google-play-ci','play-ci',open(sys.argv[1],encoding='utf-8').read())" "/c/Users/SpencerFields/Downloads/claude-automation-apps-KEY.json"
+```
+
+The script falls back to it whenever `PLAY_SERVICE_ACCOUNT_JSON` is unset, so
+after this the key exists in exactly two places that are meant to hold secrets
+— the repository secret and the OS vault — and nowhere on disk. Delete the
+download afterwards.
+
+A key can be re-issued at any time from the same service account (Cloud Console
+> that account > Keys > Add key). Old keys keep working until deleted, so
+issuing a fresh one costs nothing.
+
 ## What CI does with it
 
 The `android` job, after building the signed bundle:

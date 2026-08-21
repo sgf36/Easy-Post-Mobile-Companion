@@ -11,14 +11,17 @@ the App Store Connect side. The key never leaves the process.
 
     python3 tool/play_upload.py --aab build/app/outputs/bundle/release/app-release.aab
 
-Credentials come from PLAY_SERVICE_ACCOUNT_JSON, which may be the JSON itself
-or a path to it. See PLAY-SETUP.md for how it is created and what it is allowed
-to do.
+Credentials come from PLAY_SERVICE_ACCOUNT_JSON — the JSON itself or a path to
+it — or, on a workstation, from the OS credential store. See PLAY-SETUP.md.
 
-The default track is `internal`, which is the one that reaches named testers
-immediately and reaches nobody else. Production is refused outright: a release
-to the public should be a deliberate act in the Console, not a flag on a script
-that also does routine test uploads.
+The default track is `internal`, which reaches named testers and nobody else.
+Production is refused outright: a release to the public should be a deliberate
+act in the Console, not a flag on a script that also does routine test uploads.
+
+    --check   prove the credential works and can see this app
+    --share   Internal app sharing: an install link, with no track and no
+              review. The only route to a phone before an app's first release
+              has finished publishing.
 """
 from __future__ import annotations
 
@@ -41,10 +44,29 @@ TOKEN_URL = "https://oauth2.googleapis.com/token"
 TRACKS = ("internal", "alpha", "beta")
 
 
+KEYRING_SERVICE = "google-play-ci"
+KEYRING_ACCOUNT = "play-ci"
+
+
 def credentials() -> dict:
+    """The key, from the environment or from the OS credential store.
+
+    CI sets the environment variable from the repository secret. On a
+    workstation, holding it in the credential store instead means there is no
+    JSON file sitting in Downloads waiting to be committed or synced — the same
+    arrangement the cPanel deploy token uses.
+    """
     raw = os.environ.get("PLAY_SERVICE_ACCOUNT_JSON", "").strip()
     if not raw:
-        sys.exit("PLAY_SERVICE_ACCOUNT_JSON is not set — see PLAY-SETUP.md")
+        try:
+            import keyring
+
+            raw = (keyring.get_password(KEYRING_SERVICE, KEYRING_ACCOUNT) or "").strip()
+        except ImportError:
+            pass
+    if not raw:
+        sys.exit("No credential. Set PLAY_SERVICE_ACCOUNT_JSON, or store the key "
+                 f"under {KEYRING_SERVICE}/{KEYRING_ACCOUNT} — see PLAY-SETUP.md")
     if not raw.startswith("{"):
         if not os.path.exists(raw):
             sys.exit(f"PLAY_SERVICE_ACCOUNT_JSON points at {raw}, which does not exist")
@@ -144,6 +166,31 @@ class Play:
         requests.delete(f"{BASE}/applications/{self.package}/edits/{edit}",
                         headers=self.h, timeout=60)
 
+    def share(self, path: str) -> dict:
+        """Upload to Internal app sharing and return the install link.
+
+        A different mechanism to the tracks above, and the one that works
+        before an app has ever been published. A track release on a new app
+        goes to "Pending publication" until Google reviews it, and the tester
+        opt-in link does not exist until that finishes — so the internal track
+        cannot deliver a first build to a phone on the day it is built.
+        Internal app sharing has no review and no track: it returns a URL that
+        installs the exact bundle.
+
+        Note the path. It is applications/internalappsharing/{package}, not
+        applications/{package}/internalappsharing, which is the ordering
+        everything else in this API uses and the one worth getting wrong once.
+        """
+        size = os.path.getsize(path)
+        print(f"  uploading {os.path.basename(path)} ({size // (1024 * 1024)}MB) to internal app sharing")
+        with open(path, "rb") as fh:
+            r = requests.post(
+                f"{UPLOAD}/applications/internalappsharing/{self.package}/artifacts/bundle",
+                headers={**self.h, "Content-Type": "application/octet-stream"},
+                params={"uploadType": "media"}, data=fh, timeout=1800,
+            )
+        return self._check(r, "internal app sharing upload")
+
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__,
@@ -153,6 +200,9 @@ def main() -> int:
     p.add_argument("--notes", default=None, help="release notes for testers")
     p.add_argument("--check", action="store_true",
                    help="authenticate and read the app back, upload nothing")
+    p.add_argument("--share", action="store_true",
+                   help="upload to Internal app sharing and print an install link, "
+                        "bypassing tracks and review")
     args = p.parse_args()
 
     info = credentials()
@@ -170,6 +220,16 @@ def main() -> int:
 
     if not os.path.exists(args.aab):
         sys.exit(f"no bundle at {args.aab}")
+
+    if args.share:
+        art = play.share(args.aab)
+        print()
+        print("Open this on the phone, signed in as a listed tester:")
+        print(" ", art.get("downloadUrl"))
+        print()
+        print("The Play Store app must have internal app sharing switched on:")
+        print("  Play Store > profile > Settings > About > tap 'Play Store version' seven times.")
+        return 0
 
     edit = play.new_edit()
     print(f"edit {edit}")
