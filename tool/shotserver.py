@@ -1,14 +1,27 @@
-"""Host-side screenshot server for the App Store capture run.
+"""Host-side screenshot server for the store capture runs.
 
-The integration test runs inside the iOS Simulator and cannot shell out. It hits
-this server at each clean frame; the server takes the native-resolution capture
-with `xcrun simctl io booted screenshot` and only then answers, so the test stays
-in lockstep with the captures.
+The integration test runs inside the simulator or emulator and cannot shell out.
+It hits this server at each clean frame; the server takes the native-resolution
+capture and only then answers, so the test stays in lockstep with the captures.
+
+Two platforms, one test. `SHOTS_PLATFORM=ios` (the default) captures with
+`xcrun simctl`; `SHOTS_PLATFORM=android` captures with `adb exec-out screencap`.
+The test itself is identical either way — it knows nothing about how the picture
+is taken, which is why the same shot list serves the App Store and Play.
 """
 import http.server
 import os
 import subprocess
 import urllib.parse
+
+PLATFORM = os.environ.get("SHOTS_PLATFORM", "ios").lower()
+if PLATFORM not in ("ios", "android"):
+    raise SystemExit(f"SHOTS_PLATFORM must be ios or android, not {PLATFORM!r}")
+
+# Which emulator, when more than one is attached. adb picks arbitrarily
+# otherwise, and capturing the wrong device is the sort of failure that looks
+# like a rendering bug.
+ANDROID_SERIAL = os.environ.get("ANDROID_SERIAL", "")
 
 # Overridable so CI can write into the workspace, where upload-artifact can see
 # it. A GitHub runner's ~/Desktop is not a useful place to leave build output.
@@ -16,15 +29,33 @@ OUT = os.path.expanduser(os.environ.get("ASC_SHOTS_DIR", "~/Desktop/asc-screensh
 os.makedirs(OUT, exist_ok=True)
 
 
+def capture(dest):
+    """Take one native-resolution capture into `dest`."""
+    if PLATFORM == "ios":
+        return subprocess.run(
+            ["xcrun", "simctl", "io", "booted", "screenshot", dest],
+            capture_output=True,
+        )
+
+    # `adb exec-out` rather than `adb shell`: shell mangles the PNG by
+    # translating LF to CRLF on some platforms, which produces a file that is
+    # the right size and will not open. exec-out is a clean binary channel.
+    serial = ["-s", ANDROID_SERIAL] if ANDROID_SERIAL else []
+    result = subprocess.run(
+        ["adb", *serial, "exec-out", "screencap", "-p"], capture_output=True
+    )
+    if result.returncode == 0 and result.stdout:
+        with open(dest, "wb") as fh:
+            fh.write(result.stdout)
+    return result
+
+
 class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         query = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
         name = query.get("name", ["shot"])[0]
         dest = os.path.join(OUT, name + ".png")
-        result = subprocess.run(
-            ["xcrun", "simctl", "io", "booted", "screenshot", dest],
-            capture_output=True,
-        )
+        result = capture(dest)
         # A failed capture must answer with a failure.
         #
         # This used to reply "200 ok" whatever happened, and the caller catches
@@ -51,5 +82,5 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    print("shotserver listening on 127.0.0.1:8099 -> %s" % OUT, flush=True)
+    print("shotserver (%s) listening on 127.0.0.1:8099 -> %s" % (PLATFORM, OUT), flush=True)
     http.server.HTTPServer(("127.0.0.1", 8099), Handler).serve_forever()
