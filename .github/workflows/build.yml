@@ -351,25 +351,57 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Create and boot the emulator
+        env:
+          # Pin where the AVD lives. avdmanager and the emulator each search a
+          # list of candidate directories — $ANDROID_AVD_HOME, then
+          # $ANDROID_SDK_HOME/avd, then $HOME/.android/avd — and on this runner
+          # they resolved differently: the AVD was created somewhere the
+          # emulator did not look, and it died with "Unknown AVD name".
+          ANDROID_AVD_HOME: ${{ github.workspace }}/.avd
         run: |
           set -euo pipefail
           SDK="$ANDROID_HOME/cmdline-tools/latest/bin"
           ADB="$ANDROID_HOME/platform-tools/adb"
           IMAGE="system-images;android-34;google_apis;x86_64"
+          mkdir -p "$ANDROID_AVD_HOME"
           yes | "$SDK/sdkmanager" --licenses >/dev/null 2>&1 || true
-          "$SDK/sdkmanager" --install "$IMAGE" "platform-tools" >/dev/null
+          "$SDK/sdkmanager" --install "$IMAGE" "platform-tools" "emulator" >/dev/null
           echo no | "$SDK/avdmanager" create avd -n "$AVD_NAME" -k "$IMAGE" \
             --device "pixel_6" --force
+          # Prove it landed where the emulator will look, rather than finding
+          # that out from a process which exits and a wait which never returns.
+          "$ANDROID_HOME/emulator/emulator" -list-avds | tee /tmp/avds
+          grep -qx "$AVD_NAME" /tmp/avds || {
+            echo "::error::AVD $AVD_NAME was created but the emulator cannot see it"
+            ls -la "$ANDROID_AVD_HOME" || true
+            exit 1
+          }
+
           # 1080x2340 at 440dpi: an ordinary modern phone, portrait, and inside
           # Play's 320-3840px bounds without resizing anything afterwards.
           "$ANDROID_HOME/emulator/emulator" -avd "$AVD_NAME" -no-window -no-audio \
-            -no-boot-anim -gpu swiftshader_indirect -skin 1080x2340 &
-          "$ADB" wait-for-device
-          # wait-for-device returns as soon as adb can talk to it, which is long
-          # before Android has finished starting. Poll the property set last.
-          until [ "$("$ADB" shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ]; do
+            -no-boot-anim -gpu swiftshader_indirect -skin 1080x2340 \
+            > /tmp/emulator.log 2>&1 &
+          EMU=$!
+
+          # Bounded, and watching the process. The first version ran
+          # `adb wait-for-device` with no timeout against an emulator that had
+          # already exited, and sat there saying nothing for twenty-three
+          # minutes. A dead emulator should fail in seconds, with its log.
+          for i in $(seq 1 90); do
+            if ! kill -0 "$EMU" 2>/dev/null; then
+              echo "::error::the emulator exited during boot"
+              cat /tmp/emulator.log
+              exit 1
+            fi
+            [ "$("$ADB" shell getprop sys.boot_completed 2>/dev/null | tr -d '\r' || true)" = "1" ] && break
             sleep 5
           done
+          if [ "$("$ADB" shell getprop sys.boot_completed 2>/dev/null | tr -d '\r' || true)" != "1" ]; then
+            echo "::error::the emulator did not finish booting within 450s"
+            cat /tmp/emulator.log
+            exit 1
+          fi
           "$ADB" shell wm density 440
           # Animations left on make a "settled" frame a lie: the test pumps
           # until Flutter is idle, but a system transition can still be part-way
