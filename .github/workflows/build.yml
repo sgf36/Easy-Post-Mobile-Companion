@@ -266,12 +266,17 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     needs: [test, locales]
     runs-on: macos-latest
+    # A wedged capture used to sit until GitHub's six-hour default. It has cost
+    # that twice: a run cancelled by hand after 6h1m, and three legs of the
+    # 2026-08-21 recapture. Nothing here legitimately takes an hour.
+    timeout-minutes: 50
     strategy:
       fail-fast: false
       matrix:
         locale: ${{ fromJSON(needs.locales.outputs.matrix) }}
     env:
       DEVICE: iPhone 16 Pro Max
+      CAPTURE_TIMEOUT_SECONDS: "900"
       ASC_SHOTS_DIR: ${{ github.workspace }}/asc-screenshots/${{ matrix.locale }}
     steps:
       - uses: actions/checkout@v4
@@ -304,9 +309,20 @@ jobs:
 
       # No `open -a Simulator`: a runner has no GUI session, and
       # `simctl io booted screenshot` does not need one.
+      # `flutter test` can wedge in the gap between "Xcode build done" and the
+      # app connecting back to the test harness. That gap is outside the test,
+      # so neither the testWidgets Timeout nor pumpAndSettle's own cap applies,
+      # and the leg sits doing nothing until the job is killed. The log of a
+      # wedged run ends at "Xcode build done" with no further line at all,
+      # while a healthy one reaches its first CAPTURED within ninety seconds.
+      #
+      # It is flaky, not locale-specific: on 2026-08-21 German wedged in one run
+      # and passed in the next. So the answer is a watchdog and a retry, not a
+      # fix to any one language. macOS ships no coreutils `timeout`, hence the
+      # explicit poll; `set -e` is off so a failed attempt reaches the retry.
       - name: Capture screenshots
         run: |
-          set -euo pipefail
+          set -uo pipefail
           mkdir -p "$ASC_SHOTS_DIR"
           python3 tool/shotserver.py &
           SERVER=$!
@@ -315,9 +331,46 @@ jobs:
             curl -fsS "http://127.0.0.1:8099/shot?name=_warmup" >/dev/null && break || sleep 1
           done
           rm -f "$ASC_SHOTS_DIR/_warmup.png"
-          flutter test integration_test/screenshots_test.dart \
-            -d "$DEVICE" --dart-define=SHOTS_REQUIRED=1 --dart-define=DEMO_FIXTURES=true \
-            --dart-define=UI_LOCALE=${{ matrix.locale }}
+
+          capture_once() {
+            flutter test integration_test/screenshots_test.dart \
+              -d "$DEVICE" --dart-define=SHOTS_REQUIRED=1 --dart-define=DEMO_FIXTURES=true \
+              --dart-define=UI_LOCALE=${{ matrix.locale }} &
+            local pid=$!
+            local waited=0
+            while kill -0 "$pid" 2>/dev/null; do
+              sleep 10
+              waited=$((waited + 10))
+              if [ "$waited" -ge "$CAPTURE_TIMEOUT_SECONDS" ]; then
+                echo "::warning::no result after ${waited}s — killing this attempt"
+                kill -9 "$pid" 2>/dev/null || true
+                wait "$pid" 2>/dev/null || true
+                return 124
+              fi
+            done
+            wait "$pid"
+          }
+
+          for attempt in 1 2 3; do
+            echo "::group::capture attempt $attempt"
+            # Half a set is worse than none: the verify step counts files, so a
+            # killed attempt must not leave its partial output behind to be
+            # topped up by the next one.
+            rm -f "$ASC_SHOTS_DIR"/*.png
+            capture_once
+            code=$?
+            echo "::endgroup::"
+            [ "$code" = 0 ] && exit 0
+            echo "::warning::attempt $attempt failed (exit $code)"
+            [ "$attempt" = 3 ] && break
+            # A killed attempt leaves the simulator holding a half-installed app.
+            xcrun simctl shutdown "$DEVICE" || true
+            xcrun simctl erase "$DEVICE" || true
+            xcrun simctl boot "$DEVICE"
+            xcrun simctl bootstatus "$DEVICE" -b
+          done
+          echo "::error::capture failed after 3 attempts"
+          exit 1
 
       # The capture path has failed silently before: the server answered 200
       # whatever happened and the test caught its own errors, so a run that
