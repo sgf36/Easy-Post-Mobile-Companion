@@ -19,6 +19,10 @@ on:
         type: choice
         default: internal
         options: [internal, alpha, beta]
+      android_screenshots:
+        description: "Capture Play store screenshots from an Android emulator"
+        type: boolean
+        default: false
 
 env:
   FLUTTER_VERSION: "3.44.8"
@@ -119,9 +123,11 @@ jobs:
         if: steps.signing.outputs.ready == 'true'
         run: flutter build appbundle --release --build-number=${{ github.run_number }}
 
-      # A signed release APK for direct (sideload) download, offered in-app from
-      # Tools > Android app while the Play listing is pending. Same signing config
-      # as the bundle; uploaded alongside it by the artifact step below.
+      # A signed release APK alongside the bundle. No longer offered anywhere:
+      # the direct download it fed was retired once Play had a testing track,
+      # because an APK install cannot update itself. Kept because `adb install`
+      # of a release build is the only way to check a signed binary on a real
+      # device without going through a track.
       - name: Build signed APK (direct download)
         if: steps.signing.outputs.ready == 'true'
         run: flutter build apk --release --build-number=${{ github.run_number }}
@@ -297,6 +303,147 @@ jobs:
           if-no-files-found: warn
           path: build/ios/ipa/*.ipa
 
+  # Play store screenshots, from an Android emulator on a Linux runner.
+  #
+  # The same integration test as the iOS leg drives it. The test knows nothing
+  # about how a picture is taken — it calls the shot server at each settled
+  # frame — so tool/shotserver.py switches between `xcrun simctl` and
+  # `adb exec-out screencap` on SHOTS_PLATFORM, and one shot list serves both
+  # stores.
+  #
+  # Manual dispatch only, like the iOS leg: capture is a release chore, not a
+  # per-push cost.
+  #
+  # English only for now. Play takes localised imagery per listing language and
+  # this listing has one; the matrix can grow when the other languages do.
+  android-screenshots:
+    if: github.event_name == 'workflow_dispatch' && inputs.android_screenshots == true
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ASC_SHOTS_DIR: ${{ github.workspace }}/play-screenshots
+      SHOTS_PLATFORM: android
+      AVD_NAME: play-capture
+      PACKAGE: com.spencerfields.easypostmobilecompanion
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter gen-l10n
+
+      # The emulator needs KVM, which exists on Linux runners but is owned by
+      # root until a udev rule opens it. Without it the emulator drops to
+      # software rendering and takes long enough to look like a hang.
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Create and boot the emulator
+        run: |
+          set -euo pipefail
+          SDK="$ANDROID_HOME/cmdline-tools/latest/bin"
+          ADB="$ANDROID_HOME/platform-tools/adb"
+          IMAGE="system-images;android-34;google_apis;x86_64"
+          yes | "$SDK/sdkmanager" --licenses >/dev/null 2>&1 || true
+          "$SDK/sdkmanager" --install "$IMAGE" "platform-tools" >/dev/null
+          echo no | "$SDK/avdmanager" create avd -n "$AVD_NAME" -k "$IMAGE" \
+            --device "pixel_6" --force
+          # 1080x2340 at 440dpi: an ordinary modern phone, portrait, and inside
+          # Play's 320-3840px bounds without resizing anything afterwards.
+          "$ANDROID_HOME/emulator/emulator" -avd "$AVD_NAME" -no-window -no-audio \
+            -no-boot-anim -gpu swiftshader_indirect -skin 1080x2340 &
+          "$ADB" wait-for-device
+          # wait-for-device returns as soon as adb can talk to it, which is long
+          # before Android has finished starting. Poll the property set last.
+          until [ "$("$ADB" shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ]; do
+            sleep 5
+          done
+          "$ADB" shell wm density 440
+          # Animations left on make a "settled" frame a lie: the test pumps
+          # until Flutter is idle, but a system transition can still be part-way
+          # through and lands in the picture.
+          "$ADB" shell settings put global window_animation_scale 0
+          "$ADB" shell settings put global transition_animation_scale 0
+          "$ADB" shell settings put global animator_duration_scale 0
+          "$ADB" devices
+
+      - name: Capture screenshots
+        run: |
+          set -uo pipefail
+          ADB="$ANDROID_HOME/platform-tools/adb"
+          mkdir -p "$ASC_SHOTS_DIR"
+          python3 tool/shotserver.py &
+          SERVER=$!
+          trap 'kill $SERVER 2>/dev/null || true' EXIT
+          for i in $(seq 1 20); do
+            curl -fsS "http://127.0.0.1:8099/shot?name=_warmup" >/dev/null && break || sleep 1
+          done
+          rm -f "$ASC_SHOTS_DIR/_warmup.png"
+
+          # Same watchdog as the iOS leg, for the same reason: the gap between
+          # the build finishing and the app connecting back to the harness is
+          # outside the test, so no timeout inside the test bounds it.
+          capture_once() {
+            flutter test integration_test/screenshots_test.dart \
+              -d emulator-5554 --dart-define=SHOTS_REQUIRED=1 \
+              --dart-define=DEMO_FIXTURES=true --dart-define=UI_LOCALE=en &
+            local pid=$!
+            local waited=0
+            while kill -0 "$pid" 2>/dev/null; do
+              sleep 10
+              waited=$((waited + 10))
+              if [ "$waited" -ge 900 ]; then
+                echo "::warning::no result after ${waited}s — killing this attempt"
+                kill -9 "$pid" 2>/dev/null || true
+                wait "$pid" 2>/dev/null || true
+                return 124
+              fi
+            done
+            wait "$pid"
+          }
+
+          for attempt in 1 2 3; do
+            echo "::group::capture attempt $attempt"
+            rm -f "$ASC_SHOTS_DIR"/*.png
+            capture_once
+            code=$?
+            echo "::endgroup::"
+            [ "$code" = 0 ] && exit 0
+            echo "::warning::attempt $attempt failed (exit $code)"
+            [ "$attempt" = 3 ] && break
+            "$ADB" uninstall "$PACKAGE" || true
+          done
+          echo "::error::capture failed after 3 attempts"
+          exit 1
+
+      # The same proof the iOS leg demands. A capture path that answers 200
+      # whatever happened has been green over an empty directory before.
+      - name: Verify the captures
+        run: |
+          set -euo pipefail
+          COUNT=$(ls -1 "$ASC_SHOTS_DIR"/*.png 2>/dev/null | wc -l | tr -d ' ')
+          echo "captured $COUNT png(s)"
+          [ "$COUNT" -ge 7 ] || { echo "::error::expected at least 7 screenshots, got $COUNT"; exit 1; }
+          python3 tool/verify_shots.py --min-edge 320 --max-edge 3840 --portrait "$ASC_SHOTS_DIR"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: play-screenshots
+          path: ${{ env.ASC_SHOTS_DIR }}
+
   # App Store screenshots, on a hosted macOS runner rather than a rented Mac.
   #
   # Manual dispatch only: capture is a release chore, not a per-push cost, and
@@ -431,14 +578,7 @@ jobs:
           COUNT=$(ls -1 "$ASC_SHOTS_DIR"/*.png 2>/dev/null | wc -l | tr -d ' ')
           echo "captured $COUNT png(s)"
           [ "$COUNT" -ge 7 ] || { echo "::error::expected at least 7 screenshots, got $COUNT"; exit 1; }
-          for f in "$ASC_SHOTS_DIR"/*.png; do
-            SIZE=$(sips -g pixelWidth -g pixelHeight "$f" | awk '/pixel/{printf "%s",$2"x"}' | sed 's/x$//')
-            echo "  $(basename "$f")  $SIZE"
-            case "$SIZE" in
-              1320x2868|1290x2796) ;;
-              *) echo "::error::$(basename "$f") is $SIZE, not a 6.9-inch App Store size"; exit 1 ;;
-            esac
-          done
+          python3 tool/verify_shots.py --exact 1320x2868 --exact 1290x2796 "$ASC_SHOTS_DIR"
 
       - uses: actions/upload-artifact@v4
         if: always()
