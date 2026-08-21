@@ -50,4 +50,12 @@ app.*.map.json
 # screenshot set into the index because nothing here excluded them.
 store/android-release/
 store/asc-shots/
-store/play-assets/
+
+# store/play-assets/ used to be ignored wholesale, which meant the Play listing
+# imagery lived only on whichever machine last captured it while the App Store
+# equivalents were tracked. That is how a set captured against the live account
+# survived unnoticed until it was read: nothing ever showed it in a diff.
+# Ignore the binaries that get swept in, not the listing itself.
+store/**/*.aab
+store/**/*.apk
+store/**/*.bak
