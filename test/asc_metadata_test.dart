@@ -112,16 +112,13 @@ void main() {
         'request refunds',
       ];
 
-      // Not the subtitle. "Track, insure and file claims" would fail this and
-      // is nonetheless what is live and Apple-approved on 1.0.1 — the app
-      // still shows insurance policies and claims, it just no longer creates
-      // them. Rewriting it means finding a replacement under 30 characters in
-      // 28 languages, which is a decision about the listing rather than a
-      // correction to it, so it is deliberately left open rather than
-      // quietly failed here.
+      // The subtitle is in scope. It read "Track, insure and file claims"
+      // until 1.1.0 — Apple-approved, and describing two actions the app had
+      // not offered since 1.0.1. It now names the tracking list and the
+      // refunds list, which is what it actually opens on.
       for (final locale in <String>['en-GB', 'en-US']) {
         final fields = _metadata()[locale] as Map<String, dynamic>;
-        for (final field in <String>['description', 'promotionalText']) {
+        for (final field in <String>['description', 'promotionalText', 'subtitle']) {
           final text = (fields[field] as String).toLowerCase();
           for (final phrase in [...labelPhrases, ...removedActionPhrases]) {
             expect(text, isNot(contains(phrase)), reason: '$locale.$field: $phrase');

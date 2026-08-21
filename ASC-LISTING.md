@@ -19,7 +19,7 @@ Apple's; counts are noted where a field is constrained.
 | Field | Value |
 |---|---|
 | **Name** (≤30) | `Easy-Post Mobile Companion` — 26 |
-| **Subtitle** (≤30) | `Track, insure and file claims` — 29 · **open question**, see below |
+| **Subtitle** (≤30) | `Track parcels and refunds` — 25 |
 | **Bundle ID** | `com.spencerfields.easypostmobilecompanion` |
 | **Primary category** | Business |
 | **Secondary category** | Productivity |
@@ -27,15 +27,13 @@ Apple's; counts are noted where a field is constrained.
 | **Price** | Free (the paid licence lives on Easy-Post Desktop) |
 | **Copyright** | `2026 Spencer Fields` |
 
-> **The subtitle still names two things the app no longer does.** Buying
-> insurance and filing a claim were removed in 1.0.1; the app lists existing
-> policies and claims but creates neither. Apple approved the subtitle as it
-> stands, and the description and promotional text were corrected around it, so
-> this is a listing decision rather than an outstanding error — but replacing it
-> means finding something under 30 characters in 28 languages, and German
-> already sits at 26 and Hungarian at 29. Left as it is until that is decided;
-> `test/asc_metadata_test.dart` deliberately exempts the subtitle from the
-> phrase check that would otherwise fail on it.
+> **The subtitle changed in 1.1.0.** It read "Track, insure and file claims"
+> through 1.0 and 1.0.1, naming two actions the app stopped offering in 1.0.1
+> under guideline 5.1.1(ix). It now names the tracking list and the refunds
+> list. All 28 are in `store/asc-metadata.json`; the two with no headroom left
+> — Arabic and French — were shortened to noun phrases rather than run at
+> exactly 30 characters, since a subtitle at the cap cannot be edited again
+> without a rewrite.
 
 ### URLs
 
