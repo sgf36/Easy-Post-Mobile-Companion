@@ -103,46 +103,62 @@ The two failures worth recognising:
 A permission change can take a few minutes to reach the API. If step 4 looks
 right and `--check` still fails, wait and run it again before changing anything.
 
-## Getting a build onto a phone before the first release publishes
+## Nothing reaches a phone until the app is published once
 
-The internal track's tester opt-in link — Testing > Internal testing > Testers >
-**Copy link** — is greyed out until the app has been **published**. A first
-release sits in "Pending publication" while Google reviews it, and no link
-exists in the meantime. Being on the tester list does not help: there is nothing
-to opt into yet.
+Both routes to a device are gated on the same thing, and neither says so
+clearly:
 
-**Internal app sharing** is the way round it. Different mechanism, no track and
-no review, and it returns a URL that installs the exact bundle:
+- The internal track's tester opt-in link — Testing > Internal testing >
+  Testers > **Copy link** — is greyed out, saying the app must be published
+  first. Being on the tester list does not help; there is nothing to opt into.
+- **Internal app sharing**, which is normally the way round exactly this,
+  refuses with `400 UploadException: NOT_PUBLISHED`.
 
-```bash
-python "/c/Users/SpencerFields/OneDrive - Spencer Fields/Apps/Claude/easypost_mobile_companion/tool/play_upload.py" --share --aab "<path to app-release.aab>"
+A release can be uploaded and assigned to the internal track — versionCode 65
+sits there with status `completed` — and still reach nobody, because Play will
+not publish anything at all until the app's required setup is finished.
+
+What is missing is readable over the API:
+
+```
+tracks:        internal, versionCode 65, status completed
+store listing: en-GB, title only — no short description, no full description
+app details:   defaultLanguage en-GB, nothing else
 ```
 
-On the phone, internal app sharing has to be switched on first: **Play Store >
-profile > Settings > About > tap "Play Store version" seven times**. Then open
-the link.
+The store listing text and graphics **can** be set over the API
+(`edits.listings`, `edits.images`). The declarations under **App content**
+cannot: content rating, data safety, target audience, ads, and the privacy
+policy have no endpoint in androidpublisher v3 and are Console-only. They are
+also attestations about the product, so they belong to a person rather than to
+a script.
 
-This is a sideways step, not a replacement. Once the first release publishes,
-the opt-in link appears and the internal track updates like any other app,
-which is the point of the whole exercise.
+Order of operations, once those are done: the internal release moves from
+"Pending publication" to published, the opt-in link appears, and from the
+second release onward the track updates like any other app — which is the point
+of moving off the APK.
 
 ## Keeping the key on a workstation
 
 CI reads the key from the repository secret. For running the script by hand,
-put it in the Windows credential store rather than leaving JSON in `Downloads`:
+the fallback is a file at `%LOCALAPPDATA%\easypost\play-ci.json`, which the
+script finds without being told:
 
 ```bash
-python -c "import keyring,sys;keyring.set_password('google-play-ci','play-ci',open(sys.argv[1],encoding='utf-8').read())" "/c/Users/SpencerFields/Downloads/claude-automation-apps-KEY.json"
+mkdir -p "/c/Users/SpencerFields/AppData/Local/easypost" && cp "/c/Users/SpencerFields/Downloads/claude-automation-apps-50d08e28fe44.json" "/c/Users/SpencerFields/AppData/Local/easypost/play-ci.json"
 ```
 
-The script falls back to it whenever `PLAY_SERVICE_ACCOUNT_JSON` is unset, so
-after this the key exists in exactly two places that are meant to hold secrets
-— the repository secret and the OS vault — and nowhere on disk. Delete the
-download afterwards.
+**Not** the Windows credential store, which is where the rest of this
+workspace's secrets live. `CredWrite` caps a credential blob at 2560 bytes, and
+a service-account key is about 2.4 KB of JSON — 4.7 KB once Windows encodes it
+as UTF-16. It fails with `WinError 1783, "The stub received bad data"`, which
+does not sound like a length limit.
+
+Not Downloads, which a browser clears out, and not anywhere under OneDrive,
+which would sync a private key to a server. `LOCALAPPDATA` is neither.
 
 A key can be re-issued at any time from the same service account (Cloud Console
-> that account > Keys > Add key). Old keys keep working until deleted, so
-issuing a fresh one costs nothing.
+> that account > Keys > Add key). Old keys keep working until deleted.
 
 ## What CI does with it
 

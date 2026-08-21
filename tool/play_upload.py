@@ -44,29 +44,35 @@ TOKEN_URL = "https://oauth2.googleapis.com/token"
 TRACKS = ("internal", "alpha", "beta")
 
 
-KEYRING_SERVICE = "google-play-ci"
-KEYRING_ACCOUNT = "play-ci"
+def default_key_path() -> str:
+    """Where the key lives on a workstation.
+
+    Not the Windows credential store, which is where the rest of this
+    workspace's secrets live: CredWrite caps a credential blob at 2560 bytes and
+    a service-account key is about 2.4 KB of JSON, which is 4.7 KB once Windows
+    encodes it as UTF-16. It fails with WinError 1783, "The stub received bad
+    data", which does not sound like a length limit and cost a detour once.
+
+    Not Downloads either — that is where it starts, and it should not stay
+    somewhere a browser clears out. Not OneDrive, which would sync a private key
+    to a server. LOCALAPPDATA is neither.
+    """
+    base = os.environ.get("LOCALAPPDATA") or os.path.expanduser("~/.config")
+    return os.path.join(base, "easypost", "play-ci.json")
 
 
 def credentials() -> dict:
-    """The key, from the environment or from the OS credential store.
+    """The key, from the environment or from the workstation copy.
 
-    CI sets the environment variable from the repository secret. On a
-    workstation, holding it in the credential store instead means there is no
-    JSON file sitting in Downloads waiting to be committed or synced — the same
-    arrangement the cPanel deploy token uses.
+    CI sets the environment variable from the repository secret; by hand, the
+    file at default_key_path() is found without being named every time.
     """
     raw = os.environ.get("PLAY_SERVICE_ACCOUNT_JSON", "").strip()
+    if not raw and os.path.exists(default_key_path()):
+        raw = default_key_path()
     if not raw:
-        try:
-            import keyring
-
-            raw = (keyring.get_password(KEYRING_SERVICE, KEYRING_ACCOUNT) or "").strip()
-        except ImportError:
-            pass
-    if not raw:
-        sys.exit("No credential. Set PLAY_SERVICE_ACCOUNT_JSON, or store the key "
-                 f"under {KEYRING_SERVICE}/{KEYRING_ACCOUNT} — see PLAY-SETUP.md")
+        sys.exit("No credential. Set PLAY_SERVICE_ACCOUNT_JSON, or put the key at "
+                 f"{default_key_path()} — see PLAY-SETUP.md")
     if not raw.startswith("{"):
         if not os.path.exists(raw):
             sys.exit(f"PLAY_SERVICE_ACCOUNT_JSON points at {raw}, which does not exist")
