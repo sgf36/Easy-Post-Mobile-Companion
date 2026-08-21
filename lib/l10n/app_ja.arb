@@ -123,5 +123,12 @@
   "fieldReference": "参照番号",
   "fieldPickupWindow": "集荷時間帯",
   "fieldCost": "料金",
-  "detailNothingFurther": "これ以上の詳細はありません。"
+  "detailNothingFurther": "これ以上の詳細はありません。",
+  "navRefunds": "返金",
+  "refundsEmpty": "返金はまだ申請されていません。",
+  "detailRefund": "返金リクエスト",
+  "fieldRefundStatus": "返金",
+  "refundStatusSubmitted": "申請済み",
+  "refundStatusRefunded": "返金済み",
+  "refundStatusRejected": "却下"
 }

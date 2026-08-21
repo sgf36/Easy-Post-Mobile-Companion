@@ -412,4 +412,25 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Nema dodatnih pojedinosti.';
+
+  @override
+  String get navRefunds => 'Povrati novca';
+
+  @override
+  String get refundsEmpty => 'Još nije zatražen nijedan povrat novca.';
+
+  @override
+  String get detailRefund => 'Zahtjev za povrat novca';
+
+  @override
+  String get fieldRefundStatus => 'Povrat novca';
+
+  @override
+  String get refundStatusSubmitted => 'Poslano';
+
+  @override
+  String get refundStatusRefunded => 'Vraćeno';
+
+  @override
+  String get refundStatusRejected => 'Odbijeno';
 }

@@ -123,5 +123,12 @@
   "fieldReference": "Tham chiếu",
   "fieldPickupWindow": "Khung giờ lấy hàng",
   "fieldCost": "Chi phí",
-  "detailNothingFurther": "Không có thêm chi tiết."
+  "detailNothingFurther": "Không có thêm chi tiết.",
+  "navRefunds": "Hoàn tiền",
+  "refundsEmpty": "Chưa có yêu cầu hoàn tiền nào.",
+  "detailRefund": "Yêu cầu hoàn tiền",
+  "fieldRefundStatus": "Hoàn tiền",
+  "refundStatusSubmitted": "Đã gửi",
+  "refundStatusRefunded": "Đã hoàn tiền",
+  "refundStatusRejected": "Bị từ chối"
 }

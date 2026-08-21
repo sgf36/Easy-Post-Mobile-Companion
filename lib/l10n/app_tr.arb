@@ -123,5 +123,12 @@
   "fieldReference": "Referans",
   "fieldPickupWindow": "Alım zaman aralığı",
   "fieldCost": "Maliyet",
-  "detailNothingFurther": "Başka ayrıntı yok."
+  "detailNothingFurther": "Başka ayrıntı yok.",
+  "navRefunds": "İadeler",
+  "refundsEmpty": "Henüz iade talep edilmedi.",
+  "detailRefund": "İade talebi",
+  "fieldRefundStatus": "İade",
+  "refundStatusSubmitted": "Gönderildi",
+  "refundStatusRefunded": "İade edildi",
+  "refundStatusRejected": "Reddedildi"
 }

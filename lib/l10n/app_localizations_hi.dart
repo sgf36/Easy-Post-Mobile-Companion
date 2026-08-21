@@ -415,4 +415,25 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'कोई अतिरिक्त विवरण नहीं।';
+
+  @override
+  String get navRefunds => 'रिफ़ंड';
+
+  @override
+  String get refundsEmpty => 'अभी तक कोई रिफ़ंड नहीं मांगा गया है।';
+
+  @override
+  String get detailRefund => 'रिफ़ंड अनुरोध';
+
+  @override
+  String get fieldRefundStatus => 'रिफ़ंड';
+
+  @override
+  String get refundStatusSubmitted => 'सबमिट किया गया';
+
+  @override
+  String get refundStatusRefunded => 'रिफ़ंड हो गया';
+
+  @override
+  String get refundStatusRejected => 'अस्वीकृत';
 }

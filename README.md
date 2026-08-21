@@ -17,13 +17,27 @@ Reviewers who have no licensed desktop can pair with a **review code** instead
 (`Enter review code` on the pairing screen), which connects to a demo test-mode
 account.
 
-## Status — Phase 0 (spike)
+## Sections
 
-- QR / review-code pairing → secure-enclave credential storage
-- Live trackers list via the proxy
+- **Tracking** — live trackers, detail and journey map
+- **History** — every shipment bought, with its rate
+- **Insurance**, **Claims**, **Pickups** — what the desktop has raised
+- **Refunds** — how far each refund request on a bought label has got:
+  submitted, refunded or rejected
+- **Reports** — spend by carrier
+- **HTS Lookup** — tariff codes
 
-Planned: push notifications, HTS lookup, insurance/claims/pickups, history and
-reports (see the build brief's phasing).
+Read-only since 1.0.1. Buying insurance and filing claims were removed after
+App Review rejected 1.0 under guideline 5.1.1(ix), and asking for a refund is
+the desktop's job for the same reason buying a label is — this shows the answer
+that comes back, which is the part somebody has to keep checking.
+
+The Refunds list is derived from the shipments collection, where
+`refund_status` lives. EasyPost's `/refunds` endpoint holds a different object,
+created by `POST /refunds`, which nothing in this product calls — a tab built
+on it would be permanently empty.
+
+Planned: push notifications (see the build brief's phasing).
 
 ## Develop
 

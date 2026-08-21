@@ -412,4 +412,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'لا توجد تفاصيل إضافية.';
+
+  @override
+  String get navRefunds => 'المبالغ المستردة';
+
+  @override
+  String get refundsEmpty => 'لم يتم طلب أي مبالغ مستردة بعد.';
+
+  @override
+  String get detailRefund => 'طلب استرداد';
+
+  @override
+  String get fieldRefundStatus => 'الاسترداد';
+
+  @override
+  String get refundStatusSubmitted => 'تم الإرسال';
+
+  @override
+  String get refundStatusRefunded => 'تم الاسترداد';
+
+  @override
+  String get refundStatusRejected => 'مرفوض';
 }

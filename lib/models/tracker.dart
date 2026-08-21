@@ -164,6 +164,106 @@ String statusText(AppLocalizations t, Object? raw) {
   return status.isEmpty ? '' : statusLabel(t, status);
 }
 
+/// A refund request's own three-value vocabulary, which is not the shipment
+/// one.
+///
+/// `refund_status` on a shipment is `submitted`, `refunded` or `rejected`, and
+/// none of those means what the identically-shaped shipment statuses above
+/// mean — a parcel is never "refunded" and a refund is never "delivered".
+/// Folding them into [statusLabel] would have put "Unknown" on every refund, or
+/// worse, taught that table words that then leaked onto a tracking row.
+///
+/// Total, like [statusLabel]: a value EasyPost adds later reads as words rather
+/// than as an identifier.
+String refundStatusLabel(AppLocalizations t, String status) {
+  switch (status) {
+    case 'submitted':
+      return t.refundStatusSubmitted;
+    case 'refunded':
+      return t.refundStatusRefunded;
+    case 'rejected':
+      return t.refundStatusRejected;
+    default:
+      return t.statusUnknown;
+  }
+}
+
+/// The translated refund status of a raw record, or nothing when it carries
+/// none — which is also how a shipment with no refund request reads.
+String refundStatusText(AppLocalizations t, Object? raw) {
+  final status = (raw ?? '').toString().trim();
+  return status.isEmpty ? '' : refundStatusLabel(t, status);
+}
+
+/// Icon and colour for a refund request. Submitted is the waiting state and
+/// carries the same purple as `pre_transit`, for the same reason: nothing has
+/// happened yet.
+StatusStyle refundStatusStyle(String status) {
+  switch (status) {
+    case 'submitted':
+      return const StatusStyle(Icons.hourglass_top, Color(0xFF8E5AD6));
+    case 'refunded':
+      return const StatusStyle(Icons.undo, Color(0xFF2E7D32));
+    case 'rejected':
+      return const StatusStyle(Icons.block, Color(0xFFC62828));
+    default:
+      return const StatusStyle(Icons.help_outline, Color(0xFF757575));
+  }
+}
+
+/// Sort order for the refunds list: what is still waiting first, then what was
+/// refused, then what is settled.
+///
+/// Deliberately not newest-first. A refund request is a thing somebody is
+/// waiting on, and the two that need a person — still pending, and refused —
+/// are the two that a date sort would bury under everything already resolved.
+int refundStatusOrder(String status) {
+  const order = ['submitted', 'rejected', 'refunded'];
+  final i = order.indexOf(status);
+  return i < 0 ? order.length : i;
+}
+
+/// The refund state a shipment record carries, or '' for the ordinary case of
+/// a label nobody has asked to refund.
+String refundStateOf(Map<String, dynamic> shipment) =>
+    (shipment['refund_status'] ?? '').toString().trim();
+
+/// The Refunds list: every shipment with a refund request on it, ordered by
+/// [refundStatusOrder] and then newest first.
+///
+/// Derived from the shipments collection rather than from EasyPost's
+/// `/refunds`, which is a different object that this account never creates.
+/// Easy-Post Desktop asks for a refund with `POST /shipments/{id}/refund` —
+/// `refund_shipment` in its `app/services/shipments.py` — which sets
+/// `refund_status` on the shipment and returns the shipment. `/refunds` holds
+/// objects made by `POST /refunds` with a carrier and a list of tracking codes,
+/// which nothing in this product does. A tab built on that endpoint would have
+/// been permanently empty and read as a broken app rather than as an absence of
+/// refunds.
+///
+/// Two further consequences worth having: the proxy already allows
+/// `GET /shipments`, so this needs no backend change and adds no cross-repo
+/// contract; and each row arrives with its rate attached, so the screen can say
+/// what sum is at stake without a second call.
+List<Map<String, dynamic>> refundRequests(
+  List<Map<String, dynamic>> shipments,
+) {
+  DateTime created(Map<String, dynamic> m) =>
+      DateTime.tryParse((m['created_at'] ?? '').toString()) ??
+      // Epoch zero for an unparseable date, so the row sorts last rather than
+      // being dropped. A missing timestamp is not worth losing a refund over.
+      DateTime.fromMillisecondsSinceEpoch(0);
+
+  final rows = shipments.where((s) => refundStateOf(s).isNotEmpty).toList();
+  rows.sort((a, b) {
+    final byState = refundStatusOrder(
+      refundStateOf(a),
+    ).compareTo(refundStatusOrder(refundStateOf(b)));
+    return byState != 0 ? byState : created(b).compareTo(created(a));
+  });
+  return rows;
+}
+
 /// Sort priority — journey order, ending with terminal/exception states.
 int statusOrder(String status) {
   const order = [

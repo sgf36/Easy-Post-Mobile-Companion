@@ -412,4 +412,25 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Tidak ada detail lain.';
+
+  @override
+  String get navRefunds => 'Pengembalian dana';
+
+  @override
+  String get refundsEmpty => 'Belum ada pengembalian dana yang diminta.';
+
+  @override
+  String get detailRefund => 'Permintaan pengembalian dana';
+
+  @override
+  String get fieldRefundStatus => 'Pengembalian dana';
+
+  @override
+  String get refundStatusSubmitted => 'Dikirim';
+
+  @override
+  String get refundStatusRefunded => 'Dikembalikan';
+
+  @override
+  String get refundStatusRejected => 'Ditolak';
 }

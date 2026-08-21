@@ -9,13 +9,23 @@ import 'claims_screen.dart';
 import 'hts_screen.dart';
 import 'insurance_screen.dart';
 import 'pickups_screen.dart';
+import 'refunds_screen.dart';
 import 'reports_screen.dart';
 import 'resource_detail_screen.dart';
 import 'resource_list_screen.dart';
 import 'trackers_screen.dart';
 
 /// The app's sections, mirroring Easy-Post Desktop's sidebar.
-enum Section { tracking, history, insurance, claims, pickups, reports, hts }
+enum Section {
+  tracking,
+  history,
+  insurance,
+  claims,
+  pickups,
+  refunds,
+  reports,
+  hts,
+}
 
 extension SectionMeta on Section {
   String label(AppLocalizations t) => switch (this) {
@@ -24,6 +34,7 @@ extension SectionMeta on Section {
         Section.insurance => t.navInsurance,
         Section.claims => t.navClaims,
         Section.pickups => t.navPickups,
+        Section.refunds => t.navRefunds,
         Section.reports => t.navReports,
         Section.hts => t.navHts,
       };
@@ -34,6 +45,7 @@ extension SectionMeta on Section {
         Section.insurance => Icons.verified_user,
         Section.claims => Icons.gavel,
         Section.pickups => Icons.event_available,
+        Section.refunds => Icons.currency_exchange,
         Section.reports => Icons.bar_chart,
         Section.hts => Icons.travel_explore,
       };
@@ -112,6 +124,7 @@ class _HomeShellState extends State<HomeShell> {
       Section.insurance => InsuranceScreen(nav: nav, creds: c),
       Section.claims => ClaimsScreen(nav: nav, creds: c),
       Section.pickups => PickupsScreen(nav: nav, creds: c),
+      Section.refunds => RefundsScreen(nav: nav, creds: c),
       Section.reports => ReportsScreen(nav: nav, creds: c),
       Section.hts => HtsScreen(nav: nav),
     };
@@ -164,7 +177,14 @@ class NavDrawer extends StatelessWidget {
               child: ListView(
                 children: [
                   _header(t.navSectionManage),
-                  for (final s in [Section.tracking, Section.history, Section.insurance, Section.claims, Section.pickups])
+                  for (final s in [
+                    Section.tracking,
+                    Section.history,
+                    Section.insurance,
+                    Section.claims,
+                    Section.pickups,
+                    Section.refunds,
+                  ])
                     _tile(context, s),
                   _header(t.navSectionTools),
                   for (final s in [Section.reports, Section.hts]) _tile(context, s),

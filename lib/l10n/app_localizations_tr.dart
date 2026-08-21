@@ -412,4 +412,25 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Başka ayrıntı yok.';
+
+  @override
+  String get navRefunds => 'İadeler';
+
+  @override
+  String get refundsEmpty => 'Henüz iade talep edilmedi.';
+
+  @override
+  String get detailRefund => 'İade talebi';
+
+  @override
+  String get fieldRefundStatus => 'İade';
+
+  @override
+  String get refundStatusSubmitted => 'Gönderildi';
+
+  @override
+  String get refundStatusRefunded => 'İade edildi';
+
+  @override
+  String get refundStatusRejected => 'Reddedildi';
 }

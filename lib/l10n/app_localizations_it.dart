@@ -415,4 +415,25 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Nessun altro dettaglio.';
+
+  @override
+  String get navRefunds => 'Rimborsi';
+
+  @override
+  String get refundsEmpty => 'Nessun rimborso richiesto finora.';
+
+  @override
+  String get detailRefund => 'Richiesta di rimborso';
+
+  @override
+  String get fieldRefundStatus => 'Rimborso';
+
+  @override
+  String get refundStatusSubmitted => 'Inviata';
+
+  @override
+  String get refundStatusRefunded => 'Rimborsata';
+
+  @override
+  String get refundStatusRejected => 'Rifiutata';
 }

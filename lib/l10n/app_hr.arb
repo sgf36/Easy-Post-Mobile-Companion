@@ -123,5 +123,12 @@
   "fieldReference": "Referenca",
   "fieldPickupWindow": "Razdoblje preuzimanja",
   "fieldCost": "Cijena",
-  "detailNothingFurther": "Nema dodatnih pojedinosti."
+  "detailNothingFurther": "Nema dodatnih pojedinosti.",
+  "navRefunds": "Povrati novca",
+  "refundsEmpty": "Još nije zatražen nijedan povrat novca.",
+  "detailRefund": "Zahtjev za povrat novca",
+  "fieldRefundStatus": "Povrat novca",
+  "refundStatusSubmitted": "Poslano",
+  "refundStatusRefunded": "Vraćeno",
+  "refundStatusRejected": "Odbijeno"
 }

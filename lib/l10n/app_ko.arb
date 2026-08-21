@@ -123,5 +123,12 @@
   "fieldReference": "참조번호",
   "fieldPickupWindow": "수거 시간대",
   "fieldCost": "비용",
-  "detailNothingFurther": "추가 정보가 없습니다."
+  "detailNothingFurther": "추가 정보가 없습니다.",
+  "navRefunds": "환불",
+  "refundsEmpty": "아직 요청된 환불이 없습니다.",
+  "detailRefund": "환불 요청",
+  "fieldRefundStatus": "환불",
+  "refundStatusSubmitted": "제출됨",
+  "refundStatusRefunded": "환불됨",
+  "refundStatusRejected": "거부됨"
 }

@@ -415,4 +415,25 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Geen verdere gegevens.';
+
+  @override
+  String get navRefunds => 'Terugbetalingen';
+
+  @override
+  String get refundsEmpty => 'Er zijn nog geen terugbetalingen aangevraagd.';
+
+  @override
+  String get detailRefund => 'Terugbetalingsverzoek';
+
+  @override
+  String get fieldRefundStatus => 'Terugbetaling';
+
+  @override
+  String get refundStatusSubmitted => 'Ingediend';
+
+  @override
+  String get refundStatusRefunded => 'Terugbetaald';
+
+  @override
+  String get refundStatusRejected => 'Afgewezen';
 }

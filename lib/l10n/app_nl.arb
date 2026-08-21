@@ -123,5 +123,12 @@
   "fieldReference": "Referentie",
   "fieldPickupWindow": "Ophaalvenster",
   "fieldCost": "Kosten",
-  "detailNothingFurther": "Geen verdere gegevens."
+  "detailNothingFurther": "Geen verdere gegevens.",
+  "navRefunds": "Terugbetalingen",
+  "refundsEmpty": "Er zijn nog geen terugbetalingen aangevraagd.",
+  "detailRefund": "Terugbetalingsverzoek",
+  "fieldRefundStatus": "Terugbetaling",
+  "refundStatusSubmitted": "Ingediend",
+  "refundStatusRefunded": "Terugbetaald",
+  "refundStatusRejected": "Afgewezen"
 }

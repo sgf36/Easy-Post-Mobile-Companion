@@ -414,4 +414,25 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Žádné další podrobnosti.';
+
+  @override
+  String get navRefunds => 'Refundace';
+
+  @override
+  String get refundsEmpty => 'Zatím nebyla vyžádána žádná refundace.';
+
+  @override
+  String get detailRefund => 'Žádost o refundaci';
+
+  @override
+  String get fieldRefundStatus => 'Refundace';
+
+  @override
+  String get refundStatusSubmitted => 'Odesláno';
+
+  @override
+  String get refundStatusRefunded => 'Refundováno';
+
+  @override
+  String get refundStatusRejected => 'Zamítnuto';
 }

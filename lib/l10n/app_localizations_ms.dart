@@ -413,4 +413,25 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Tiada butiran lanjut.';
+
+  @override
+  String get navRefunds => 'Bayaran balik';
+
+  @override
+  String get refundsEmpty => 'Belum ada bayaran balik yang dipohon.';
+
+  @override
+  String get detailRefund => 'Permohonan bayaran balik';
+
+  @override
+  String get fieldRefundStatus => 'Bayaran balik';
+
+  @override
+  String get refundStatusSubmitted => 'Dihantar';
+
+  @override
+  String get refundStatusRefunded => 'Dibayar balik';
+
+  @override
+  String get refundStatusRejected => 'Ditolak';
 }

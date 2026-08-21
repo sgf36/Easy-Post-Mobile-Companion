@@ -123,5 +123,12 @@
   "fieldReference": "Αναφορά",
   "fieldPickupWindow": "Χρονικό παράθυρο παραλαβής",
   "fieldCost": "Κόστος",
-  "detailNothingFurther": "Δεν υπάρχουν περισσότερες λεπτομέρειες."
+  "detailNothingFurther": "Δεν υπάρχουν περισσότερες λεπτομέρειες.",
+  "navRefunds": "Επιστροφές χρημάτων",
+  "refundsEmpty": "Δεν έχει ζητηθεί ακόμη καμία επιστροφή χρημάτων.",
+  "detailRefund": "Αίτημα επιστροφής χρημάτων",
+  "fieldRefundStatus": "Επιστροφή χρημάτων",
+  "refundStatusSubmitted": "Υποβλήθηκε",
+  "refundStatusRefunded": "Επιστράφηκε",
+  "refundStatusRejected": "Απορρίφθηκε"
 }

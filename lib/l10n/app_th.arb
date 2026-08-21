@@ -123,5 +123,12 @@
   "fieldReference": "หมายเลขอ้างอิง",
   "fieldPickupWindow": "ช่วงเวลาเข้ารับพัสดุ",
   "fieldCost": "ค่าใช้จ่าย",
-  "detailNothingFurther": "ไม่มีรายละเอียดเพิ่มเติม"
+  "detailNothingFurther": "ไม่มีรายละเอียดเพิ่มเติม",
+  "navRefunds": "การคืนเงิน",
+  "refundsEmpty": "ยังไม่มีการขอคืนเงิน",
+  "detailRefund": "คำขอคืนเงิน",
+  "fieldRefundStatus": "การคืนเงิน",
+  "refundStatusSubmitted": "ส่งแล้ว",
+  "refundStatusRefunded": "คืนเงินแล้ว",
+  "refundStatusRejected": "ถูกปฏิเสธ"
 }

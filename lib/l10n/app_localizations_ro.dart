@@ -414,4 +414,25 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Nu există alte detalii.';
+
+  @override
+  String get navRefunds => 'Rambursări';
+
+  @override
+  String get refundsEmpty => 'Nu a fost solicitată încă nicio rambursare.';
+
+  @override
+  String get detailRefund => 'Cerere de rambursare';
+
+  @override
+  String get fieldRefundStatus => 'Rambursare';
+
+  @override
+  String get refundStatusSubmitted => 'Trimisă';
+
+  @override
+  String get refundStatusRefunded => 'Rambursată';
+
+  @override
+  String get refundStatusRejected => 'Respinsă';
 }

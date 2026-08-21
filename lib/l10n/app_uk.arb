@@ -123,5 +123,12 @@
   "fieldReference": "Посилання",
   "fieldPickupWindow": "Інтервал забору",
   "fieldCost": "Вартість",
-  "detailNothingFurther": "Додаткових відомостей немає."
+  "detailNothingFurther": "Додаткових відомостей немає.",
+  "navRefunds": "Повернення коштів",
+  "refundsEmpty": "Повернення коштів ще не запитувалися.",
+  "detailRefund": "Запит на повернення",
+  "fieldRefundStatus": "Повернення",
+  "refundStatusSubmitted": "Надіслано",
+  "refundStatusRefunded": "Повернено",
+  "refundStatusRejected": "Відхилено"
 }

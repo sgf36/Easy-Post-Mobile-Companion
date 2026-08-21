@@ -891,6 +891,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No further details.'**
   String get detailNothingFurther;
+
+  /// Navigation label for the section listing refund requests on bought labels.
+  ///
+  /// In en, this message translates to:
+  /// **'Refunds'**
+  String get navRefunds;
+
+  /// Shown when no label in the account has had a refund requested.
+  ///
+  /// In en, this message translates to:
+  /// **'No refunds have been requested yet.'**
+  String get refundsEmpty;
+
+  /// Title of the screen showing one refund request in full.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund request'**
+  String get detailRefund;
+
+  /// Field label for how far a refund request has got. Sits beside the parcel’s own status, which is a different thing, so keep the two distinguishable.
+  ///
+  /// In en, this message translates to:
+  /// **'Refund'**
+  String get fieldRefundStatus;
+
+  /// Refund state: asked for, and the carrier has not answered yet.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get refundStatusSubmitted;
+
+  /// Refund state: the carrier agreed and credited the label.
+  ///
+  /// In en, this message translates to:
+  /// **'Refunded'**
+  String get refundStatusRefunded;
+
+  /// Refund state: the carrier refused, usually because the label was used.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get refundStatusRejected;
 }
 
 class _AppLocalizationsDelegate

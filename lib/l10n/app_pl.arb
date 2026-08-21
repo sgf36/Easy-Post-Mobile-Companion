@@ -123,5 +123,12 @@
   "fieldReference": "Numer referencyjny",
   "fieldPickupWindow": "Okno odbioru",
   "fieldCost": "Koszt",
-  "detailNothingFurther": "Brak dalszych szczegółów."
+  "detailNothingFurther": "Brak dalszych szczegółów.",
+  "navRefunds": "Zwroty",
+  "refundsEmpty": "Nie zażądano jeszcze żadnych zwrotów.",
+  "detailRefund": "Wniosek o zwrot",
+  "fieldRefundStatus": "Zwrot",
+  "refundStatusSubmitted": "Wysłano",
+  "refundStatusRefunded": "Zwrócono",
+  "refundStatusRejected": "Odrzucono"
 }

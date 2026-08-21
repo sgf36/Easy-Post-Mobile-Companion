@@ -123,5 +123,12 @@
   "fieldReference": "参考编号",
   "fieldPickupWindow": "取件时间段",
   "fieldCost": "费用",
-  "detailNothingFurther": "没有更多详细信息。"
+  "detailNothingFurther": "没有更多详细信息。",
+  "navRefunds": "退款",
+  "refundsEmpty": "尚未申请退款。",
+  "detailRefund": "退款申请",
+  "fieldRefundStatus": "退款",
+  "refundStatusSubmitted": "已提交",
+  "refundStatusRefunded": "已退款",
+  "refundStatusRejected": "已拒绝"
 }

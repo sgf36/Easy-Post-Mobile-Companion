@@ -417,4 +417,25 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get detailNothingFurther => 'Δεν υπάρχουν περισσότερες λεπτομέρειες.';
+
+  @override
+  String get navRefunds => 'Επιστροφές χρημάτων';
+
+  @override
+  String get refundsEmpty => 'Δεν έχει ζητηθεί ακόμη καμία επιστροφή χρημάτων.';
+
+  @override
+  String get detailRefund => 'Αίτημα επιστροφής χρημάτων';
+
+  @override
+  String get fieldRefundStatus => 'Επιστροφή χρημάτων';
+
+  @override
+  String get refundStatusSubmitted => 'Υποβλήθηκε';
+
+  @override
+  String get refundStatusRefunded => 'Επιστράφηκε';
+
+  @override
+  String get refundStatusRejected => 'Απορρίφθηκε';
 }
