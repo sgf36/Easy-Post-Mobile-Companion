@@ -164,22 +164,35 @@ jobs:
         run: |
           if [ -n "$PLAY_JSON" ]; then echo "ready=true" >> "$GITHUB_OUTPUT"; else echo "ready=false" >> "$GITHUB_OUTPUT"; fi
 
-      # The commit message reaches the script through the environment, never
-      # through the command line. Interpolating it into `run:` would put
-      # attacker-controlled text into a shell — a commit titled with a
-      # backtick or a quote is enough — and would break on any newline.
+      # Release notes are written for testers, not taken from the commit.
+      #
+      # This used to send the commit subject, so the internal track carried
+      # "Android screenshots: make the capture job work, and file Data safety
+      # (#8)" — addressed to whoever reviews this repository, not to whoever
+      # installs the app. It would read worse still on a wider track.
+      #
+      # store/play-release-notes.txt is the place to say something, and is
+      # deliberately optional: with no file, testers get the version and build,
+      # which is honest and tells them what they have. Nothing here reads the
+      # commit at all, which also retires the shell-injection footgun that
+      # interpolating a commit subject carried.
       - name: Upload to Play (${{ inputs.play_track || 'internal' }})
         if: steps.play.outputs.ready == 'true' && github.event_name != 'pull_request'
         env:
           PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
           PLAY_TRACK: ${{ inputs.play_track || 'internal' }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           RUN_NUMBER: ${{ github.run_number }}
         run: |
           set -euo pipefail
           python3 -m pip install --quiet --disable-pip-version-check PyJWT requests cryptography
-          NOTES=$(printf '%s' "${COMMIT_MESSAGE:-}" | head -1)
-          [ -n "$NOTES" ] || NOTES="Build $RUN_NUMBER"
+          VERSION=$(sed -n 's/^version: *\([0-9.]*\)+.*/\1/p' pubspec.yaml)
+          if [ -s store/play-release-notes.txt ]; then
+            NOTES=$(cat store/play-release-notes.txt)
+            echo "release notes from store/play-release-notes.txt"
+          else
+            NOTES="Version $VERSION (build $RUN_NUMBER)."
+            echo "no store/play-release-notes.txt — using \"$NOTES\""
+          fi
           python3 tool/play_upload.py \
             --aab build/app/outputs/bundle/release/app-release.aab \
             --track "$PLAY_TRACK" --notes "$NOTES"
