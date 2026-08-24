@@ -186,6 +186,23 @@ seen before, so a re-run of an old workflow cannot be uploaded — build again.
 deliberate act in the Console, not a flag on the job that also does routine
 test uploads.
 
+## The iOS half, and the closed train
+
+The `ios` job uploads to TestFlight with `xcrun altool`. Once a marketing
+version ships, Apple closes its pre-release train and refuses any further build
+under it — `90186` and `90062`, which say the same thing twice.
+
+That is the expected state of every merge to `main` between a version going
+live and somebody bumping `pubspec.yaml` for the next one, so the job treats
+those two codes as a skip with a notice rather than a failure. A branch held red
+for days is how a real failure gets waved through.
+
+Only those two codes. Anything else altool reports still fails the job.
+
+The fix when you see that notice is to bump the **marketing version** in
+`pubspec.yaml`. CI supplies only `--build-number`; the version name comes from
+pubspec and nowhere else.
+
 ## Why not fastlane, or an action from the Marketplace
 
 The protocol is four REST calls around an "edit" object: open, upload bundle,

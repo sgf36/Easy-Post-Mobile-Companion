@@ -302,9 +302,35 @@ jobs:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
         run: |
+          set -uo pipefail
           IPA=$(ls build/ios/ipa/*.ipa | head -1)
           echo "Uploading $IPA to App Store Connect..."
-          xcrun altool --upload-app -f "$IPA" -t ios -u "$APPLE_ID" -p "$APPLE_APP_PASSWORD"
+          set +e
+          OUT=$(xcrun altool --upload-app -f "$IPA" -t ios \
+                  -u "$APPLE_ID" -p "$APPLE_APP_PASSWORD" 2>&1)
+          CODE=$?
+          set -e
+          echo "$OUT"
+          [ "$CODE" = 0 ] && exit 0
+
+          # 90186 and 90062 both mean the same thing: the marketing version in
+          # pubspec.yaml has already shipped, so Apple has closed its
+          # pre-release train and will not take another build under it.
+          #
+          # That is not a broken build. It is the expected state of every merge
+          # to main between a version going live and somebody bumping the
+          # version for the next one — and left as a failure it paints the
+          # branch red for days, which is how a real failure gets waved through.
+          #
+          # Matched on the codes, not on the prose, and only these two. Anything
+          # else altool says is still a failure.
+          if grep -qE '\b(90186|90062)\b' <<<"$OUT"; then
+            VERSION=$(sed -n 's/^version: *\([0-9.]*\)+.*/\1/p' pubspec.yaml)
+            echo "::notice::TestFlight skipped — $VERSION has already shipped and its train is closed. Bump the version in pubspec.yaml when work starts on the next release."
+            exit 0
+          fi
+          echo "::error::altool failed for a reason other than a closed train"
+          exit "$CODE"
 
       - name: Build (no signing secrets) — compile check
         if: steps.signing.outputs.ready != 'true'
