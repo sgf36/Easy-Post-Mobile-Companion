@@ -152,9 +152,19 @@ class Play:
             )
         return self._check(r, "uploading the bundle")["versionCode"]
 
+    # Play's per-language cap on release notes. Over it, the text is truncated
+    # rather than refused, so a note that reads fine locally arrives cut off
+    # mid-sentence on the listing with nothing to say it happened.
+    NOTES_LIMIT = 500
+
     def set_track(self, edit: str, track: str, version_code: int, notes: str | None):
         release = {"versionCodes": [str(version_code)], "status": "completed"}
         if notes:
+            notes = notes.strip()
+            if len(notes) > self.NOTES_LIMIT:
+                sys.exit(f"release notes are {len(notes)} characters, over Play's "
+                         f"{self.NOTES_LIMIT} limit — shorten them rather than "
+                         "letting Play truncate mid-sentence")
             release["releaseNotes"] = [{"language": "en-GB", "text": notes}]
         r = requests.put(
             f"{BASE}/applications/{self.package}/edits/{edit}/tracks/{track}",

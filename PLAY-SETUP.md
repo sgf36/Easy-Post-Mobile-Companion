@@ -170,6 +170,14 @@ The `android` job, after building the signed bundle:
 - **on a pull request** — nothing. A fork's PR must not be able to publish, and
   an internal release per PR would burn a versionCode each time.
 
+Release notes come from `store/play-release-notes.txt`, or, with no such file,
+from the version and build number. They are **not** taken from the commit
+message: that put "Android screenshots: make the capture job work, and file Data
+safety (#8)" in front of testers, which is addressed to whoever reviews this
+repository rather than to whoever installs the app. Play caps notes at 500
+characters per language and truncates silently past that, so
+`tool/play_upload.py` refuses instead.
+
 `versionCode` is `github.run_number`, which is why it can only go up; the
 version *name* comes from `pubspec.yaml`. Play refuses a versionCode it has
 seen before, so a re-run of an old workflow cannot be uploaded — build again.
