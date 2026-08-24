@@ -170,7 +170,16 @@ class _JourneyMapState extends State<_JourneyMap> {
     for (final e in widget.tracker.events) {
       final label = e.locationLabel;
       if (label == null || !seen.add(label)) continue;
-      final ll = await Geocoder.lookup(city: e.city, state: e.state, country: e.country);
+      // The event's own country when it has one, otherwise the journey's.
+      // Royal Mail scans carry a city and nothing else, and an uncountried
+      // city is what the geocoder now refuses outright.
+      final ll = await Geocoder.lookup(
+        city: e.city,
+        state: e.state,
+        country: e.country?.trim().isNotEmpty == true
+            ? e.country
+            : widget.tracker.fallbackCountry,
+      );
       if (ll != null) located.add(ll);
     }
     if (!mounted) return;

@@ -15,6 +15,14 @@ class Tracker {
   final String? signedBy;
   final List<TrackEvent> events; // chronological (oldest first)
 
+  /// ISO-2 country for the journey, from `carrier_detail`.
+  ///
+  /// Scan events do not always carry one — Royal Mail's domestic scans give a
+  /// city and nothing else — and geocoding a bare city name without a country
+  /// is what put a Watford delivery in Brazil. This is the fallback that keeps
+  /// those pins on the map instead of dropping them.
+  final String? fallbackCountry;
+
   Tracker({
     required this.id,
     required this.trackingCode,
@@ -24,6 +32,7 @@ class Tracker {
     this.estDelivery,
     this.updatedAt,
     this.signedBy,
+    this.fallbackCountry,
     this.events = const [],
   });
 
@@ -33,7 +42,22 @@ class Tracker {
         .map(TrackEvent.fromJson)
         .toList()
       ..sort((a, b) => (a.datetime ?? DateTime(1970)).compareTo(b.datetime ?? DateTime(1970)));
+    // Destination first, then origin: a domestic parcel makes them the same,
+    // and for an international one the destination is where most scans are.
+    final carrierDetail = j['carrier_detail'] as Map<String, dynamic>?;
+    String? locCountry(String key) {
+      final loc = carrierDetail?[key] as Map<String, dynamic>?;
+      final c = loc?['country']?.toString().trim();
+      return (c == null || c.isEmpty) ? null : c;
+    }
+
     return Tracker(
+      fallbackCountry: locCountry('destination_tracking_location') ??
+          locCountry('origin_tracking_location') ??
+          // Last resort: any event that did carry one.
+          details
+              .map((e) => e.country?.trim())
+              .firstWhere((c) => c != null && c.isNotEmpty, orElse: () => null),
       id: (j['id'] ?? '').toString(),
       trackingCode: (j['tracking_code'] ?? '—').toString(),
       carrier: (j['carrier'] ?? '').toString(),
