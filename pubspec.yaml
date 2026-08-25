@@ -20,16 +20,21 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # hardcoded --build-name that overrode it while this file said something else
 # again; it no longer does, so this line is the single answer.
 #
-# It has to go up, not just the build number. 1.0.1 is on the App Store, and
-# Apple closes a pre-release train once its version ships: another upload
-# calling itself 1.0.1 comes back as 90186 "train is closed" and 90062
-# "CFBundleShortVersionString must contain a higher version than the previously
-# approved version". 1.1.0 because the Refunds section is a feature.
+# It has to go up, not just the build number. Apple closes a pre-release train
+# once its version ships: another upload under a shipped version comes back as
+# 90186 "train is closed" and 90062 "CFBundleShortVersionString must contain a
+# higher version than the previously approved version". CI now treats those two
+# codes as a skip rather than a failure, so a stale version here shows as a
+# notice on a green build — check for it before wondering why TestFlight is
+# quiet.
+#
+# 1.1.1 because it carries one fix and no features: the journey map was
+# geocoding scan locations without a country and plotting them in the wrong
+# one, which put a Watford delivery off the coast of Brazil.
 #
 # The build NUMBER is still supplied by CI (github.run_number), because it has
-# to increase per upload and a file in git cannot do that on its own. The last
-# one Apple holds is 56.
-version: 1.1.0+1
+# to increase per upload and a file in git cannot do that on its own.
+version: 1.1.1+1
 
 environment:
   sdk: ^3.12.2

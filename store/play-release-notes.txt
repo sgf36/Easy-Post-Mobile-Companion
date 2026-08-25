@@ -1,3 +1,3 @@
-A new Refunds section shows every shipment with a refund request on it, and whether each one is still waiting, refused or settled, beside the parcel's own status, carrier, service and label cost.
+Corrects the journey map. Some scan locations were placed in the wrong country — a parcel delivered in Watford could appear off the coast of South America.
 
-Requesting a refund remains a desktop task. This edition reports on requests already made.
+Locations are now matched within the carrier's own country, and anywhere that cannot be placed with confidence is left off the map rather than guessed at.
