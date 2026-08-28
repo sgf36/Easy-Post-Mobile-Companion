@@ -54,10 +54,14 @@ class Tracker {
     return Tracker(
       fallbackCountry: locCountry('destination_tracking_location') ??
           locCountry('origin_tracking_location') ??
-          // Last resort: any event that did carry one.
+          // Any event that did carry one.
           details
               .map((e) => e.country?.trim())
-              .firstWhere((c) => c != null && c.isNotEmpty, orElse: () => null),
+              .firstWhere((c) => c != null && c.isNotEmpty, orElse: () => null) ??
+          // The tracking number itself, when it is an S10.
+          s10Country((j['tracking_code'] ?? '').toString()) ??
+          // Failing everything, the carrier's own country.
+          carrierCountry((j['carrier'] ?? '').toString()),
       id: (j['id'] ?? '').toString(),
       trackingCode: (j['tracking_code'] ?? '—').toString(),
       carrier: (j['carrier'] ?? '').toString(),
@@ -68,6 +72,56 @@ class Tracker {
       signedBy: j['signed_by']?.toString(),
       events: details,
     );
+  }
+}
+
+/// The origin country encoded in a UPU S10 tracking number.
+///
+/// S10 is two letters for the service, nine digits, then the ISO 3166-1 alpha-2
+/// country of origin — so `OK828900054GB` ends in the answer. Royal Mail's
+/// domestic scans carry a city and nothing else, and `carrier_detail` was empty
+/// on the tracker that exposed this, so the number was the only place the
+/// country existed.
+///
+/// Origin, strictly, not the country of every scan. That is the right trade for
+/// a fallback: it is only consulted when nothing else said, and a geocode
+/// constrained to the wrong country returns nothing rather than something
+/// wrong.
+String? s10Country(String trackingCode) {
+  final t = trackingCode.trim().toUpperCase().replaceAll(RegExp(r'\s'), '');
+  final m = RegExp(r'^[A-Z]{2}\d{9}([A-Z]{2})$').firstMatch(t);
+  return m?.group(1);
+}
+
+/// Where a carrier's own network runs, for carriers that run in one country.
+///
+/// Deliberately short and deliberately excludes carriers that deliver
+/// internationally under their own name — DHL, FedEx and UPS scan parcels on
+/// every continent, so their country cannot be inferred from the carrier alone.
+/// Consulted only after everything else has failed.
+String? carrierCountry(String carrier) {
+  switch (carrier.trim().toLowerCase().replaceAll(RegExp(r'[^a-z]'), '')) {
+    case 'royalmail':
+    case 'royalmailv':
+    case 'parcelforce':
+    case 'evri':
+    case 'hermesuk':
+    case 'dpduk':
+    case 'yodel':
+      return 'GB';
+    case 'usps':
+      return 'US';
+    case 'canadapost':
+    case 'postescanada':
+      return 'CA';
+    case 'australiapost':
+      return 'AU';
+    case 'anpost':
+      return 'IE';
+    case 'nzpost':
+      return 'NZ';
+    default:
+      return null;
   }
 }
 
