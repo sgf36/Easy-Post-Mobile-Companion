@@ -126,16 +126,89 @@ void main() {
     });
 
     test('nothing anywhere leaves it null, and the map stays empty', () {
+      // A global carrier and a non-S10 code, so no step in the chain can
+      // supply a country. Refusing to guess is the property being pinned:
+      // no pin at all beats a pin in the wrong ocean.
       final t = Tracker.fromJson({
         'id': 'trk_4',
-        'tracking_code': 'X',
-        'carrier': 'RoyalMailV3',
+        'tracking_code': '1Z999AA10123456784',
+        'carrier': 'DHLExpress',
         'status': 'in_transit',
         'tracking_details': [
           {'status': 'in_transit', 'tracking_location': {'city': 'Watford DO'}},
         ],
       });
       expect(t.fallbackCountry, isNull);
+    });
+  });
+
+  group('the country comes from the tracking number when nothing else has it', () {
+    test('the S10 suffix — the real tracker that showed "Map unavailable"', () {
+      // OK828900054GB: two letters, nine digits, ISO country of origin.
+      expect(s10Country('OK828900054GB'), 'GB');
+    });
+
+    test('other S10 numbers', () {
+      expect(s10Country('RB123456789US'), 'US');
+      expect(s10Country('ok828900054gb'), 'GB');
+      expect(s10Country(' OK828900054GB '), 'GB');
+    });
+
+    test('non-S10 codes yield nothing rather than a guess', () {
+      // A USPS impb and an EasyPost test code are not S10 and must not be
+      // parsed as though the last two characters meant a country.
+      expect(s10Country('9405500208303120843618'), isNull);
+      expect(s10Country('EZ1000000001'), isNull);
+      expect(s10Country('1Z999AA10123456784'), isNull);
+      expect(s10Country(''), isNull);
+    });
+
+    test('single-country carriers, and not the global ones', () {
+      expect(carrierCountry('RoyalMailV3'), 'GB');
+      expect(carrierCountry('Evri'), 'GB');
+      expect(carrierCountry('DPDUK'), 'GB');
+      expect(carrierCountry('USPS'), 'US');
+      expect(carrierCountry('CanadaPost'), 'CA');
+      // These deliver on every continent; the carrier says nothing about
+      // where a given scan happened.
+      expect(carrierCountry('DHLExpress'), isNull);
+      expect(carrierCountry('FedEx'), isNull);
+      expect(carrierCountry('UPS'), isNull);
+    });
+
+    test('the whole chain, on the tracker that failed', () {
+      // No tracking_location country, no carrier_detail — exactly what came
+      // back for OK828900054GB, which rendered "Map unavailable".
+      final t = Tracker.fromJson({
+        'id': 'trk_rm',
+        'tracking_code': 'OK828900054GB',
+        'carrier': 'RoyalMailV3',
+        'status': 'delivered',
+        'tracking_details': [
+          {
+            'status': 'delivered',
+            'datetime': '2026-08-24T11:48:00Z',
+            'tracking_location': {'city': 'Watford DO'},
+          },
+        ],
+      });
+      expect(t.fallbackCountry, 'GB');
+    });
+
+    test('carrier_detail still wins over the tracking number', () {
+      // An international parcel scanned at its destination should use that,
+      // not the origin encoded in an S10.
+      final t = Tracker.fromJson({
+        'id': 'trk_intl',
+        'tracking_code': 'OK828900054GB',
+        'carrier': 'RoyalMailV3',
+        'status': 'in_transit',
+        'carrier_detail': {
+          'destination_tracking_location': {'city': 'Boston', 'country': 'US'},
+        },
+        'tracking_details': const [],
+      });
+      expect(t.fallbackCountry, 'US');
     });
   });
 }
