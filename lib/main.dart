@@ -4,12 +4,16 @@ import 'l10n/app_localizations.dart';
 import 'screens/home_shell.dart';
 import 'screens/pair_screen.dart';
 import 'services/pairing_store.dart';
+import 'services/review_prompt.dart';
 import 'theme.dart';
 
 void main() => runApp(const CompanionApp());
 
 class CompanionApp extends StatelessWidget {
-  const CompanionApp({super.key});
+  /// Injected only by tests, which must never reach the real store SDK.
+  final ReviewPrompt? reviewPrompt;
+
+  const CompanionApp({super.key, this.reviewPrompt});
 
   /// Pins the interface language, for screenshot capture only.
   ///
@@ -28,28 +32,52 @@ class CompanionApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _forcedLocale.isEmpty ? null : Locale(_forcedLocale),
       theme: Brand.theme(),
-      home: const RootGate(),
+      home: RootGate(reviewPrompt: reviewPrompt),
     );
   }
 }
 
 /// Decides the start screen from stored pairing: pair if none, else trackers.
 class RootGate extends StatefulWidget {
-  const RootGate({super.key});
+  final ReviewPrompt? reviewPrompt;
+
+  const RootGate({super.key, this.reviewPrompt});
 
   @override
   State<RootGate> createState() => _RootGateState();
 }
 
-class _RootGateState extends State<RootGate> {
+class _RootGateState extends State<RootGate> with WidgetsBindingObserver {
   final PairingStore _store = PairingStore();
   PairingCredentials? _creds;
   bool _loading = true;
 
+  /// The rating ask lives here rather than in a screen because it is armed in
+  /// one visit and spent in the next: it has to outlive whatever was on screen
+  /// when it was earned. See [ReviewPrompt].
+  late final ReviewPrompt _review =
+      widget.reviewPrompt ?? StoreReviewPrompt();
+
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _load();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  /// Coming back to the app is one of the two moments the prompt may appear;
+  /// a successful tracker load is the other. Neither can fire on the day the
+  /// ask was earned — [ReviewPrompt] enforces that itself, so adding a call
+  /// site cannot reintroduce the interruption.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _creds != null) _review.maybeAsk();
   }
 
   Future<void> _load() async {
@@ -80,6 +108,6 @@ class _RootGateState extends State<RootGate> {
     }
     final creds = _creds;
     if (creds == null) return PairScreen(onPaired: _onPaired);
-    return HomeShell(creds: creds, onUnpair: _unpair);
+    return HomeShell(creds: creds, onUnpair: _unpair, review: _review);
   }
 }

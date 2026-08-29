@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../models/tracker.dart';
 import '../services/pairing_store.dart';
+import '../services/review_prompt.dart';
 import '../services/proxy_client.dart';
 import '../theme.dart';
 import 'claims_screen.dart';
@@ -62,7 +63,16 @@ class AppNav {
 class HomeShell extends StatefulWidget {
   final PairingCredentials creds;
   final Future<void> Function() onUnpair;
-  const HomeShell({super.key, required this.creds, required this.onUnpair});
+
+  /// Passed through to Tracking, the only screen that can earn a rating ask.
+  final ReviewPrompt review;
+
+  const HomeShell({
+    super.key,
+    required this.creds,
+    required this.onUnpair,
+    required this.review,
+  });
 
   @override
   State<HomeShell> createState() => _HomeShellState();
@@ -82,7 +92,8 @@ class _HomeShellState extends State<HomeShell> {
     final proxy = ProxyClient();
     final t = AppLocalizations.of(context);
     return switch (_section) {
-      Section.tracking => TrackersScreen(creds: c, nav: nav),
+      Section.tracking =>
+        TrackersScreen(creds: c, nav: nav, review: widget.review),
       Section.history => ResourceListScreen(
           nav: nav,
           title: t.navHistory,

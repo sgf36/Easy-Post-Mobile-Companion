@@ -5,6 +5,7 @@ import '../models/tracker.dart';
 import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
+import '../services/review_prompt.dart';
 import 'home_shell.dart';
 import 'tracker_detail_screen.dart';
 
@@ -13,7 +14,17 @@ enum SortBy { status, carrier, code, updated }
 class TrackersScreen extends StatefulWidget {
   final PairingCredentials creds;
   final AppNav nav;
-  const TrackersScreen({super.key, required this.creds, required this.nav});
+
+  /// Tracking is where a rating is earned: it is the screen the user opens the
+  /// app for, and the only one whose success means "it showed me my parcels".
+  final ReviewPrompt review;
+
+  const TrackersScreen({
+    super.key,
+    required this.creds,
+    required this.nav,
+    required this.review,
+  });
 
   @override
   State<TrackersScreen> createState() => _TrackersScreenState();
@@ -34,7 +45,21 @@ class _TrackersScreenState extends State<TrackersScreen> {
   }
 
   Future<List<Tracker>> _load() async {
-    final raw = await _proxy.getTrackers(widget.creds);
+    final List<Map<String, dynamic>> raw;
+    try {
+      raw = await _proxy.getTrackers(widget.creds);
+    } catch (_) {
+      // A failed load stands the ask down for this session, and is rethrown
+      // untouched so the FutureBuilder still shows the error it always did.
+      widget.review.noteFriction();
+      rethrow;
+    }
+    // Arms; and asks only if it was armed on an earlier day, which is the
+    // rule that keeps this off the list the user is reading right now. Asking
+    // here as well as on resume is what reaches a user who launches the app
+    // cold and never backgrounds it — `resumed` does not fire for them.
+    await widget.review.recordSuccess();
+    await widget.review.maybeAsk();
     return raw.map(Tracker.fromJson).toList();
   }
 
