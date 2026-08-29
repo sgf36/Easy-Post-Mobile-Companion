@@ -34,7 +34,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #
 # The build NUMBER is still supplied by CI (github.run_number), because it has
 # to increase per upload and a file in git cannot do that on its own.
-version: 1.1.1+1
+version: 1.1.2+1
 
 environment:
   sdk: ^3.12.2
