@@ -1,3 +1,3 @@
-Corrects the journey map. Some scan locations were placed in the wrong country — a parcel delivered in Watford could appear off the coast of South America.
+Nothing in the app has changed, and nothing has moved.
 
-Locations are now matched within the carrier's own country, and anywhere that cannot be placed with confidence is left off the map rather than guessed at.
+This update adds one thing: a prompt asking whether you would leave a rating. It appears only after the app has been useful on several separate days, never on the day it earns it, and never after something has gone wrong. Dismissing it costs nothing and it will not come back for months.
