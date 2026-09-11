@@ -111,6 +111,79 @@ void _spendTests() {
     });
   });
 
+  group('formatPlace', () {
+    test('prints the town line History showed, with no name or street', () {
+      // History's row had a formatter of its own. Tracking now prints the same
+      // line for the same parcel, so both go through formatAddress, and this
+      // pins the output History already had.
+      expect(
+        formatPlace({
+          'name': 'Halstead Books',
+          'street1': '4 Quay Street',
+          'city': 'Bristol',
+          'state': '',
+          'zip': 'BS1 4DB',
+          'country': 'GB',
+        }),
+        'Bristol, GB',
+      );
+      expect(
+        formatPlace({'city': 'Portland', 'state': 'OR', 'country': 'US'}),
+        'Portland, OR, US',
+      );
+    });
+
+    test('an address with no place in it is empty', () {
+      expect(formatPlace(null), '');
+      expect(formatPlace(const {'name': 'Acme Ltd'}), '');
+    });
+  });
+
+  group('toAddressFor', () {
+    final byShipment = toAddressesByShipment(<Map<String, dynamic>>[
+      {
+        'id': 'shp_1',
+        'tracking_code': 'EZ1',
+        'to_address': {'city': 'Bristol', 'country': 'GB'},
+      },
+      {
+        'id': 'shp_2',
+        'tracking_code': 'EZ2',
+        'to_address': {'city': 'Leipzig', 'country': 'DE'},
+      },
+    ]);
+
+    test('follows a tracker to the shipment it was created for', () {
+      final t = Tracker.fromJson(
+          {'id': 'trk_1', 'tracking_code': 'EZ1', 'shipment_id': 'shp_1'});
+      expect(formatPlace(toAddressFor(t, byShipment)), 'Bristol, GB');
+    });
+
+    test('a tracker added by number has no recipient, even beside a shipment '
+        'with the same number', () {
+      // Joining on tracking code would put an address on this row. Carriers
+      // reissue numbers, so it would be a guess presented as a fact.
+      final t = Tracker.fromJson({'id': 'trk_2', 'tracking_code': 'EZ2'});
+      expect(t.shipmentId, isNull);
+      expect(toAddressFor(t, byShipment), isNull);
+    });
+
+    test('a blank shipment id is no shipment', () {
+      final t = Tracker.fromJson(
+          {'id': 'trk_3', 'tracking_code': 'EZ3', 'shipment_id': '  '});
+      expect(t.shipmentId, isNull);
+    });
+
+    test('a shipment not in the loaded list shows nothing rather than failing',
+        () {
+      // Before the shipments arrive, or past the client's item cap.
+      final t = Tracker.fromJson(
+          {'id': 'trk_4', 'tracking_code': 'EZ4', 'shipment_id': 'shp_9'});
+      expect(toAddressFor(t, byShipment), isNull);
+      expect(toAddressFor(t, const {}), isNull);
+    });
+  });
+
   group('formatMoney', () {
     test('renders the exact string the Insurance list got wrong', () {
       // EasyPost sends an insurance amount as "5000.00000". The list printed

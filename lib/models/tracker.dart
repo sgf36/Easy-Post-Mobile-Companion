@@ -23,6 +23,14 @@ class Tracker {
   /// those pins on the map instead of dropping them.
   final String? fallbackCountry;
 
+  /// The shipment this tracker was created for, when it came from a label.
+  ///
+  /// A tracker carries no address of its own, so this is the only route from a
+  /// parcel to its recipient. A tracker added by tracking number alone has no
+  /// shipment and therefore no recipient — see [toAddressFor] for why it is not
+  /// matched to one by tracking code instead.
+  final String? shipmentId;
+
   Tracker({
     required this.id,
     required this.trackingCode,
@@ -33,6 +41,7 @@ class Tracker {
     this.updatedAt,
     this.signedBy,
     this.fallbackCountry,
+    this.shipmentId,
     this.events = const [],
   });
 
@@ -70,6 +79,10 @@ class Tracker {
       estDelivery: DateTime.tryParse((j['est_delivery_date'] ?? '').toString()),
       updatedAt: DateTime.tryParse((j['updated_at'] ?? '').toString()),
       signedBy: j['signed_by']?.toString(),
+      shipmentId: switch (j['shipment_id']?.toString().trim()) {
+        final String id when id.isNotEmpty => id,
+        _ => null,
+      },
       events: details,
     );
   }
@@ -507,26 +520,63 @@ String formatSpend(Map<String, double> byCurrency, {String locale = 'en'}) {
 /// a template prints a trail of orphaned commas for every field the address
 /// does not carry. Repeats are dropped too, because `name` and `company` are
 /// frequently the same string and printing it twice looks like a bug.
-String formatAddress(Object? address) {
+///
+/// [fields] exists so that the short form, [formatPlace], is this function
+/// and not a second formatter. History's list used to carry one of its own,
+/// and the desktop app's worst display defect was exactly that shape: one
+/// screen formatted a value properly while every other screen showed it raw.
+String formatAddress(Object? address, {List<String> fields = _addressFields}) {
   if (address is! Map) return '';
-  const order = [
-    'name',
-    'company',
-    'street1',
-    'street2',
-    'city',
-    'state',
-    'zip',
-    'country',
-  ];
   final seen = <String>{};
   final parts = <String>[];
-  for (final field in order) {
+  for (final field in fields) {
     final value = address[field]?.toString().trim() ?? '';
     if (value.isEmpty || !seen.add(value.toLowerCase())) continue;
     parts.add(value);
   }
   return parts.join(', ');
+}
+
+const List<String> _addressFields = <String>[
+  'name',
+  'company',
+  'street1',
+  'street2',
+  'city',
+  'state',
+  'zip',
+  'country',
+];
+
+/// Where a parcel is going, in the space a list row has for it.
+///
+/// No name and no street: a row already carries a tracking number, a carrier
+/// and a status, and the whole address is one tap away on the detail page.
+/// History and Tracking both print this, so one parcel reads the same in both.
+String formatPlace(Object? address) =>
+    formatAddress(address, fields: const <String>['city', 'state', 'country']);
+
+/// Each shipment's recipient address, keyed by shipment id.
+///
+/// Built from the shipments collection in one pass rather than by fetching a
+/// shipment per tracker, which would multiply the requests by the length of
+/// the list. The proxy already allows the collection, for History.
+Map<String, Object?> toAddressesByShipment(List<Map<String, dynamic>> shipments) =>
+    <String, Object?>{
+      for (final s in shipments)
+        if ((s['id'] ?? '').toString().isNotEmpty) s['id'].toString(): s['to_address'],
+    };
+
+/// The recipient of a tracked parcel, or null when nothing says who it is.
+///
+/// Joined on [Tracker.shipmentId] and on nothing else. A tracker added by
+/// tracking number alone has no shipment, and pairing it with a shipment that
+/// happens to share its tracking code would be a guess: carriers reissue
+/// numbers, so a match on the number is not a match on the parcel. A blank line
+/// is honest about that, where somebody else's address would not be.
+Object? toAddressFor(Tracker tracker, Map<String, Object?> toAddresses) {
+  final id = tracker.shipmentId;
+  return id == null ? null : toAddresses[id];
 }
 
 /// One money value with its currency: "5,000.00 USD".

@@ -101,7 +101,9 @@ class _HomeShellState extends State<HomeShell> {
           fetch: () => proxy.getShipments(c),
           row: (m) => ResourceRow(
             title: (m['tracking_code'] ?? m['id'] ?? '—').toString(),
-            subtitle: _addr(m['to_address']),
+            // The same line Tracking prints for the same parcel, from the same
+            // function, so the two lists cannot come to disagree about it.
+            subtitle: formatPlace(m['to_address']),
             // Through statusLabel, not raw. A shipment's status is the same
             // vocabulary a tracker's is, so printing it verbatim here left
             // History reading "delivered" beside a Tracking row reading
@@ -145,14 +147,6 @@ class _HomeShellState extends State<HomeShell> {
   /// when it is absent or unparseable — never the raw ISO string.
   static String _when(AppLocalizations t, dynamic raw) =>
       formatDateTime(DateTime.tryParse((raw ?? '').toString()), t.localeName);
-
-  static String _addr(dynamic a) {
-    if (a is Map) {
-      final parts = [a['city'], a['state'], a['country']].where((p) => p != null && '$p'.trim().isNotEmpty);
-      return parts.join(', ');
-    }
-    return '';
-  }
 }
 
 /// The shared navigation drawer.

@@ -5,10 +5,16 @@ import 'package:latlong2/latlong.dart';
 import '../l10n/app_localizations.dart';
 import '../models/tracker.dart';
 import '../services/geocode.dart';
+import 'resource_detail_screen.dart';
 
 class TrackerDetailScreen extends StatelessWidget {
   final Tracker tracker;
-  const TrackerDetailScreen({super.key, required this.tracker});
+
+  /// The recipient's EasyPost address object, or null when the tracker has no
+  /// shipment behind it — in which case nothing is shown rather than a guess.
+  final Object? toAddress;
+
+  const TrackerDetailScreen({super.key, required this.tracker, this.toAddress});
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +51,12 @@ class TrackerDetailScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
+                // The same label and layout as a shipment's page in History, so
+                // one address reads the same whichever list it was opened from.
+                if (formatAddress(toAddress).isNotEmpty)
+                  DetailFieldRow(
+                    field: DetailField(t.insuranceToAddress, formatAddress(toAddress)),
+                  ),
                 if (statusDetailText(tracker.status, tracker.statusDetail) != null)
                   _infoRow(Icons.info_outline,
                       statusDetailText(tracker.status, tracker.statusDetail)!),
