@@ -28,13 +28,13 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # notice on a green build — check for it before wondering why TestFlight is
 # quiet.
 #
-# 1.1.1 because it carries one fix and no features: the journey map was
-# geocoding scan locations without a country and plotting them in the wrong
-# one, which put a Watford delivery off the coast of Brazil.
+# 1.2.0, not 1.1.3, because it adds something a user can see: the Tracking list
+# and a tracker's page now show where each parcel is going. 1.1.1 and 1.1.2 were
+# a fix and a rating prompt, and a patch number said so.
 #
 # The build NUMBER is still supplied by CI (github.run_number), because it has
 # to increase per upload and a file in git cannot do that on its own.
-version: 1.1.2+1
+version: 1.2.0+1
 
 environment:
   sdk: ^3.12.2

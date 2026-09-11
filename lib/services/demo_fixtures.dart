@@ -28,6 +28,7 @@ const String _today = '2026-08-14';
 const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   {
     'id': 'trk_demo_01',
+    'shipment_id': 'shp_demo_01',
     'tracking_code': 'EZ1000000001',
     'carrier': 'USPS',
     'status': 'out_for_delivery',
@@ -65,6 +66,7 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   // straight line between two pins.
   {
     'id': 'trk_demo_02',
+    'shipment_id': 'shp_demo_02',
     'tracking_code': 'EZ2000000002',
     'carrier': 'RoyalMailV3',
     'status': 'in_transit',
@@ -110,6 +112,7 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   },
   {
     'id': 'trk_demo_03',
+    'shipment_id': 'shp_demo_03',
     'tracking_code': 'EZ3000000003',
     'carrier': 'FedEx',
     'status': 'delivered',
@@ -140,6 +143,7 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   },
   {
     'id': 'trk_demo_05',
+    'shipment_id': 'shp_demo_08',
     'tracking_code': 'EZ5000000005',
     'carrier': 'Evri',
     'status': 'return_to_sender',
@@ -174,6 +178,7 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   // freely — what they add is carriers and volume, not new colours.
   {
     'id': 'trk_demo_07',
+    'shipment_id': 'shp_demo_04',
     'tracking_code': 'EZ7000000007',
     'carrier': 'UPS',
     'status': 'in_transit',
@@ -195,6 +200,7 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   },
   {
     'id': 'trk_demo_08',
+    'shipment_id': 'shp_demo_09',
     'tracking_code': 'EZ8000000008',
     'carrier': 'DPDUK',
     'status': 'available_for_pickup',
@@ -210,6 +216,7 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   },
   {
     'id': 'trk_demo_09',
+    'shipment_id': 'shp_demo_07',
     'tracking_code': 'EZ9000000009',
     'carrier': 'CanadaPost',
     'status': 'delivered',
@@ -225,6 +232,7 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   },
   {
     'id': 'trk_demo_10',
+    'shipment_id': 'shp_demo_06',
     'tracking_code': 'EZ1000000010',
     'carrier': 'Parcelforce',
     'status': 'out_for_delivery',
@@ -240,6 +248,7 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
   },
   {
     'id': 'trk_demo_11',
+    'shipment_id': 'shp_demo_05',
     'tracking_code': 'EZ1100000011',
     'carrier': 'DHLExpress',
     'status': 'in_transit',

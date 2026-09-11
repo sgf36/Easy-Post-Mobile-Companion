@@ -86,4 +86,27 @@ void main() {
       }
     });
   });
+
+  group('the Tracking shot shows recipients honestly', () {
+    test('every shipment_id names a fixture shipment for the same parcel', () {
+      // A link to a shipment with a different tracking code would photograph
+      // one parcel's recipient beside another parcel's number.
+      final codes = <String, String>{
+        for (final s in demoShipments) s['id'] as String: s['tracking_code'] as String,
+      };
+      for (final t in demoTrackers.where((t) => t['shipment_id'] != null)) {
+        expect(codes[t['shipment_id']], t['tracking_code'],
+            reason: '${t['id']} links to the wrong shipment');
+      }
+    });
+
+    test('some trackers have a recipient and some do not', () {
+      // Both cases are real: a label bought through EasyPost has a shipment,
+      // and a parcel added by tracking number does not. The listing should not
+      // imply every row always carries an address.
+      final linked = demoTrackers.where((t) => t['shipment_id'] != null).length;
+      expect(linked, greaterThan(0));
+      expect(linked, lessThan(demoTrackers.length));
+    });
+  });
 }

@@ -52,7 +52,7 @@ class ResourceDetailScreen extends StatelessWidget {
           if (shown.isEmpty)
             Text(t.detailNothingFurther, style: const TextStyle(color: Brand.muted))
           else
-            for (final field in shown) _FieldRow(field: field),
+            for (final field in shown) DetailFieldRow(field: field),
         ],
       ),
     );
@@ -96,9 +96,12 @@ class _Heading extends StatelessWidget {
 /// is "Χρονικό παράθυρο παραλαβής" in Greek — so a two-column row would either
 /// clip the label or starve the value. Stacking is also what right-to-left
 /// languages want without any mirroring work.
-class _FieldRow extends StatelessWidget {
+///
+/// Public because a tracker's page shows the recipient with it too, and a
+/// look-alike built there would drift from this one.
+class DetailFieldRow extends StatelessWidget {
   final DetailField field;
-  const _FieldRow({required this.field});
+  const DetailFieldRow({super.key, required this.field});
 
   @override
   Widget build(BuildContext context) {

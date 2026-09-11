@@ -34,6 +34,9 @@ class _TrackersScreenState extends State<TrackersScreen> {
   final ProxyClient _proxy = ProxyClient();
   late Future<List<Tracker>> _future;
 
+  /// Recipient addresses by shipment id, from the shipments list History reads.
+  Map<String, Object?> _toAddresses = const {};
+
   SortBy _sort = SortBy.status;
   final Set<String> _hiddenStatuses = {};
   final Set<String> _hiddenCarriers = {};
@@ -42,6 +45,27 @@ class _TrackersScreenState extends State<TrackersScreen> {
   void initState() {
     super.initState();
     _future = _load();
+    _loadAddresses();
+  }
+
+  /// Fetched beside the trackers, not before them, so the list is never held
+  /// back for a second collection. A shipment record carries its rates, parcel
+  /// and both addresses, and an account's worth of them arrives well after its
+  /// trackers do; the addresses fill in when they land.
+  ///
+  /// A failure here costs the addresses and nothing more. The parcels are still
+  /// true without them, so it neither replaces the list with an error nor
+  /// counts as friction for the rating ask, which is gated on the parcels.
+  Future<void> _loadAddresses() async {
+    final Map<String, Object?> byShipment;
+    try {
+      byShipment = toAddressesByShipment(await _proxy.getShipments(widget.creds));
+    } catch (_) {
+      // Whatever an earlier load found stays: a shipment's recipient is fixed
+      // once its label is bought, so an old entry is not a stale one.
+      return;
+    }
+    if (mounted) setState(() => _toAddresses = byShipment);
   }
 
   Future<List<Tracker>> _load() async {
@@ -64,9 +88,10 @@ class _TrackersScreenState extends State<TrackersScreen> {
   }
 
   Future<void> _refresh() async {
+    final addresses = _loadAddresses();
     final f = _load();
     setState(() => _future = f);
-    await f.catchError((_) => <Tracker>[]);
+    await Future.wait([f.catchError((_) => <Tracker>[]), addresses]);
   }
 
   bool get _filtersActive => _hiddenStatuses.isNotEmpty || _hiddenCarriers.isNotEmpty;
@@ -243,7 +268,11 @@ class _TrackersScreenState extends State<TrackersScreen> {
                     child: Text(t.trackersShowing(shown.length, all.length),
                         style: Theme.of(context).textTheme.bodySmall),
                   ),
-                for (final tracker in shown) _TrackerTile(tracker: tracker),
+                for (final tracker in shown)
+                  _TrackerTile(
+                    tracker: tracker,
+                    toAddress: toAddressFor(tracker, _toAddresses),
+                  ),
                 if (shown.isEmpty)
                   Padding(
                     padding: const EdgeInsets.all(24),
@@ -260,34 +289,52 @@ class _TrackersScreenState extends State<TrackersScreen> {
 
 class _TrackerTile extends StatelessWidget {
   final Tracker tracker;
-  const _TrackerTile({required this.tracker});
+
+  /// The recipient's EasyPost address object; null when the tracker has no
+  /// shipment behind it, or before the shipments have loaded.
+  final Object? toAddress;
+
+  const _TrackerTile({required this.tracker, this.toAddress});
 
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context);
     final ss = statusStyle(tracker.status);
     final cc = carrierColor(tracker.carrier);
+    final place = formatPlace(toAddress);
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: cc,
         child: Icon(ss.icon, color: Colors.white, size: 22),
       ),
       title: Text(tracker.trackingCode, style: const TextStyle(fontWeight: FontWeight.w600)),
-      subtitle: Row(
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            tracker.carrier.isEmpty ? t.carrierUnknown : carrierDisplayName(tracker.carrier),
-            style: TextStyle(color: cc, fontWeight: FontWeight.w600),
-          ),
-          if (tracker.estDelivery != null) ...[
-            const Text(' · '),
-            Flexible(
-              child: Text(
-                t.etaLabel(formatDateShort(tracker.estDelivery, t.localeName)),
-                overflow: TextOverflow.ellipsis,
+          Row(
+            children: [
+              Text(
+                tracker.carrier.isEmpty ? t.carrierUnknown : carrierDisplayName(tracker.carrier),
+                style: TextStyle(color: cc, fontWeight: FontWeight.w600),
               ),
-            ),
-          ],
+              if (tracker.estDelivery != null) ...[
+                const Text(' · '),
+                Flexible(
+                  child: Text(
+                    t.etaLabel(formatDateShort(tracker.estDelivery, t.localeName)),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ],
+          ),
+          // A line of its own rather than a third item on the carrier's. That
+          // line is already sized to the last point for a long carrier beside a
+          // long ETA (see the badge note below), so a town appended to it would
+          // be the first thing ellipsised away.
+          if (place.isNotEmpty)
+            Text(place, maxLines: 1, overflow: TextOverflow.ellipsis),
         ],
       ),
       // Capped, and allowed to wrap inside the cap. A long status name —
@@ -320,7 +367,9 @@ class _TrackerTile extends StatelessWidget {
         ),
       ),
       onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => TrackerDetailScreen(tracker: tracker)),
+        MaterialPageRoute(
+          builder: (_) => TrackerDetailScreen(tracker: tracker, toAddress: toAddress),
+        ),
       ),
     );
   }

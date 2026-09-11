@@ -1,3 +1,3 @@
-Nothing in the app has changed, and nothing has moved.
+The Tracking screen now shows where each parcel is going: the destination town beneath the carrier and the full delivery address on the parcel’s own page.
 
-This update adds one thing: a prompt asking whether you would leave a rating. It appears only after the app has been useful on several separate days, never on the day it earns it, and never after something has gone wrong. Dismissing it costs nothing and it will not come back for months.
+Addresses come from the shipment behind each label, the same record History shows. A parcel added by tracking number alone has no shipment behind it, so no address is shown rather than a guess.
