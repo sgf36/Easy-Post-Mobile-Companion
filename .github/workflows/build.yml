@@ -463,6 +463,10 @@ jobs:
 
       - name: Capture screenshots
         run: |
+          # The runner's default shell is `bash -e`, which `set -uo pipefail`
+          # does not undo. Without +e the first failed attempt ends the step
+          # and the retry below never runs.
+          set +e
           set -uo pipefail
           ADB="$ANDROID_HOME/platform-tools/adb"
           mkdir -p "$ASC_SHOTS_DIR"
@@ -625,9 +629,12 @@ jobs:
       # It is flaky, not locale-specific: on 2026-08-21 German wedged in one run
       # and passed in the next. So the answer is a watchdog and a retry, not a
       # fix to any one language. macOS ships no coreutils `timeout`, hence the
-      # explicit poll; `set -e` is off so a failed attempt reaches the retry.
+      # explicit poll. `set +e` is needed because the runner's default shell is
+      # `bash -e`, and `set -uo pipefail` does not undo that: without it the
+      # first failed attempt ends the step and the retry never runs.
       - name: Capture screenshots
         run: |
+          set +e
           set -uo pipefail
           mkdir -p "$ASC_SHOTS_DIR"
           python3 tool/shotserver.py &
