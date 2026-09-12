@@ -271,7 +271,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
                         style: Theme.of(context).textTheme.bodySmall),
                   ),
                 for (final tracker in shown)
-                  _TrackerTile(
+                  TrackerTile(
                     tracker: tracker,
                     shipment: shipmentFor(tracker, _shipments),
                   ),
@@ -289,14 +289,16 @@ class _TrackersScreenState extends State<TrackersScreen> {
   }
 }
 
-class _TrackerTile extends StatelessWidget {
+/// One parcel's row. Public only so a test can render it: the overflow this
+/// row is bounded by is invisible to unit tests and cost a screenshot run.
+class TrackerTile extends StatelessWidget {
   final Tracker tracker;
 
   /// The shipment this parcel's label was bought on; null when the tracker was
   /// added by tracking number, or before the shipments have loaded.
   final Map<String, dynamic>? shipment;
 
-  const _TrackerTile({required this.tracker, this.shipment});
+  const TrackerTile({super.key, required this.tracker, this.shipment});
 
   @override
   Widget build(BuildContext context) {
@@ -308,6 +310,7 @@ class _TrackerTile extends StatelessWidget {
         DateTime.tryParse((shipment?['created_at'] ?? '').toString()), t.localeName);
     final refund = shipment == null ? '' : refundStateOf(shipment!);
     return ListTile(
+      isThreeLine: true,
       leading: CircleAvatar(
         backgroundColor: cc,
         child: Icon(ss.icon, color: Colors.white, size: 22),
@@ -319,9 +322,17 @@ class _TrackerTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                tracker.carrier.isEmpty ? t.carrierUnknown : carrierDisplayName(tracker.carrier),
-                style: TextStyle(color: cc, fontWeight: FontWeight.w600),
+              // Flexible, like the date beside it. A fixed carrier name ran
+              // this row off the side of a 390-point phone by 32 pixels —
+              // "DHL Express" beside a date does not fit there, and every
+              // screenshot is taken at 440 points, where it does.
+              Flexible(
+                child: Text(
+                  tracker.carrier.isEmpty ? t.carrierUnknown : carrierDisplayName(tracker.carrier),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: cc, fontWeight: FontWeight.w600),
+                ),
               ),
               if (tracker.estDelivery != null) ...[
                 const Text(' · '),
@@ -340,14 +351,43 @@ class _TrackerTile extends StatelessWidget {
           // be the first thing ellipsised away.
           if (place.isNotEmpty)
             Text(place, maxLines: 1, overflow: TextOverflow.ellipsis),
-          // When the label was bought, which is the only date on this row that
-          // has already happened: the line above it is an estimate. Smaller and
-          // muted so the row still reads status-first at a glance.
-          if (created.isNotEmpty)
-            Text(t.createdLabel(created),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, color: Brand.muted)),
+          // When the label was bought — the only date on this row that has
+          // already happened, since the line above it is an estimate — and
+          // beside it any refund asked for on that label.
+          //
+          // The refund sits here rather than in a second badge beside the
+          // status: a tile bounds what it is given, and a stacked pair of
+          // badges overflowed it by 12 pixels, which App Review would have
+          // seen as a striped bar across the row. It keeps its own colour from
+          // refundStatusStyle, because a parcel's status and a refund's are
+          // different vocabularies — a parcel is never "refunded".
+          if (created.isNotEmpty || refund.isNotEmpty)
+            DefaultTextStyle(
+              style: const TextStyle(fontSize: 12, color: Brand.muted),
+              child: Row(
+                children: [
+                  if (created.isNotEmpty)
+                    Flexible(
+                      child: Text(t.createdLabel(created),
+                          maxLines: 1, overflow: TextOverflow.ellipsis),
+                    ),
+                  if (created.isNotEmpty && refund.isNotEmpty) const Text(' · '),
+                  if (refund.isNotEmpty)
+                    Flexible(
+                      child: Text(
+                        refundStatusLabel(t, refund),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: refundStatusStyle(refund).color,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
         ],
       ),
       // Capped, and allowed to wrap inside the cap. A long status name —
@@ -366,22 +406,7 @@ class _TrackerTile extends StatelessWidget {
       // a word cannot be wrapped any other way.
       trailing: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 110),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            _badge(statusLabel(t, tracker.status), ss.color),
-            // A second badge rather than a longer first one. A parcel's status
-            // and its refund's are different vocabularies — a parcel is never
-            // "refunded" — and one badge reading both invites the reading that
-            // they are one event. Its own colour, from refundStatusStyle, for
-            // the same reason.
-            if (refund.isNotEmpty) ...[
-              const SizedBox(height: 4),
-              _badge(refundStatusLabel(t, refund), refundStatusStyle(refund).color),
-            ],
-          ],
-        ),
+        child: _badge(statusLabel(t, tracker.status), ss.color),
       ),
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
