@@ -10,7 +10,21 @@ class ResourceRow {
   final String title;
   final String subtitle;
   final String trailing;
-  const ResourceRow({required this.title, this.subtitle = '', this.trailing = ''});
+
+  /// A second trailing line, under the first in smaller muted text.
+  ///
+  /// History prints a refund's state here rather than folding it into
+  /// [trailing]: a parcel's status and its refund's status are different
+  /// vocabularies, and one line reading "Delivered - Refunded" invites the
+  /// reading that the parcel was delivered *and* refunded as one event.
+  final String trailingSecondary;
+
+  const ResourceRow({
+    required this.title,
+    this.subtitle = '',
+    this.trailing = '',
+    this.trailingSecondary = '',
+  });
 }
 
 /// A generic list section: fetch a collection through the proxy and render it,
@@ -47,11 +61,21 @@ class ResourceListScreen extends StatefulWidget {
 /// Without the chevron a tappable row and an inert one look identical, and the
 /// only way to find out which this is would be to tap it.
 Widget? _trailing(ResourceRow r, {required bool showChevron}) {
-  if (r.trailing.isEmpty && !showChevron) return null;
+  if (r.trailing.isEmpty && r.trailingSecondary.isEmpty && !showChevron) return null;
   return Row(
     mainAxisSize: MainAxisSize.min,
     children: [
-      if (r.trailing.isNotEmpty) Text(r.trailing),
+      if (r.trailing.isNotEmpty || r.trailingSecondary.isNotEmpty)
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            if (r.trailing.isNotEmpty) Text(r.trailing),
+            if (r.trailingSecondary.isNotEmpty)
+              Text(r.trailingSecondary,
+                  style: const TextStyle(fontSize: 11, color: Brand.muted)),
+          ],
+        ),
       if (showChevron)
         const Padding(
           padding: EdgeInsetsDirectional.only(start: 4),

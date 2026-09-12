@@ -148,48 +148,53 @@ void _spendTests() {
     });
   });
 
-  group('toAddressFor', () {
-    final byShipment = toAddressesByShipment(<Map<String, dynamic>>[
+  group('shipmentFor', () {
+    final shipments = <Map<String, dynamic>>[
       {
         'id': 'shp_1',
         'tracking_code': 'EZ1',
+        'created_at': '2026-08-12T10:15:00Z',
         'to_address': {'city': 'Bristol', 'country': 'GB'},
       },
       {
         'id': 'shp_2',
         'tracking_code': 'EZ2',
         'to_address': {'city': 'Leipzig', 'country': 'DE'},
+        'refund_status': 'submitted',
       },
-    ]);
+    ];
+    final byId = shipmentsById(shipments);
 
-    test('follows a tracker to the shipment it was created for', () {
-      final t = Tracker.fromJson(
-          {'id': 'trk_1', 'tracking_code': 'EZ1', 'shipment_id': 'shp_1'});
-      expect(formatPlace(toAddressFor(t, byShipment)), 'Bristol, GB');
+    test('follows the tracker to the shipment its label was bought on', () {
+      final t = Tracker.fromJson({'id': 'trk_1', 'tracking_code': 'EZ1', 'shipment_id': 'shp_1'});
+      final s = shipmentFor(t, byId);
+      expect(formatPlace(s?['to_address']), 'Bristol, GB');
+      expect(s?['created_at'], '2026-08-12T10:15:00Z');
     });
 
-    test('a tracker added by number has no recipient, even beside a shipment '
-        'with the same number', () {
-      // Joining on tracking code would put an address on this row. Carriers
-      // reissue numbers, so it would be a guess presented as a fact.
+    test('a tracker added by number joins to nothing, even when a shipment shares its number', () {
       final t = Tracker.fromJson({'id': 'trk_2', 'tracking_code': 'EZ2'});
       expect(t.shipmentId, isNull);
-      expect(toAddressFor(t, byShipment), isNull);
+      expect(shipmentFor(t, byId), isNull);
+      // The shipment sharing EZ2 carries a refund; joining on the number would
+      // put that refund on a parcel nobody asked to refund.
+      expect(refundStateOf(shipments[1]), 'submitted');
     });
 
     test('a blank shipment id is no shipment', () {
-      final t = Tracker.fromJson(
-          {'id': 'trk_3', 'tracking_code': 'EZ3', 'shipment_id': '  '});
+      final t = Tracker.fromJson({'id': 'trk_3', 'tracking_code': 'EZ3', 'shipment_id': ''});
       expect(t.shipmentId, isNull);
     });
 
-    test('a shipment not in the loaded list shows nothing rather than failing',
-        () {
-      // Before the shipments arrive, or past the client's item cap.
-      final t = Tracker.fromJson(
-          {'id': 'trk_4', 'tracking_code': 'EZ4', 'shipment_id': 'shp_9'});
-      expect(toAddressFor(t, byShipment), isNull);
-      expect(toAddressFor(t, const {}), isNull);
+    test('a shipment outside the loaded list shows nothing rather than failing', () {
+      final t = Tracker.fromJson({'id': 'trk_4', 'tracking_code': 'EZ4', 'shipment_id': 'shp_missing'});
+      expect(shipmentFor(t, byId), isNull);
+      expect(shipmentFor(t, const {}), isNull);
+    });
+
+    test('a shipment with no refund request reports no refund state', () {
+      final t = Tracker.fromJson({'id': 'trk_5', 'tracking_code': 'EZ1', 'shipment_id': 'shp_1'});
+      expect(refundStateOf(shipmentFor(t, byId)!), '');
     });
   });
 

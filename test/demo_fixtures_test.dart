@@ -100,6 +100,16 @@ void main() {
       }
     });
 
+    test('the refund states a shipper waits on are all represented', () {
+      // A list whose only refund is "rejected" would not show the state
+      // somebody actually sits in while a carrier decides.
+      final states = {
+        for (final t in demoTrackers.where((t) => t['shipment_id'] != null))
+          demoShipments.firstWhere((s) => s['id'] == t['shipment_id'])['refund_status'],
+      };
+      expect(states, containsAll(<Object?>['submitted', 'refunded', 'rejected']));
+    });
+
     test('some trackers have a recipient and some do not', () {
       // Both cases are real: a label bought through EasyPost has a shipment,
       // and a parcel added by tracking number does not. The listing should not

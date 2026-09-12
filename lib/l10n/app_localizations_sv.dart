@@ -124,6 +124,11 @@ class AppLocalizationsSv extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'Skapad $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Beräknad leverans $date';
   }
@@ -396,6 +401,9 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Skapad';
+
+  @override
+  String get fieldLastUpdated => 'Senast uppdaterad';
 
   @override
   String get fieldAmount => 'Belopp';

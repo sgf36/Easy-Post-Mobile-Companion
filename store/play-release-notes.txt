@@ -1,3 +1,3 @@
-The Tracking screen now shows where each parcel is going: the destination town beneath the carrier and the full delivery address on the parcel’s own page.
+Refund requests now show where the parcel is. The Tracking screen marks any parcel with a refund against it and shows when its label was bought, and History shows the refund state beside the parcel's own status.
 
-Addresses come from the shipment behind each label, the same record History shows. A parcel added by tracking number alone has no shipment behind it, so no address is shown rather than a guess.
+Parcel rows also fit properly on smaller phones.

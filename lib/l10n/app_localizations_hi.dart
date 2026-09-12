@@ -125,6 +125,11 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'बनाया गया $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'अनुमानित डिलीवरी $date';
   }
@@ -397,6 +402,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get fieldCreated => 'बनाया गया';
+
+  @override
+  String get fieldLastUpdated => 'अंतिम अपडेट';
 
   @override
   String get fieldAmount => 'राशि';

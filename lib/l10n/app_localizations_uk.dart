@@ -124,6 +124,11 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'Створено $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Орієнтовна доставка $date';
   }
@@ -394,6 +399,9 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Створено';
+
+  @override
+  String get fieldLastUpdated => 'Останнє оновлення';
 
   @override
   String get fieldAmount => 'Сума';

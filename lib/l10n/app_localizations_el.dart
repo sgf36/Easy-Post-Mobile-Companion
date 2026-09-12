@@ -124,6 +124,11 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'Δημιουργήθηκε $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Εκτιμώμενη παράδοση $date';
   }
@@ -399,6 +404,9 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Δημιουργήθηκε';
+
+  @override
+  String get fieldLastUpdated => 'Τελευταία ενημέρωση';
 
   @override
   String get fieldAmount => 'Ποσό';

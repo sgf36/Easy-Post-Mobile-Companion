@@ -246,6 +246,42 @@ const List<Map<String, dynamic>> demoTrackers = <Map<String, dynamic>>[
       },
     ],
   },
+  // The two unused labels a refund was asked for. They are tracked as well as
+  // bought, because the Tracking list now shows a refund's state and a list
+  // where the only refund is a rejected one says nothing about the state
+  // somebody actually sits in, which is "submitted".
+  {
+    'id': 'trk_demo_12',
+    'shipment_id': 'shp_demo_10',
+    'tracking_code': 'EZ1200000012',
+    'carrier': 'USPS',
+    'status': 'pre_transit',
+    'est_delivery_date': '2026-08-16',
+    'tracking_details': <Map<String, dynamic>>[
+      {
+        'status': 'pre_transit',
+        'message': 'Shipping Label Created',
+        'datetime': '2026-08-13T14:45:00Z',
+        'tracking_location': {'city': 'Portland', 'state': 'OR', 'country': 'US'},
+      },
+    ],
+  },
+  {
+    'id': 'trk_demo_13',
+    'shipment_id': 'shp_demo_11',
+    'tracking_code': 'EZ1300000013',
+    'carrier': 'RoyalMailV3',
+    'status': 'pre_transit',
+    'est_delivery_date': '2026-08-14',
+    'tracking_details': <Map<String, dynamic>>[
+      {
+        'status': 'pre_transit',
+        'message': 'Shipping Label Created',
+        'datetime': '2026-08-10T10:05:00Z',
+        'tracking_location': {'city': 'Carlisle', 'state': '', 'country': 'GB'},
+      },
+    ],
+  },
   {
     'id': 'trk_demo_11',
     'shipment_id': 'shp_demo_05',

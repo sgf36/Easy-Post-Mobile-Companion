@@ -124,6 +124,11 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return '생성 $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return '예상 도착일 $date';
   }
@@ -391,6 +396,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get fieldCreated => '생성일';
+
+  @override
+  String get fieldLastUpdated => '마지막 업데이트';
 
   @override
   String get fieldAmount => '금액';

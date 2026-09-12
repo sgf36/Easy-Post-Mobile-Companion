@@ -124,6 +124,11 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'Criado $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Entrega estimada $date';
   }
@@ -395,6 +400,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Criado';
+
+  @override
+  String get fieldLastUpdated => 'Última atualização';
 
   @override
   String get fieldAmount => 'Valor';

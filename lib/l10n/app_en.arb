@@ -71,6 +71,15 @@
       }
     }
   },
+  "createdLabel": "Created {date}",
+  "@createdLabel": {
+    "description": "When the label was bought, on a tracker row, abbreviated to fit beside the estimated delivery date.",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "detailEstimatedDelivery": "Estimated delivery {date}",
   "@detailEstimatedDelivery": {
     "placeholders": {
@@ -255,6 +264,10 @@
   "fieldCreated": "Created",
   "@fieldCreated": {
     "description": "Field label: when the record was created."
+  },
+  "fieldLastUpdated": "Last updated",
+  "@fieldLastUpdated": {
+    "description": "Field label: when the shipment record last changed. Shown beside a refund state because EasyPost keeps no date for the refund itself; never label this as the refund date, since any change moves it."
   },
   "fieldAmount": "Amount",
   "@fieldAmount": {

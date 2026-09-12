@@ -124,6 +124,11 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'Dibuat $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Estimasi pengiriman $date';
   }
@@ -394,6 +399,9 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Dibuat';
+
+  @override
+  String get fieldLastUpdated => 'Terakhir diperbarui';
 
   @override
   String get fieldAmount => 'Jumlah';
