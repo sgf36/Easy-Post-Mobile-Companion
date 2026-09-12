@@ -370,6 +370,12 @@ abstract class AppLocalizations {
   /// **'ETA {date}'**
   String etaLabel(String date);
 
+  /// When the label was bought, on a tracker row, abbreviated to fit beside the estimated delivery date.
+  ///
+  /// In en, this message translates to:
+  /// **'Created {date}'**
+  String createdLabel(String date);
+
   /// No description provided for @detailEstimatedDelivery.
   ///
   /// In en, this message translates to:
@@ -855,6 +861,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Created'**
   String get fieldCreated;
+
+  /// Field label: when the shipment record last changed. Shown beside a refund state because EasyPost keeps no date for the refund itself; never label this as the refund date, since any change moves it.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated'**
+  String get fieldLastUpdated;
 
   /// Field label: an insured or claimed amount of money.
   ///

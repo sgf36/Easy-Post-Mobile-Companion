@@ -559,27 +559,35 @@ const List<String> _addressFields = <String>[
 String formatPlace(Object? address) =>
     formatAddress(address, fields: const <String>['city', 'state', 'country']);
 
-/// Each shipment's recipient address, keyed by shipment id.
+/// The shipments a tracker can be joined to, keyed by shipment id.
 ///
 /// Built from the shipments collection in one pass rather than by fetching a
 /// shipment per tracker, which would multiply the requests by the length of
 /// the list. The proxy already allows the collection, for History.
-Map<String, Object?> toAddressesByShipment(List<Map<String, dynamic>> shipments) =>
-    <String, Object?>{
+///
+/// The whole record is kept, not one field of it: the recipient, the date the
+/// label was bought and any refund request all live on it, and a map per
+/// field would be three joins that could disagree with each other.
+Map<String, Map<String, dynamic>> shipmentsById(List<Map<String, dynamic>> shipments) =>
+    <String, Map<String, dynamic>>{
       for (final s in shipments)
-        if ((s['id'] ?? '').toString().isNotEmpty) s['id'].toString(): s['to_address'],
+        if ((s['id'] ?? '').toString().isNotEmpty) s['id'].toString(): s,
     };
 
-/// The recipient of a tracked parcel, or null when nothing says who it is.
+/// The shipment a tracked parcel came from, or null when nothing says which.
 ///
 /// Joined on [Tracker.shipmentId] and on nothing else. A tracker added by
 /// tracking number alone has no shipment, and pairing it with a shipment that
 /// happens to share its tracking code would be a guess: carriers reissue
-/// numbers, so a match on the number is not a match on the parcel. A blank line
-/// is honest about that, where somebody else's address would not be.
-Object? toAddressFor(Tracker tracker, Map<String, Object?> toAddresses) {
+/// numbers, so a match on the number is not a match on the parcel. Showing
+/// nothing is honest about that, where somebody else's address, purchase date
+/// or refund would not be.
+Map<String, dynamic>? shipmentFor(
+  Tracker tracker,
+  Map<String, Map<String, dynamic>> shipments,
+) {
   final id = tracker.shipmentId;
-  return id == null ? null : toAddresses[id];
+  return id == null ? null : shipments[id];
 }
 
 /// One money value with its currency: "5,000.00 USD".

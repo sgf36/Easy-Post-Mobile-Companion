@@ -124,6 +124,11 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'Létrehozva $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Becsült kézbesítés: $date';
   }
@@ -397,6 +402,9 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Létrehozva';
+
+  @override
+  String get fieldLastUpdated => 'Utoljára frissítve';
 
   @override
   String get fieldAmount => 'Összeg';

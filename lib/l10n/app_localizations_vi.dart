@@ -124,6 +124,11 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'Đã tạo $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Ngày giao hàng dự kiến $date';
   }
@@ -394,6 +399,9 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Đã tạo';
+
+  @override
+  String get fieldLastUpdated => 'Cập nhật lần cuối';
 
   @override
   String get fieldAmount => 'Số tiền';

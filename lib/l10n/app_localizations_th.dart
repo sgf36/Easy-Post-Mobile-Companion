@@ -124,6 +124,11 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'สร้างเมื่อ $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'กำหนดส่งโดยประมาณ $date';
   }
@@ -395,6 +400,9 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get fieldCreated => 'สร้างเมื่อ';
+
+  @override
+  String get fieldLastUpdated => 'อัปเดตล่าสุด';
 
   @override
   String get fieldAmount => 'จำนวนเงิน';

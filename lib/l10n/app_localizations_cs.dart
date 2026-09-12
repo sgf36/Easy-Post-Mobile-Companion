@@ -124,6 +124,11 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return 'Vytvořeno $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Odhadované doručení $date';
   }
@@ -396,6 +401,9 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Vytvořeno';
+
+  @override
+  String get fieldLastUpdated => 'Naposledy aktualizováno';
 
   @override
   String get fieldAmount => 'Částka';

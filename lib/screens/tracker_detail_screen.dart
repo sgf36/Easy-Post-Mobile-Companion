@@ -10,11 +10,11 @@ import 'resource_detail_screen.dart';
 class TrackerDetailScreen extends StatelessWidget {
   final Tracker tracker;
 
-  /// The recipient's EasyPost address object, or null when the tracker has no
-  /// shipment behind it — in which case nothing is shown rather than a guess.
-  final Object? toAddress;
+  /// The shipment this parcel's label was bought on, or null when the tracker
+  /// has none — in which case nothing is shown rather than a guess.
+  final Map<String, dynamic>? shipment;
 
-  const TrackerDetailScreen({super.key, required this.tracker, this.toAddress});
+  const TrackerDetailScreen({super.key, required this.tracker, this.shipment});
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +51,12 @@ class TrackerDetailScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                // The same label and layout as a shipment's page in History, so
-                // one address reads the same whichever list it was opened from.
-                if (formatAddress(toAddress).isNotEmpty)
-                  DetailFieldRow(
-                    field: DetailField(t.insuranceToAddress, formatAddress(toAddress)),
-                  ),
+                // The same labels and layout as a shipment's page in History,
+                // so one parcel reads the same whichever list it was opened
+                // from. All four come from the shipment the label was bought
+                // on; a tracker added by number has none and shows none.
+                for (final field in _shipmentFields(t))
+                  DetailFieldRow(field: field),
                 if (statusDetailText(tracker.status, tracker.statusDetail) != null)
                   _infoRow(Icons.info_outline,
                       statusDetailText(tracker.status, tracker.statusDetail)!),
@@ -90,6 +90,32 @@ class TrackerDetailScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// What the shipment says about this parcel, in the order it is asked about:
+  /// where it is going, when the label was bought, and how a refund on it has
+  /// got on.
+  ///
+  /// The refund's own dates are not here because EasyPost does not keep them:
+  /// asking for a refund sets `refund_status` on the shipment and creates no
+  /// record of its own. `updated_at` is the nearest thing, and it is shown
+  /// under its true name — it moves on any change, not only on a refund.
+  List<DetailField> _shipmentFields(AppLocalizations t) {
+    final s = shipment;
+    if (s == null) return const [];
+    final refund = refundStatusText(t, s['refund_status']);
+    final created = formatDateTime(
+        DateTime.tryParse((s['created_at'] ?? '').toString()), t.localeName);
+    final updated = formatDateTime(
+        DateTime.tryParse((s['updated_at'] ?? '').toString()), t.localeName);
+    return [
+      if (formatAddress(s['to_address']).isNotEmpty)
+        DetailField(t.insuranceToAddress, formatAddress(s['to_address'])),
+      if (created.isNotEmpty) DetailField(t.fieldCreated, created),
+      if (refund.isNotEmpty) DetailField(t.fieldRefundStatus, refund),
+      if (refund.isNotEmpty && updated.isNotEmpty)
+        DetailField(t.fieldLastUpdated, updated),
+    ];
   }
 
   Widget _infoRow(IconData icon, String text) => Padding(

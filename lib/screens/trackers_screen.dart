@@ -5,6 +5,7 @@ import '../models/tracker.dart';
 import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
+import '../theme.dart';
 import '../services/review_prompt.dart';
 import 'home_shell.dart';
 import 'tracker_detail_screen.dart';
@@ -34,8 +35,8 @@ class _TrackersScreenState extends State<TrackersScreen> {
   final ProxyClient _proxy = ProxyClient();
   late Future<List<Tracker>> _future;
 
-  /// Recipient addresses by shipment id, from the shipments list History reads.
-  Map<String, Object?> _toAddresses = const {};
+  /// The shipments behind these parcels, by id, from the list History reads.
+  Map<String, Map<String, dynamic>> _shipments = const {};
 
   SortBy _sort = SortBy.status;
   final Set<String> _hiddenStatuses = {};
@@ -45,7 +46,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
   void initState() {
     super.initState();
     _future = _load();
-    _loadAddresses();
+    _loadShipments();
   }
 
   /// Fetched beside the trackers, not before them, so the list is never held
@@ -53,19 +54,20 @@ class _TrackersScreenState extends State<TrackersScreen> {
   /// and both addresses, and an account's worth of them arrives well after its
   /// trackers do; the addresses fill in when they land.
   ///
-  /// A failure here costs the addresses and nothing more. The parcels are still
-  /// true without them, so it neither replaces the list with an error nor
-  /// counts as friction for the rating ask, which is gated on the parcels.
-  Future<void> _loadAddresses() async {
-    final Map<String, Object?> byShipment;
+  /// A failure here costs the recipient, purchase date and refund state, and
+  /// nothing more. The parcels are still true without them, so it neither
+  /// replaces the list with an error nor counts as friction for the rating
+  /// ask, which is gated on the parcels.
+  Future<void> _loadShipments() async {
+    final Map<String, Map<String, dynamic>> byId;
     try {
-      byShipment = toAddressesByShipment(await _proxy.getShipments(widget.creds));
+      byId = shipmentsById(await _proxy.getShipments(widget.creds));
     } catch (_) {
-      // Whatever an earlier load found stays: a shipment's recipient is fixed
-      // once its label is bought, so an old entry is not a stale one.
+      // Whatever an earlier load found stays. A recipient and a purchase date
+      // never change; a refund state can, so a refresh replaces the lot.
       return;
     }
-    if (mounted) setState(() => _toAddresses = byShipment);
+    if (mounted) setState(() => _shipments = byId);
   }
 
   Future<List<Tracker>> _load() async {
@@ -88,10 +90,10 @@ class _TrackersScreenState extends State<TrackersScreen> {
   }
 
   Future<void> _refresh() async {
-    final addresses = _loadAddresses();
+    final shipments = _loadShipments();
     final f = _load();
     setState(() => _future = f);
-    await Future.wait([f.catchError((_) => <Tracker>[]), addresses]);
+    await Future.wait([f.catchError((_) => <Tracker>[]), shipments]);
   }
 
   bool get _filtersActive => _hiddenStatuses.isNotEmpty || _hiddenCarriers.isNotEmpty;
@@ -271,7 +273,7 @@ class _TrackersScreenState extends State<TrackersScreen> {
                 for (final tracker in shown)
                   _TrackerTile(
                     tracker: tracker,
-                    toAddress: toAddressFor(tracker, _toAddresses),
+                    shipment: shipmentFor(tracker, _shipments),
                   ),
                 if (shown.isEmpty)
                   Padding(
@@ -290,18 +292,21 @@ class _TrackersScreenState extends State<TrackersScreen> {
 class _TrackerTile extends StatelessWidget {
   final Tracker tracker;
 
-  /// The recipient's EasyPost address object; null when the tracker has no
-  /// shipment behind it, or before the shipments have loaded.
-  final Object? toAddress;
+  /// The shipment this parcel's label was bought on; null when the tracker was
+  /// added by tracking number, or before the shipments have loaded.
+  final Map<String, dynamic>? shipment;
 
-  const _TrackerTile({required this.tracker, this.toAddress});
+  const _TrackerTile({required this.tracker, this.shipment});
 
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context);
     final ss = statusStyle(tracker.status);
     final cc = carrierColor(tracker.carrier);
-    final place = formatPlace(toAddress);
+    final place = formatPlace(shipment?['to_address']);
+    final created = formatDateShort(
+        DateTime.tryParse((shipment?['created_at'] ?? '').toString()), t.localeName);
+    final refund = shipment == null ? '' : refundStateOf(shipment!);
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: cc,
@@ -335,6 +340,14 @@ class _TrackerTile extends StatelessWidget {
           // be the first thing ellipsised away.
           if (place.isNotEmpty)
             Text(place, maxLines: 1, overflow: TextOverflow.ellipsis),
+          // When the label was bought, which is the only date on this row that
+          // has already happened: the line above it is an estimate. Smaller and
+          // muted so the row still reads status-first at a glance.
+          if (created.isNotEmpty)
+            Text(t.createdLabel(created),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 12, color: Brand.muted)),
         ],
       ),
       // Capped, and allowed to wrap inside the cap. A long status name —
@@ -353,24 +366,43 @@ class _TrackerTile extends StatelessWidget {
       // a word cannot be wrapped any other way.
       trailing: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 110),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-          decoration: BoxDecoration(
-            color: ss.color.withValues(alpha: 0.12),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Text(
-            statusLabel(t, tracker.status),
-            textAlign: TextAlign.center,
-            style: TextStyle(color: ss.color, fontSize: 11, fontWeight: FontWeight.w600),
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _badge(statusLabel(t, tracker.status), ss.color),
+            // A second badge rather than a longer first one. A parcel's status
+            // and its refund's are different vocabularies — a parcel is never
+            // "refunded" — and one badge reading both invites the reading that
+            // they are one event. Its own colour, from refundStatusStyle, for
+            // the same reason.
+            if (refund.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              _badge(refundStatusLabel(t, refund), refundStatusStyle(refund).color),
+            ],
+          ],
         ),
       ),
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => TrackerDetailScreen(tracker: tracker, toAddress: toAddress),
+          builder: (_) => TrackerDetailScreen(tracker: tracker, shipment: shipment),
         ),
       ),
     );
   }
+
+  /// 11pt inside 6 of padding, for the reason in the note above: at 12pt the
+  /// longest single German word did not fit the cap and was wrapped mid-word.
+  static Widget _badge(String text, Color color) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.12),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w600),
+        ),
+      );
 }

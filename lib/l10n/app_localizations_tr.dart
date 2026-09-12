@@ -124,6 +124,11 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return '$date oluşturuldu';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return 'Tahmini teslimat $date';
   }
@@ -394,6 +399,9 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get fieldCreated => 'Oluşturuldu';
+
+  @override
+  String get fieldLastUpdated => 'Son güncelleme';
 
   @override
   String get fieldAmount => 'Tutar';

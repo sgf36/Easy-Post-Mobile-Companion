@@ -124,6 +124,11 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String createdLabel(String date) {
+    return '创建 $date';
+  }
+
+  @override
   String detailEstimatedDelivery(String date) {
     return '预计送达 $date';
   }
@@ -388,6 +393,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get fieldCreated => '创建时间';
+
+  @override
+  String get fieldLastUpdated => '最后更新';
 
   @override
   String get fieldAmount => '金额';

@@ -110,6 +110,10 @@ class _HomeShellState extends State<HomeShell> {
             // "Livré" for the same parcel. Statuses translate; only the
             // carrier brands do not.
             trailing: statusText(t, m['status']),
+            // A refund's state, under the parcel's own. Kept apart rather than
+            // folded into one line: the two are different vocabularies, and a
+            // parcel is never "refunded".
+            trailingSecondary: refundStatusText(t, m['refund_status']),
           ),
           detail: (m) {
             final rate = m['selected_rate'] as Map<String, dynamic>?;
@@ -130,6 +134,16 @@ class _HomeShellState extends State<HomeShell> {
                 DetailField(t.insuranceFromAddress, formatAddress(m['from_address'])),
                 DetailField(t.insuranceToAddress, formatAddress(m['to_address'])),
                 DetailField(t.fieldCreated, _when(t, m['created_at'])),
+                // Only when a refund was asked for. EasyPost keeps no dates of
+                // its own for one — `POST /shipments/{id}/refund` sets the
+                // status and creates no record — so the nearest thing is the
+                // shipment's own updated_at, shown under its true name because
+                // it moves on any change, not only on a refund.
+                if (refundStatusText(t, m['refund_status']).isNotEmpty) ...[
+                  DetailField(
+                      t.fieldRefundStatus, refundStatusText(t, m['refund_status'])),
+                  DetailField(t.fieldLastUpdated, _when(t, m['updated_at'])),
+                ],
               ],
             );
           },
