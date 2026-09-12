@@ -461,6 +461,9 @@ const _carrierNames = <String, String>{
   'fedexdefault': 'FedEx',
   'dhlexpress': 'DHL Express',
   'dhlecommerce': 'DHL eCommerce',
+  // What EasyPost's tracker endpoint accepts and echoes back for DHL eCommerce,
+  // and therefore what a tracker created by Easy-Post Desktop carries.
+  'dhlecs': 'DHL eCommerce',
   'royalmail': 'Royal Mail',
   'royalmailv3': 'Royal Mail V3',
   'evri': 'Evri',

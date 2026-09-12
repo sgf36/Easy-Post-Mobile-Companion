@@ -25,6 +25,15 @@ void main() {
       expect(carrierDisplayName('USPS'), isNot('U S P S'));
     });
 
+    test('names the carrier codes the desktop creates trackers under', () {
+      // Easy-Post Desktop (sgf36/EasyPost#56) creates trackers under the names
+      // EasyPost's tracker endpoint accepts, and the tracker reads them back in
+      // this casing. Without an entry the camel-case fallback prints
+      // "Dhl Ecs".
+      expect(carrierDisplayName('DhlEcs'), 'DHL eCommerce');
+      expect(carrierDisplayName('Hermes'), 'Evri');
+    });
+
     test('is case-insensitive on the lookup', () {
       expect(carrierDisplayName('royalmailv3'), 'Royal Mail V3');
       expect(carrierDisplayName('ROYALMAILV3'), 'Royal Mail V3');
