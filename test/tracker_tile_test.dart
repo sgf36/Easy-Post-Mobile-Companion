@@ -60,4 +60,15 @@ void main() {
     await pumpRow(tester, locale: const Locale('de'), tracker: worstCase, shipment: null);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('a row with nothing on the third line is not padded out to it', (tester) async {
+    // The three-line height has to be asked for per row. Asked for always, a
+    // parcel added by tracking number sits above a gap the size of the line it
+    // has nothing to put on, which the screenshots showed as a hole in the list.
+    await pumpRow(tester, locale: const Locale('en'), tracker: worstCase, shipment: null);
+    final bare = tester.getSize(find.byType(TrackerTile)).height;
+    await pumpRow(tester, locale: const Locale('en'), tracker: worstCase, shipment: worstShipment);
+    final full = tester.getSize(find.byType(TrackerTile)).height;
+    expect(bare, lessThan(full));
+  });
 }

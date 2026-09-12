@@ -310,7 +310,11 @@ class TrackerTile extends StatelessWidget {
         DateTime.tryParse((shipment?['created_at'] ?? '').toString()), t.localeName);
     final refund = shipment == null ? '' : refundStateOf(shipment!);
     return ListTile(
-      isThreeLine: true,
+      // Only when there is a third line to show. Declared unconditionally, the
+      // tile reserves the height anyway, and a parcel added by tracking number
+      // — which has no recipient, no purchase date and no refund — sat above a
+      // gap the size of the line it does not have.
+      isThreeLine: place.isNotEmpty || created.isNotEmpty || refund.isNotEmpty,
       leading: CircleAvatar(
         backgroundColor: cc,
         child: Icon(ss.icon, color: Colors.white, size: 22),
