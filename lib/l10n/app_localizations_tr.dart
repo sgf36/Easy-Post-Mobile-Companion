@@ -441,4 +441,66 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Reddedildi';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Eşleşme kaldırıldı. Sunucuya ulaşılamadı; bu telefonun erişimi yeniden çevrimiçi olduğunda iptal edilecek.';
+
+  @override
+  String get pairingLostTitle => 'Bu telefon artık eşleşmiş değil';
+
+  @override
+  String get pairingLostBody =>
+      'Erişimi iptal edildi ya da artık masaüstüyle eşleşmiyor. Gönderilerinizi görmek için yeniden eşleştirin.';
+
+  @override
+  String get pairingLostAction => 'Yeniden eşleştir';
+
+  @override
+  String get pickupStatusScheduled => 'Planlandı';
+
+  @override
+  String get pickupStatusCanceled => 'İptal edildi';
+
+  @override
+  String get insuranceStatusNew => 'Yeni';
+
+  @override
+  String get insuranceStatusPending => 'Beklemede';
+
+  @override
+  String get insuranceStatusPurchased => 'Satın alındı';
+
+  @override
+  String get insuranceStatusFailed => 'Başarısız';
+
+  @override
+  String get insuranceStatusCancelled => 'İptal edildi';
+
+  @override
+  String get claimStatusSubmitted => 'Gönderildi';
+
+  @override
+  String get claimStatusInReview => 'İnceleniyor';
+
+  @override
+  String get claimStatusApproved => 'Onaylandı';
+
+  @override
+  String get claimStatusApprovedPartial => 'Kısmen onaylandı';
+
+  @override
+  String get claimStatusRejected => 'Reddedildi';
+
+  @override
+  String get claimStatusCancelled => 'İptal edildi';
+
+  @override
+  String get claimStatusNeedsAction => 'İşlem gerekli';
+
+  @override
+  String get pickupCancelDone => 'Kargo alımı iptal edildi.';
+
+  @override
+  String get reportsRefundsPending => 'Bekleyen iadeler';
 }

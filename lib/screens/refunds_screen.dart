@@ -23,14 +23,16 @@ import 'resource_detail_screen.dart';
 class RefundsScreen extends StatefulWidget {
   final AppNav nav;
   final PairingCredentials creds;
-  const RefundsScreen({super.key, required this.nav, required this.creds});
+  final ProxyClient proxy;
+  const RefundsScreen(
+      {super.key, required this.nav, required this.creds, required this.proxy});
 
   @override
   State<RefundsScreen> createState() => _RefundsScreenState();
 }
 
 class _RefundsScreenState extends State<RefundsScreen> {
-  final _proxy = ProxyClient();
+  ProxyClient get _proxy => widget.proxy;
   late Future<List<Map<String, dynamic>>> _future;
 
   @override
@@ -47,7 +49,9 @@ class _RefundsScreenState extends State<RefundsScreen> {
 
   Future<void> _refresh() async {
     final f = _load();
-    setState(() => _future = f);
+    setState(() {
+      _future = f;
+    });
     await f.catchError((_) => <Map<String, dynamic>>[]);
   }
 
@@ -99,7 +103,7 @@ class _RefundsScreenState extends State<RefundsScreen> {
     // "Refunded" would assert a figure nobody sent us.
     final cost = formatMoney(
       rate?['rate'],
-      currency: (rate?['currency'] ?? 'USD').toString(),
+      currency: (rate?['currency'] ?? '').toString(),
       locale: t.localeName,
     );
 

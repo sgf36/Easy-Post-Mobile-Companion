@@ -441,4 +441,66 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Отклонён';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Устройство отвязано. Сервер недоступен, поэтому доступ этого телефона будет отозван, как только он снова выйдет в сеть.';
+
+  @override
+  String get pairingLostTitle => 'Этот телефон больше не связан';
+
+  @override
+  String get pairingLostBody =>
+      'Его доступ отозван или больше не соответствует компьютеру. Выполните сопряжение заново, чтобы видеть отправления.';
+
+  @override
+  String get pairingLostAction => 'Связать заново';
+
+  @override
+  String get pickupStatusScheduled => 'Запланирован';
+
+  @override
+  String get pickupStatusCanceled => 'Отменён';
+
+  @override
+  String get insuranceStatusNew => 'Новое';
+
+  @override
+  String get insuranceStatusPending => 'Ожидает';
+
+  @override
+  String get insuranceStatusPurchased => 'Оформлено';
+
+  @override
+  String get insuranceStatusFailed => 'Ошибка';
+
+  @override
+  String get insuranceStatusCancelled => 'Отменено';
+
+  @override
+  String get claimStatusSubmitted => 'Отправлена';
+
+  @override
+  String get claimStatusInReview => 'На рассмотрении';
+
+  @override
+  String get claimStatusApproved => 'Одобрена';
+
+  @override
+  String get claimStatusApprovedPartial => 'Одобрена частично';
+
+  @override
+  String get claimStatusRejected => 'Отклонена';
+
+  @override
+  String get claimStatusCancelled => 'Отменена';
+
+  @override
+  String get claimStatusNeedsAction => 'Требуется действие';
+
+  @override
+  String get pickupCancelDone => 'Забор груза отменён.';
+
+  @override
+  String get reportsRefundsPending => 'Ожидаемые возвраты';
 }

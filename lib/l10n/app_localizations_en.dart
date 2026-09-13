@@ -441,4 +441,66 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Rejected';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Unpaired. The server could not be reached, so this phone’s access will be revoked as soon as it is back online.';
+
+  @override
+  String get pairingLostTitle => 'This phone is no longer paired';
+
+  @override
+  String get pairingLostBody =>
+      'Its access was revoked or no longer matches the desktop. Pair it again to see your shipments.';
+
+  @override
+  String get pairingLostAction => 'Pair again';
+
+  @override
+  String get pickupStatusScheduled => 'Scheduled';
+
+  @override
+  String get pickupStatusCanceled => 'Cancelled';
+
+  @override
+  String get insuranceStatusNew => 'New';
+
+  @override
+  String get insuranceStatusPending => 'Pending';
+
+  @override
+  String get insuranceStatusPurchased => 'Purchased';
+
+  @override
+  String get insuranceStatusFailed => 'Failed';
+
+  @override
+  String get insuranceStatusCancelled => 'Cancelled';
+
+  @override
+  String get claimStatusSubmitted => 'Submitted';
+
+  @override
+  String get claimStatusInReview => 'In review';
+
+  @override
+  String get claimStatusApproved => 'Approved';
+
+  @override
+  String get claimStatusApprovedPartial => 'Partly approved';
+
+  @override
+  String get claimStatusRejected => 'Rejected';
+
+  @override
+  String get claimStatusCancelled => 'Cancelled';
+
+  @override
+  String get claimStatusNeedsAction => 'Action needed';
+
+  @override
+  String get pickupCancelDone => 'Pickup cancelled.';
+
+  @override
+  String get reportsRefundsPending => 'Refunds pending';
 }

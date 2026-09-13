@@ -442,4 +442,66 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'ถูกปฏิเสธ';
+
+  @override
+  String get unpairRevokeQueued =>
+      'ยกเลิกการจับคู่แล้ว ไม่สามารถติดต่อเซิร์ฟเวอร์ได้ ระบบจะเพิกถอนสิทธิ์เข้าถึงของโทรศัพท์เครื่องนี้ทันทีที่กลับมาออนไลน์';
+
+  @override
+  String get pairingLostTitle => 'โทรศัพท์เครื่องนี้ไม่ได้จับคู่อีกต่อไป';
+
+  @override
+  String get pairingLostBody =>
+      'สิทธิ์เข้าถึงถูกเพิกถอนหรือไม่ตรงกับเดสก์ท็อปอีกต่อไป โปรดจับคู่ใหม่เพื่อดูพัสดุของคุณ';
+
+  @override
+  String get pairingLostAction => 'จับคู่ใหม่';
+
+  @override
+  String get pickupStatusScheduled => 'นัดหมายแล้ว';
+
+  @override
+  String get pickupStatusCanceled => 'ยกเลิกแล้ว';
+
+  @override
+  String get insuranceStatusNew => 'ใหม่';
+
+  @override
+  String get insuranceStatusPending => 'รอดำเนินการ';
+
+  @override
+  String get insuranceStatusPurchased => 'ซื้อแล้ว';
+
+  @override
+  String get insuranceStatusFailed => 'ล้มเหลว';
+
+  @override
+  String get insuranceStatusCancelled => 'ยกเลิกแล้ว';
+
+  @override
+  String get claimStatusSubmitted => 'ส่งแล้ว';
+
+  @override
+  String get claimStatusInReview => 'กำลังตรวจสอบ';
+
+  @override
+  String get claimStatusApproved => 'อนุมัติแล้ว';
+
+  @override
+  String get claimStatusApprovedPartial => 'อนุมัติบางส่วน';
+
+  @override
+  String get claimStatusRejected => 'ถูกปฏิเสธ';
+
+  @override
+  String get claimStatusCancelled => 'ยกเลิกแล้ว';
+
+  @override
+  String get claimStatusNeedsAction => 'ต้องดำเนินการ';
+
+  @override
+  String get pickupCancelDone => 'ยกเลิกการนัดรับพัสดุแล้ว';
+
+  @override
+  String get reportsRefundsPending => 'รอการคืนเงิน';
 }

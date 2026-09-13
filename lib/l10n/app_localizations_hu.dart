@@ -444,4 +444,66 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Elutasítva';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Párosítás megszüntetve. A kiszolgáló nem volt elérhető, ezért a telefon hozzáférését akkor vonjuk vissza, amikor újra online lesz.';
+
+  @override
+  String get pairingLostTitle => 'Ez a telefon már nincs párosítva';
+
+  @override
+  String get pairingLostBody =>
+      'A hozzáférését visszavonták, vagy már nem egyezik az asztali alkalmazással. Párosítsa újra a küldemények megtekintéséhez.';
+
+  @override
+  String get pairingLostAction => 'Újrapárosítás';
+
+  @override
+  String get pickupStatusScheduled => 'Ütemezve';
+
+  @override
+  String get pickupStatusCanceled => 'Törölve';
+
+  @override
+  String get insuranceStatusNew => 'Új';
+
+  @override
+  String get insuranceStatusPending => 'Függőben';
+
+  @override
+  String get insuranceStatusPurchased => 'Megvásárolva';
+
+  @override
+  String get insuranceStatusFailed => 'Sikertelen';
+
+  @override
+  String get insuranceStatusCancelled => 'Törölve';
+
+  @override
+  String get claimStatusSubmitted => 'Elküldve';
+
+  @override
+  String get claimStatusInReview => 'Elbírálás alatt';
+
+  @override
+  String get claimStatusApproved => 'Jóváhagyva';
+
+  @override
+  String get claimStatusApprovedPartial => 'Részben jóváhagyva';
+
+  @override
+  String get claimStatusRejected => 'Elutasítva';
+
+  @override
+  String get claimStatusCancelled => 'Visszavonva';
+
+  @override
+  String get claimStatusNeedsAction => 'Teendő szükséges';
+
+  @override
+  String get pickupCancelDone => 'Az átvétel törölve.';
+
+  @override
+  String get reportsRefundsPending => 'Függő visszatérítések';
 }

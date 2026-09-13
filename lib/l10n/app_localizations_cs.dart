@@ -443,4 +443,66 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Zamítnuto';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Spárování zrušeno. Server není dostupný, proto bude přístup tohoto telefonu odvolán, jakmile bude znovu online.';
+
+  @override
+  String get pairingLostTitle => 'Tento telefon již není spárován';
+
+  @override
+  String get pairingLostBody =>
+      'Jeho přístup byl odvolán nebo již neodpovídá počítači. Spárujte jej znovu, abyste viděli své zásilky.';
+
+  @override
+  String get pairingLostAction => 'Spárovat znovu';
+
+  @override
+  String get pickupStatusScheduled => 'Naplánováno';
+
+  @override
+  String get pickupStatusCanceled => 'Zrušeno';
+
+  @override
+  String get insuranceStatusNew => 'Nové';
+
+  @override
+  String get insuranceStatusPending => 'Čeká se';
+
+  @override
+  String get insuranceStatusPurchased => 'Zakoupeno';
+
+  @override
+  String get insuranceStatusFailed => 'Nezdařilo se';
+
+  @override
+  String get insuranceStatusCancelled => 'Zrušeno';
+
+  @override
+  String get claimStatusSubmitted => 'Odesláno';
+
+  @override
+  String get claimStatusInReview => 'Posuzuje se';
+
+  @override
+  String get claimStatusApproved => 'Schváleno';
+
+  @override
+  String get claimStatusApprovedPartial => 'Částečně schváleno';
+
+  @override
+  String get claimStatusRejected => 'Zamítnuto';
+
+  @override
+  String get claimStatusCancelled => 'Zrušeno';
+
+  @override
+  String get claimStatusNeedsAction => 'Vyžaduje akci';
+
+  @override
+  String get pickupCancelDone => 'Vyzvednutí bylo zrušeno.';
+
+  @override
+  String get reportsRefundsPending => 'Čekající refundace';
 }

@@ -320,5 +320,85 @@
   "refundStatusRejected": "Rejected",
   "@refundStatusRejected": {
     "description": "Refund state: the carrier refused, usually because the label was used."
+  },
+  "unpairRevokeQueued": "Unpaired. The server could not be reached, so this phone’s access will be revoked as soon as it is back online.",
+  "@unpairRevokeQueued": {
+    "description": "Shown after unpairing while offline. The phone is already unpaired on the device; the server will be told to revoke its access on a later launch or return to the app."
+  },
+  "pairingLostTitle": "This phone is no longer paired",
+  "@pairingLostTitle": {
+    "description": "Heading of the screen shown when the server refuses this phone's pairing (revoked, or no longer matching the desktop)."
+  },
+  "pairingLostBody": "Its access was revoked or no longer matches the desktop. Pair it again to see your shipments.",
+  "@pairingLostBody": {
+    "description": "Explanation under pairingLostTitle."
+  },
+  "pairingLostAction": "Pair again",
+  "@pairingLostAction": {
+    "description": "Button that unpairs the phone and opens the pairing scanner."
+  },
+  "pickupStatusScheduled": "Scheduled",
+  "@pickupStatusScheduled": {
+    "description": "Pickup status: a carrier collection is booked."
+  },
+  "pickupStatusCanceled": "Cancelled",
+  "@pickupStatusCanceled": {
+    "description": "Pickup status: the collection was cancelled."
+  },
+  "insuranceStatusNew": "New",
+  "@insuranceStatusNew": {
+    "description": "Insurance policy status: created, not yet processed."
+  },
+  "insuranceStatusPending": "Pending",
+  "@insuranceStatusPending": {
+    "description": "Insurance policy status: waiting to be purchased, usually for the parcel to be tracked."
+  },
+  "insuranceStatusPurchased": "Purchased",
+  "@insuranceStatusPurchased": {
+    "description": "Insurance policy status: cover is in force."
+  },
+  "insuranceStatusFailed": "Failed",
+  "@insuranceStatusFailed": {
+    "description": "Insurance policy status: the purchase did not go through."
+  },
+  "insuranceStatusCancelled": "Cancelled",
+  "@insuranceStatusCancelled": {
+    "description": "Insurance policy status: the policy was cancelled."
+  },
+  "claimStatusSubmitted": "Submitted",
+  "@claimStatusSubmitted": {
+    "description": "Insurance claim status: filed, not yet reviewed."
+  },
+  "claimStatusInReview": "In review",
+  "@claimStatusInReview": {
+    "description": "Insurance claim status: being assessed."
+  },
+  "claimStatusApproved": "Approved",
+  "@claimStatusApproved": {
+    "description": "Insurance claim status: approved in full."
+  },
+  "claimStatusApprovedPartial": "Partly approved",
+  "@claimStatusApprovedPartial": {
+    "description": "Insurance claim status: approved for less than was claimed."
+  },
+  "claimStatusRejected": "Rejected",
+  "@claimStatusRejected": {
+    "description": "Insurance claim status: denied."
+  },
+  "claimStatusCancelled": "Cancelled",
+  "@claimStatusCancelled": {
+    "description": "Insurance claim status: withdrawn or cancelled."
+  },
+  "claimStatusNeedsAction": "Action needed",
+  "@claimStatusNeedsAction": {
+    "description": "Insurance claim status: the claims team is waiting on the shipper for more information."
+  },
+  "pickupCancelDone": "Pickup cancelled.",
+  "@pickupCancelDone": {
+    "description": "Confirmation after a pickup was cancelled."
+  },
+  "reportsRefundsPending": "Refunds pending",
+  "@reportsRefundsPending": {
+    "description": "Reports card: the value of labels with a refund requested but not yet settled. Still counted in total spend."
   }
 }

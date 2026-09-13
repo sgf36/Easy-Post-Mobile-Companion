@@ -444,4 +444,66 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Rechazado';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Desvinculado. No se pudo conectar con el servidor, así que el acceso de este teléfono se revocará en cuanto vuelva a tener conexión.';
+
+  @override
+  String get pairingLostTitle => 'Este teléfono ya no está vinculado';
+
+  @override
+  String get pairingLostBody =>
+      'Su acceso se revocó o ya no coincide con el escritorio. Vuelve a vincularlo para ver tus envíos.';
+
+  @override
+  String get pairingLostAction => 'Vincular de nuevo';
+
+  @override
+  String get pickupStatusScheduled => 'Programada';
+
+  @override
+  String get pickupStatusCanceled => 'Cancelada';
+
+  @override
+  String get insuranceStatusNew => 'Nuevo';
+
+  @override
+  String get insuranceStatusPending => 'Pendiente';
+
+  @override
+  String get insuranceStatusPurchased => 'Contratado';
+
+  @override
+  String get insuranceStatusFailed => 'Fallido';
+
+  @override
+  String get insuranceStatusCancelled => 'Cancelado';
+
+  @override
+  String get claimStatusSubmitted => 'Enviada';
+
+  @override
+  String get claimStatusInReview => 'En revisión';
+
+  @override
+  String get claimStatusApproved => 'Aprobada';
+
+  @override
+  String get claimStatusApprovedPartial => 'Aprobada parcialmente';
+
+  @override
+  String get claimStatusRejected => 'Rechazada';
+
+  @override
+  String get claimStatusCancelled => 'Cancelada';
+
+  @override
+  String get claimStatusNeedsAction => 'Requiere acción';
+
+  @override
+  String get pickupCancelDone => 'Recogida cancelada.';
+
+  @override
+  String get reportsRefundsPending => 'Reembolsos pendientes';
 }

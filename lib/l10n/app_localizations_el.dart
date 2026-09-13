@@ -446,4 +446,66 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Απορρίφθηκε';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Η σύζευξη καταργήθηκε. Ο διακομιστής δεν ήταν προσβάσιμος, οπότε η πρόσβαση αυτού του τηλεφώνου θα ανακληθεί μόλις συνδεθεί ξανά στο διαδίκτυο.';
+
+  @override
+  String get pairingLostTitle => 'Αυτό το τηλέφωνο δεν είναι πλέον συζευγμένο';
+
+  @override
+  String get pairingLostBody =>
+      'Η πρόσβασή του ανακλήθηκε ή δεν αντιστοιχεί πλέον στον υπολογιστή. Επαναλάβετε τη σύζευξη για να δείτε τις αποστολές σας.';
+
+  @override
+  String get pairingLostAction => 'Νέα σύζευξη';
+
+  @override
+  String get pickupStatusScheduled => 'Προγραμματισμένη';
+
+  @override
+  String get pickupStatusCanceled => 'Ακυρωμένη';
+
+  @override
+  String get insuranceStatusNew => 'Νέα';
+
+  @override
+  String get insuranceStatusPending => 'Σε εκκρεμότητα';
+
+  @override
+  String get insuranceStatusPurchased => 'Αγοράστηκε';
+
+  @override
+  String get insuranceStatusFailed => 'Απέτυχε';
+
+  @override
+  String get insuranceStatusCancelled => 'Ακυρώθηκε';
+
+  @override
+  String get claimStatusSubmitted => 'Υποβλήθηκε';
+
+  @override
+  String get claimStatusInReview => 'Υπό εξέταση';
+
+  @override
+  String get claimStatusApproved => 'Εγκρίθηκε';
+
+  @override
+  String get claimStatusApprovedPartial => 'Εγκρίθηκε μερικώς';
+
+  @override
+  String get claimStatusRejected => 'Απορρίφθηκε';
+
+  @override
+  String get claimStatusCancelled => 'Ακυρώθηκε';
+
+  @override
+  String get claimStatusNeedsAction => 'Απαιτείται ενέργεια';
+
+  @override
+  String get pickupCancelDone => 'Η παραλαβή ακυρώθηκε.';
+
+  @override
+  String get reportsRefundsPending => 'Εκκρεμείς επιστροφές χρημάτων';
 }

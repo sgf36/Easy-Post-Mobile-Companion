@@ -438,4 +438,66 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get refundStatusRejected => '거부됨';
+
+  @override
+  String get unpairRevokeQueued =>
+      '페어링을 해제했습니다. 서버에 연결할 수 없어 온라인 상태가 되는 즉시 이 휴대폰의 접근 권한이 취소됩니다.';
+
+  @override
+  String get pairingLostTitle => '이 휴대폰은 더 이상 페어링되어 있지 않습니다';
+
+  @override
+  String get pairingLostBody =>
+      '접근 권한이 취소되었거나 더 이상 데스크톱과 일치하지 않습니다. 배송 정보를 보려면 다시 페어링하세요.';
+
+  @override
+  String get pairingLostAction => '다시 페어링';
+
+  @override
+  String get pickupStatusScheduled => '예약됨';
+
+  @override
+  String get pickupStatusCanceled => '취소됨';
+
+  @override
+  String get insuranceStatusNew => '신규';
+
+  @override
+  String get insuranceStatusPending => '대기 중';
+
+  @override
+  String get insuranceStatusPurchased => '구매됨';
+
+  @override
+  String get insuranceStatusFailed => '실패';
+
+  @override
+  String get insuranceStatusCancelled => '취소됨';
+
+  @override
+  String get claimStatusSubmitted => '제출됨';
+
+  @override
+  String get claimStatusInReview => '검토 중';
+
+  @override
+  String get claimStatusApproved => '승인됨';
+
+  @override
+  String get claimStatusApprovedPartial => '부분 승인됨';
+
+  @override
+  String get claimStatusRejected => '거부됨';
+
+  @override
+  String get claimStatusCancelled => '취소됨';
+
+  @override
+  String get claimStatusNeedsAction => '조치 필요';
+
+  @override
+  String get pickupCancelDone => '픽업이 취소되었습니다.';
+
+  @override
+  String get reportsRefundsPending => '대기 중인 환불';
 }

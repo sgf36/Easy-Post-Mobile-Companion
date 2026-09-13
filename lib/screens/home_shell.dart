@@ -67,11 +67,16 @@ class HomeShell extends StatefulWidget {
   /// Passed through to Tracking, the only screen that can earn a rating ask.
   final ReviewPrompt review;
 
+  /// The one client every section uses, so a 401 from any of them reaches the
+  /// root and so tests can answer for the network.
+  final ProxyClient proxy;
+
   const HomeShell({
     super.key,
     required this.creds,
     required this.onUnpair,
     required this.review,
+    required this.proxy,
   });
 
   @override
@@ -89,11 +94,11 @@ class _HomeShellState extends State<HomeShell> {
       onUnpair: widget.onUnpair,
     );
     final c = widget.creds;
-    final proxy = ProxyClient();
+    final proxy = widget.proxy;
     final t = AppLocalizations.of(context);
     return switch (_section) {
       Section.tracking =>
-        TrackersScreen(creds: c, nav: nav, review: widget.review),
+        TrackersScreen(creds: c, nav: nav, review: widget.review, proxy: proxy),
       Section.history => ResourceListScreen(
           nav: nav,
           title: t.navHistory,
@@ -128,7 +133,7 @@ class _HomeShellState extends State<HomeShell> {
                 DetailField(
                   t.fieldCost,
                   formatMoney(rate?['rate'],
-                      currency: (rate?['currency'] ?? 'USD').toString(),
+                      currency: (rate?['currency'] ?? '').toString(),
                       locale: t.localeName),
                 ),
                 DetailField(t.insuranceFromAddress, formatAddress(m['from_address'])),
@@ -148,11 +153,11 @@ class _HomeShellState extends State<HomeShell> {
             );
           },
         ),
-      Section.insurance => InsuranceScreen(nav: nav, creds: c),
-      Section.claims => ClaimsScreen(nav: nav, creds: c),
-      Section.pickups => PickupsScreen(nav: nav, creds: c),
-      Section.refunds => RefundsScreen(nav: nav, creds: c),
-      Section.reports => ReportsScreen(nav: nav, creds: c),
+      Section.insurance => InsuranceScreen(nav: nav, creds: c, proxy: proxy),
+      Section.claims => ClaimsScreen(nav: nav, creds: c, proxy: proxy),
+      Section.pickups => PickupsScreen(nav: nav, creds: c, proxy: proxy),
+      Section.refunds => RefundsScreen(nav: nav, creds: c, proxy: proxy),
+      Section.reports => ReportsScreen(nav: nav, creds: c, proxy: proxy),
       Section.hts => HtsScreen(nav: nav),
     };
   }

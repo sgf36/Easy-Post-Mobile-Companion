@@ -441,4 +441,66 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Odbijeno';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Uređaj je odspojen. Poslužitelj nije dostupan pa će pristup ovog telefona biti opozvan čim ponovno bude na mreži.';
+
+  @override
+  String get pairingLostTitle => 'Ovaj telefon više nije uparen';
+
+  @override
+  String get pairingLostBody =>
+      'Njegov pristup je opozvan ili više ne odgovara računalu. Ponovno ga uparite da biste vidjeli svoje pošiljke.';
+
+  @override
+  String get pairingLostAction => 'Ponovno upari';
+
+  @override
+  String get pickupStatusScheduled => 'Zakazano';
+
+  @override
+  String get pickupStatusCanceled => 'Otkazano';
+
+  @override
+  String get insuranceStatusNew => 'Novo';
+
+  @override
+  String get insuranceStatusPending => 'Na čekanju';
+
+  @override
+  String get insuranceStatusPurchased => 'Kupljeno';
+
+  @override
+  String get insuranceStatusFailed => 'Neuspjelo';
+
+  @override
+  String get insuranceStatusCancelled => 'Otkazano';
+
+  @override
+  String get claimStatusSubmitted => 'Poslan';
+
+  @override
+  String get claimStatusInReview => 'U obradi';
+
+  @override
+  String get claimStatusApproved => 'Odobren';
+
+  @override
+  String get claimStatusApprovedPartial => 'Djelomično odobren';
+
+  @override
+  String get claimStatusRejected => 'Odbijen';
+
+  @override
+  String get claimStatusCancelled => 'Otkazan';
+
+  @override
+  String get claimStatusNeedsAction => 'Potrebna radnja';
+
+  @override
+  String get pickupCancelDone => 'Preuzimanje je otkazano.';
+
+  @override
+  String get reportsRefundsPending => 'Povrati na čekanju';
 }

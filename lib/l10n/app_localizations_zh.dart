@@ -435,4 +435,64 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get refundStatusRejected => '已拒绝';
+
+  @override
+  String get unpairRevokeQueued => '已解除配对。无法连接服务器，此手机的访问权限将在恢复联网后立即撤销。';
+
+  @override
+  String get pairingLostTitle => '此手机已不再配对';
+
+  @override
+  String get pairingLostBody => '其访问权限已被撤销，或已与桌面端不匹配。请重新配对以查看您的货件。';
+
+  @override
+  String get pairingLostAction => '重新配对';
+
+  @override
+  String get pickupStatusScheduled => '已预约';
+
+  @override
+  String get pickupStatusCanceled => '已取消';
+
+  @override
+  String get insuranceStatusNew => '新建';
+
+  @override
+  String get insuranceStatusPending => '待处理';
+
+  @override
+  String get insuranceStatusPurchased => '已购买';
+
+  @override
+  String get insuranceStatusFailed => '失败';
+
+  @override
+  String get insuranceStatusCancelled => '已取消';
+
+  @override
+  String get claimStatusSubmitted => '已提交';
+
+  @override
+  String get claimStatusInReview => '审核中';
+
+  @override
+  String get claimStatusApproved => '已批准';
+
+  @override
+  String get claimStatusApprovedPartial => '部分批准';
+
+  @override
+  String get claimStatusRejected => '已拒绝';
+
+  @override
+  String get claimStatusCancelled => '已取消';
+
+  @override
+  String get claimStatusNeedsAction => '需要处理';
+
+  @override
+  String get pickupCancelDone => '已取消取件。';
+
+  @override
+  String get reportsRefundsPending => '待退款';
 }

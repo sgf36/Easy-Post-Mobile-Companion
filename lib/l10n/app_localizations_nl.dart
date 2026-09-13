@@ -444,4 +444,66 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Afgewezen';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Ontkoppeld. De server was niet bereikbaar, dus de toegang van deze telefoon wordt ingetrokken zodra hij weer online is.';
+
+  @override
+  String get pairingLostTitle => 'Deze telefoon is niet meer gekoppeld';
+
+  @override
+  String get pairingLostBody =>
+      'De toegang is ingetrokken of komt niet meer overeen met de desktop. Koppel hem opnieuw om je zendingen te zien.';
+
+  @override
+  String get pairingLostAction => 'Opnieuw koppelen';
+
+  @override
+  String get pickupStatusScheduled => 'Gepland';
+
+  @override
+  String get pickupStatusCanceled => 'Geannuleerd';
+
+  @override
+  String get insuranceStatusNew => 'Nieuw';
+
+  @override
+  String get insuranceStatusPending => 'In behandeling';
+
+  @override
+  String get insuranceStatusPurchased => 'Afgesloten';
+
+  @override
+  String get insuranceStatusFailed => 'Mislukt';
+
+  @override
+  String get insuranceStatusCancelled => 'Geannuleerd';
+
+  @override
+  String get claimStatusSubmitted => 'Ingediend';
+
+  @override
+  String get claimStatusInReview => 'In beoordeling';
+
+  @override
+  String get claimStatusApproved => 'Goedgekeurd';
+
+  @override
+  String get claimStatusApprovedPartial => 'Gedeeltelijk goedgekeurd';
+
+  @override
+  String get claimStatusRejected => 'Afgewezen';
+
+  @override
+  String get claimStatusCancelled => 'Geannuleerd';
+
+  @override
+  String get claimStatusNeedsAction => 'Actie vereist';
+
+  @override
+  String get pickupCancelDone => 'Ophaling geannuleerd.';
+
+  @override
+  String get reportsRefundsPending => 'Terugbetalingen in behandeling';
 }

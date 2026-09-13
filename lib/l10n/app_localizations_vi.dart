@@ -441,4 +441,66 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Bị từ chối';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Đã hủy ghép nối. Không thể kết nối máy chủ, vì vậy quyền truy cập của điện thoại này sẽ bị thu hồi ngay khi có mạng trở lại.';
+
+  @override
+  String get pairingLostTitle => 'Điện thoại này không còn được ghép nối';
+
+  @override
+  String get pairingLostBody =>
+      'Quyền truy cập của điện thoại đã bị thu hồi hoặc không còn khớp với máy tính. Hãy ghép nối lại để xem các lô hàng của bạn.';
+
+  @override
+  String get pairingLostAction => 'Ghép nối lại';
+
+  @override
+  String get pickupStatusScheduled => 'Đã lên lịch';
+
+  @override
+  String get pickupStatusCanceled => 'Đã hủy';
+
+  @override
+  String get insuranceStatusNew => 'Mới';
+
+  @override
+  String get insuranceStatusPending => 'Đang chờ';
+
+  @override
+  String get insuranceStatusPurchased => 'Đã mua';
+
+  @override
+  String get insuranceStatusFailed => 'Thất bại';
+
+  @override
+  String get insuranceStatusCancelled => 'Đã hủy';
+
+  @override
+  String get claimStatusSubmitted => 'Đã gửi';
+
+  @override
+  String get claimStatusInReview => 'Đang xem xét';
+
+  @override
+  String get claimStatusApproved => 'Đã duyệt';
+
+  @override
+  String get claimStatusApprovedPartial => 'Đã duyệt một phần';
+
+  @override
+  String get claimStatusRejected => 'Bị từ chối';
+
+  @override
+  String get claimStatusCancelled => 'Đã hủy';
+
+  @override
+  String get claimStatusNeedsAction => 'Cần xử lý';
+
+  @override
+  String get pickupCancelDone => 'Đã hủy lịch lấy hàng.';
+
+  @override
+  String get reportsRefundsPending => 'Hoàn tiền đang chờ';
 }

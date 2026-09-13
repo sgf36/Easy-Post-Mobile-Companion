@@ -442,4 +442,66 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Refusée';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Appareil dissocié. Le serveur est injoignable : l’accès de ce téléphone sera révoqué dès qu’il sera de nouveau en ligne.';
+
+  @override
+  String get pairingLostTitle => 'Ce téléphone n’est plus jumelé';
+
+  @override
+  String get pairingLostBody =>
+      'Son accès a été révoqué ou ne correspond plus au bureau. Jumelez-le à nouveau pour voir vos envois.';
+
+  @override
+  String get pairingLostAction => 'Jumeler à nouveau';
+
+  @override
+  String get pickupStatusScheduled => 'Programmé';
+
+  @override
+  String get pickupStatusCanceled => 'Annulé';
+
+  @override
+  String get insuranceStatusNew => 'Nouvelle';
+
+  @override
+  String get insuranceStatusPending => 'En attente';
+
+  @override
+  String get insuranceStatusPurchased => 'Souscrite';
+
+  @override
+  String get insuranceStatusFailed => 'Échec';
+
+  @override
+  String get insuranceStatusCancelled => 'Annulée';
+
+  @override
+  String get claimStatusSubmitted => 'Envoyée';
+
+  @override
+  String get claimStatusInReview => 'En cours d’examen';
+
+  @override
+  String get claimStatusApproved => 'Approuvée';
+
+  @override
+  String get claimStatusApprovedPartial => 'Approuvée partiellement';
+
+  @override
+  String get claimStatusRejected => 'Refusée';
+
+  @override
+  String get claimStatusCancelled => 'Annulée';
+
+  @override
+  String get claimStatusNeedsAction => 'Action requise';
+
+  @override
+  String get pickupCancelDone => 'Enlèvement annulé.';
+
+  @override
+  String get reportsRefundsPending => 'Remboursements en attente';
 }
