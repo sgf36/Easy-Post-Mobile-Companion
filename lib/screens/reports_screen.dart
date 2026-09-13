@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
-import '../models/tracker.dart' show carrierColor, carrierDisplayName, formatSpend;
+import '../models/spend_report.dart';
+import '../models/tracker.dart' show carrierColor, carrierDisplayName;
 import '../services/error_text.dart';
 import '../services/pairing_store.dart';
 import '../services/proxy_client.dart';
@@ -12,34 +13,16 @@ import 'home_shell.dart';
 class ReportsScreen extends StatefulWidget {
   final AppNav nav;
   final PairingCredentials creds;
-  const ReportsScreen({super.key, required this.nav, required this.creds});
+  final ProxyClient proxy;
+  const ReportsScreen(
+      {super.key, required this.nav, required this.creds, required this.proxy});
 
   @override
   State<ReportsScreen> createState() => _ReportsScreenState();
 }
 
-/// Spend is kept per currency, not as one number.
-///
-/// It used to be a single total labelled with whichever currency the *first*
-/// shipment happened to carry. Ship one parcel in dollars and two in pounds and
-/// the screen added them together and called the result dollars — a wrong
-/// figure, stated confidently. Anyone shipping from the United Kingdom to the
-/// United States can do that in an afternoon.
-class _Report {
-  int count = 0;
-  final Map<String, double> spendByCurrency = {};
-  final Map<String, int> carrierCount = {};
-  /// Keyed by carrier, then currency: a carrier can be paid in more than one.
-  final Map<String, Map<String, double>> carrierSpend = {};
-
-  String spendLabel(String locale) => formatSpend(spendByCurrency, locale: locale);
-
-  String carrierSpendLabel(String carrier, String locale) =>
-      formatSpend(carrierSpend[carrier] ?? const {}, locale: locale);
-}
-
 class _ReportsScreenState extends State<ReportsScreen> {
-  late Future<_Report> _future;
+  late Future<SpendReport> _future;
 
   @override
   void initState() {
@@ -47,29 +30,16 @@ class _ReportsScreenState extends State<ReportsScreen> {
     _future = _build();
   }
 
-  Future<_Report> _build() async {
-    final shipments = await ProxyClient().getShipments(widget.creds);
-    final r = _Report();
-    for (final s in shipments) {
-      r.count++;
-      final rate = s['selected_rate'];
-      if (rate is Map) {
-        final amount = double.tryParse('${rate['rate'] ?? ''}') ?? 0;
-        final carrier = (rate['carrier'] ?? 'Unknown').toString();
-        final currency = (rate['currency'] ?? '').toString();
-        r.spendByCurrency[currency] = (r.spendByCurrency[currency] ?? 0) + amount;
-        r.carrierCount[carrier] = (r.carrierCount[carrier] ?? 0) + 1;
-        final byCurrency = r.carrierSpend.putIfAbsent(carrier, () => {});
-        byCurrency[currency] = (byCurrency[currency] ?? 0) + amount;
-      }
-    }
-    return r;
-  }
+  /// What counts as spend is decided by [buildSpendReport], not here.
+  Future<SpendReport> _build() async =>
+      buildSpendReport(await widget.proxy.getShipments(widget.creds));
 
   Future<void> _refresh() async {
     final f = _build();
-    setState(() => _future = f);
-    await f.catchError((_) => _Report());
+    setState(() {
+      _future = f;
+    });
+    await f.catchError((_) => SpendReport());
   }
 
   @override
@@ -80,7 +50,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
       drawer: NavDrawer(nav: widget.nav),
       body: RefreshIndicator(
         onRefresh: _refresh,
-        child: FutureBuilder<_Report>(
+        child: FutureBuilder<SpendReport>(
           future: _future,
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
@@ -93,7 +63,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     child: Text(describeError(t, snap.error), textAlign: TextAlign.center)),
               ]);
             }
-            final r = snap.data ?? _Report();
+            final r = snap.data ?? SpendReport();
             // Ordered by shipment count rather than spend: spend is no longer a
             // single comparable number once more than one currency is in play,
             // and converting between them would need a rate this app has no
@@ -117,6 +87,12 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     ],
                   ),
                 ),
+                // Beside the total rather than subtracted from it: until the
+                // carrier settles, the money is spent and may not come back.
+                if (r.pendingRefundsByCurrency.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  _card(t.reportsRefundsPending, r.pendingRefundsLabel(t.localeName)),
+                ],
                 const SizedBox(height: 24),
                 Text(t.reportsByCarrier, style: Theme.of(context).textTheme.titleMedium),
                 const SizedBox(height: 8),

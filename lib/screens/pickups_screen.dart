@@ -12,16 +12,22 @@ import 'resource_detail_screen.dart';
 class PickupsScreen extends StatefulWidget {
   final AppNav nav;
   final PairingCredentials creds;
-  const PickupsScreen({super.key, required this.nav, required this.creds});
+  final ProxyClient proxy;
+  const PickupsScreen(
+      {super.key, required this.nav, required this.creds, required this.proxy});
 
   @override
   State<PickupsScreen> createState() => _PickupsScreenState();
 }
 
 class _PickupsScreenState extends State<PickupsScreen> {
-  final _proxy = ProxyClient();
+  ProxyClient get _proxy => widget.proxy;
   late Future<List<Map<String, dynamic>>> _future;
-  String? _busyId;
+
+  /// Every cancel still waiting on the proxy. A set rather than one id: with a
+  /// single id, the first cancel to finish cleared the spinner on the second,
+  /// whose button came back and could send the same POST again.
+  final Set<String> _busyIds = {};
 
   @override
   void initState() {
@@ -31,7 +37,9 @@ class _PickupsScreenState extends State<PickupsScreen> {
 
   Future<void> _refresh() async {
     final f = _proxy.getPickups(widget.creds);
-    setState(() => _future = f);
+    setState(() {
+      _future = f;
+    });
     await f.catchError((_) => <Map<String, dynamic>>[]);
   }
 
@@ -51,19 +59,20 @@ class _PickupsScreenState extends State<PickupsScreen> {
         ],
       ),
     );
-    if (ok != true) return;
-    setState(() => _busyId = id);
+    if (ok != true || !mounted || _busyIds.contains(id)) return;
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _busyIds.add(id));
     try {
       await _proxy.cancelPickup(widget.creds, id);
-      await _refresh();
+      messenger.showSnackBar(SnackBar(content: Text(t.pickupCancelDone)));
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(describeError(t, e))));
-      }
+      messenger.showSnackBar(SnackBar(content: Text(describeError(t, e))));
     } finally {
-      if (mounted) setState(() => _busyId = null);
+      if (mounted) setState(() => _busyIds.remove(id));
     }
+    // Refreshed on failure as well. A cancel whose response was lost may still
+    // have succeeded at EasyPost, and the list is the only place that can say.
+    if (mounted) await _refresh();
   }
 
   @override
@@ -94,13 +103,13 @@ class _PickupsScreenState extends State<PickupsScreen> {
                 final m = items[i];
                 final id = (m['id'] ?? '—').toString();
                 final status = (m['status'] ?? '').toString();
-                final cancellable = status != 'cancelled' && status != 'canceled';
+                final cancellable = pickupCancellable(m);
                 return ListTile(
                   title: Text(id, style: const TextStyle(fontWeight: FontWeight.w600)),
-                  subtitle: Text([m['reference'], statusText(t, status)]
+                  subtitle: Text([m['reference'], pickupStatusText(t, status)]
                       .where((s) => s != null && '$s'.isNotEmpty)
                       .join('  ·  ')),
-                  trailing: _busyId == id
+                  trailing: _busyIds.contains(id)
                       ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
                       : (cancellable
                           ? TextButton(onPressed: () => _cancel(m), child: Text(t.actionCancel))
@@ -111,7 +120,7 @@ class _PickupsScreenState extends State<PickupsScreen> {
                         title: t.detailPickup,
                         heading: id,
                         fields: [
-                          DetailField(t.fieldStatus, statusText(t, status)),
+                          DetailField(t.fieldStatus, pickupStatusText(t, status)),
                           DetailField(t.fieldReference, (m['reference'] ?? '').toString()),
                           DetailField(t.fieldPickupWindow, _window(t, m)),
                           // A pickup's address is where the carrier collects
@@ -137,6 +146,16 @@ class _PickupsScreenState extends State<PickupsScreen> {
     );
   }
 }
+
+/// Whether a pickup offers Cancel: only when EasyPost says it is `scheduled`.
+///
+/// This used to offer Cancel on everything not cancelled, which included a
+/// status of `unknown`. The collection window is deliberately not consulted:
+/// the demo fixtures that feed the store screenshots carry fixed dates that are
+/// already past, and EasyPost refuses a cancel it cannot honour with its own
+/// message, which the snackbar shows.
+bool pickupCancellable(Map<String, dynamic> pickup) =>
+    (pickup['status'] ?? '').toString().trim() == 'scheduled';
 
 /// The collection window as one phrase: "15 Aug 2026, 09:00 – 15 Aug 2026, 17:00".
 ///

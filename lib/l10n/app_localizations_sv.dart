@@ -443,4 +443,66 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Avvisad';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Bortkopplad. Servern gick inte att nå, så telefonens åtkomst återkallas så snart den är online igen.';
+
+  @override
+  String get pairingLostTitle => 'Den här telefonen är inte längre parkopplad';
+
+  @override
+  String get pairingLostBody =>
+      'Dess åtkomst har återkallats eller stämmer inte längre med datorn. Parkoppla den igen för att se dina försändelser.';
+
+  @override
+  String get pairingLostAction => 'Parkoppla igen';
+
+  @override
+  String get pickupStatusScheduled => 'Schemalagd';
+
+  @override
+  String get pickupStatusCanceled => 'Avbruten';
+
+  @override
+  String get insuranceStatusNew => 'Ny';
+
+  @override
+  String get insuranceStatusPending => 'Väntande';
+
+  @override
+  String get insuranceStatusPurchased => 'Köpt';
+
+  @override
+  String get insuranceStatusFailed => 'Misslyckades';
+
+  @override
+  String get insuranceStatusCancelled => 'Avbruten';
+
+  @override
+  String get claimStatusSubmitted => 'Skickad';
+
+  @override
+  String get claimStatusInReview => 'Granskas';
+
+  @override
+  String get claimStatusApproved => 'Godkänd';
+
+  @override
+  String get claimStatusApprovedPartial => 'Delvis godkänd';
+
+  @override
+  String get claimStatusRejected => 'Avvisad';
+
+  @override
+  String get claimStatusCancelled => 'Avbruten';
+
+  @override
+  String get claimStatusNeedsAction => 'Åtgärd krävs';
+
+  @override
+  String get pickupCancelDone => 'Upphämtningen har avbrutits.';
+
+  @override
+  String get reportsRefundsPending => 'Väntande återbetalningar';
 }

@@ -242,18 +242,107 @@ String statusLabel(AppLocalizations t, String status) {
   }
 }
 
-/// The translated status of a raw record, or nothing when it carries none.
+/// The translated status of a tracker or shipment record, or nothing when it
+/// carries none.
 ///
-/// Shipments, insurance policies, claims and pickups all use the same status
-/// vocabulary as trackers, and all four lists were printing it verbatim — so
-/// History read "delivered" beside a Tracking row reading "Livré" for the same
+/// Shipments share the tracker vocabulary, and History once printed it
+/// verbatim — "delivered" beside a Tracking row reading "Livré" for the same
 /// parcel. An absent status stays absent rather than becoming "Unknown":
 /// stamping a word on every unlabelled record asserts something the API did
 /// not say.
+///
+/// Only for trackers and shipments. Pickups, insurance and claims each have a
+/// vocabulary of their own — see [pickupStatusText], [insuranceStatusText] and
+/// [claimStatusText] — and passing them here put "Unknown" on every one.
 String statusText(AppLocalizations t, Object? raw) {
   final status = (raw ?? '').toString().trim();
   return status.isEmpty ? '' : statusLabel(t, status);
 }
+
+/// Shared shape of the per-resource `…StatusText` functions: trimmed, blank
+/// stays blank, anything else goes through that resource's own label.
+String _statusTextWith(
+  AppLocalizations t,
+  Object? raw,
+  String Function(AppLocalizations, String) label,
+) {
+  final status = (raw ?? '').toString().trim();
+  return status.isEmpty ? '' : label(t, status);
+}
+
+/// A pickup's status, from EasyPost's Pickup object: `scheduled`, `canceled`
+/// or `unknown`.
+///
+/// `canceled` is EasyPost's US spelling here, where trackers and insurance use
+/// `cancelled`. The British spelling is accepted as well, so that neither
+/// spelling can ever reach the reader as "Unknown".
+String pickupStatusLabel(AppLocalizations t, String status) {
+  switch (status) {
+    case 'scheduled':
+      return t.pickupStatusScheduled;
+    case 'canceled':
+    case 'cancelled':
+      return t.pickupStatusCanceled;
+    default:
+      return t.statusUnknown;
+  }
+}
+
+String pickupStatusText(AppLocalizations t, Object? raw) =>
+    _statusTextWith(t, raw, pickupStatusLabel);
+
+/// An insurance policy's status, from EasyPost's Insurance object: `new`,
+/// `pending`, `purchased`, `failed` or `cancelled`.
+String insuranceStatusLabel(AppLocalizations t, String status) {
+  switch (status) {
+    case 'new':
+      return t.insuranceStatusNew;
+    case 'pending':
+      return t.insuranceStatusPending;
+    case 'purchased':
+      return t.insuranceStatusPurchased;
+    case 'failed':
+      return t.insuranceStatusFailed;
+    case 'cancelled':
+    case 'canceled':
+      return t.insuranceStatusCancelled;
+    default:
+      return t.statusUnknown;
+  }
+}
+
+String insuranceStatusText(AppLocalizations t, Object? raw) =>
+    _statusTextWith(t, raw, insuranceStatusLabel);
+
+/// A claim's status, from EasyPost's Claim object: `submitted`, `in_review`,
+/// `approved`, `approved_partial`, `rejected`, `cancelled` or `needs_action`.
+///
+/// `approved_partial` gets its own words rather than folding into "Approved":
+/// a claim paid in part is the one a shipper most needs to notice.
+String claimStatusLabel(AppLocalizations t, String status) {
+  switch (status) {
+    case 'submitted':
+      return t.claimStatusSubmitted;
+    case 'in_review':
+      return t.claimStatusInReview;
+    case 'approved':
+      return t.claimStatusApproved;
+    case 'approved_partial':
+      return t.claimStatusApprovedPartial;
+    case 'rejected':
+      return t.claimStatusRejected;
+    case 'cancelled':
+    case 'canceled':
+      return t.claimStatusCancelled;
+    case 'needs_action':
+      return t.claimStatusNeedsAction;
+    default:
+      return t.statusUnknown;
+  }
+}
+
+String claimStatusText(AppLocalizations t, Object? raw) =>
+    _statusTextWith(t, raw, claimStatusLabel);
 
 /// A refund request's own three-value vocabulary, which is not the shipment
 /// one.
@@ -588,6 +677,15 @@ Map<String, dynamic>? shipmentFor(
 ) {
   final id = tracker.shipmentId;
   return id == null ? null : shipments[id];
+}
+
+/// The premium an insurance record was charged, or null when it has none.
+///
+/// EasyPost nests it: `fee` is a Fee object whose `amount` is the figure. A
+/// bare number is accepted too, so an older or simplified record still shows.
+Object? insuranceFeeAmount(Map<String, dynamic> insurance) {
+  final fee = insurance['fee'];
+  return fee is Map ? fee['amount'] : fee;
 }
 
 /// One money value with its currency: "5,000.00 USD".

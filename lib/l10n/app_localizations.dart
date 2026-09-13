@@ -945,6 +945,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rejected'**
   String get refundStatusRejected;
+
+  /// Shown after unpairing while offline. The phone is already unpaired on the device; the server will be told to revoke its access on a later launch or return to the app.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpaired. The server could not be reached, so this phone’s access will be revoked as soon as it is back online.'**
+  String get unpairRevokeQueued;
+
+  /// Heading of the screen shown when the server refuses this phone's pairing (revoked, or no longer matching the desktop).
+  ///
+  /// In en, this message translates to:
+  /// **'This phone is no longer paired'**
+  String get pairingLostTitle;
+
+  /// Explanation under pairingLostTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Its access was revoked or no longer matches the desktop. Pair it again to see your shipments.'**
+  String get pairingLostBody;
+
+  /// Button that unpairs the phone and opens the pairing scanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Pair again'**
+  String get pairingLostAction;
+
+  /// Pickup status: a carrier collection is booked.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled'**
+  String get pickupStatusScheduled;
+
+  /// Pickup status: the collection was cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get pickupStatusCanceled;
+
+  /// Insurance policy status: created, not yet processed.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get insuranceStatusNew;
+
+  /// Insurance policy status: waiting to be purchased, usually for the parcel to be tracked.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get insuranceStatusPending;
+
+  /// Insurance policy status: cover is in force.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchased'**
+  String get insuranceStatusPurchased;
+
+  /// Insurance policy status: the purchase did not go through.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get insuranceStatusFailed;
+
+  /// Insurance policy status: the policy was cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get insuranceStatusCancelled;
+
+  /// Insurance claim status: filed, not yet reviewed.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get claimStatusSubmitted;
+
+  /// Insurance claim status: being assessed.
+  ///
+  /// In en, this message translates to:
+  /// **'In review'**
+  String get claimStatusInReview;
+
+  /// Insurance claim status: approved in full.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get claimStatusApproved;
+
+  /// Insurance claim status: approved for less than was claimed.
+  ///
+  /// In en, this message translates to:
+  /// **'Partly approved'**
+  String get claimStatusApprovedPartial;
+
+  /// Insurance claim status: denied.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get claimStatusRejected;
+
+  /// Insurance claim status: withdrawn or cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get claimStatusCancelled;
+
+  /// Insurance claim status: the claims team is waiting on the shipper for more information.
+  ///
+  /// In en, this message translates to:
+  /// **'Action needed'**
+  String get claimStatusNeedsAction;
+
+  /// Confirmation after a pickup was cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup cancelled.'**
+  String get pickupCancelDone;
+
+  /// Reports card: the value of labels with a refund requested but not yet settled. Still counted in total spend.
+  ///
+  /// In en, this message translates to:
+  /// **'Refunds pending'**
+  String get reportsRefundsPending;
 }
 
 class _AppLocalizationsDelegate

@@ -441,4 +441,66 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Ditolak';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Pasangan diputus. Server tidak dapat dijangkau, jadi akses ponsel ini akan dicabut begitu kembali online.';
+
+  @override
+  String get pairingLostTitle => 'Ponsel ini tidak lagi terpasang';
+
+  @override
+  String get pairingLostBody =>
+      'Aksesnya telah dicabut atau tidak lagi cocok dengan desktop. Pasangkan lagi untuk melihat pengiriman Anda.';
+
+  @override
+  String get pairingLostAction => 'Pasangkan lagi';
+
+  @override
+  String get pickupStatusScheduled => 'Terjadwal';
+
+  @override
+  String get pickupStatusCanceled => 'Dibatalkan';
+
+  @override
+  String get insuranceStatusNew => 'Baru';
+
+  @override
+  String get insuranceStatusPending => 'Tertunda';
+
+  @override
+  String get insuranceStatusPurchased => 'Dibeli';
+
+  @override
+  String get insuranceStatusFailed => 'Gagal';
+
+  @override
+  String get insuranceStatusCancelled => 'Dibatalkan';
+
+  @override
+  String get claimStatusSubmitted => 'Dikirim';
+
+  @override
+  String get claimStatusInReview => 'Sedang ditinjau';
+
+  @override
+  String get claimStatusApproved => 'Disetujui';
+
+  @override
+  String get claimStatusApprovedPartial => 'Disetujui sebagian';
+
+  @override
+  String get claimStatusRejected => 'Ditolak';
+
+  @override
+  String get claimStatusCancelled => 'Dibatalkan';
+
+  @override
+  String get claimStatusNeedsAction => 'Perlu tindakan';
+
+  @override
+  String get pickupCancelDone => 'Penjemputan dibatalkan.';
+
+  @override
+  String get reportsRefundsPending => 'Pengembalian dana tertunda';
 }

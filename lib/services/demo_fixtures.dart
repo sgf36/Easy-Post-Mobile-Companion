@@ -414,6 +414,8 @@ const List<Map<String, dynamic>> demoInsurances = <Map<String, dynamic>>[
     'tracking_code': 'EZ2000000002',
     'amount': '120.00',
     'currency': 'USD',
+    // A Fee object, as EasyPost sends it, so the detail page shows a Cost row.
+    'fee': {'object': 'Fee', 'type': 'InsuranceFee', 'amount': '1.20000', 'charged': true, 'refunded': false},
     'status': 'purchased',
     'provider': 'InsureShield',
     'created_at': '2026-08-12T09:05:00Z',
@@ -423,6 +425,8 @@ const List<Map<String, dynamic>> demoInsurances = <Map<String, dynamic>>[
     'tracking_code': 'EZ1000000001',
     'amount': '75.00',
     'currency': 'USD',
+    // A Fee object, as EasyPost sends it, so the detail page shows a Cost row.
+    'fee': {'object': 'Fee', 'type': 'InsuranceFee', 'amount': '0.75000', 'charged': true, 'refunded': false},
     'status': 'pending',
     'provider': 'InsureShield',
     'created_at': '2026-08-12T10:18:00Z',

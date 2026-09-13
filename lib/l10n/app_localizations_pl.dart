@@ -443,4 +443,66 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Odrzucono';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Odłączono. Serwer był nieosiągalny, więc dostęp tego telefonu zostanie cofnięty, gdy tylko wróci do sieci.';
+
+  @override
+  String get pairingLostTitle => 'Ten telefon nie jest już sparowany';
+
+  @override
+  String get pairingLostBody =>
+      'Jego dostęp został cofnięty lub nie odpowiada już komputerowi. Sparuj go ponownie, aby zobaczyć przesyłki.';
+
+  @override
+  String get pairingLostAction => 'Sparuj ponownie';
+
+  @override
+  String get pickupStatusScheduled => 'Zaplanowany';
+
+  @override
+  String get pickupStatusCanceled => 'Anulowany';
+
+  @override
+  String get insuranceStatusNew => 'Nowe';
+
+  @override
+  String get insuranceStatusPending => 'Oczekujące';
+
+  @override
+  String get insuranceStatusPurchased => 'Zakupione';
+
+  @override
+  String get insuranceStatusFailed => 'Nieudane';
+
+  @override
+  String get insuranceStatusCancelled => 'Anulowane';
+
+  @override
+  String get claimStatusSubmitted => 'Wysłane';
+
+  @override
+  String get claimStatusInReview => 'W trakcie rozpatrywania';
+
+  @override
+  String get claimStatusApproved => 'Zatwierdzone';
+
+  @override
+  String get claimStatusApprovedPartial => 'Częściowo zatwierdzone';
+
+  @override
+  String get claimStatusRejected => 'Odrzucone';
+
+  @override
+  String get claimStatusCancelled => 'Anulowane';
+
+  @override
+  String get claimStatusNeedsAction => 'Wymaga działania';
+
+  @override
+  String get pickupCancelDone => 'Odbiór anulowany.';
+
+  @override
+  String get reportsRefundsPending => 'Oczekujące zwroty';
 }

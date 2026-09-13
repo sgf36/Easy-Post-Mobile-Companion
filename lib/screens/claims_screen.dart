@@ -12,14 +12,16 @@ import 'resource_detail_screen.dart';
 class ClaimsScreen extends StatefulWidget {
   final AppNav nav;
   final PairingCredentials creds;
-  const ClaimsScreen({super.key, required this.nav, required this.creds});
+  final ProxyClient proxy;
+  const ClaimsScreen(
+      {super.key, required this.nav, required this.creds, required this.proxy});
 
   @override
   State<ClaimsScreen> createState() => _ClaimsScreenState();
 }
 
 class _ClaimsScreenState extends State<ClaimsScreen> {
-  final _proxy = ProxyClient();
+  ProxyClient get _proxy => widget.proxy;
   late Future<List<Map<String, dynamic>>> _future;
 
   @override
@@ -30,7 +32,9 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
 
   Future<void> _refresh() async {
     final f = _proxy.getClaims(widget.creds);
-    setState(() => _future = f);
+    setState(() {
+      _future = f;
+    });
     await f.catchError((_) => <Map<String, dynamic>>[]);
   }
 
@@ -71,7 +75,7 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(statusText(t, m['status'])),
+                      Text(claimStatusText(t, m['status'])),
                       const Padding(
                         padding: EdgeInsetsDirectional.only(start: 4),
                         child: Icon(Icons.chevron_right, size: 20, color: Brand.muted),
@@ -84,12 +88,14 @@ class _ClaimsScreenState extends State<ClaimsScreen> {
                         title: t.detailClaim,
                         heading: heading,
                         fields: [
-                          DetailField(t.fieldStatus, statusText(t, m['status'])),
+                          DetailField(t.fieldStatus, claimStatusText(t, m['status'])),
                           DetailField(t.fieldType, _claimType(t, m['type'])),
                           DetailField(
                             t.fieldAmount,
+                            // EasyPost's Claim object names no currency, so
+                            // none is printed rather than a guessed one.
                             formatMoney(m['requested_amount'] ?? m['amount'],
-                                currency: (m['currency'] ?? 'USD').toString(),
+                                currency: (m['currency'] ?? '').toString(),
                                 locale: t.localeName),
                           ),
                           DetailField(t.fieldTrackingCode,

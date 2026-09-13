@@ -96,7 +96,9 @@ class _ResourceListScreenState extends State<ResourceListScreen> {
 
   Future<void> _refresh() async {
     final f = widget.fetch();
-    setState(() => _future = f);
+    setState(() {
+      _future = f;
+    });
     await f.catchError((_) => <Map<String, dynamic>>[]);
   }
 

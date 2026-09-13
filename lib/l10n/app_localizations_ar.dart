@@ -441,4 +441,66 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'مرفوض';
+
+  @override
+  String get unpairRevokeQueued =>
+      'تم إلغاء الإقران. تعذّر الوصول إلى الخادم، لذا سيُلغى وصول هذا الهاتف فور عودته إلى الاتصال بالإنترنت.';
+
+  @override
+  String get pairingLostTitle => 'لم يعد هذا الهاتف مقترنًا';
+
+  @override
+  String get pairingLostBody =>
+      'أُلغي وصوله أو لم يعد يطابق تطبيق سطح المكتب. أعد إقرانه لعرض شحناتك.';
+
+  @override
+  String get pairingLostAction => 'إعادة الإقران';
+
+  @override
+  String get pickupStatusScheduled => 'مجدول';
+
+  @override
+  String get pickupStatusCanceled => 'ملغى';
+
+  @override
+  String get insuranceStatusNew => 'جديد';
+
+  @override
+  String get insuranceStatusPending => 'قيد الانتظار';
+
+  @override
+  String get insuranceStatusPurchased => 'تم الشراء';
+
+  @override
+  String get insuranceStatusFailed => 'فشل';
+
+  @override
+  String get insuranceStatusCancelled => 'ملغى';
+
+  @override
+  String get claimStatusSubmitted => 'تم الإرسال';
+
+  @override
+  String get claimStatusInReview => 'قيد المراجعة';
+
+  @override
+  String get claimStatusApproved => 'تمت الموافقة';
+
+  @override
+  String get claimStatusApprovedPartial => 'تمت الموافقة جزئيًا';
+
+  @override
+  String get claimStatusRejected => 'مرفوضة';
+
+  @override
+  String get claimStatusCancelled => 'ملغاة';
+
+  @override
+  String get claimStatusNeedsAction => 'مطلوب إجراء';
+
+  @override
+  String get pickupCancelDone => 'تم إلغاء الاستلام.';
+
+  @override
+  String get reportsRefundsPending => 'استردادات قيد الانتظار';
 }

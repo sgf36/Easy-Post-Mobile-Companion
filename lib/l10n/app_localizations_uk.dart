@@ -441,4 +441,66 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Відхилено';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Відв’язано. Сервер недоступний, тому доступ цього телефона буде відкликано, щойно він знову буде в мережі.';
+
+  @override
+  String get pairingLostTitle => 'Цей телефон більше не прив’язано';
+
+  @override
+  String get pairingLostBody =>
+      'Його доступ відкликано або він більше не відповідає комп’ютеру. Прив’яжіть його знову, щоб бачити відправлення.';
+
+  @override
+  String get pairingLostAction => 'Прив’язати знову';
+
+  @override
+  String get pickupStatusScheduled => 'Заплановано';
+
+  @override
+  String get pickupStatusCanceled => 'Скасовано';
+
+  @override
+  String get insuranceStatusNew => 'Нове';
+
+  @override
+  String get insuranceStatusPending => 'Очікує';
+
+  @override
+  String get insuranceStatusPurchased => 'Оформлено';
+
+  @override
+  String get insuranceStatusFailed => 'Помилка';
+
+  @override
+  String get insuranceStatusCancelled => 'Скасовано';
+
+  @override
+  String get claimStatusSubmitted => 'Надіслано';
+
+  @override
+  String get claimStatusInReview => 'На розгляді';
+
+  @override
+  String get claimStatusApproved => 'Схвалено';
+
+  @override
+  String get claimStatusApprovedPartial => 'Схвалено частково';
+
+  @override
+  String get claimStatusRejected => 'Відхилено';
+
+  @override
+  String get claimStatusCancelled => 'Скасовано';
+
+  @override
+  String get claimStatusNeedsAction => 'Потрібна дія';
+
+  @override
+  String get pickupCancelDone => 'Забір скасовано.';
+
+  @override
+  String get reportsRefundsPending => 'Очікувані повернення';
 }

@@ -442,4 +442,66 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Recusado';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Despareado. Não foi possível acessar o servidor, então o acesso deste telefone será revogado assim que ele voltar a ficar online.';
+
+  @override
+  String get pairingLostTitle => 'Este telefone não está mais pareado';
+
+  @override
+  String get pairingLostBody =>
+      'O acesso dele foi revogado ou não corresponde mais ao desktop. Pareie-o novamente para ver seus envios.';
+
+  @override
+  String get pairingLostAction => 'Parear novamente';
+
+  @override
+  String get pickupStatusScheduled => 'Agendada';
+
+  @override
+  String get pickupStatusCanceled => 'Cancelada';
+
+  @override
+  String get insuranceStatusNew => 'Novo';
+
+  @override
+  String get insuranceStatusPending => 'Pendente';
+
+  @override
+  String get insuranceStatusPurchased => 'Contratado';
+
+  @override
+  String get insuranceStatusFailed => 'Falhou';
+
+  @override
+  String get insuranceStatusCancelled => 'Cancelado';
+
+  @override
+  String get claimStatusSubmitted => 'Enviada';
+
+  @override
+  String get claimStatusInReview => 'Em análise';
+
+  @override
+  String get claimStatusApproved => 'Aprovada';
+
+  @override
+  String get claimStatusApprovedPartial => 'Aprovada parcialmente';
+
+  @override
+  String get claimStatusRejected => 'Recusada';
+
+  @override
+  String get claimStatusCancelled => 'Cancelada';
+
+  @override
+  String get claimStatusNeedsAction => 'Ação necessária';
+
+  @override
+  String get pickupCancelDone => 'Coleta cancelada.';
+
+  @override
+  String get reportsRefundsPending => 'Reembolsos pendentes';
 }

@@ -19,12 +19,14 @@ class TrackersScreen extends StatefulWidget {
   /// Tracking is where a rating is earned: it is the screen the user opens the
   /// app for, and the only one whose success means "it showed me my parcels".
   final ReviewPrompt review;
+  final ProxyClient proxy;
 
   const TrackersScreen({
     super.key,
     required this.creds,
     required this.nav,
     required this.review,
+    required this.proxy,
   });
 
   @override
@@ -32,7 +34,7 @@ class TrackersScreen extends StatefulWidget {
 }
 
 class _TrackersScreenState extends State<TrackersScreen> {
-  final ProxyClient _proxy = ProxyClient();
+  ProxyClient get _proxy => widget.proxy;
   late Future<List<Tracker>> _future;
 
   /// The shipments behind these parcels, by id, from the list History reads.
@@ -92,7 +94,9 @@ class _TrackersScreenState extends State<TrackersScreen> {
   Future<void> _refresh() async {
     final shipments = _loadShipments();
     final f = _load();
-    setState(() => _future = f);
+    setState(() {
+      _future = f;
+    });
     await Future.wait([f.catchError((_) => <Tracker>[]), shipments]);
   }
 

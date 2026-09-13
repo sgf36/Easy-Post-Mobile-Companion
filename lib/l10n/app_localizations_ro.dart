@@ -443,4 +443,66 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'Respinsă';
+
+  @override
+  String get unpairRevokeQueued =>
+      'Dispozitiv deconectat. Serverul nu a putut fi contactat, așa că accesul acestui telefon va fi revocat imediat ce revine online.';
+
+  @override
+  String get pairingLostTitle => 'Acest telefon nu mai este asociat';
+
+  @override
+  String get pairingLostBody =>
+      'Accesul său a fost revocat sau nu mai corespunde cu desktopul. Asociază-l din nou pentru a-ți vedea expedierile.';
+
+  @override
+  String get pairingLostAction => 'Asociază din nou';
+
+  @override
+  String get pickupStatusScheduled => 'Programată';
+
+  @override
+  String get pickupStatusCanceled => 'Anulată';
+
+  @override
+  String get insuranceStatusNew => 'Nouă';
+
+  @override
+  String get insuranceStatusPending => 'În așteptare';
+
+  @override
+  String get insuranceStatusPurchased => 'Cumpărată';
+
+  @override
+  String get insuranceStatusFailed => 'Eșuată';
+
+  @override
+  String get insuranceStatusCancelled => 'Anulată';
+
+  @override
+  String get claimStatusSubmitted => 'Trimisă';
+
+  @override
+  String get claimStatusInReview => 'În analiză';
+
+  @override
+  String get claimStatusApproved => 'Aprobată';
+
+  @override
+  String get claimStatusApprovedPartial => 'Aprobată parțial';
+
+  @override
+  String get claimStatusRejected => 'Respinsă';
+
+  @override
+  String get claimStatusCancelled => 'Anulată';
+
+  @override
+  String get claimStatusNeedsAction => 'Acțiune necesară';
+
+  @override
+  String get pickupCancelDone => 'Ridicarea a fost anulată.';
+
+  @override
+  String get reportsRefundsPending => 'Rambursări în așteptare';
 }

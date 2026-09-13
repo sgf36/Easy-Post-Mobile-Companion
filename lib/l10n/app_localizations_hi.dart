@@ -444,4 +444,66 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'अस्वीकृत';
+
+  @override
+  String get unpairRevokeQueued =>
+      'युग्मन हटा दिया गया। सर्वर तक पहुँचा नहीं जा सका, इसलिए ऑनलाइन वापस आते ही इस फ़ोन की पहुँच रद्द कर दी जाएगी।';
+
+  @override
+  String get pairingLostTitle => 'यह फ़ोन अब युग्मित नहीं है';
+
+  @override
+  String get pairingLostBody =>
+      'इसकी पहुँच रद्द कर दी गई है या यह अब डेस्कटॉप से मेल नहीं खाती। अपनी शिपमेंट देखने के लिए इसे दोबारा जोड़ें।';
+
+  @override
+  String get pairingLostAction => 'दोबारा जोड़ें';
+
+  @override
+  String get pickupStatusScheduled => 'निर्धारित';
+
+  @override
+  String get pickupStatusCanceled => 'रद्द';
+
+  @override
+  String get insuranceStatusNew => 'नया';
+
+  @override
+  String get insuranceStatusPending => 'लंबित';
+
+  @override
+  String get insuranceStatusPurchased => 'खरीदा गया';
+
+  @override
+  String get insuranceStatusFailed => 'विफल';
+
+  @override
+  String get insuranceStatusCancelled => 'रद्द';
+
+  @override
+  String get claimStatusSubmitted => 'सबमिट किया गया';
+
+  @override
+  String get claimStatusInReview => 'समीक्षाधीन';
+
+  @override
+  String get claimStatusApproved => 'स्वीकृत';
+
+  @override
+  String get claimStatusApprovedPartial => 'आंशिक रूप से स्वीकृत';
+
+  @override
+  String get claimStatusRejected => 'अस्वीकृत';
+
+  @override
+  String get claimStatusCancelled => 'रद्द';
+
+  @override
+  String get claimStatusNeedsAction => 'कार्रवाई आवश्यक';
+
+  @override
+  String get pickupCancelDone => 'पिकअप रद्द कर दिया गया।';
+
+  @override
+  String get reportsRefundsPending => 'लंबित रिफ़ंड';
 }

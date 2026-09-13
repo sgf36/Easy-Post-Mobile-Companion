@@ -12,14 +12,16 @@ import 'resource_detail_screen.dart';
 class InsuranceScreen extends StatefulWidget {
   final AppNav nav;
   final PairingCredentials creds;
-  const InsuranceScreen({super.key, required this.nav, required this.creds});
+  final ProxyClient proxy;
+  const InsuranceScreen(
+      {super.key, required this.nav, required this.creds, required this.proxy});
 
   @override
   State<InsuranceScreen> createState() => _InsuranceScreenState();
 }
 
 class _InsuranceScreenState extends State<InsuranceScreen> {
-  final _proxy = ProxyClient();
+  ProxyClient get _proxy => widget.proxy;
   late Future<List<Map<String, dynamic>>> _future;
 
   @override
@@ -30,7 +32,9 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
 
   Future<void> _refresh() async {
     final f = _proxy.getInsurances(widget.creds);
-    setState(() => _future = f);
+    setState(() {
+      _future = f;
+    });
     await f.catchError((_) => <Map<String, dynamic>>[]);
   }
 
@@ -75,8 +79,7 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(formatMoney(m['amount'],
-                          currency: (m['currency'] ?? 'USD').toString(),
-                          locale: t.localeName)),
+                          currency: _currency(m), locale: t.localeName)),
                       const Padding(
                         padding: EdgeInsetsDirectional.only(start: 4),
                         child: Icon(Icons.chevron_right, size: 20, color: Brand.muted),
@@ -89,20 +92,21 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
                         title: t.detailInsurancePolicy,
                         heading: heading,
                         fields: [
-                          DetailField(t.fieldStatus, statusText(t, m['status'])),
+                          DetailField(t.fieldStatus, insuranceStatusText(t, m['status'])),
                           DetailField(t.fieldProvider,
                               (m['provider'] ?? m['carrier'] ?? '').toString()),
                           DetailField(
                             t.fieldAmount,
                             formatMoney(m['amount'],
-                                currency: (m['currency'] ?? 'USD').toString(),
-                                locale: t.localeName),
+                                currency: _currency(m), locale: t.localeName),
                           ),
+                          // `fee` is a Fee object, not a figure. Passed whole,
+                          // formatMoney could not parse it and the Cost row
+                          // silently never rendered.
                           DetailField(
                             t.fieldCost,
-                            formatMoney(m['fee'],
-                                currency: (m['currency'] ?? 'USD').toString(),
-                                locale: t.localeName),
+                            formatMoney(insuranceFeeAmount(m),
+                                currency: _currency(m), locale: t.localeName),
                           ),
                           DetailField(t.insuranceFromAddress, formatAddress(m['from_address'])),
                           DetailField(t.insuranceToAddress, formatAddress(m['to_address'])),
@@ -124,4 +128,15 @@ class _InsuranceScreenState extends State<InsuranceScreen> {
       ),
     );
   }
+}
+
+/// The currency of an insurance record.
+///
+/// USD when the record names none, and here that is documented rather than
+/// assumed: EasyPost's Insurance object carries no currency field and describes
+/// both `amount` and the fee as USD values. Elsewhere an absent currency prints
+/// as no currency at all.
+String _currency(Map<String, dynamic> m) {
+  final named = (m['currency'] ?? '').toString().trim();
+  return named.isEmpty ? 'USD' : named;
 }

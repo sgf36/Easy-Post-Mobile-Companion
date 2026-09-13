@@ -441,4 +441,66 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get refundStatusRejected => 'נדחה';
+
+  @override
+  String get unpairRevokeQueued =>
+      'הצימוד בוטל. לא ניתן היה להגיע לשרת, ולכן הגישה של הטלפון תבוטל ברגע שיחזור להיות מחובר.';
+
+  @override
+  String get pairingLostTitle => 'הטלפון הזה אינו מצומד עוד';
+
+  @override
+  String get pairingLostBody =>
+      'הגישה שלו בוטלה או שאינה תואמת עוד למחשב. יש לצמד אותו מחדש כדי לראות את המשלוחים.';
+
+  @override
+  String get pairingLostAction => 'צימוד מחדש';
+
+  @override
+  String get pickupStatusScheduled => 'מתוכנן';
+
+  @override
+  String get pickupStatusCanceled => 'בוטל';
+
+  @override
+  String get insuranceStatusNew => 'חדש';
+
+  @override
+  String get insuranceStatusPending => 'ממתין';
+
+  @override
+  String get insuranceStatusPurchased => 'נרכש';
+
+  @override
+  String get insuranceStatusFailed => 'נכשל';
+
+  @override
+  String get insuranceStatusCancelled => 'בוטל';
+
+  @override
+  String get claimStatusSubmitted => 'נשלחה';
+
+  @override
+  String get claimStatusInReview => 'בבדיקה';
+
+  @override
+  String get claimStatusApproved => 'אושרה';
+
+  @override
+  String get claimStatusApprovedPartial => 'אושרה חלקית';
+
+  @override
+  String get claimStatusRejected => 'נדחתה';
+
+  @override
+  String get claimStatusCancelled => 'בוטלה';
+
+  @override
+  String get claimStatusNeedsAction => 'נדרשת פעולה';
+
+  @override
+  String get pickupCancelDone => 'האיסוף בוטל.';
+
+  @override
+  String get reportsRefundsPending => 'החזרים ממתינים';
 }

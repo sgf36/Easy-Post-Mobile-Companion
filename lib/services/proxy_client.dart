@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io' show Platform;
 
@@ -53,19 +54,46 @@ class ProxyClient {
   static const bool useFixtures =
       bool.fromEnvironment('DEMO_FIXTURES', defaultValue: false);
 
-  /// Screens construct `ProxyClient()` directly, so the swap happens here
-  /// rather than by threading an injected client through every widget.
-  factory ProxyClient() =>
-      useFixtures ? _FixtureProxyClient._() : ProxyClient._real();
+  /// The swap to fixtures happens here, so that a screenshot run needs no
+  /// change to how the app is wired.
+  ///
+  /// [httpClient] is the seam for tests: the money screens and the unpair flow
+  /// were unreachable from any ordinary test while every screen built its own
+  /// client on the real network, which is how a spend total that counted
+  /// refunded labels shipped with nothing failing.
+  factory ProxyClient({http.Client? httpClient}) => useFixtures
+      ? _FixtureProxyClient._()
+      : ProxyClient._real(httpClient);
 
-  ProxyClient._real();
+  ProxyClient._real([this._client]);
+
+  /// Null in the app, which then uses the package's top-level functions exactly
+  /// as it always has.
+  final http.Client? _client;
+
+  /// Told when the proxy answers 401 to a proxied call: the pairing was revoked,
+  /// from this phone or from the desktop, or the KEK no longer matches.
+  ///
+  /// Without it each section rendered its own "no longer paired" error with no
+  /// way out but the drawer, so a revoked phone looked broken on every tab
+  /// rather than simply unpaired. The root of the app listens and replaces the
+  /// whole shell with one screen that offers to pair again.
+  void Function()? onPairingLost;
+
+  Future<http.Response> _httpGet(Uri uri, {Map<String, String>? headers}) =>
+      _client?.get(uri, headers: headers) ?? http.get(uri, headers: headers);
+
+  Future<http.Response> _httpPost(Uri uri,
+          {Map<String, String>? headers, Object? body}) =>
+      _client?.post(uri, headers: headers, body: body) ??
+      http.post(uri, headers: headers, body: body);
 
   String get _platform => Platform.isIOS ? 'ios' : 'android';
 
   /// Redeem a one-time pairing token (from the desktop QR) for a device token
   /// and KEK.
   Future<PairingCredentials> claim(String proxyUrl, String pairingToken) async {
-    final res = await http.post(
+    final res = await _httpPost(
       Uri.parse('$proxyUrl/pair/claim'),
       headers: const {'content-type': 'application/json'},
       body: jsonEncode({'pairing_token': pairingToken, 'platform': _platform}),
@@ -81,7 +109,7 @@ class ProxyClient {
 
   /// Reviewer path: redeem a review code for a demo (test-mode) device.
   Future<PairingCredentials> demo(String proxyUrl, String code) async {
-    final res = await http.post(
+    final res = await _httpPost(
       Uri.parse('$proxyUrl/pair/demo'),
       headers: const {'content-type': 'application/json'},
       body: jsonEncode({'code': code, 'platform': _platform}),
@@ -127,8 +155,9 @@ class ProxyClient {
 
   /// GET one page of an allow-listed EasyPost collection through the proxy.
   Future<Map<String, dynamic>> _getPage(PairingCredentials c, Uri uri) async {
-    final res = await http.get(uri, headers: _authHeaders(c));
+    final res = await _httpGet(uri, headers: _authHeaders(c));
     if (res.statusCode == 401) {
+      onPairingLost?.call();
       throw ProxyException(ProxyErrorKind.notPaired,
           'This device is no longer paired. Pair again from the desktop.');
     }
@@ -206,7 +235,7 @@ class ProxyClient {
     String path,
     Map<String, dynamic> body,
   ) async {
-    final res = await http.post(
+    final res = await _httpPost(
       Uri.parse('${c.proxyUrl}$path'),
       headers: {..._authHeaders(c), 'content-type': 'application/json'},
       body: jsonEncode(body),
@@ -218,6 +247,7 @@ class ProxyClient {
       data = {};
     }
     if (res.statusCode == 401) {
+      onPairingLost?.call();
       throw ProxyException(
           ProxyErrorKind.notPairedShort, 'This device is no longer paired.');
     }
@@ -256,6 +286,36 @@ class ProxyClient {
   // If the account is ever enrolled as an organization, restore them together
   // with the listing text and the reviewer notes, all three of which now state
   // that the mobile application is read-only.
+
+  /// How long an unpair waits for the proxy before giving up and queueing the
+  /// revoke. Long enough for a slow mobile network, short enough that tapping
+  /// Unpair does not appear to hang.
+  static const Duration revokeTimeout = Duration(seconds: 10);
+
+  /// Ask the proxy to revoke a device token. True once the proxy has confirmed
+  /// the token can no longer be used; false when that is not yet known.
+  ///
+  /// Only the token is sent, never the KEK: holding the token is enough to cut
+  /// that one phone off and nothing more, and a queued revoke outlives the KEK,
+  /// which is deleted from the keychain at unpair.
+  ///
+  /// 200 covers a token revoked now and one revoked before, so a retry after a
+  /// lost response is harmless. 401 means the proxy does not accept the token
+  /// at all, which is the outcome being asked for. Anything else, and any
+  /// network failure or timeout, leaves the answer unknown and the revoke
+  /// queued: reporting success there would repeat the original defect, where
+  /// the phone said "unpaired" and the token kept working.
+  Future<bool> revokeToken(String proxyUrl, String deviceToken) async {
+    try {
+      final res = await _httpPost(
+        Uri.parse('$proxyUrl/pair/revoke'),
+        headers: {'authorization': 'Bearer $deviceToken'},
+      ).timeout(revokeTimeout);
+      return res.statusCode == 200 || res.statusCode == 401;
+    } catch (_) {
+      return false;
+    }
+  }
 
   /// Cancel a scheduled pickup.
   Future<Map<String, dynamic>> cancelPickup(PairingCredentials c, String id) =>

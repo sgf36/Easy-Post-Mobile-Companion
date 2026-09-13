@@ -438,4 +438,66 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get refundStatusRejected => '却下';
+
+  @override
+  String get unpairRevokeQueued =>
+      'ペアリングを解除しました。サーバーに接続できなかったため、このスマートフォンのアクセスはオンラインに戻り次第取り消されます。';
+
+  @override
+  String get pairingLostTitle => 'このスマートフォンはペアリングされていません';
+
+  @override
+  String get pairingLostBody =>
+      'アクセスが取り消されたか、デスクトップと一致しなくなりました。配送状況を見るには、もう一度ペアリングしてください。';
+
+  @override
+  String get pairingLostAction => 'もう一度ペアリング';
+
+  @override
+  String get pickupStatusScheduled => '予約済み';
+
+  @override
+  String get pickupStatusCanceled => 'キャンセル済み';
+
+  @override
+  String get insuranceStatusNew => '新規';
+
+  @override
+  String get insuranceStatusPending => '保留中';
+
+  @override
+  String get insuranceStatusPurchased => '購入済み';
+
+  @override
+  String get insuranceStatusFailed => '失敗';
+
+  @override
+  String get insuranceStatusCancelled => 'キャンセル済み';
+
+  @override
+  String get claimStatusSubmitted => '申請済み';
+
+  @override
+  String get claimStatusInReview => '審査中';
+
+  @override
+  String get claimStatusApproved => '承認済み';
+
+  @override
+  String get claimStatusApprovedPartial => '一部承認';
+
+  @override
+  String get claimStatusRejected => '却下';
+
+  @override
+  String get claimStatusCancelled => 'キャンセル済み';
+
+  @override
+  String get claimStatusNeedsAction => '対応が必要';
+
+  @override
+  String get pickupCancelDone => '集荷をキャンセルしました。';
+
+  @override
+  String get reportsRefundsPending => '返金待ち';
 }
