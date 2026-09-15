@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Cancelada",
   "claimStatusNeedsAction": "Requiere acción",
   "pickupCancelDone": "Recogida cancelada.",
-  "reportsRefundsPending": "Reembolsos pendientes"
+  "reportsRefundsPending": "Reembolsos pendientes",
+  "navManifests": "Manifiestos",
+  "manifestsEmpty": "Aún no hay manifiestos.",
+  "manifestShipmentSingular": "envío",
+  "manifestShipmentPlural": "envíos",
+  "manifestStatusCreated": "Creado",
+  "manifestStatusCreating": "Creando…",
+  "manifestStatusFailed": "Fallido",
+  "manifestBarcodeHeading": "Escanear en recogida",
+  "manifestBarcodeTip": "Muestre este código de barras al conductor de recogida para que lo escanee.",
+  "manifestFieldAddress": "Dirección de origen",
+  "manifestTrackingCodesHeading": "Códigos de seguimiento",
+  "manifestNoTrackingCodes": "Sin códigos de seguimiento",
+  "detailManifest": "Manifiesto"
 }

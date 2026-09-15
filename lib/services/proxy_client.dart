@@ -227,6 +227,8 @@ class ProxyClient {
       _getList(c, '/ep/claims', 'claims');
   Future<List<Map<String, dynamic>>> getPickups(PairingCredentials c) =>
       _getList(c, '/ep/pickups', 'pickups');
+  Future<List<Map<String, dynamic>>> getScanForms(PairingCredentials c) =>
+      _getList(c, '/ep/scan_forms', 'scan_forms');
 
   /// POST an allow-listed EasyPost action through the proxy, returning the JSON
   /// body. Surfaces EasyPost's own error message where present.
@@ -358,4 +360,8 @@ class _FixtureProxyClient extends ProxyClient {
   @override
   Future<List<Map<String, dynamic>>> getPickups(PairingCredentials c) =>
       _canned(demoPickups);
+
+  @override
+  Future<List<Map<String, dynamic>>> getScanForms(PairingCredentials c) =>
+      _canned(demoScanForms);
 }

@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Zrušeno",
   "claimStatusNeedsAction": "Vyžaduje akci",
   "pickupCancelDone": "Vyzvednutí bylo zrušeno.",
-  "reportsRefundsPending": "Čekající refundace"
+  "reportsRefundsPending": "Čekající refundace",
+  "navManifests": "Manifesty",
+  "manifestsEmpty": "Zatím žádné manifesty.",
+  "manifestShipmentSingular": "shipment",
+  "manifestShipmentPlural": "shipments",
+  "manifestStatusCreated": "Created",
+  "manifestStatusCreating": "Creating…",
+  "manifestStatusFailed": "Failed",
+  "manifestBarcodeHeading": "Scan at collection",
+  "manifestBarcodeTip": "Show this barcode to the pickup driver so they can scan it.",
+  "manifestFieldAddress": "Origin address",
+  "manifestTrackingCodesHeading": "Tracking codes",
+  "manifestNoTrackingCodes": "No tracking codes",
+  "detailManifest": "Manifest"
 }

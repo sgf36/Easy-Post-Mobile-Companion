@@ -152,5 +152,18 @@
   "claimStatusCancelled": "キャンセル済み",
   "claimStatusNeedsAction": "対応が必要",
   "pickupCancelDone": "集荷をキャンセルしました。",
-  "reportsRefundsPending": "返金待ち"
+  "reportsRefundsPending": "返金待ち",
+  "navManifests": "マニフェスト",
+  "manifestsEmpty": "マニフェストはまだありません。",
+  "manifestShipmentSingular": "件",
+  "manifestShipmentPlural": "件",
+  "manifestStatusCreated": "作成済み",
+  "manifestStatusCreating": "作成中…",
+  "manifestStatusFailed": "失敗",
+  "manifestBarcodeHeading": "集荷時にスキャン",
+  "manifestBarcodeTip": "このバーコードを集荷ドライバーに見せてスキャンしてもらってください。",
+  "manifestFieldAddress": "発送元住所",
+  "manifestTrackingCodesHeading": "追跡番号",
+  "manifestNoTrackingCodes": "追跡番号なし",
+  "detailManifest": "マニフェスト"
 }

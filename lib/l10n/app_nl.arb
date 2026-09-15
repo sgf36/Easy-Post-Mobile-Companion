@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Geannuleerd",
   "claimStatusNeedsAction": "Actie vereist",
   "pickupCancelDone": "Ophaling geannuleerd.",
-  "reportsRefundsPending": "Terugbetalingen in behandeling"
+  "reportsRefundsPending": "Terugbetalingen in behandeling",
+  "navManifests": "Manifesten",
+  "manifestsEmpty": "Nog geen manifesten.",
+  "manifestShipmentSingular": "zending",
+  "manifestShipmentPlural": "zendingen",
+  "manifestStatusCreated": "Aangemaakt",
+  "manifestStatusCreating": "Wordt aangemaakt…",
+  "manifestStatusFailed": "Mislukt",
+  "manifestBarcodeHeading": "Scannen bij ophaling",
+  "manifestBarcodeTip": "Toon deze barcode aan de ophaalchauffeur om te scannen.",
+  "manifestFieldAddress": "Afzenderadres",
+  "manifestTrackingCodesHeading": "Trackingnummers",
+  "manifestNoTrackingCodes": "Geen trackingnummers",
+  "detailManifest": "Manifest"
 }

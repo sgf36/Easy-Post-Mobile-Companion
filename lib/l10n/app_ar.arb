@@ -152,5 +152,18 @@
   "claimStatusCancelled": "ملغاة",
   "claimStatusNeedsAction": "مطلوب إجراء",
   "pickupCancelDone": "تم إلغاء الاستلام.",
-  "reportsRefundsPending": "استردادات قيد الانتظار"
+  "reportsRefundsPending": "استردادات قيد الانتظار",
+  "navManifests": "البيانات",
+  "manifestsEmpty": "لا توجد بيانات بعد.",
+  "manifestShipmentSingular": "شحنة",
+  "manifestShipmentPlural": "شحنات",
+  "manifestStatusCreated": "تم الإنشاء",
+  "manifestStatusCreating": "جارٍ الإنشاء…",
+  "manifestStatusFailed": "فشل",
+  "manifestBarcodeHeading": "مسح عند الاستلام",
+  "manifestBarcodeTip": "اعرض هذا الباركود لسائق الاستلام ليتمكن من مسحه.",
+  "manifestFieldAddress": "عنوان المصدر",
+  "manifestTrackingCodesHeading": "أرقام التتبع",
+  "manifestNoTrackingCodes": "لا توجد أرقام تتبع",
+  "detailManifest": "بيان"
 }

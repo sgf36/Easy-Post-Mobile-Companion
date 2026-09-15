@@ -9,6 +9,7 @@ import '../theme.dart';
 import 'claims_screen.dart';
 import 'hts_screen.dart';
 import 'insurance_screen.dart';
+import 'manifests_screen.dart';
 import 'pickups_screen.dart';
 import 'refunds_screen.dart';
 import 'reports_screen.dart';
@@ -22,6 +23,7 @@ enum Section {
   history,
   insurance,
   claims,
+  manifests,
   pickups,
   refunds,
   reports,
@@ -34,6 +36,7 @@ extension SectionMeta on Section {
         Section.history => t.navHistory,
         Section.insurance => t.navInsurance,
         Section.claims => t.navClaims,
+        Section.manifests => t.navManifests,
         Section.pickups => t.navPickups,
         Section.refunds => t.navRefunds,
         Section.reports => t.navReports,
@@ -45,6 +48,7 @@ extension SectionMeta on Section {
         Section.history => Icons.history,
         Section.insurance => Icons.verified_user,
         Section.claims => Icons.gavel,
+        Section.manifests => Icons.list_alt,
         Section.pickups => Icons.event_available,
         Section.refunds => Icons.currency_exchange,
         Section.reports => Icons.bar_chart,
@@ -155,6 +159,7 @@ class _HomeShellState extends State<HomeShell> {
         ),
       Section.insurance => InsuranceScreen(nav: nav, creds: c, proxy: proxy),
       Section.claims => ClaimsScreen(nav: nav, creds: c, proxy: proxy),
+      Section.manifests => ManifestsScreen(nav: nav, creds: c, proxy: proxy),
       Section.pickups => PickupsScreen(nav: nav, creds: c, proxy: proxy),
       Section.refunds => RefundsScreen(nav: nav, creds: c, proxy: proxy),
       Section.reports => ReportsScreen(nav: nav, creds: c, proxy: proxy),
@@ -206,6 +211,7 @@ class NavDrawer extends StatelessWidget {
                     Section.history,
                     Section.insurance,
                     Section.claims,
+                    Section.manifests,
                     Section.pickups,
                     Section.refunds,
                   ])

@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Cancelada",
   "claimStatusNeedsAction": "Ação necessária",
   "pickupCancelDone": "Coleta cancelada.",
-  "reportsRefundsPending": "Reembolsos pendentes"
+  "reportsRefundsPending": "Reembolsos pendentes",
+  "navManifests": "Manifestos",
+  "manifestsEmpty": "Nenhum manifesto ainda.",
+  "manifestShipmentSingular": "envio",
+  "manifestShipmentPlural": "envios",
+  "manifestStatusCreated": "Criado",
+  "manifestStatusCreating": "A criar…",
+  "manifestStatusFailed": "Falhou",
+  "manifestBarcodeHeading": "Digitalizar na recolha",
+  "manifestBarcodeTip": "Mostre este código de barras ao motorista de recolha para digitalizar.",
+  "manifestFieldAddress": "Morada de origem",
+  "manifestTrackingCodesHeading": "Códigos de rastreio",
+  "manifestNoTrackingCodes": "Sem códigos de rastreio",
+  "detailManifest": "Manifesto"
 }

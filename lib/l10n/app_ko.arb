@@ -152,5 +152,18 @@
   "claimStatusCancelled": "취소됨",
   "claimStatusNeedsAction": "조치 필요",
   "pickupCancelDone": "픽업이 취소되었습니다.",
-  "reportsRefundsPending": "대기 중인 환불"
+  "reportsRefundsPending": "대기 중인 환불",
+  "navManifests": "매니페스트",
+  "manifestsEmpty": "매니페스트가 없습니다.",
+  "manifestShipmentSingular": "shipment",
+  "manifestShipmentPlural": "shipments",
+  "manifestStatusCreated": "Created",
+  "manifestStatusCreating": "Creating…",
+  "manifestStatusFailed": "Failed",
+  "manifestBarcodeHeading": "Scan at collection",
+  "manifestBarcodeTip": "Show this barcode to the pickup driver so they can scan it.",
+  "manifestFieldAddress": "Origin address",
+  "manifestTrackingCodesHeading": "Tracking codes",
+  "manifestNoTrackingCodes": "No tracking codes",
+  "detailManifest": "매니페스트"
 }

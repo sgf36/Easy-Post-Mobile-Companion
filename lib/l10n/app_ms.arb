@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Dibatalkan",
   "claimStatusNeedsAction": "Tindakan diperlukan",
   "pickupCancelDone": "Pengambilan dibatalkan.",
-  "reportsRefundsPending": "Bayaran balik belum selesai"
+  "reportsRefundsPending": "Bayaran balik belum selesai",
+  "navManifests": "Manifes",
+  "manifestsEmpty": "Tiada manifes lagi.",
+  "manifestShipmentSingular": "shipment",
+  "manifestShipmentPlural": "shipments",
+  "manifestStatusCreated": "Created",
+  "manifestStatusCreating": "Creating…",
+  "manifestStatusFailed": "Failed",
+  "manifestBarcodeHeading": "Scan at collection",
+  "manifestBarcodeTip": "Show this barcode to the pickup driver so they can scan it.",
+  "manifestFieldAddress": "Origin address",
+  "manifestTrackingCodesHeading": "Tracking codes",
+  "manifestNoTrackingCodes": "No tracking codes",
+  "detailManifest": "Manifes"
 }

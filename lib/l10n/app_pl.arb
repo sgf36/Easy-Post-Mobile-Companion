@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Anulowane",
   "claimStatusNeedsAction": "Wymaga działania",
   "pickupCancelDone": "Odbiór anulowany.",
-  "reportsRefundsPending": "Oczekujące zwroty"
+  "reportsRefundsPending": "Oczekujące zwroty",
+  "navManifests": "Manifesty",
+  "manifestsEmpty": "Brak manifestów.",
+  "manifestShipmentSingular": "shipment",
+  "manifestShipmentPlural": "shipments",
+  "manifestStatusCreated": "Created",
+  "manifestStatusCreating": "Creating…",
+  "manifestStatusFailed": "Failed",
+  "manifestBarcodeHeading": "Scan at collection",
+  "manifestBarcodeTip": "Show this barcode to the pickup driver so they can scan it.",
+  "manifestFieldAddress": "Origin address",
+  "manifestTrackingCodesHeading": "Tracking codes",
+  "manifestNoTrackingCodes": "No tracking codes",
+  "detailManifest": "Manifest"
 }

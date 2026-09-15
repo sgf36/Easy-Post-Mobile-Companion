@@ -152,5 +152,18 @@
   "claimStatusCancelled": "ยกเลิกแล้ว",
   "claimStatusNeedsAction": "ต้องดำเนินการ",
   "pickupCancelDone": "ยกเลิกการนัดรับพัสดุแล้ว",
-  "reportsRefundsPending": "รอการคืนเงิน"
+  "reportsRefundsPending": "รอการคืนเงิน",
+  "navManifests": "ใบกำกับ",
+  "manifestsEmpty": "ยังไม่มีใบกำกับ",
+  "manifestShipmentSingular": "shipment",
+  "manifestShipmentPlural": "shipments",
+  "manifestStatusCreated": "Created",
+  "manifestStatusCreating": "Creating…",
+  "manifestStatusFailed": "Failed",
+  "manifestBarcodeHeading": "Scan at collection",
+  "manifestBarcodeTip": "Show this barcode to the pickup driver so they can scan it.",
+  "manifestFieldAddress": "Origin address",
+  "manifestTrackingCodesHeading": "Tracking codes",
+  "manifestNoTrackingCodes": "No tracking codes",
+  "detailManifest": "ใบกำกับ"
 }

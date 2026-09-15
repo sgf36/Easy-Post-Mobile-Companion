@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Отменена",
   "claimStatusNeedsAction": "Требуется действие",
   "pickupCancelDone": "Забор груза отменён.",
-  "reportsRefundsPending": "Ожидаемые возвраты"
+  "reportsRefundsPending": "Ожидаемые возвраты",
+  "navManifests": "Манифесты",
+  "manifestsEmpty": "Манифестов пока нет.",
+  "manifestShipmentSingular": "отправление",
+  "manifestShipmentPlural": "отправлений",
+  "manifestStatusCreated": "Создан",
+  "manifestStatusCreating": "Создаётся…",
+  "manifestStatusFailed": "Ошибка",
+  "manifestBarcodeHeading": "Сканировать при получении",
+  "manifestBarcodeTip": "Покажите этот штрих-код водителю для сканирования.",
+  "manifestFieldAddress": "Адрес отправителя",
+  "manifestTrackingCodesHeading": "Трек-номера",
+  "manifestNoTrackingCodes": "Нет трек-номеров",
+  "detailManifest": "Манифест"
 }

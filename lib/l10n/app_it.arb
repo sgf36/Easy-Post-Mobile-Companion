@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Annullato",
   "claimStatusNeedsAction": "Azione richiesta",
   "pickupCancelDone": "Ritiro annullato.",
-  "reportsRefundsPending": "Rimborsi in attesa"
+  "reportsRefundsPending": "Rimborsi in attesa",
+  "navManifests": "Manifesti",
+  "manifestsEmpty": "Nessun manifesto ancora.",
+  "manifestShipmentSingular": "spedizione",
+  "manifestShipmentPlural": "spedizioni",
+  "manifestStatusCreated": "Creato",
+  "manifestStatusCreating": "In creazione…",
+  "manifestStatusFailed": "Fallito",
+  "manifestBarcodeHeading": "Scansiona al ritiro",
+  "manifestBarcodeTip": "Mostra questo codice a barre al corriere per la scansione.",
+  "manifestFieldAddress": "Indirizzo di origine",
+  "manifestTrackingCodesHeading": "Codici di tracciamento",
+  "manifestNoTrackingCodes": "Nessun codice di tracciamento",
+  "detailManifest": "Manifesto"
 }

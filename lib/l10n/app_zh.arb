@@ -152,5 +152,18 @@
   "claimStatusCancelled": "已取消",
   "claimStatusNeedsAction": "需要处理",
   "pickupCancelDone": "已取消取件。",
-  "reportsRefundsPending": "待退款"
+  "reportsRefundsPending": "待退款",
+  "navManifests": "清单",
+  "manifestsEmpty": "暂无清单。",
+  "manifestShipmentSingular": "件",
+  "manifestShipmentPlural": "件",
+  "manifestStatusCreated": "已创建",
+  "manifestStatusCreating": "创建中…",
+  "manifestStatusFailed": "失败",
+  "manifestBarcodeHeading": "取件时扫描",
+  "manifestBarcodeTip": "将此条形码出示给取件司机扫描。",
+  "manifestFieldAddress": "发件地址",
+  "manifestTrackingCodesHeading": "追踪号",
+  "manifestNoTrackingCodes": "无追踪号",
+  "detailManifest": "清单"
 }

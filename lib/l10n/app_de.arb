@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Storniert",
   "claimStatusNeedsAction": "Handlung erforderlich",
   "pickupCancelDone": "Abholung storniert.",
-  "reportsRefundsPending": "Ausstehende Erstattungen"
+  "reportsRefundsPending": "Ausstehende Erstattungen",
+  "navManifests": "Manifeste",
+  "manifestsEmpty": "Noch keine Manifeste.",
+  "manifestShipmentSingular": "Sendung",
+  "manifestShipmentPlural": "Sendungen",
+  "manifestStatusCreated": "Erstellt",
+  "manifestStatusCreating": "Wird erstellt…",
+  "manifestStatusFailed": "Fehlgeschlagen",
+  "manifestBarcodeHeading": "Bei Abholung scannen",
+  "manifestBarcodeTip": "Zeigen Sie diesen Barcode dem Abholfahrer zum Scannen.",
+  "manifestFieldAddress": "Absenderadresse",
+  "manifestTrackingCodesHeading": "Sendungsnummern",
+  "manifestNoTrackingCodes": "Keine Sendungsnummern",
+  "detailManifest": "Manifest"
 }

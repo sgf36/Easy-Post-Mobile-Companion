@@ -467,3 +467,40 @@ const List<Map<String, dynamic>> demoPickups = <Map<String, dynamic>>[
     'service': 'NextDay',
   },
 ];
+
+const List<Map<String, dynamic>> demoScanForms = <Map<String, dynamic>>[
+  {
+    'id': 'sf_demo_01',
+    'status': 'created',
+    'confirmation': '9400111899223100001234',
+    'address': {
+      'street1': '14 Cartwright Gardens',
+      'city': 'London',
+      'state': '',
+      'zip': 'WC1H 9BS',
+      'country': 'GB',
+    },
+    'tracking_codes': ['EZ2000000002', 'EZ1000000010'],
+    'form_url': 'https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/demo.pdf',
+    'batch_id': null,
+    'created_at': '2026-08-14T11:30:00Z',
+    'updated_at': '2026-08-14T11:30:05Z',
+  },
+  {
+    'id': 'sf_demo_02',
+    'status': 'created',
+    'confirmation': '9400111899223100005678',
+    'address': {
+      'street1': '14 Cartwright Gardens',
+      'city': 'London',
+      'state': '',
+      'zip': 'WC1H 9BS',
+      'country': 'GB',
+    },
+    'tracking_codes': ['EZ1300000013'],
+    'form_url': 'https://easypost-files.s3.us-west-2.amazonaws.com/files/scan_form/demo2.pdf',
+    'batch_id': null,
+    'created_at': '2026-08-12T09:15:00Z',
+    'updated_at': '2026-08-12T09:15:04Z',
+  },
+];

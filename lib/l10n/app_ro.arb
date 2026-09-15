@@ -152,5 +152,18 @@
   "claimStatusCancelled": "Anulată",
   "claimStatusNeedsAction": "Acțiune necesară",
   "pickupCancelDone": "Ridicarea a fost anulată.",
-  "reportsRefundsPending": "Rambursări în așteptare"
+  "reportsRefundsPending": "Rambursări în așteptare",
+  "navManifests": "Manifeste",
+  "manifestsEmpty": "Niciun manifest încă.",
+  "manifestShipmentSingular": "shipment",
+  "manifestShipmentPlural": "shipments",
+  "manifestStatusCreated": "Created",
+  "manifestStatusCreating": "Creating…",
+  "manifestStatusFailed": "Failed",
+  "manifestBarcodeHeading": "Scan at collection",
+  "manifestBarcodeTip": "Show this barcode to the pickup driver so they can scan it.",
+  "manifestFieldAddress": "Origin address",
+  "manifestTrackingCodesHeading": "Tracking codes",
+  "manifestNoTrackingCodes": "No tracking codes",
+  "detailManifest": "Manifest"
 }
