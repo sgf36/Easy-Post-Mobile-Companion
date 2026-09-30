@@ -505,4 +505,25 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Väntande återbetalningar';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Inga Click & Drop-beställningar ännu.';
+
+  @override
+  String get detailClickDrop => 'Click & Drop-beställning';
+
+  @override
+  String get clickDropStatusPurchased => 'Köpt';
+
+  @override
+  String get clickDropStatusVoided => 'Ogiltigförklarad';
+
+  @override
+  String get fieldOrderId => 'Beställnings-ID';
+
+  @override
+  String get fieldOrderReference => 'Referens';
 }

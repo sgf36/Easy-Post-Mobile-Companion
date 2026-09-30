@@ -503,4 +503,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Ожидаемые возвраты';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Заказов Click & Drop пока нет.';
+
+  @override
+  String get detailClickDrop => 'Заказ Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'Оплачено';
+
+  @override
+  String get clickDropStatusVoided => 'Аннулировано';
+
+  @override
+  String get fieldOrderId => 'ID заказа';
+
+  @override
+  String get fieldOrderReference => 'Референс';
 }

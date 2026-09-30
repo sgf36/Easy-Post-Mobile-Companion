@@ -503,4 +503,25 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Bekleyen iadeler';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Henüz Click & Drop siparişi yok.';
+
+  @override
+  String get detailClickDrop => 'Click & Drop siparişi';
+
+  @override
+  String get clickDropStatusPurchased => 'Satın alındı';
+
+  @override
+  String get clickDropStatusVoided => 'İptal edildi';
+
+  @override
+  String get fieldOrderId => 'Sipariş kimliği';
+
+  @override
+  String get fieldOrderReference => 'Referans';
 }

@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Cancelada",
   "claimStatusNeedsAction": "Ação necessária",
   "pickupCancelDone": "Coleta cancelada.",
-  "reportsRefundsPending": "Reembolsos pendentes"
+  "reportsRefundsPending": "Reembolsos pendentes",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Ainda não há encomendas Click & Drop.",
+  "detailClickDrop": "Encomenda Click & Drop",
+  "clickDropStatusPurchased": "Comprado",
+  "clickDropStatusVoided": "Anulado",
+  "fieldOrderId": "ID da encomenda",
+  "fieldOrderReference": "Referência"
 }

@@ -152,5 +152,12 @@
   "claimStatusCancelled": "בוטלה",
   "claimStatusNeedsAction": "נדרשת פעולה",
   "pickupCancelDone": "האיסוף בוטל.",
-  "reportsRefundsPending": "החזרים ממתינים"
+  "reportsRefundsPending": "החזרים ממתינים",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "אין עדיין הזמנות Click & Drop.",
+  "detailClickDrop": "הזמנת Click & Drop",
+  "clickDropStatusPurchased": "נרכש",
+  "clickDropStatusVoided": "בוטל",
+  "fieldOrderId": "מזהה הזמנה",
+  "fieldOrderReference": "מספר אסמכתא"
 }

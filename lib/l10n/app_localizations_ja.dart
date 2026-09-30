@@ -500,4 +500,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => '返金待ち';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Click & Dropの注文はまだありません。';
+
+  @override
+  String get detailClickDrop => 'Click & Drop注文';
+
+  @override
+  String get clickDropStatusPurchased => '購入済み';
+
+  @override
+  String get clickDropStatusVoided => '無効';
+
+  @override
+  String get fieldOrderId => '注文ID';
+
+  @override
+  String get fieldOrderReference => '参照番号';
 }

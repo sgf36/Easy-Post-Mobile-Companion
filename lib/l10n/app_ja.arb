@@ -152,5 +152,12 @@
   "claimStatusCancelled": "キャンセル済み",
   "claimStatusNeedsAction": "対応が必要",
   "pickupCancelDone": "集荷をキャンセルしました。",
-  "reportsRefundsPending": "返金待ち"
+  "reportsRefundsPending": "返金待ち",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Click & Dropの注文はまだありません。",
+  "detailClickDrop": "Click & Drop注文",
+  "clickDropStatusPurchased": "購入済み",
+  "clickDropStatusVoided": "無効",
+  "fieldOrderId": "注文ID",
+  "fieldOrderReference": "参照番号"
 }

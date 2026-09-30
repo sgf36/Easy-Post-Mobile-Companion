@@ -505,4 +505,25 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Rambursări în așteptare';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Nu există încă comenzi Click & Drop.';
+
+  @override
+  String get detailClickDrop => 'Comandă Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'Cumpărat';
+
+  @override
+  String get clickDropStatusVoided => 'Anulat';
+
+  @override
+  String get fieldOrderId => 'ID comandă';
+
+  @override
+  String get fieldOrderReference => 'Referință';
 }

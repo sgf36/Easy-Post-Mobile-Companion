@@ -503,4 +503,25 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Pengembalian dana tertunda';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Belum ada pesanan Click & Drop.';
+
+  @override
+  String get detailClickDrop => 'Pesanan Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'Dibeli';
+
+  @override
+  String get clickDropStatusVoided => 'Dibatalkan';
+
+  @override
+  String get fieldOrderId => 'ID Pesanan';
+
+  @override
+  String get fieldOrderReference => 'Referensi';
 }

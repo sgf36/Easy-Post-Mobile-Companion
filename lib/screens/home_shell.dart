@@ -7,6 +7,7 @@ import '../services/review_prompt.dart';
 import '../services/proxy_client.dart';
 import '../theme.dart';
 import 'claims_screen.dart';
+import 'click_drop_screen.dart';
 import 'hts_screen.dart';
 import 'insurance_screen.dart';
 import 'pickups_screen.dart';
@@ -20,6 +21,7 @@ import 'trackers_screen.dart';
 enum Section {
   tracking,
   history,
+  clickDrop,
   insurance,
   claims,
   pickups,
@@ -32,6 +34,7 @@ extension SectionMeta on Section {
   String label(AppLocalizations t) => switch (this) {
         Section.tracking => t.navTracking,
         Section.history => t.navHistory,
+        Section.clickDrop => t.navClickDrop,
         Section.insurance => t.navInsurance,
         Section.claims => t.navClaims,
         Section.pickups => t.navPickups,
@@ -43,6 +46,7 @@ extension SectionMeta on Section {
   IconData get icon => switch (this) {
         Section.tracking => Icons.local_shipping,
         Section.history => Icons.history,
+        Section.clickDrop => Icons.local_post_office,
         Section.insurance => Icons.verified_user,
         Section.claims => Icons.gavel,
         Section.pickups => Icons.event_available,
@@ -99,6 +103,8 @@ class _HomeShellState extends State<HomeShell> {
     return switch (_section) {
       Section.tracking =>
         TrackersScreen(creds: c, nav: nav, review: widget.review, proxy: proxy),
+      Section.clickDrop =>
+        ClickDropScreen(nav: nav, creds: c, proxy: proxy),
       Section.history => ResourceListScreen(
           nav: nav,
           title: t.navHistory,
@@ -204,6 +210,7 @@ class NavDrawer extends StatelessWidget {
                   for (final s in [
                     Section.tracking,
                     Section.history,
+                    Section.clickDrop,
                     Section.insurance,
                     Section.claims,
                     Section.pickups,

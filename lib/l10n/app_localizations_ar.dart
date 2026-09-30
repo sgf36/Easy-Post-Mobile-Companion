@@ -503,4 +503,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'استردادات قيد الانتظار';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'لا توجد طلبات Click & Drop حتى الآن.';
+
+  @override
+  String get detailClickDrop => 'طلب Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'تم الشراء';
+
+  @override
+  String get clickDropStatusVoided => 'ملغى';
+
+  @override
+  String get fieldOrderId => 'رقم الطلب';
+
+  @override
+  String get fieldOrderReference => 'المرجع';
 }

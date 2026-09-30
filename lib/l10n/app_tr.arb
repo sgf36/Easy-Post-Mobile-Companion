@@ -152,5 +152,12 @@
   "claimStatusCancelled": "İptal edildi",
   "claimStatusNeedsAction": "İşlem gerekli",
   "pickupCancelDone": "Kargo alımı iptal edildi.",
-  "reportsRefundsPending": "Bekleyen iadeler"
+  "reportsRefundsPending": "Bekleyen iadeler",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Henüz Click & Drop siparişi yok.",
+  "detailClickDrop": "Click & Drop siparişi",
+  "clickDropStatusPurchased": "Satın alındı",
+  "clickDropStatusVoided": "İptal edildi",
+  "fieldOrderId": "Sipariş kimliği",
+  "fieldOrderReference": "Referans"
 }

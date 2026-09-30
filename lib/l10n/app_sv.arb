@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Avbruten",
   "claimStatusNeedsAction": "Åtgärd krävs",
   "pickupCancelDone": "Upphämtningen har avbrutits.",
-  "reportsRefundsPending": "Väntande återbetalningar"
+  "reportsRefundsPending": "Väntande återbetalningar",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Inga Click & Drop-beställningar ännu.",
+  "detailClickDrop": "Click & Drop-beställning",
+  "clickDropStatusPurchased": "Köpt",
+  "clickDropStatusVoided": "Ogiltigförklarad",
+  "fieldOrderId": "Beställnings-ID",
+  "fieldOrderReference": "Referens"
 }

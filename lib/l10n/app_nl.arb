@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Geannuleerd",
   "claimStatusNeedsAction": "Actie vereist",
   "pickupCancelDone": "Ophaling geannuleerd.",
-  "reportsRefundsPending": "Terugbetalingen in behandeling"
+  "reportsRefundsPending": "Terugbetalingen in behandeling",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Nog geen Click & Drop-bestellingen.",
+  "detailClickDrop": "Click & Drop-bestelling",
+  "clickDropStatusPurchased": "Gekocht",
+  "clickDropStatusVoided": "Ongeldig gemaakt",
+  "fieldOrderId": "Bestelnummer",
+  "fieldOrderReference": "Referentie"
 }

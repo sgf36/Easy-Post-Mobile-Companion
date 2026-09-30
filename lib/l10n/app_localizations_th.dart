@@ -504,4 +504,25 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'รอการคืนเงิน';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'ยังไม่มีคำสั่งซื้อ Click & Drop';
+
+  @override
+  String get detailClickDrop => 'คำสั่งซื้อ Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'ซื้อแล้ว';
+
+  @override
+  String get clickDropStatusVoided => 'ยกเลิกแล้ว';
+
+  @override
+  String get fieldOrderId => 'รหัสคำสั่งซื้อ';
+
+  @override
+  String get fieldOrderReference => 'อ้างอิง';
 }

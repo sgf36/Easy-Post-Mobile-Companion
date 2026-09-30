@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Visszavonva",
   "claimStatusNeedsAction": "Teendő szükséges",
   "pickupCancelDone": "Az átvétel törölve.",
-  "reportsRefundsPending": "Függő visszatérítések"
+  "reportsRefundsPending": "Függő visszatérítések",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Még nincsenek Click & Drop rendelések.",
+  "detailClickDrop": "Click & Drop rendelés",
+  "clickDropStatusPurchased": "Megvásárolva",
+  "clickDropStatusVoided": "Érvénytelenítve",
+  "fieldOrderId": "Rendelésazonosító",
+  "fieldOrderReference": "Hivatkozás"
 }

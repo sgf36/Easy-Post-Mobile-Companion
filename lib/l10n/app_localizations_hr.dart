@@ -503,4 +503,25 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Povrati na čekanju';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Još nema Click & Drop narudžbi.';
+
+  @override
+  String get detailClickDrop => 'Click & Drop narudžba';
+
+  @override
+  String get clickDropStatusPurchased => 'Kupljeno';
+
+  @override
+  String get clickDropStatusVoided => 'Poništeno';
+
+  @override
+  String get fieldOrderId => 'ID narudžbe';
+
+  @override
+  String get fieldOrderReference => 'Referenca';
 }

@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Anulată",
   "claimStatusNeedsAction": "Acțiune necesară",
   "pickupCancelDone": "Ridicarea a fost anulată.",
-  "reportsRefundsPending": "Rambursări în așteptare"
+  "reportsRefundsPending": "Rambursări în așteptare",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Nu există încă comenzi Click & Drop.",
+  "detailClickDrop": "Comandă Click & Drop",
+  "clickDropStatusPurchased": "Cumpărat",
+  "clickDropStatusVoided": "Anulat",
+  "fieldOrderId": "ID comandă",
+  "fieldOrderReference": "Referință"
 }

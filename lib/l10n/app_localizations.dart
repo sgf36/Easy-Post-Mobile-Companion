@@ -1065,6 +1065,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Refunds pending'**
   String get reportsRefundsPending;
+
+  /// Navigation label for the section showing Royal Mail Click & Drop orders bought from the desktop.
+  ///
+  /// In en, this message translates to:
+  /// **'Click & Drop'**
+  String get navClickDrop;
+
+  /// Shown when no Click & Drop orders have been synced from the desktop.
+  ///
+  /// In en, this message translates to:
+  /// **'No Click & Drop orders yet.'**
+  String get clickDropEmpty;
+
+  /// Title of the screen showing one Click & Drop order in full.
+  ///
+  /// In en, this message translates to:
+  /// **'Click & Drop order'**
+  String get detailClickDrop;
+
+  /// Click & Drop order status: the label has been bought.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchased'**
+  String get clickDropStatusPurchased;
+
+  /// Click & Drop order status: the order was cancelled and the label voided.
+  ///
+  /// In en, this message translates to:
+  /// **'Voided'**
+  String get clickDropStatusVoided;
+
+  /// Field label: the Click & Drop order identifier.
+  ///
+  /// In en, this message translates to:
+  /// **'Order ID'**
+  String get fieldOrderId;
+
+  /// Field label: the sender's own reference on the Click & Drop order.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference'**
+  String get fieldOrderReference;
 }
 
 class _AppLocalizationsDelegate

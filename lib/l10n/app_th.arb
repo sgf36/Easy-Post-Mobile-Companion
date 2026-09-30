@@ -152,5 +152,12 @@
   "claimStatusCancelled": "ยกเลิกแล้ว",
   "claimStatusNeedsAction": "ต้องดำเนินการ",
   "pickupCancelDone": "ยกเลิกการนัดรับพัสดุแล้ว",
-  "reportsRefundsPending": "รอการคืนเงิน"
+  "reportsRefundsPending": "รอการคืนเงิน",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "ยังไม่มีคำสั่งซื้อ Click & Drop",
+  "detailClickDrop": "คำสั่งซื้อ Click & Drop",
+  "clickDropStatusPurchased": "ซื้อแล้ว",
+  "clickDropStatusVoided": "ยกเลิกแล้ว",
+  "fieldOrderId": "รหัสคำสั่งซื้อ",
+  "fieldOrderReference": "อ้างอิง"
 }

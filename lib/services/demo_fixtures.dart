@@ -467,3 +467,30 @@ const List<Map<String, dynamic>> demoPickups = <Map<String, dynamic>>[
     'service': 'NextDay',
   },
 ];
+
+const List<Map<String, dynamic>> demoClickDropOrders = <Map<String, dynamic>>[
+  {
+    'order_identifier': 80012345,
+    'tracking_number': 'JD987654321GB',
+    'service_name': 'CRL48',
+    'order_reference': 'DEMO-REF-01',
+    'status': 'purchased',
+    'created_at': '${_today}T10:15:00Z',
+  },
+  {
+    'order_identifier': 80012346,
+    'tracking_number': 'JD987654322GB',
+    'service_name': 'STL1',
+    'order_reference': '',
+    'status': 'purchased',
+    'created_at': '${_today}T09:30:00Z',
+  },
+  {
+    'order_identifier': 80012300,
+    'tracking_number': null,
+    'service_name': 'BPL48',
+    'order_reference': 'OLD-ORDER',
+    'status': 'voided',
+    'created_at': '2026-08-12T14:00:00Z',
+  },
+];

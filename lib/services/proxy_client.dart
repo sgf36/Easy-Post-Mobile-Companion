@@ -228,6 +228,16 @@ class ProxyClient {
   Future<List<Map<String, dynamic>>> getPickups(PairingCredentials c) =>
       _getList(c, '/ep/pickups', 'pickups');
 
+  /// Click & Drop orders are stored in D1, not in EasyPost, so they use a
+  /// different endpoint and do not paginate the same way.
+  Future<List<Map<String, dynamic>>> getClickDropOrders(
+      PairingCredentials c) async {
+    final body =
+        await _getPage(c, Uri.parse('${c.proxyUrl}/clickdrop/orders'));
+    return ((body['orders'] as List<dynamic>?) ?? const [])
+        .cast<Map<String, dynamic>>();
+  }
+
   /// POST an allow-listed EasyPost action through the proxy, returning the JSON
   /// body. Surfaces EasyPost's own error message where present.
   Future<Map<String, dynamic>> _post(
@@ -358,4 +368,9 @@ class _FixtureProxyClient extends ProxyClient {
   @override
   Future<List<Map<String, dynamic>>> getPickups(PairingCredentials c) =>
       _canned(demoPickups);
+
+  @override
+  Future<List<Map<String, dynamic>>> getClickDropOrders(
+          PairingCredentials c) =>
+      _canned(demoClickDropOrders);
 }

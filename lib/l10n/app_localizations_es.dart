@@ -506,4 +506,25 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Reembolsos pendientes';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Aún no hay pedidos de Click & Drop.';
+
+  @override
+  String get detailClickDrop => 'Pedido de Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'Comprado';
+
+  @override
+  String get clickDropStatusVoided => 'Anulado';
+
+  @override
+  String get fieldOrderId => 'ID de pedido';
+
+  @override
+  String get fieldOrderReference => 'Referencia';
 }

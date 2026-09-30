@@ -152,5 +152,12 @@
   "claimStatusCancelled": "रद्द",
   "claimStatusNeedsAction": "कार्रवाई आवश्यक",
   "pickupCancelDone": "पिकअप रद्द कर दिया गया।",
-  "reportsRefundsPending": "लंबित रिफ़ंड"
+  "reportsRefundsPending": "लंबित रिफ़ंड",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "अभी तक कोई Click & Drop ऑर्डर नहीं।",
+  "detailClickDrop": "Click & Drop ऑर्डर",
+  "clickDropStatusPurchased": "खरीदा गया",
+  "clickDropStatusVoided": "रद्द किया गया",
+  "fieldOrderId": "ऑर्डर आईडी",
+  "fieldOrderReference": "संदर्भ"
 }

@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Zrušeno",
   "claimStatusNeedsAction": "Vyžaduje akci",
   "pickupCancelDone": "Vyzvednutí bylo zrušeno.",
-  "reportsRefundsPending": "Čekající refundace"
+  "reportsRefundsPending": "Čekající refundace",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Zatím žádné objednávky Click & Drop.",
+  "detailClickDrop": "Objednávka Click & Drop",
+  "clickDropStatusPurchased": "Zakoupeno",
+  "clickDropStatusVoided": "Zrušeno",
+  "fieldOrderId": "ID objednávky",
+  "fieldOrderReference": "Reference"
 }

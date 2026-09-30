@@ -400,5 +400,33 @@
   "reportsRefundsPending": "Refunds pending",
   "@reportsRefundsPending": {
     "description": "Reports card: the value of labels with a refund requested but not yet settled. Still counted in total spend."
+  },
+  "navClickDrop": "Click & Drop",
+  "@navClickDrop": {
+    "description": "Navigation label for the section showing Royal Mail Click & Drop orders bought from the desktop."
+  },
+  "clickDropEmpty": "No Click & Drop orders yet.",
+  "@clickDropEmpty": {
+    "description": "Shown when no Click & Drop orders have been synced from the desktop."
+  },
+  "detailClickDrop": "Click & Drop order",
+  "@detailClickDrop": {
+    "description": "Title of the screen showing one Click & Drop order in full."
+  },
+  "clickDropStatusPurchased": "Purchased",
+  "@clickDropStatusPurchased": {
+    "description": "Click & Drop order status: the label has been bought."
+  },
+  "clickDropStatusVoided": "Voided",
+  "@clickDropStatusVoided": {
+    "description": "Click & Drop order status: the order was cancelled and the label voided."
+  },
+  "fieldOrderId": "Order ID",
+  "@fieldOrderId": {
+    "description": "Field label: the Click & Drop order identifier."
+  },
+  "fieldOrderReference": "Reference",
+  "@fieldOrderReference": {
+    "description": "Field label: the sender's own reference on the Click & Drop order."
   }
 }

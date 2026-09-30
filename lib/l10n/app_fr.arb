@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Annulée",
   "claimStatusNeedsAction": "Action requise",
   "pickupCancelDone": "Enlèvement annulé.",
-  "reportsRefundsPending": "Remboursements en attente"
+  "reportsRefundsPending": "Remboursements en attente",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Aucune commande Click & Drop pour l'instant.",
+  "detailClickDrop": "Commande Click & Drop",
+  "clickDropStatusPurchased": "Acheté",
+  "clickDropStatusVoided": "Annulé",
+  "fieldOrderId": "ID de commande",
+  "fieldOrderReference": "Référence"
 }

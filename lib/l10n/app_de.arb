@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Storniert",
   "claimStatusNeedsAction": "Handlung erforderlich",
   "pickupCancelDone": "Abholung storniert.",
-  "reportsRefundsPending": "Ausstehende Erstattungen"
+  "reportsRefundsPending": "Ausstehende Erstattungen",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Noch keine Click & Drop-Bestellungen.",
+  "detailClickDrop": "Click & Drop-Bestellung",
+  "clickDropStatusPurchased": "Gekauft",
+  "clickDropStatusVoided": "Storniert",
+  "fieldOrderId": "Bestell-ID",
+  "fieldOrderReference": "Referenz"
 }

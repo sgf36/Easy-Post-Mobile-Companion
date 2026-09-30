@@ -508,4 +508,25 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Εκκρεμείς επιστροφές χρημάτων';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Δεν υπάρχουν ακόμη παραγγελίες Click & Drop.';
+
+  @override
+  String get detailClickDrop => 'Παραγγελία Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'Αγοράστηκε';
+
+  @override
+  String get clickDropStatusVoided => 'Ακυρώθηκε';
+
+  @override
+  String get fieldOrderId => 'Αναγνωριστικό παραγγελίας';
+
+  @override
+  String get fieldOrderReference => 'Αναφορά';
 }

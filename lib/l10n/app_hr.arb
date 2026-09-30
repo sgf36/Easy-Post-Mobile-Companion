@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Otkazan",
   "claimStatusNeedsAction": "Potrebna radnja",
   "pickupCancelDone": "Preuzimanje je otkazano.",
-  "reportsRefundsPending": "Povrati na čekanju"
+  "reportsRefundsPending": "Povrati na čekanju",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Još nema Click & Drop narudžbi.",
+  "detailClickDrop": "Click & Drop narudžba",
+  "clickDropStatusPurchased": "Kupljeno",
+  "clickDropStatusVoided": "Poništeno",
+  "fieldOrderId": "ID narudžbe",
+  "fieldOrderReference": "Referenca"
 }

@@ -152,5 +152,12 @@
   "claimStatusCancelled": "已取消",
   "claimStatusNeedsAction": "需要处理",
   "pickupCancelDone": "已取消取件。",
-  "reportsRefundsPending": "待退款"
+  "reportsRefundsPending": "待退款",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "暂无 Click & Drop 订单。",
+  "detailClickDrop": "Click & Drop 订单",
+  "clickDropStatusPurchased": "已购买",
+  "clickDropStatusVoided": "已作废",
+  "fieldOrderId": "订单编号",
+  "fieldOrderReference": "参考号"
 }

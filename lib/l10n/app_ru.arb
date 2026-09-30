@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Отменена",
   "claimStatusNeedsAction": "Требуется действие",
   "pickupCancelDone": "Забор груза отменён.",
-  "reportsRefundsPending": "Ожидаемые возвраты"
+  "reportsRefundsPending": "Ожидаемые возвраты",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Заказов Click & Drop пока нет.",
+  "detailClickDrop": "Заказ Click & Drop",
+  "clickDropStatusPurchased": "Оплачено",
+  "clickDropStatusVoided": "Аннулировано",
+  "fieldOrderId": "ID заказа",
+  "fieldOrderReference": "Референс"
 }

@@ -505,4 +505,25 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Čekající refundace';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Zatím žádné objednávky Click & Drop.';
+
+  @override
+  String get detailClickDrop => 'Objednávka Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'Zakoupeno';
+
+  @override
+  String get clickDropStatusVoided => 'Zrušeno';
+
+  @override
+  String get fieldOrderId => 'ID objednávky';
+
+  @override
+  String get fieldOrderReference => 'Reference';
 }

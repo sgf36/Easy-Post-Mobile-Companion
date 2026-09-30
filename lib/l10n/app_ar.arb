@@ -152,5 +152,12 @@
   "claimStatusCancelled": "ملغاة",
   "claimStatusNeedsAction": "مطلوب إجراء",
   "pickupCancelDone": "تم إلغاء الاستلام.",
-  "reportsRefundsPending": "استردادات قيد الانتظار"
+  "reportsRefundsPending": "استردادات قيد الانتظار",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "لا توجد طلبات Click & Drop حتى الآن.",
+  "detailClickDrop": "طلب Click & Drop",
+  "clickDropStatusPurchased": "تم الشراء",
+  "clickDropStatusVoided": "ملغى",
+  "fieldOrderId": "رقم الطلب",
+  "fieldOrderReference": "المرجع"
 }

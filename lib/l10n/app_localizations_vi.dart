@@ -503,4 +503,25 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Hoàn tiền đang chờ';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Chưa có đơn hàng Click & Drop nào.';
+
+  @override
+  String get detailClickDrop => 'Đơn hàng Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'Đã mua';
+
+  @override
+  String get clickDropStatusVoided => 'Đã hủy';
+
+  @override
+  String get fieldOrderId => 'Mã đơn hàng';
+
+  @override
+  String get fieldOrderReference => 'Tham chiếu';
 }

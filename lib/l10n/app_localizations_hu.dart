@@ -506,4 +506,25 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Függő visszatérítések';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Még nincsenek Click & Drop rendelések.';
+
+  @override
+  String get detailClickDrop => 'Click & Drop rendelés';
+
+  @override
+  String get clickDropStatusPurchased => 'Megvásárolva';
+
+  @override
+  String get clickDropStatusVoided => 'Érvénytelenítve';
+
+  @override
+  String get fieldOrderId => 'Rendelésazonosító';
+
+  @override
+  String get fieldOrderReference => 'Hivatkozás';
 }

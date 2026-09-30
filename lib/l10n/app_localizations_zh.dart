@@ -495,4 +495,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => '待退款';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => '暂无 Click & Drop 订单。';
+
+  @override
+  String get detailClickDrop => 'Click & Drop 订单';
+
+  @override
+  String get clickDropStatusPurchased => '已购买';
+
+  @override
+  String get clickDropStatusVoided => '已作废';
+
+  @override
+  String get fieldOrderId => '订单编号';
+
+  @override
+  String get fieldOrderReference => '参考号';
 }

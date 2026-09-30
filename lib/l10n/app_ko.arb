@@ -152,5 +152,12 @@
   "claimStatusCancelled": "취소됨",
   "claimStatusNeedsAction": "조치 필요",
   "pickupCancelDone": "픽업이 취소되었습니다.",
-  "reportsRefundsPending": "대기 중인 환불"
+  "reportsRefundsPending": "대기 중인 환불",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "아직 Click & Drop 주문이 없습니다.",
+  "detailClickDrop": "Click & Drop 주문",
+  "clickDropStatusPurchased": "구매 완료",
+  "clickDropStatusVoided": "취소됨",
+  "fieldOrderId": "주문 ID",
+  "fieldOrderReference": "참조번호"
 }

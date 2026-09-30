@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Ακυρώθηκε",
   "claimStatusNeedsAction": "Απαιτείται ενέργεια",
   "pickupCancelDone": "Η παραλαβή ακυρώθηκε.",
-  "reportsRefundsPending": "Εκκρεμείς επιστροφές χρημάτων"
+  "reportsRefundsPending": "Εκκρεμείς επιστροφές χρημάτων",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Δεν υπάρχουν ακόμη παραγγελίες Click & Drop.",
+  "detailClickDrop": "Παραγγελία Click & Drop",
+  "clickDropStatusPurchased": "Αγοράστηκε",
+  "clickDropStatusVoided": "Ακυρώθηκε",
+  "fieldOrderId": "Αναγνωριστικό παραγγελίας",
+  "fieldOrderReference": "Αναφορά"
 }

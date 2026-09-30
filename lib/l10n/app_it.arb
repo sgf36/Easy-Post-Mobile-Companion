@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Annullato",
   "claimStatusNeedsAction": "Azione richiesta",
   "pickupCancelDone": "Ritiro annullato.",
-  "reportsRefundsPending": "Rimborsi in attesa"
+  "reportsRefundsPending": "Rimborsi in attesa",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Nessun ordine Click & Drop al momento.",
+  "detailClickDrop": "Ordine Click & Drop",
+  "clickDropStatusPurchased": "Acquistato",
+  "clickDropStatusVoided": "Annullato",
+  "fieldOrderId": "ID ordine",
+  "fieldOrderReference": "Riferimento"
 }

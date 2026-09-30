@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Anulowane",
   "claimStatusNeedsAction": "Wymaga działania",
   "pickupCancelDone": "Odbiór anulowany.",
-  "reportsRefundsPending": "Oczekujące zwroty"
+  "reportsRefundsPending": "Oczekujące zwroty",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Brak zamówień Click & Drop.",
+  "detailClickDrop": "Zamówienie Click & Drop",
+  "clickDropStatusPurchased": "Zakupione",
+  "clickDropStatusVoided": "Anulowane",
+  "fieldOrderId": "ID zamówienia",
+  "fieldOrderReference": "Numer referencyjny"
 }

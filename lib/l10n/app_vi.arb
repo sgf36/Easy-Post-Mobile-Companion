@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Đã hủy",
   "claimStatusNeedsAction": "Cần xử lý",
   "pickupCancelDone": "Đã hủy lịch lấy hàng.",
-  "reportsRefundsPending": "Hoàn tiền đang chờ"
+  "reportsRefundsPending": "Hoàn tiền đang chờ",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Chưa có đơn hàng Click & Drop nào.",
+  "detailClickDrop": "Đơn hàng Click & Drop",
+  "clickDropStatusPurchased": "Đã mua",
+  "clickDropStatusVoided": "Đã hủy",
+  "fieldOrderId": "Mã đơn hàng",
+  "fieldOrderReference": "Tham chiếu"
 }

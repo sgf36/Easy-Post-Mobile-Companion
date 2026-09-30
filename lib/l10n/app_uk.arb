@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Скасовано",
   "claimStatusNeedsAction": "Потрібна дія",
   "pickupCancelDone": "Забір скасовано.",
-  "reportsRefundsPending": "Очікувані повернення"
+  "reportsRefundsPending": "Очікувані повернення",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Замовлень Click & Drop поки немає.",
+  "detailClickDrop": "Замовлення Click & Drop",
+  "clickDropStatusPurchased": "Придбано",
+  "clickDropStatusVoided": "Анульовано",
+  "fieldOrderId": "ID замовлення",
+  "fieldOrderReference": "Посилання"
 }

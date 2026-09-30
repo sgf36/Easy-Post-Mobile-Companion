@@ -506,4 +506,25 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'लंबित रिफ़ंड';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'अभी तक कोई Click & Drop ऑर्डर नहीं।';
+
+  @override
+  String get detailClickDrop => 'Click & Drop ऑर्डर';
+
+  @override
+  String get clickDropStatusPurchased => 'खरीदा गया';
+
+  @override
+  String get clickDropStatusVoided => 'रद्द किया गया';
+
+  @override
+  String get fieldOrderId => 'ऑर्डर आईडी';
+
+  @override
+  String get fieldOrderReference => 'संदर्भ';
 }

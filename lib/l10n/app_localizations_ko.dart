@@ -500,4 +500,25 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => '대기 중인 환불';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => '아직 Click & Drop 주문이 없습니다.';
+
+  @override
+  String get detailClickDrop => 'Click & Drop 주문';
+
+  @override
+  String get clickDropStatusPurchased => '구매 완료';
+
+  @override
+  String get clickDropStatusVoided => '취소됨';
+
+  @override
+  String get fieldOrderId => '주문 ID';
+
+  @override
+  String get fieldOrderReference => '참조번호';
 }

@@ -152,5 +152,12 @@
   "claimStatusCancelled": "Dibatalkan",
   "claimStatusNeedsAction": "Perlu tindakan",
   "pickupCancelDone": "Penjemputan dibatalkan.",
-  "reportsRefundsPending": "Pengembalian dana tertunda"
+  "reportsRefundsPending": "Pengembalian dana tertunda",
+  "navClickDrop": "Click & Drop",
+  "clickDropEmpty": "Belum ada pesanan Click & Drop.",
+  "detailClickDrop": "Pesanan Click & Drop",
+  "clickDropStatusPurchased": "Dibeli",
+  "clickDropStatusVoided": "Dibatalkan",
+  "fieldOrderId": "ID Pesanan",
+  "fieldOrderReference": "Referensi"
 }

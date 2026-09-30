@@ -503,4 +503,25 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get reportsRefundsPending => 'Очікувані повернення';
+
+  @override
+  String get navClickDrop => 'Click & Drop';
+
+  @override
+  String get clickDropEmpty => 'Замовлень Click & Drop поки немає.';
+
+  @override
+  String get detailClickDrop => 'Замовлення Click & Drop';
+
+  @override
+  String get clickDropStatusPurchased => 'Придбано';
+
+  @override
+  String get clickDropStatusVoided => 'Анульовано';
+
+  @override
+  String get fieldOrderId => 'ID замовлення';
+
+  @override
+  String get fieldOrderReference => 'Посилання';
 }
